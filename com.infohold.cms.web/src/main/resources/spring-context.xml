@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-autowire="byName" default-lazy-init="true"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans   
+    	http://www.springframework.org/schema/beans/spring-beans.xsd  
+    	http://www.springframework.org/schema/context  
+    	http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="javaMailSenderImpl" class="org.springframework.mail.javamail.JavaMailSenderImpl"></bean>
+	<context:annotation-config />
+	<context:component-scan base-package="com.infohold" />
+	<import resource="classpath:spring-hibernate.xml" />  
+	<import resource="classpath:spring-cxf.xml" /> 
+	
+    <!-- 
+    <import resource="classpath:spring-jms.xml" /> 
+	<import resource="classpath:spring-workflow.xml" />
+ 	<import resource="classpath:spring-aop.xml" /> 
+	<import resource="classpath:spring-jms.xml" />
+	<import resource="classpath:spring-jmx.xml" />
+	<import resource="classpath:spring-quartz.xml" /> --> 
+		
+</beans>

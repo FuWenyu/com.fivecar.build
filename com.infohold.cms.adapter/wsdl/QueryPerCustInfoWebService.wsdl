@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://impl.webservice.service.ecif.infohold.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://webservice.service.ecif.infohold.com/" name="QueryPerCustInfoWebServiceImplService" targetNamespace="http://impl.webservice.service.ecif.infohold.com/">
+  <wsdl:import location="http://172.18.10.84:8080/com.infohold.ecif.service/ws/QueryPerCustInfoWebService?wsdl=QueryPerCustInfoWebService.wsdl" namespace="http://webservice.service.ecif.infohold.com/">
+    </wsdl:import>
+  <wsdl:binding name="QueryPerCustInfoWebServiceImplServiceSoapBinding" type="ns1:QueryPerCustInfoWebService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="query_perCustInfo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="query_perCustInfo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="query_perCustInfoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="QueryPerCustInfoWebServiceImplService">
+    <wsdl:port binding="tns:QueryPerCustInfoWebServiceImplServiceSoapBinding" name="QueryPerCustInfoWebServiceImplPort">
+      <soap:address location="http://172.18.10.84:8080/com.infohold.ecif.service/ws/QueryPerCustInfoWebService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

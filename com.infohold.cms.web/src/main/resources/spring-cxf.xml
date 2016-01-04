@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="  
+        http://www.springframework.org/schema/beans   
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://cxf.apache.org/jaxws   
+        http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	<bean id="logIn" class="org.apache.cxf.interceptor.LoggingInInterceptor"></bean>
+	<bean id="logOut" class="org.apache.cxf.interceptor.LoggingOutInterceptor"></bean>
+	<bean id="webServiceFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean"></bean>
+		
+	<!-- 发布webService接口服务 -->
+	<!-- <jaxws:endpoint id="ICustomerWebService" implementor="com.infohold.cms.webService.impl.CustomerWebService" address="/ICustomerWebService" >
+		<jaxws:inInterceptors><ref bean="logIn"/></jaxws:inInterceptors>
+ 		<jaxws:outInterceptors><ref bean="logOut"/></jaxws:outInterceptors> 
+	</jaxws:endpoint>
+	<jaxws:endpoint id="Ido_loanAddWebService" implementor="com.infohold.cms.webService.impl.do_loanAddWebService" address="/Ido_loanAddWebService" >
+		<jaxws:inInterceptors><ref bean="logIn"/></jaxws:inInterceptors>
+ 		<jaxws:outInterceptors><ref bean="logOut"/></jaxws:outInterceptors> 
+	</jaxws:endpoint>
+	<jaxws:endpoint id="Ido_loanDisbursementAddWebService" implementor="com.infohold.cms.webService.impl.do_loanDisbursementAddWebService" address="/Ido_loanDisbursementAddWebService" >
+		<jaxws:inInterceptors><ref bean="logIn"/></jaxws:inInterceptors>
+ 		<jaxws:outInterceptors><ref bean="logOut"/></jaxws:outInterceptors> 
+	</jaxws:endpoint>
+	<jaxws:endpoint id="IBusinessWebService" implementor="com.infohold.cms.webService.impl.BusinessWebService" address="/IBusinessWebService" >
+		<jaxws:inInterceptors><ref bean="logIn"/></jaxws:inInterceptors>
+ 		<jaxws:outInterceptors><ref bean="logOut"/></jaxws:outInterceptors> 
+	</jaxws:endpoint>
+	企业钱包-客户经理查询接口
+	<jaxws:endpoint id="Iquery_custManagerListWebService" implementor="com.infohold.cms.webService.impl.Query_custManagerListWebService" address="/Iquery_custManagerListWebService" >
+		<jaxws:inInterceptors><ref bean="logIn"/></jaxws:inInterceptors>
+ 		<jaxws:outInterceptors><ref bean="logOut"/></jaxws:outInterceptors> 
+	</jaxws:endpoint>
+	企业钱包-客户新增接口
+	<jaxws:endpoint id="Ido_addCustInfoWebService" implementor="com.infohold.cms.webService.impl.Do_addCustInfoWebService" address="/Ido_addCustInfoWebService" >
+		<jaxws:inInterceptors><ref bean="logIn"/></jaxws:inInterceptors>
+ 		<jaxws:outInterceptors><ref bean="logOut"/></jaxws:outInterceptors> 
+	</jaxws:endpoint> -->
+
+</beans>

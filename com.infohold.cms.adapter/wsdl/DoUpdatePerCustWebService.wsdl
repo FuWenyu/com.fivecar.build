@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://impl.webservice.service.ecif.infohold.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://webservice.service.ecif.infohold.com/" name="DoUpdatePerCustWebServiceImplService" targetNamespace="http://impl.webservice.service.ecif.infohold.com/">
+  <wsdl:import location="http://172.18.10.84:8080/com.infohold.ecif.service/ws/DoUpdatePerCustWebService?wsdl=DoUpdatePerCustWebService.wsdl" namespace="http://webservice.service.ecif.infohold.com/">
+    </wsdl:import>
+  <wsdl:binding name="DoUpdatePerCustWebServiceImplServiceSoapBinding" type="ns1:DoUpdatePerCustWebService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="do_updatePerCustInfo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="do_updatePerCustInfo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="do_updatePerCustInfoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DoUpdatePerCustWebServiceImplService">
+    <wsdl:port binding="tns:DoUpdatePerCustWebServiceImplServiceSoapBinding" name="DoUpdatePerCustWebServiceImplPort">
+      <soap:address location="http://172.18.10.84:8080/com.infohold.ecif.service/ws/DoUpdatePerCustWebService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v7.0"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/activemq-broker-5.8.0.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/activemq-client-5.8.0.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/activemq-console-5.8.0.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/activemq-jaas-5.8.0.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/activemq-kahadb-store-5.8.0.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/activemq-openwire-legacy-5.8.0.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/activemq-protobuf-1.1.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/activemq-spring-5.8.0.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/activemq-web-5.8.0.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/ant.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/commons-beanutils-1.7.0.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/commons-codec-1.4.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/commons-codec-1.7.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/commons-dbcp-1.4.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/commons-httpclient-3.0.1.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/commons-lang-2.5.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/commons-pool-1.5.5.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/ezmorph-1.0.3.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/freemarker-2.3.20.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/gecko-1.1.4.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/geronimo-j2ee-management_1.1_spec-1.0.1.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/geronimo-jms_1.1_spec-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/geronimo-jta_1.0.1B_spec-1.0.1.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/hawtbuf-1.9.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/hessian-3.1.5.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/httpclient-4.3.3.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/httpcore-4.3.3.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/infoholdCSPClient.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/jackson-annotations-2.0.2.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/jackson-core-2.0.2.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/jackson-core-lgpl-1.4.0.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/jackson-databind-2.0.2.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/jackson-mapper-lgpl-1.4.0.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/jcl-over-slf4j-1.6.6.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/jline-0.9.94.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/json-20140107.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/json-lib-2.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/jsonrpc4j-1.0.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/junit.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/mail.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/message-client-1.0.0.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/metamorphosis-client-1.4.6.2.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/metamorphosis-commons-1.4.6.2.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/mongo-java-driver-2.11.3.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/mysql-connector-java-5.1.28-bin.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/netty-3.2.2.Final.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/pinyin4j-2.5.0.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/portal-mail-template-1.0.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/portal-weixin-client.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/slf4j-api-1.6.2.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/slf4j-api-1.6.6.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/slf4j-log4j12-1.6.2.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/wget-1.2.9.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/xml-apis-1.0.b2.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/zkclient-0.3.jar"/>
+	<classpathentry kind="lib" path="/com.fivecar.cms.web/extLib/zookeeper-3.4.3.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
