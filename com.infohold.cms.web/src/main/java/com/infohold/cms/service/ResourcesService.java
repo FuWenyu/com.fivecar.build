@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -41,9 +42,9 @@ public class ResourcesService implements IBusinessService {
 	@Autowired
 	private SysConfigUtil sysConfigUtil;
 
-	ImageCompressUtil imgcompress = new ImageCompressUtil();
-
 	private DateUtil dateutil = new DateUtil();
+	
+	private Logger logger = Logger.getLogger(ResourcesService.class);
 
 	@Override
 	public TransData execute(TransData transData) throws BusinessException {
@@ -185,6 +186,7 @@ public class ResourcesService implements IBusinessService {
 	public TransData picture_query(TransData transData)
 			throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
+		logger.info("picture_query-request"+map);
 		String usefo = (String) map.get("usefo");
 		List<Map<String, Object>> orgList = resourcesdao.getResource(usefo,transData.getPageInfo());
 		if (orgList.isEmpty()) {
@@ -207,6 +209,7 @@ public class ResourcesService implements IBusinessService {
 	public TransData entry_query(TransData transData)
 			throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
+		logger.info("entry_query-request"+map);
 		String usefo = (String) map.get("usefo");
 		List<Map<String, Object>> orgList = resourcesdao.getEntry(usefo,transData.getPageInfo());
 		if (orgList.isEmpty()) {

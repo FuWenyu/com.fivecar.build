@@ -61,18 +61,17 @@ public class DealerDao extends BaseDao<BaseEntity> {
 	 * @param page
 	 * @return
 	 */
-	public List<Map<String, Object>> querydealerList1(String cardbrand,Page page){
+	public List<Map<String, Object>> querydealerList1(Page page){
 		StringBuffer sql = new StringBuffer();
 		sql.append("select dle.id,");
 		sql.append("dle.carbrand,");
 		sql.append("dle.dealerName,");
-		sql.append("dle.url,");
-		sql.append("dle.urlreal ");
+		sql.append("dle.telephone,");
+		sql.append("dle.addr,");
+		sql.append("dle.position,");
+		sql.append("dle.description ");
 		sql.append("from fc_ssss_dealer dle ");
-		sql.append(" where dle.carbrandid=");
-		sql.append("'");
-		sql.append(cardbrand);
-		sql.append("'");
+
 		return super.excutePageQuery(sql.toString(),page);
 	}
 	/**
@@ -111,8 +110,9 @@ public class DealerDao extends BaseDao<BaseEntity> {
 	 * @param id，用户主键
 	 * @return
 	 */
-	public void dealer_update(CarDealerEntity entity) {
+	public boolean dealer_update(CarDealerEntity entity) {
 		super.update(entity);
+		return true;
 	}
 	
 }

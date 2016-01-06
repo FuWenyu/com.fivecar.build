@@ -3,6 +3,7 @@
 	<name>com.fivecar.cms.basic</name>
 	<comment></comment>
 	<projects>
+		<project>com.fivecar.build</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

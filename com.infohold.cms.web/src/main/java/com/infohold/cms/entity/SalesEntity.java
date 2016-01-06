@@ -80,7 +80,7 @@ public class SalesEntity extends BaseEntity {
 	/**
 	 * @return the profile
 	 */
-	@Column(name ="profile",nullable=false,columnDefinition="varchar(255)default ''")
+	@Column(name ="profile",columnDefinition="varchar(255)default ''")
 	public java.lang.String getProfile() {
 		return profile;
 	}
@@ -106,7 +106,7 @@ public class SalesEntity extends BaseEntity {
 	/**
 	 * @return the wxQQ
 	 */
-	@Column(name ="wxQQ",nullable=false,columnDefinition="varchar(24)default ''")
+	@Column(name ="wxQQ",columnDefinition="varchar(24)default ''")
 	public java.lang.String getWxQQ() {
 		return wxQQ;
 	}
@@ -171,7 +171,7 @@ public class SalesEntity extends BaseEntity {
 	/**
 	 * @return the description
 	 */
-	@Column(name ="description",nullable=true,columnDefinition="varchar(128)default ''")
+	@Column(name ="description",columnDefinition="varchar(128)default ''")
 	public java.lang.String getDescription() {
 		return description;
 	}

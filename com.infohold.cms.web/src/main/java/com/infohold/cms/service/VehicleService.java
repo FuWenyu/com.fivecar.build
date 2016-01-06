@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,8 @@ public class VehicleService implements IBusinessService {
 	private SysConfigUtil sysConfigUtil;
 
 	private DateUtil dateutil = new DateUtil();
+	
+	private Logger logger = Logger.getLogger(VehicleService.class);
 
 	@Override
 	public TransData execute(TransData transData) throws BusinessException {
@@ -184,9 +187,10 @@ public class VehicleService implements IBusinessService {
 	 */
 	public TransData vehicleQuery(TransData transData) throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
-		String cardbrand = (String) map.get("cardbrand");
+		logger.info("vehicleQuery-request:"+map);
+		String carbrand = (String) map.get("carbrand");
 		List<Map<String, Object>> vehiclelist = vehicledao.queryvehicleList1(
-				cardbrand, transData.getPageInfo());
+				carbrand, transData.getPageInfo());
 		if (vehiclelist == null) {
 			transData.setExpCode("-1");
 			transData.setExpMsg("fail");

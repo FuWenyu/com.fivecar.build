@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -41,9 +42,9 @@ public class PictureService implements IBusinessService {
 	@Autowired
 	private SysConfigUtil sysConfigUtil;
 
-	ImageCompressUtil imgcompress = new ImageCompressUtil();
-
 	private DateUtil dateutil = new DateUtil();
+	
+	private Logger logger = Logger.getLogger(PictureService.class);
 
 	@Override
 	public TransData execute(TransData transData) throws BusinessException {
@@ -343,23 +344,9 @@ public class PictureService implements IBusinessService {
 	public TransData resourcesQuery(TransData transData)
 			throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
+		logger.info("resourcesQuery-request:"+map);
 		String anchor = (String) map.get("anchor");
 		ResourcesEntity resources = pictureDao.getResource(anchor);
-/*		StringBuffer head = new StringBuffer();
-		head.append("<!DOCTYPE html>");
-		head.append("<html>");
-		head.append("<head>");
-		head.append("<body>");
-		head.append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
-		head.append("<meta name=\"referrer\" content=\"always\">");
-		head.append("<meta charset=\"utf-8\">");
-		head.append("<meta name=\"viewport\"");
-		head.append("content=\"width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no\">");
-		head.append("</head>");
-		head.append(resources.getResource());
-		head.append("</body>");
-		head.append("</html>");
-		resources.setResource(head.toString());*/
 		if (resources==null) {
 			transData.setExpCode("-1");
 			transData.setExpMsg("fail");
@@ -380,6 +367,7 @@ public class PictureService implements IBusinessService {
 	public TransData picture_query(TransData transData)
 			throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
+		logger.info("picture_query-request:"+map);
 		String usefo = (String) map.get("usefo");
 		List<Map<String, Object>> orgList = pictureDao.getEntry(usefo,transData.getPageInfo());
 		if (orgList.isEmpty()) {
@@ -402,6 +390,7 @@ public class PictureService implements IBusinessService {
 	public TransData entry_query(TransData transData)
 			throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
+		logger.info("entry_query-request:"+map);
 		String usefo = (String) map.get("usefo");
 		List<Map<String, Object>> orgList = pictureDao.getEntry(usefo,transData.getPageInfo());
 		if (orgList.isEmpty()) {

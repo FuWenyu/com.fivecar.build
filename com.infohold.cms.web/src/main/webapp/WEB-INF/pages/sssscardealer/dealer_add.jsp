@@ -124,11 +124,15 @@
 		if (!checkData('addr', '4s店地址 ', 'input')) {
 			return;
 		}
+		if (!checkData('description', '4s店简介 ', 'input')) {
+			return;
+		}
 		param = {};
 		param["carbrand"]=$("#carbrand").val();
 		param["dealerName"]=$("#dealerName").val();
 		param["telephone"]=$("#telephone").val();
 		param["addr"]=$("#addr").val();
+		param["description"]=$("#description").val();
 		$.ajax({
 			type : "POST",
 			url : "<%=path%>/mvc/dealer_save.do",

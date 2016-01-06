@@ -4,11 +4,13 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.infohold.cms.basic.common.TransData;
 import com.infohold.cms.basic.common.UserSession;
+import com.infohold.cms.basic.controller.CentreController;
 import com.infohold.cms.basic.exception.BusinessException;
 import com.infohold.cms.basic.service.IBusinessService;
 import com.infohold.cms.basic.util.SysConfigUtil;
@@ -34,6 +36,8 @@ public class DealerService implements IBusinessService {
 
 	private DateUtil dateutil = new DateUtil();
 
+	private Logger logger = Logger.getLogger(DealerService.class);
+	
 	@Override
 	public TransData execute(TransData transData) throws BusinessException {
 		String tradCode = transData.getTradeCode();
@@ -157,12 +161,40 @@ public class DealerService implements IBusinessService {
 	public TransData updatePictureEntity(TransData transData)
 			throws BusinessException {
 		// 页面数据
-		transData.setExpMsg("success");
+		Map<String, Object> map = transData.getViewMap();
+		UserSession session = transData.getUserSession();
+		String id = (String)  map.get("dealer_id");
+		String dealerName = (String) map.get("dealerName");
+		String carbrandall = (String) map.get("carbrand");
+		String telephone = (String) map.get("telephone");
+		String addr = (String) map.get("addr");
+		String position = (String) map.get("position");
+		String description = (String) map.get("description");
+		String createName = session.getUserName();
+		Timestamp createDate = dateutil.getTimestamp();
+
+		String[] strarray = carbrandall.split("-");
+		String carbrandid = strarray[0];
+		String carbrandname = strarray[1];
+		CarDealerEntity CarDealerEntity = new CarDealerEntity();
+		CarDealerEntity.setId(id);
+		CarDealerEntity.setDealerName(dealerName);
+		CarDealerEntity.setCarbrandid(carbrandid);
+		CarDealerEntity.setCarbrand(carbrandname);
+		CarDealerEntity.setTelephone(telephone);
+		CarDealerEntity.setAddr(addr);
+		CarDealerEntity.setPosition(position);
+		CarDealerEntity.setCreateDate(createDate);
+		CarDealerEntity.setCreateName(createName);
+		CarDealerEntity.setDescription(description);
+		if (dealerdao.dealer_update(CarDealerEntity)) {
+			transData.setExpMsg("success");
+		}
 		return transData;
 	}
 
 	/**
-	 * http请求根据品牌查询车辆列表
+	 * http请求查询4s店信息列表
 	 * 
 	 * @param transData
 	 * @return
@@ -170,16 +202,18 @@ public class DealerService implements IBusinessService {
 	 */
 	public TransData dealerQuery(TransData transData) throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
-		String cardbrand = (String) map.get("cardbrand");
-		List<Map<String, Object>> dealerlist = dealerdao.querydealerList1(
-				cardbrand, transData.getPageInfo());
-		if (dealerlist == null) {
-			transData.setExpCode("-1");
-			transData.setExpMsg("fail");
-		} else {
-			transData.setObj(dealerlist);
-			transData.setExpCode("1");
-			transData.setExpMsg("success");
+		logger.info("dealerQuery-request:"+map);
+		String dealer = (String) map.get("dealer");
+		if (dealer.equals("dealer")) {
+			List<Map<String, Object>> dealerlist = dealerdao.querydealerList1(transData.getPageInfo());
+			if (dealerlist == null) {
+				transData.setExpCode("-1");
+				transData.setExpMsg("fail");
+			} else {
+				transData.setObj(dealerlist);
+				transData.setExpCode("1");
+				transData.setExpMsg("success");
+			}
 		}
 		return transData;
 	}

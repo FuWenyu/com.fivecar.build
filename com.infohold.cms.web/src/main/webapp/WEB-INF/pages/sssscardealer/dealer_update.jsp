@@ -38,73 +38,60 @@
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id"> </label>
 					</div>
-					<%-- <input id="VERSION_FOR" type="hidden" class="" name="VERSION_FOR"   value="${picture.version_flag}" />	
-					<input id="version_ol" type="hidden" class="" name="version_ol"   value="${picture.version_online}" />	 --%>
-					<input id="version_id" type="hidden" class="" name="picture_id" id="picture_id"   value="${picture.id}" />
-					<input id="version_id" type="hidden" class="" name="usefor" id="usefor"   value="${picture.usefo}" />
-					<input id="version_id" type="hidden" class="" name="add_date" id="add_date"   value="${picture.add_date}" />	
+					<%-- <input id="VERSION_FOR" type="hidden" class="" name="VERSION_FOR"   value="${dealer.version_flag}" />	
+					<input id="version_ol" type="hidden" class="" name="version_ol"   value="${dealer.version_online}" />	 --%>
+					<input id="dealer_id" type="hidden" class="" name="dealer_id" id="dealer_id"   value="${dealer.id}" />
+					<input id="version_id" type="hidden" class="" name="carbrand1" id="carbrand1"   value="${dealer.carbrandid}-${dealer.carbrand}" />
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
-							图片名称 </label>
-						
+							经营品牌</label>
 						<div class="col-sm-9">
-							<input type="text" id="imageName" name="imageName" placeholder="请输入图片名称"
+							<select class="input-medium"  id="carbrand" name="carbrand">
+							<c:forEach items="${brandList}" var="list" varStatus="status">
+	                        <option value="${list.id}-${list.brandNamecn}">${list.initial}-${list.brandNamecn}</option>
+	               		    </c:forEach>
+               		    </select>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">
+							4s店全名 </label>
+						<div class="col-sm-9">
+							<input type="text" id="dealerName" name="dealerName" placeholder="请输入4s店全名 "
 								class="col-xs-10 col-sm-5"
-								value="${picture.imageName}" /> <span style="color: red"></span>
+								value="${dealer.dealerName}" /> <span style="color: red"></span>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
-							标题</label>
+							联系电话</label>
 						
 						<div class="col-sm-9">
-							<input type="text" id="title" name="title" placeholder="请输入标题"
+							<input type="text" id="telephone" name="telephone" placeholder="请输入联系电话 "
 								class="col-xs-10 col-sm-5"
-								value="${picture.title}" /> <span style="color: red"></span>
+								value="${dealer.telephone}" /> <span style="color: red"></span>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
-							用途</label>
+							4s店地址</label>
+						
 						<div class="col-sm-9">
-							<select class="input-medium"  id="usefo" name="usefo">
-                                <option value="">-请选择-</option> 
-								<option value="11">行业资讯</option>
-								<option value="21">优惠信息</option>
-								<option value="31">汽车生活</option>
-							</select>
+							<input type="text" id="addr" name="addr" placeholder="请输入4s店地址 "
+								class="col-xs-10 col-sm-5"
+								value="${dealer.addr}" /> <span style="color: red"></span>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="name">
-							图片链接地址 </label>
-		
+							4s店简介 </label>
 						<div class="col-sm-9">
-							<input type="text" id="anchor" placeholder="请输入图片链接地址"
-								class="col-xs-10 col-sm-5" name="anchor" value="" />
+							<input type="text" id=description placeholder="请输入4s店简介"
+								class="col-xs-10 col-sm-5" name="description" value="${dealer.description}" />
 						</div>
 					</div>
 
-					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="name">
-							图片链接地址 </label>
-		
-						<div class="col-sm-9">
-							<input type="text" id="picture_url" placeholder="请输入图片链接地址"
-								class="col-xs-10 col-sm-5" name="picture_url" value="${picture.to_url}" />
-						</div>
-					</div>
-							<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="name">
-							图片描述 </label>
-		
-						<div class="col-sm-9">
-							<%-- <input type="text" id="picture_desc" placeholder="请输入图片描述"
-								class="col-xs-10 col-sm-5" name="picture_desc" value="${picture.picture_desc}" /> --%>
-							<textarea rows="6" cols="72" id="picture_desc" name="picture_desc"> ${picture.picture_desc}</textarea>
-						</div>
-					</div>
-		
 					<div class="clearfix form-actions">
 						<div class="col-md-offset-3 col-md-9">
 							<button class="btn btn-info" type="button" onclick="subForm();">
@@ -112,7 +99,7 @@
 							</button>
 		
 							&nbsp; &nbsp; &nbsp;
-							<button class="btn" type="button" onclick="javascript:window.location = '<%=path%>/mvc/picture.do?type=cms';">
+							<button class="btn" type="button" onclick="javascript:window.location = '<%=path%>/mvc/dealer.do';">
 								<i class="icon-reply bigger-110"></i> 返回
 							</button>
 						</div>
@@ -172,53 +159,39 @@
 			$("#organizationId").formComponents("select");
 			$("#cms_roleid").formComponents("check");
 			$("#oms_roleid").formComponents("check");
-			var usefor = document.getElementById('usefor').value;
-			var VERSION_OL = document.getElementById('version_ol').value;
 			
-			checkOption('usefo',usefor);
-			checkOption('version_online',VERSION_OL);
-			/* $("#cms_form-group").hide();
-			$("#organizationId").change(function(){
-				var orgId = $("#organizationId").val();
-				if(orgId == "000000"){
-					$("#oms_form-group").show();
-					$("#cms_form-group").hide();
-				}else{
-					$("#oms_form-group").hide();
-					$("#cms_form-group").show();
-				}
-			}); */
-			//$("#organizationId").addClass("disabled");
+			var carbrand1 = document.getElementById('carbrand1').value;
+			checkOption('carbrand',carbrand1);
 			$("#cms_form-group").find("input[value=2]").attr("checked","checked").attr("disabled","disabled");
 		});
 		/*********自定于方法**********/
 		//表单提交
 		function subForm() {
-//			if (!checkData('version_no', '版本号', 'input')) {
-//				return;
-//			}
-			/* if (!checkData('version_flag', '系统标记', 'input')) {
-				return;
-			} */
-			if (!checkData('picture_name', '图片名称', 'input')) {
+			if (!checkData('carbrand', '经营品牌', 'input')) {
 				return;
 			}
-			if (!checkData('picture_desc', '图片描述', 'input')) {
+			if (!checkData('dealerName', '4s店全名', 'input')) {
 				return;
 			}
-			if (!checkData('picture_url', '图片地址 ', 'input')) {
+			if (!checkData('telephone', '联系电话', 'input')) {
+				return;
+			}
+			if (!checkData('addr', '4s店地址 ', 'input')) {
+				return;
+			}
+			if (!checkData('description', '4s店简介 ', 'input')) {
 				return;
 			}
 			$.ajax({
 				type : "POST",
-				url : "<%=path%>/mvc/picture_editSave.do",
+				url : "<%=path%>/mvc/dealer_editSave.do",
 				data : $("#sub_form").serialize(),
 				async : false,
 				dataType:'json',
 				success : function(data) {
 					if(data.msg == "success"){
 						alert("保存成功！");
-						window.location = "<%=path%>/mvc/picture.do";
+						window.location = "<%=path%>/mvc/dealer.do";
 					}else{
 						alert("保存失败:"+data.msg);
 					}

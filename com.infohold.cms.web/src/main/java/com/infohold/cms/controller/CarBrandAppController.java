@@ -29,7 +29,7 @@ import com.infohold.cms.service.VersionService;
 /**
  * APP品牌查询画面
  * @author Administrator
- *
+ * 
  */
 @Controller
 public class CarBrandAppController extends CentreController{
@@ -84,6 +84,35 @@ public class CarBrandAppController extends CentreController{
 			map.put("expMsg", transData.getExpMsg());
 			List<Map<String, Object>> carvehicleList = (List<Map<String, Object>>)transData.getObj();
 			map.put("carvehicleList", carvehicleList);
+			map.put("page",transData.getPageInfo());
+			return map;
+		}
+		System.out.println(map);
+		return map;
+	}
+	
+	/**
+	 * APP-4s店信息列表查询
+	 * 
+	 * @param httpServletRequest
+	 * @return map
+	 */
+	
+	@RequestMapping("/app/cardealer.do")
+	@ResponseBody
+	public Map<String, Object> CarDealer(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletresponse) throws Exception {
+		TransData transData = new TransData();
+		transData.setServiceName("dealerService");
+		transData.setTradeCode("T24007");
+		transData=super.doService(httpServletRequest, transData);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(!"".equals(transData.getExpCode())){
+			map.put("expCode", transData.getExpCode());
+			map.put("expMsg", transData.getExpMsg());
+			List<Map<String, Object>> cardealerList = (List<Map<String, Object>>)transData.getObj();
+			map.put("cardealerList", cardealerList);
 			map.put("page",transData.getPageInfo());
 			return map;
 		}

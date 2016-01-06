@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +40,9 @@ public class AppUserService implements IBusinessService {
 	private SysConfigUtil sysConfigUtil;
 	
 	private DateUtil dateutil = new DateUtil();
+	
+	private Logger logger = Logger.getLogger(AppUserService.class);
+	
 	@Override
 	public TransData execute(TransData transData) throws BusinessException {
 		String tradCode=transData.getTradeCode();
@@ -57,6 +61,7 @@ public class AppUserService implements IBusinessService {
 	 */
 	public TransData AppRegister(TransData transData) throws BusinessException{
 		Map<String,Object> map= transData.getViewMap();
+		logger.info("AppRegister-request:"+map);
 		String phone_no = (String)map.get("phone_no");
 		String password = (String)map.get("password");
 		Timestamp create_date = dateutil.getTimestamp();
@@ -106,6 +111,7 @@ public class AppUserService implements IBusinessService {
 	 */
 	public TransData loginCheck(TransData transData) throws BusinessException{
 		Map<String,Object> map= transData.getViewMap();
+		logger.info("loginCheck-request:"+map);
 		String login_name = (String)map.get("phone_no");
 		String password = (String)map.get("password");
 		String md5password = MD5Util.encryption(password);
