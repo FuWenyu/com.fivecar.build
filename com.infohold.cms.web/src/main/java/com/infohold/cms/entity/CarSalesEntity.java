@@ -27,13 +27,17 @@ import com.infohold.cms.basic.entity.BaseEntity;
 @Entity
 @Table(name = "fc_ssss_sales", schema = "")
 @SuppressWarnings("serial")
-public class SalesEntity extends BaseEntity {
+public class CarSalesEntity extends BaseEntity {
 	/**主键*/
 	private java.lang.String id;
 	/**姓名*/
 	private java.lang.String salesName;
 	/**头像*/
-	private java.lang.String profile;
+	private java.lang.String url;
+	/**logo原地址*/
+	private java.lang.String urlreal;
+	/**图片名称*/
+	private java.lang.String imageName;
 	/**电话号*/
 	private java.lang.String phone;
 	/**微信或QQ号*/
@@ -78,17 +82,43 @@ public class SalesEntity extends BaseEntity {
 		this.salesName = salesName;
 	}
 	/**
-	 * @return the profile
+	 * @return the url
 	 */
-	@Column(name ="profile",columnDefinition="varchar(255)default ''")
-	public java.lang.String getProfile() {
-		return profile;
+	@Column(name ="url",columnDefinition="varchar(255)default ''")
+	public java.lang.String getUrl() {
+		return url;
 	}
 	/**
-	 * @param profile the profile to set
+	 * @param url the url to set
 	 */
-	public void setProfile(java.lang.String profile) {
-		this.profile = profile;
+	public void setUrl(java.lang.String url) {
+		this.url = url;
+	}
+	/**
+	 * @return the urlreal
+	 */
+	@Column(name ="urlreal",columnDefinition="varchar(255)default ''")
+	public java.lang.String getUrlreal() {
+		return urlreal;
+	}
+	/**
+	 * @param urlreal the urlreal to set
+	 */
+	public void setUrlreal(java.lang.String urlreal) {
+		this.urlreal = urlreal;
+	}
+	/**
+	 * @return the imageName
+	 */
+	@Column(name ="imageName",columnDefinition="varchar(64)default ''")
+	public java.lang.String getImageName() {
+		return imageName;
+	}
+	/**
+	 * @param imageName the imageName to set
+	 */
+	public void setImageName(java.lang.String imageName) {
+		this.imageName = imageName;
 	}
 	/**
 	 * @return the phone
@@ -106,7 +136,7 @@ public class SalesEntity extends BaseEntity {
 	/**
 	 * @return the wxQQ
 	 */
-	@Column(name ="wxQQ",columnDefinition="varchar(24)default ''")
+	@Column(name ="wxQQ",columnDefinition="varchar(64)default ''")
 	public java.lang.String getWxQQ() {
 		return wxQQ;
 	}
