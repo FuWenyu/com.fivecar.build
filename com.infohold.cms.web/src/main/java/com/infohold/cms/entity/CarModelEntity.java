@@ -11,7 +11,7 @@ import com.infohold.cms.basic.entity.BaseEntity;
 
 /**   
  * @Title: Entity
- * @Description: 车辆信息
+ * @Description: 车型信息
  * @author fwy
  * @date 2015-12-7 22:07:00
  * @version V1.0   
@@ -23,20 +23,26 @@ import com.infohold.cms.basic.entity.BaseEntity;
 public class CarModelEntity extends BaseEntity {
 	/**主键*/
 	private java.lang.String id;
-	/**车辆名称*/
+	/**车型名称*/
 	private java.lang.String modelName;
-	/**车辆图片*/
-	private java.lang.String profile;
+	/**车型照片*/
+	private java.lang.String url;
+	/**车型照片原地址*/
+	private java.lang.String urlreal;
+	/**图片名称*/
+	private java.lang.String imageName;
+	/**品牌id*/
+	private java.lang.String carbrandid;
 	/**品牌*/
 	private java.lang.String carbrand;
-	/**价格区间*/
-	private java.lang.String price;
-	/**车型列表*/
-	private java.lang.String vehicleConfiguration;
-	/**销售列表*/
-	private java.lang.String sales;
-	/**4s店经销商*/
-	private java.lang.String dealers;
+	/**官方指导价格*/
+	private java.lang.String originalprice;
+	/**折扣价格*/
+	private java.lang.String discountprice;
+	/**车辆id*/
+	private java.lang.String vehicleid;
+	/**车辆*/
+	private java.lang.String vehicle;
 	/**创建人*/
 	private java.lang.String createName;
 	/**创建日期*/
@@ -73,22 +79,62 @@ public class CarModelEntity extends BaseEntity {
 		this.modelName = modelName;
 	}
 	/**
-	 * @return the profile
+	 * @return the url
 	 */
-	@Column(name ="profile",nullable=false,columnDefinition="varchar(255)default ''")
-	public java.lang.String getProfile() {
-		return profile;
+	@Column(name ="url",columnDefinition="varchar(255)default ''")
+	public java.lang.String getUrl() {
+		return url;
 	}
 	/**
-	 * @param profile the profile to set
+	 * @param url the url to set
 	 */
-	public void setProfile(java.lang.String profile) {
-		this.profile = profile;
+	public void setUrl(java.lang.String url) {
+		this.url = url;
+	}
+	/**
+	 * @return the urlreal
+	 */
+	@Column(name ="urlreal",columnDefinition="varchar(255)default ''")
+	public java.lang.String getUrlreal() {
+		return urlreal;
+	}
+	/**
+	 * @param urlreal the urlreal to set
+	 */
+	public void setUrlreal(java.lang.String urlreal) {
+		this.urlreal = urlreal;
+	}
+	/**
+	 * @return the imageName
+	 */
+	@Column(name ="imageName",columnDefinition="varchar(64)default ''")
+	public java.lang.String getImageName() {
+		return imageName;
+	}
+	/**
+	 * @param imageName the imageName to set
+	 */
+	public void setImageName(java.lang.String imageName) {
+		this.imageName = imageName;
+	}
+	
+	/**
+	 * @return the carbrandid
+	 */
+	@Column(name ="carbrandid",nullable=false,columnDefinition="varchar(36)default ''")
+	public java.lang.String getCarbrandid() {
+		return carbrandid;
+	}
+	/**
+	 * @param carbrandid the carbrandid to set
+	 */
+	public void setCarbrandid(java.lang.String carbrandid) {
+		this.carbrandid = carbrandid;
 	}
 	/**
 	 * @return the carbrand
 	 */
-	@Column(name ="carbrand",nullable=false,columnDefinition="varchar(11)default ''")
+	@Column(name ="carbrand",nullable=false,columnDefinition="varchar(64)default ''")
 	public java.lang.String getCarbrand() {
 		return carbrand;
 	}
@@ -98,58 +144,61 @@ public class CarModelEntity extends BaseEntity {
 	public void setCarbrand(java.lang.String carbrand) {
 		this.carbrand = carbrand;
 	}
+
 	/**
-	 * @return the price
+	 * @return the originalprice
 	 */
-	@Column(name ="price",nullable=false,columnDefinition="varchar(36)default ''")
-	public java.lang.String getPrice() {
-		return price;
+	@Column(name ="originalprice",columnDefinition="varchar(36)default ''")
+	public java.lang.String getOriginalprice() {
+		return originalprice;
 	}
 	/**
-	 * @param price the price to set
+	 * @param originalprice the originalprice to set
 	 */
-	public void setPrice(java.lang.String price) {
-		this.price = price;
+	public void setOriginalprice(java.lang.String originalprice) {
+		this.originalprice = originalprice;
 	}
 	/**
-	 * @return the vehicleConfiguration
+	 * @return the discountprice
 	 */
-	@Column(name ="vehicleConfiguration",nullable=true,columnDefinition="varchar(36)default ''")
-	public java.lang.String getVehicleConfiguration() {
-		return vehicleConfiguration;
+	@Column(name ="discountprice",columnDefinition="varchar(36)default ''")
+	public java.lang.String getDiscountprice() {
+		return discountprice;
 	}
 	/**
-	 * @param vehicleConfiguration the vehicleConfiguration to set
+	 * @param discountprice the discountprice to set
 	 */
-	public void setVehicleConfiguration(java.lang.String vehicleConfiguration) {
-		this.vehicleConfiguration = vehicleConfiguration;
+	public void setDiscountprice(java.lang.String discountprice) {
+		this.discountprice = discountprice;
+	}
+
+	/**
+	 * @return the vehicleid
+	 */
+	@Column(name ="vehicleid",nullable=true,columnDefinition="varchar(36)default ''")
+	public java.lang.String getVehicleid() {
+		return vehicleid;
 	}
 	/**
-	 * @return the sales
+	 * @param vehicleid the vehicleid to set
 	 */
-	@Column(name ="sales",nullable=true,columnDefinition="varchar(36)default ''")
-	public java.lang.String getSales() {
-		return sales;
+	public void setVehicleid(java.lang.String vehicleid) {
+		this.vehicleid = vehicleid;
 	}
 	/**
-	 * @param sales the sales to set
+	 * @return the vehicle
 	 */
-	public void setSales(java.lang.String sales) {
-		this.sales = sales;
+	@Column(name ="vehicle",nullable=true,columnDefinition="varchar(64)default ''")
+	public java.lang.String getVehicle() {
+		return vehicle;
 	}
 	/**
-	 * @return the dealers
+	 * @param vehicle the vehicle to set
 	 */
-	@Column(name ="dealers",nullable=true,columnDefinition="varchar(36)default ''")
-	public java.lang.String getDealers() {
-		return dealers;
+	public void setVehicle(java.lang.String vehicle) {
+		this.vehicle = vehicle;
 	}
-	/**
-	 * @param dealers the dealers to set
-	 */
-	public void setDealers(java.lang.String dealers) {
-		this.dealers = dealers;
-	}
+
 	/**
 	 * @return the createName
 	 */
