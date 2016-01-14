@@ -15,6 +15,7 @@
 
 	<body id="iframe_body" onload="setHash('${pageContext.request.contextPath}')">
 	<h1>${resources.title}</h1>
+	<span style="text-decoration:line-through;"></span>
 	${resources.resource}
 	</body>
 </html>
