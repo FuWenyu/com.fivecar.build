@@ -132,7 +132,7 @@ public enum TradeCodeDef implements Serializable {
 		case T23007:
 			return "车辆app请求";
 		case T23008:
-			return "暂不用";
+			return "车辆webview";
 		case T23009:
 			return "暂不用";
 		case T23010:
