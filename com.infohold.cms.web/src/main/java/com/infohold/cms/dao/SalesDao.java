@@ -74,7 +74,7 @@ public class SalesDao extends BaseDao<BaseEntity> {
 		sql.append("sl.url,");
 		sql.append("sl.urlreal ");
 		sql.append("from fc_ssss_sales sl ");
-		sql.append(" where sl.carbrandid=");
+		sql.append(" where sl.belong=");
 		sql.append("'");
 		sql.append(belong);
 		sql.append("'");

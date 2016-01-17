@@ -8,12 +8,17 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.infohold.cms.basic.common.Page;
 import com.infohold.cms.basic.common.TransData;
 import com.infohold.cms.basic.common.UserSession;
 import com.infohold.cms.basic.exception.BusinessException;
 import com.infohold.cms.basic.service.IBusinessService;
 import com.infohold.cms.basic.util.SysConfigUtil;
+import com.infohold.cms.dao.DealerDao;
+import com.infohold.cms.dao.SalesDao;
 import com.infohold.cms.dao.VehicleDao;
+import com.infohold.cms.entity.CarDealerEntity;
+import com.infohold.cms.entity.CarSalesEntity;
 import com.infohold.cms.entity.CarVehicleEntity;
 import com.infohold.cms.util.DateUtil;
 
@@ -29,6 +34,10 @@ public class VehicleService implements IBusinessService {
 
 	@Autowired
 	private VehicleDao vehicledao;
+	@Autowired
+	private DealerDao dealerdao;
+	@Autowired
+	private SalesDao salesdao;
 
 	@Autowired
 	private SysConfigUtil sysConfigUtil;
@@ -201,5 +210,24 @@ public class VehicleService implements IBusinessService {
 		}
 		return transData;
 	}
-
+	/**
+	 * 页面查询
+	 * 
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public CarVehicleEntity VehicleQueryPage(String  id) throws BusinessException {
+		CarVehicleEntity entity = vehicledao.getvehicleEntity(id);
+		return entity;
+	}
+	public List<Map<String, Object>> querydealerListPage(String id,Page page) throws BusinessException {
+		List<Map<String, Object>> orglist = dealerdao.querydealerListPage(id,page);
+		return orglist;
+	}
+	public List<Map<String, Object>> salesQueryPage(String dealer,Page page) throws BusinessException {
+		List<Map<String, Object>> saleslist = salesdao.querysalesList1(
+				dealer, page);
+		return saleslist;
+	}
 }

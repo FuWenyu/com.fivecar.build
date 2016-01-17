@@ -114,5 +114,28 @@ public class DealerDao extends BaseDao<BaseEntity> {
 		super.update(entity);
 		return true;
 	}
-	
+	/**
+	 * 4s店信息查询for页面
+	 * @param id，用户主键
+	 * @return
+	 */
+	public List<Map<String, Object>> querydealerListPage(String cardbrandid,Page page){
+		StringBuffer sql = new StringBuffer();
+		sql.append("select dle.id,");
+		sql.append("dle.dealerName,");
+		sql.append("dle.carbrand,");
+		sql.append("dle.telephone,");
+		sql.append("dle.addr,");
+		sql.append("dle.position,");
+		sql.append("dle.description,");
+		sql.append("dle.createDate,");
+		sql.append("dle.createName ");
+		sql.append("from fc_ssss_dealer dle ");
+		sql.append("where dle.carbrandid = ");
+		sql.append("'");
+		sql.append(cardbrandid);
+		sql.append("'");
+		sql.append(" order by dle.createDate desc");
+		return super.excutePageQuery(sql.toString(),page);
+	}
 }
