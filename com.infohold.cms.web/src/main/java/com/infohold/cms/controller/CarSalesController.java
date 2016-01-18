@@ -26,7 +26,7 @@ import com.infohold.cms.entity.CarSalesEntity;;
 public class CarSalesController extends CentreController{
 
 	/**
-	 * 品牌列表
+	 * 销售列表
 	 * @param httpServletRequest
 	 * @return ModelAndView
 	 * @throws JsonProcessingException 

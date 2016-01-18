@@ -225,9 +225,28 @@ public class VehicleService implements IBusinessService {
 		List<Map<String, Object>> orglist = dealerdao.querydealerListPage(id,page);
 		return orglist;
 	}
-	public List<Map<String, Object>> salesQueryPage(String dealer,Page page) throws BusinessException {
+	public CarDealerEntity querydealerPage(String id) throws BusinessException {
+		CarDealerEntity entity = dealerdao.getdealerEntity(id);
+		return entity;
+	}
+/*	public List<Map<String, Object>> salesQueryPage(String dealer,Page page) throws BusinessException {
 		List<Map<String, Object>> saleslist = salesdao.querysalesList1(
 				dealer, page);
 		return saleslist;
+	}*/
+	public TransData salesQueryPage(String dealer,Page page,TransData transData) throws BusinessException {
+		page.setPageSize(2);
+		transData.setPageInfo(page);
+		List<Map<String, Object>> saleslist = salesdao.querysalesList1(
+				dealer, transData.getPageInfo());
+		if (saleslist == null) {
+			transData.setExpCode("-1");
+			transData.setExpMsg("fail");
+		} else {
+			transData.setObj(saleslist);
+			transData.setExpCode("1");
+			transData.setExpMsg("success");
+		}
+		return transData;
 	}
 }
