@@ -21,9 +21,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.infohold.cms.basic.common.Page;
 import com.infohold.cms.basic.common.TransData;
 import com.infohold.cms.basic.controller.CentreController;
+import com.infohold.cms.entity.CarDealerEntity;
+import com.infohold.cms.entity.CarSalesEntity;
+import com.infohold.cms.entity.CarVehicleEntity;
 import com.infohold.cms.entity.OrganizationEntity;
 import com.infohold.cms.entity.VersionEntity;
 import com.infohold.cms.service.BaseService;
+import com.infohold.cms.service.VehicleService;
 import com.infohold.cms.service.VersionService;
 import com.infohold.cms.util.Send;
 import com.infohold.cms.util.VercodeUtil;
@@ -42,23 +46,33 @@ public class VehicleViewController extends CentreController{
 	 * @param httpServletRequest
 	 * @return map
 	 */
+	@Autowired
+	private VehicleService vehicleService;
 
 	@RequestMapping("/vehicleWebview.do")
-	public ModelAndView organization_getList(HttpServletRequest httpServletRequest,Page page) {
-		TransData transData = new TransData();
-		transData.setServiceName("vehicleService");
-		transData.setTradeCode("T23005");
-		transData=super.doService(httpServletRequest, transData);
+	public ModelAndView organization_getList(HttpServletRequest httpServletRequest) {
+		String id = httpServletRequest.getParameter("id");
+		
 		ModelAndView mav = new ModelAndView();
-		List<Map<String, Object>> vehicle = (List<Map<String, Object>>)transData.getObj();
+		 CarVehicleEntity vehicle = new CarVehicleEntity();
+		 Page page = new Page();
+		 
+		 page.setPageNo(2);
+		 page.setPageSize(2);
+		 page.setTotalCount(3);
+		 page.setTotalPages(2);
+		 vehicle = vehicleService.VehicleQueryPage(id);
+		 List<Map<String, Object>> dealerlist = vehicleService.querydealerListPage(vehicle.getCarbrandid(), new Page());
+		String dealerid = dealerlist.get(0).get("id").toString();
+		
+		Map<String, Object> dealer =  dealerlist.get(0);
+		 List<Map<String, Object>> saleslist = vehicleService.salesQueryPage(dealerid, new Page());
+		 
+		 mav.addObject("page", page);
 		mav.addObject("vehicle", vehicle);
-		mav.addObject("page",transData.getPageInfo());
-/*		if(qry_type!=null){
-			mav.setViewName("/sssscarbrand/carbrand_getListInfo");
-		}else{
-			mav.setViewName("/sssscarbrand/carbrand_getList");
-		}
-		return mav;*/
+		mav.addObject("saleslist", saleslist);
+		mav.addObject("dealer", dealer);
+		mav.addObject("dealerlist", dealerlist);
 		mav.setViewName("/webview/vehicle");
 		return mav;
 	}

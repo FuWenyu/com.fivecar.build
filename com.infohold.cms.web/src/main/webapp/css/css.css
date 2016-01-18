@@ -1,0 +1,116 @@
+@charset "utf-8";
+/* CSS Document */
+/*标题*/
+li{ list-style: none outside none;}
+h1 { font-size: 1.3em;margin:  0;}
+h2 {font-size: 1.2em; margin: 0;}
+h3 { font-size: 1.007em;margin: 0; padding-left:10px;}
+h4 {font-size: 1em;margin:0;}
+h5 {font-size: 0.83em;margin: 0;}
+h6 { font-size: 0.67em;margin: 0;}
+html, body, ul,li {margin:0;padding:0;border:0;font-size:100%;font-style:normal;}
+li{list-style-image:none;list-style-type:none;}
+
+body {margin:0 auto;padding-top:0px;color:#000;line-height:24px;}
+a{color:#000;}
+a:hover{ color:#f60;text-decoration:blink;}
+a:link{text-decoration:blink;} 
+a:focus {color: #f60;text-decoration: underline;}
+
+img{width: auto;height: auto;display: inline-block;}
+.wc01{background-image:url(http://localhost:8080/com.fivecar.cms.web/images/01.png); background-position:center;height: 195px;overflow: hidden;background-size: 100%;background-repeat: no-repeat;}
+
+.wc02{max-width: 100%;height:50px;}
+
+
+.wc02-01{
+
+	background-color:#fff;
+	float:left;
+	width:30%;
+}
+.wc02-01 a{
+	font-size:16px;
+	color:#F60;
+	font-weight:700;
+	padding-left:10px;
+	
+}
+
+.wc02-02{
+	background-color:#273037;
+	float:left;
+	width:70%;
+}
+.wc02-02 a{
+	font-size:14px;
+	color:#fff;
+	font-weight:700;
+	padding-left:10px;
+}
+.wc02-03{
+	float:left;
+	
+}
+.wc03{
+	background-color:#CCC;
+	height:40px;
+	width:100%;
+	float:left;
+}
+.wc03 h3{
+	background-color:#CCC;
+	height:30px;
+	width:100%;
+	float:left;
+	padding-left:10px;
+	padding-top:10px;
+}
+.col-xs-12,col-md-4{position:relative;min-height:1px;padding-left:0px;padding-right:0px}
+.ind_data_text{color:#8c8c8c; line-height:20px; width:70%; float:left; }
+.ind_data_text2{color:#8c8c8c; line-height:20px; width:30%; float:left; padding-top:10px;}
+.wc04{
+	background-color:#CCC;
+	height:40px;
+	width:100%;
+	float:left;
+}
+.wc04 h3{
+	background-color:#CCC;
+	height:30px;
+	width:100%;
+	float:left;
+	padding-left:10px;
+	padding-top:10px;
+} 
+.text{
+	margin:10px;
+}
+.text p{
+	padding-top:5px;
+	margin:10px;
+}
+.text p.t1{
+	color:#333;
+	font-size:12px;
+}
+.text img{
+	padding-right:5px;
+	float:left;
+}
+/*文本列表*/
+.textlist{
+	margin-bottom: 5px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 5px;
+	border-bottom:1px dashed #999;
+
+}
+.textlist ul{ width:80%; float:left;}
+.textlist li{ text-indent:14px;padding: 5px 0px; text-overflow:ellipsis; white-space:nowrap;}
+.textlist li.first{ background:none; padding-left:3px;}
+.textlist li .InfoTime{font-size:16px; color:#333; font-weight:700; text-align:left; padding:0px; margin:0px; line-height:30px;}
+.textlist li .InfoContent{ font-size:14px; color:#999; white-space:normal;}
+.textlist li img{ float:left; margin-right:5px;  }
+.tw{ padding-top:10px; float:left;}
