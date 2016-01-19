@@ -412,7 +412,6 @@ public class PictureService implements IBusinessService {
 	 */
 	public TransData getResources(TransData transData)
 			throws BusinessException {
-		Map<String, Object> map = transData.getViewMap();
 		List<Map<String, Object>> orgList = pictureDao.getResources();
 		transData.setObj(orgList);
 		transData.setExpMsg("success");

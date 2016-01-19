@@ -94,6 +94,7 @@ public class DealerService implements IBusinessService {
 		UserSession session = transData.getUserSession();
 		String dealerName = (String) map.get("dealerName");
 		String carbrandall = (String) map.get("carbrand");
+		String anchor = (String) map.get("anchor");
 		String telephone = (String) map.get("telephone");
 		String addr = (String) map.get("addr");
 		String position = (String) map.get("position");
@@ -105,7 +106,18 @@ public class DealerService implements IBusinessService {
 		String carbrandid = strarray[0];
 		String carbrandname = strarray[1];
 		
+		String[] strarray1 = anchor.split("-");
+		String resourceId = strarray1[0];
+		String resourceTitle = strarray1[1];
+		String resourceName = strarray1[2];
+		StringBuffer anchor1 = new StringBuffer("");
+		anchor1.append(sysConfigUtil.getCfgInfo("resource_request"));
+		anchor1.append(resourceId);
+		
 		CarDealerEntity CarDealerEntity = new CarDealerEntity();
+		CarDealerEntity.setPrivileges(resourceName);
+		CarDealerEntity.setPrivilegestile(resourceTitle);
+		CarDealerEntity.setPrivilegesurl(anchor1.toString());
 		CarDealerEntity.setDealerName(dealerName);
 		CarDealerEntity.setCarbrandid(carbrandid);
 		CarDealerEntity.setCarbrand(carbrandname);
@@ -164,6 +176,7 @@ public class DealerService implements IBusinessService {
 		Map<String, Object> map = transData.getViewMap();
 		UserSession session = transData.getUserSession();
 		String id = (String)  map.get("dealer_id");
+		String anchor = (String) map.get("anchor");
 		String dealerName = (String) map.get("dealerName");
 		String carbrandall = (String) map.get("carbrand");
 		String telephone = (String) map.get("telephone");
@@ -176,7 +189,19 @@ public class DealerService implements IBusinessService {
 		String[] strarray = carbrandall.split("-");
 		String carbrandid = strarray[0];
 		String carbrandname = strarray[1];
+		
+		String[] strarray1 = anchor.split("-");
+		String resourceId = strarray1[0];
+		String resourceTitle = strarray1[1];
+		String resourceName = strarray1[2];
+		StringBuffer anchor1 = new StringBuffer("");
+		anchor1.append(sysConfigUtil.getCfgInfo("resource_request"));
+		anchor1.append(resourceId);
+		
 		CarDealerEntity CarDealerEntity = new CarDealerEntity();
+		CarDealerEntity.setPrivileges(resourceName);
+		CarDealerEntity.setPrivilegestile(resourceTitle);
+		CarDealerEntity.setPrivilegesurl(anchor1.toString());
 		CarDealerEntity.setId(id);
 		CarDealerEntity.setDealerName(dealerName);
 		CarDealerEntity.setCarbrandid(carbrandid);

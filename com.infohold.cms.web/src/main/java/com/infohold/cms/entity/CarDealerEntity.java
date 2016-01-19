@@ -35,6 +35,12 @@ public class CarDealerEntity extends BaseEntity {
 	private java.lang.String addr;
 	/**经纬度*/
 	private java.lang.String position;
+	/**专属优惠*/
+	private java.lang.String privileges;
+	/**专属优惠连接*/
+	private java.lang.String privilegesurl;
+	/**专属优惠标题*/
+	private java.lang.String privilegestile;
 	/**创建人*/
 	private java.lang.String createName;
 	/**创建日期*/
@@ -175,6 +181,45 @@ public class CarDealerEntity extends BaseEntity {
 	 */
 	public void setDescription(java.lang.String description) {
 		this.description = description;
+	}
+	/**
+	 * @return the privileges
+	 */
+	@Column(name ="privileges",columnDefinition="varchar(255)default ''")
+	public java.lang.String getPrivileges() {
+		return privileges;
+	}
+	/**
+	 * @param privileges the privileges to set
+	 */
+	public void setPrivileges(java.lang.String privileges) {
+		this.privileges = privileges;
+	}
+	/**
+	 * @return the privilegesurl
+	 */
+	@Column(name ="privilegesurl",columnDefinition="varchar(255)default ''")
+	public java.lang.String getPrivilegesurl() {
+		return privilegesurl;
+	}
+	/**
+	 * @param privilegesurl the privilegesurl to set
+	 */
+	public void setPrivilegesurl(java.lang.String privilegesurl) {
+		this.privilegesurl = privilegesurl;
+	}
+	/**
+	 * @return the privilegestile
+	 */
+	@Column(name ="privilegestile",columnDefinition="varchar(255)default ''")
+	public java.lang.String getPrivilegestile() {
+		return privilegestile;
+	}
+	/**
+	 * @param privilegestile the privilegestile to set
+	 */
+	public void setPrivilegestile(java.lang.String privilegestile) {
+		this.privilegestile = privilegestile;
 	}
 
 }
