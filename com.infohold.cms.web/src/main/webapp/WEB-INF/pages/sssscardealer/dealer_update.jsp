@@ -42,6 +42,7 @@
 					<input id="version_ol" type="hidden" class="" name="version_ol"   value="${dealer.version_online}" />	 --%>
 					<input id="dealer_id" type="hidden" class="" name="dealer_id" id="dealer_id"   value="${dealer.id}" />
 					<input id="version_id" type="hidden" class="" name="carbrand1" id="carbrand1"   value="${dealer.carbrandid}-${dealer.carbrand}" />
+					<input id="resource_id" type="hidden" class="" name="resource" id="resource"   value="${list.id}-${list.title}-${list.resourceName}" />
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
 							经营品牌</label>
@@ -91,7 +92,19 @@
 								class="col-xs-10 col-sm-5" name="description" value="${dealer.description}" />
 						</div>
 					</div>
-
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="name">
+							图片链接地址 </label>
+						<div class="col-sm-9">
+						<select class="input-medium"  id="anchor" name="anchor">
+							<c:forEach items="${resourcesList}" var="list" varStatus="status">
+	                        <option value="${list.id}-${list.title}-${list.resourceName}">${list.resourceName }</option>
+	               		    </c:forEach>
+               		    </select>
+               		    </div>
+					</div>
+					
 					<div class="clearfix form-actions">
 						<div class="col-md-offset-3 col-md-9">
 							<button class="btn btn-info" type="button" onclick="subForm();">
@@ -161,7 +174,9 @@
 			$("#oms_roleid").formComponents("check");
 			
 			var carbrand1 = document.getElementById('carbrand1').value;
+			var resource = document.getElementById('resource').value;
 			checkOption('carbrand',carbrand1);
+			checkOption('anchor',resource);
 			$("#cms_form-group").find("input[value=2]").attr("checked","checked").attr("disabled","disabled");
 		});
 		/*********自定于方法**********/

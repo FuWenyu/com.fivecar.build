@@ -53,7 +53,6 @@
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
 							4s店地址</label>
-						
 						<div class="col-sm-9">
 							<input type="text" id="addr" name="addr" placeholder="请输入4s店地址 "
 								class="col-xs-10 col-sm-5"
@@ -67,6 +66,17 @@
 							<input type="text" id=description placeholder="请输入4s店简介"
 								class="col-xs-10 col-sm-5" name="description" value="" />
 						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="name">
+							图片链接地址 </label>
+						<div class="col-sm-9">
+						<select class="input-medium"  id="anchor" name="anchor">
+							<c:forEach items="${resourcesList}" var="list" varStatus="status">
+	                        <option value="${list.id}-${list.title}-${list.resourceName}">${list.resourceName }</option>
+	               		    </c:forEach>
+               		    </select>
+               		    </div>
 					</div>
 					<div class="clearfix form-actions">
 						<div class="col-md-offset-3 col-md-9">

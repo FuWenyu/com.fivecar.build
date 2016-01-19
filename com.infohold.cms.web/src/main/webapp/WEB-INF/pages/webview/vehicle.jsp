@@ -38,7 +38,7 @@
 		<button id="opener">点击加载更多经销商</button>
 		<div id="dialog" title="请选择一个经销商">
 			<c:forEach var="dealerlist" items="${dealerlist}">
-				<a href="http://www.w3school.com.cn">${dealerlist.dealerName}</a><br />
+				<a href="${url}${dealerlist.id}&vehicleid=${vehicle.id}">${dealerlist.dealerName}</a><br />
 			</c:forEach>
 		</div>
 
