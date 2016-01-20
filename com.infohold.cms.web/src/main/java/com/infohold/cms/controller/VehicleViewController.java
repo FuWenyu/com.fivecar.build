@@ -45,13 +45,13 @@ public class VehicleViewController extends CentreController {
 		TransData transData = new TransData();
 		String vehicleid = httpServletRequest.getParameter("vehicleid");
 		String delrid = httpServletRequest.getParameter("dealerid");
-		List<Map<String, Object>> saleslist = new ArrayList<>();
+//		List<Map<String, Object>> saleslist = new ArrayList<>();
 		Map<String, Object> dealer = new HashMap<String, Object>();
 		ModelAndView mav = new ModelAndView();
 		CarVehicleEntity vehicle = new CarVehicleEntity();
 		Page page = new Page();
-		page.setPageSize(2);
 		vehicle = vehicleService.VehicleQueryPage(vehicleid);
+		List<Map<String, Object>> modellist=vehicleService.querymodelPage(vehicleid, page);
 		List<Map<String, Object>> dealerlist = vehicleService.querydealerListPage(vehicle.getCarbrandid(), new Page());
 		if (delrid == null || delrid.equals(" ")||delrid.equals("") ) {
 			dealer = dealerlist.get(0);
@@ -63,6 +63,7 @@ public class VehicleViewController extends CentreController {
 			transData = vehicleService.salesQueryPage(delrid, page, transData);
 			mav.addObject("dealer", dealer1);
 		}
+		
 		StringBuffer url = new StringBuffer(sysConfigUtil.getCfgInfo("system_webview"));
 		url.append("dealerid=");
 		page = transData.getPageInfo();
@@ -70,8 +71,8 @@ public class VehicleViewController extends CentreController {
 		mav.addObject("url", url.toString());
 		mav.addObject("vehicle", vehicle);
 		mav.addObject("saleslist", transData.getObj());
-		mav.addObject("dealer", dealer);
 		mav.addObject("dealerlist", dealerlist);
+		mav.addObject("modellist", modellist);
 		mav.setViewName("/webview/vehicle");
 		return mav;
 	}

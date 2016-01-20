@@ -97,6 +97,7 @@ public class ModelService implements IBusinessService {
 		String description = (String) map.get("description");
 		String imageName = (String) map.get("imageName");
 		String vehicle = (String) map.get("vehicle");
+		String Carabstract = (String) map.get("Carabstract");
 		String createName = session.getUserName();
 		Timestamp createDate = dateutil.getTimestamp();
 
@@ -134,6 +135,7 @@ public class ModelService implements IBusinessService {
 		carmodelentity.setDescription(description);
 		carmodelentity.setCreateName(createName);
 		carmodelentity.setCreateDate(createDate);
+		carmodelentity.setCarabstract(Carabstract);
 		if (modeldao.savemodelEntity(carmodelentity)) {
 			transData.setExpMsg("success");
 		}

@@ -43,6 +43,8 @@ public class CarModelEntity extends BaseEntity {
 	private java.lang.String vehicleid;
 	/**车辆*/
 	private java.lang.String vehicle;
+	/**配置摘要*/
+	private java.lang.String Carabstract;
 	/**创建人*/
 	private java.lang.String createName;
 	/**创建日期*/
@@ -199,6 +201,19 @@ public class CarModelEntity extends BaseEntity {
 		this.vehicle = vehicle;
 	}
 
+	/**
+	 * @return the carabstract
+	 */
+	@Column(name ="Carabstract",nullable=true,columnDefinition="varchar(255)default ''")
+	public java.lang.String getCarabstract() {
+		return Carabstract;
+	}
+	/**
+	 * @param carabstract the carabstract to set
+	 */
+	public void setCarabstract(java.lang.String carabstract) {
+		Carabstract = carabstract;
+	}
 	/**
 	 * @return the createName
 	 */

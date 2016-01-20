@@ -69,7 +69,7 @@
 					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="name">
-							图片链接地址 </label>
+							五车专享特权 </label>
 						<div class="col-sm-9">
 						<select class="input-medium"  id="anchor" name="anchor">
 							<c:forEach items="${resourcesList}" var="list" varStatus="status">
@@ -137,12 +137,16 @@
 		if (!checkData('description', '4s店简介 ', 'input')) {
 			return;
 		}
+		if (!checkData('anchor', '五车专享特权', 'input')) {
+			return;
+		}
 		param = {};
 		param["carbrand"]=$("#carbrand").val();
 		param["dealerName"]=$("#dealerName").val();
 		param["telephone"]=$("#telephone").val();
 		param["addr"]=$("#addr").val();
 		param["description"]=$("#description").val();
+		param["anchor"]=$("#anchor").val();
 		$.ajax({
 			type : "POST",
 			url : "<%=path%>/mvc/dealer_save.do",

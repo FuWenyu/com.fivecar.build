@@ -18,7 +18,7 @@ a:link{text-decoration:blink;}
 a:focus {color: #f60;text-decoration: underline;}
 
 img{width: auto;height: auto;display: inline-block;}
-.wc01{background-image:url(http://localhost:8080/com.fivecar.cms.web/images/01.png); background-position:center;height: 195px;overflow: hidden;background-size: 100%;background-repeat: no-repeat;}
+.wc01{height: 195px;overflow: hidden;background-size: 100%;background-repeat: no-repeat; text-align:center;}
 
 .wc02{max-width: 100%;height:50px;}
 
@@ -67,8 +67,8 @@ img{width: auto;height: auto;display: inline-block;}
 	padding-top:10px;
 }
 .col-xs-12,col-md-4{position:relative;min-height:1px;padding-left:0px;padding-right:0px}
-.ind_data_text{color:#8c8c8c; line-height:20px; width:70%; float:left; }
-.ind_data_text2{color:#8c8c8c; line-height:20px; width:30%; float:left; padding-top:10px;}
+.ind_data_text{color:#333333; line-height:20px; width:70%; float:left; }
+.ind_data_text2{color:#333333; line-height:20px; width:30%; float:left; padding-top:10px;}
 .wc04{
 	background-color:#CCC;
 	height:40px;
@@ -114,3 +114,26 @@ img{width: auto;height: auto;display: inline-block;}
 .textlist li .InfoContent{ font-size:14px; color:#999; white-space:normal;}
 .textlist li img{ float:left; margin-right:5px;  }
 .tw{ padding-top:10px; float:left;}
+
+.wc05{
+	background-color:#CCC;
+	height:40px;
+	width:100%;
+	float:left;
+}
+.wc05 h3{
+	background-color:#CCC;
+	height:30px;
+	width:100%;
+	float:left;
+	padding-left:10px;
+	padding-top:10px;
+} 
+.wc05_col{padding-left:0px;padding-right:0px}
+.wc05_text{color:#666; line-height:20px; width:70%; float:left; font-size:12px;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box; padding-left:10px;}
+.wc05_text2{color:#333333; line-height:20px; width:30%; float:left; padding-top:10px;}
+.wc05_text2 a{ 	font-size:16px;color:#F60;font-weight:700;}
+.wc05_text3{color:#333333; font-size:14px; line-height:24px; width:100%; float:left;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box; padding-left:10px;}
+.wc05_text4{color:#333333; font-size:16px; line-height:28px; width:70%; float:left;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box; padding-left:80px;}
+.wc05_text5{color:#333333; line-height:28px; font-size:16px; width:30%; float:left;}
+

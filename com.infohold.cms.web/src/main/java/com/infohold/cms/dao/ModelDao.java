@@ -71,15 +71,15 @@ public class ModelDao extends BaseDao<BaseEntity> {
 		sql.append("select mdl.id,");
 		sql.append("mdl.carbrandid,");
 		sql.append("mdl.carbrand,");
-		sql.append("mdl.vechicleid,");
-		sql.append("mdl.vechicle,");
+		sql.append("mdl.vehicleid,");
+		sql.append("mdl.vehicle,");
 		sql.append("mdl.modelName,");
 		sql.append("mdl.originalprice,");
 		sql.append("mdl.discountprice,");
 		sql.append("mdl.url,");
 		sql.append("mdl.urlreal ");
 		sql.append("from fc_ssss_model mdl ");
-		sql.append(" where mdl.carbrandid=");
+		sql.append(" where mdl.vehicleid=");
 		sql.append("'");
 		sql.append(carvehicle);
 		sql.append("'");

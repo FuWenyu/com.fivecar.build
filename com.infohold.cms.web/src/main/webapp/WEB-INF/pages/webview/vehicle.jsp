@@ -17,7 +17,7 @@
 <body>
 	<div>
 		<div class="wc01">
-			<img width="400" height="195" alt="" />
+			<img src="${vehicle.url}" width="400" height="195">
 		</div>
 		<div class="wc02">
 			<div class="wc02-01">
@@ -29,16 +29,20 @@
 					<a>${dealer.dealerName}[4s]</a> <br> <a>${dealer.addr}</a>
 				</div>
 				<div class="wc02-03">
-					<img src="images/zc_button_ckdt_default.png" width="60" height="60"
+					<img id="map" src="images/zc_button_ckdt_default.png" width="60" height="60"
 						alt="" /> <img src="images/zc_button_lxsj_default.png"
 						width="114" height="114" alt="" />
 				</div>
 			</div>
 		</div>
+		<div id="mapdialog" title="地图">
+		${dealer.position}
+		</div>
 		<button id="opener">点击加载更多经销商</button>
 		<div id="dialog" title="请选择一个经销商">
 			<c:forEach var="dealerlist" items="${dealerlist}">
-				<a href="${url}${dealerlist.id}&vehicleid=${vehicle.id}">${dealerlist.dealerName}</a><br />
+				<a href="${url}${dealerlist.id}&vehicleid=${vehicle.id}">${dealerlist.dealerName}</a>
+				<br />
 			</c:forEach>
 		</div>
 
@@ -62,17 +66,16 @@
 		<div class="wc04">
 			<h3>
 				<img
-					src="http://localhost:8080/com.fivecar.cms.web/images/ioci1.png"
+					src="images/ioci1.png"
 					width="13" height="13" alt="" /> 销售顾问
 			</h3>
 		</div>
-		<c:forEach var="saleslist" items="${saleslist}" begin="0"
-			end="${page.pageSize-1}">
+		<c:forEach var="saleslist" items="${saleslist}">
 			<div style="clear: both"></div>
 			<div class="textlist">
 				<div>
 					<ul>
-						<li class="first"><img src="images/img1.jpg" width="86"
+						<li class="first"><img src="${saleslist.url}" width="86"
 							height="81">
 							<p class="InfoTime">销售顾问：${saleslist.salesName}</p>
 							<p class="InfoTime">销售车型：${vehicle.vehicleName}</p> <span
@@ -89,12 +92,24 @@
 			</div>
 		</c:forEach>
 	</div>
-	<div class="wc04">
+	<div class="wc05">
 		<h3>
-			<img src="http://localhost:8080/com.fivecar.cms.web/images/ioci1.png"
+			<img src="images/ioci1.png"
 				width="13" height="13" alt="" /> 全系车型
 		</h3>
 	</div>
+	<c:forEach var="modellist" items="${modellist}">
+		<div class="wc05_col">
+			<h3>${modellist.modelName}</h3>
+			<div class="wc05_text">指导价：${modellist.originalprice}</div>
+			<div class="wc05_text2">
+				优惠参考价：<a>${modellist.discountprice}</a>
+			</div>
+			<div class="wc05_text3">${modellist.Carabstract}</div>
+			<div class="wc05_text4">全款明细</div>
+			<div class="wc05_text5">贷款购车</div>
+		</div>
+	</c:forEach>
 	<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 	<script>
@@ -104,18 +119,13 @@
 		$("#opener").click(function() {
 			$("#dialog").dialog("open");
 		});
+		$("#mapdialog").dialog({
+			autoOpen : false
+		});
+		$("#map").click(function() {
+			$("#mapdialog").dialog("open");
+		});
 	</script>
-	<script type="text/javascript">
-		function movePage(pageNo) {
-			var url = $("#queryForm").attr("action");
-			var param = $("#queryForm").serialize();
-			param += "&pageNo=" + pageNo;
-			param += "&qry_type=qry";
-			$.post(url, param, function(result) {
-				$("#qryContent").html(result);
-				setHash('${pageContext.request.contextPath}');
-			});
-		};
-	</script>
+
 </body>
 </html>

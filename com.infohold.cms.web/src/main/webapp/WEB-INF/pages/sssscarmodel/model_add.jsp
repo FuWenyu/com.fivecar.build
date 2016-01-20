@@ -25,7 +25,7 @@
 						<div class="col-sm-9">
 							<select class="input-medium"  id="vehicle" name="vehicle">
 							<c:forEach items="${vehicleList}" var="list" varStatus="status">
-	                        <option value="${list.id}-${list.vehicleName}-${list.carbrandid}-${list.carbrand}">${list.carbrand}-${list.vehicle}</option>
+	                        <option value="${list.id}-${list.vehicleName}-${list.carbrandid}-${list.carbrand}">${list.carbrand}-${list.vehicleName}</option>
 	               		    </c:forEach>
                		    </select>
 						</div>
@@ -58,7 +58,15 @@
 								value="" /> <span style="color: red"></span>
 						</div>
 					</div>
-
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">
+							配置摘要</label>
+						<div class="col-sm-9">
+							<input type="text" id=""Carabstract"" name="Carabstract" placeholder="请输入配置摘要！ "
+								class="col-xs-10 col-sm-5"
+								value="" /> <span style="color: red"></span>
+						</div>
+					</div>
 					<div class="form-group">
 							<label class="col-sm-3 control-label no-padding-right" for="fileInput">车型图片上传</label>
 							<div class="col-sm-3" id="upload">

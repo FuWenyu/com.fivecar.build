@@ -37,6 +37,8 @@ public class CarVehicleEntity extends BaseEntity {
 	private java.lang.String url;
 	/**logo原地址*/
 	private java.lang.String urlreal;
+	/**链接找车页url*/
+	private java.lang.String anchor;
 	/**创建人*/
 	private java.lang.String createName;
 	/**创建日期*/
@@ -152,6 +154,20 @@ public class CarVehicleEntity extends BaseEntity {
 	 */
 	public void setUrlreal(java.lang.String urlreal) {
 		this.urlreal = urlreal;
+	}
+	
+	/**
+	 * @return the anchor
+	 */
+	@Column(name ="anchor",nullable=false,columnDefinition="varchar(255)default ''")
+	public java.lang.String getAnchor() {
+		return anchor;
+	}
+	/**
+	 * @param anchor the anchor to set
+	 */
+	public void setAnchor(java.lang.String anchor) {
+		this.anchor = anchor;
 	}
 	/**
 	 * @return the createName

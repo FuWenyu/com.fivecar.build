@@ -15,6 +15,7 @@ import com.infohold.cms.basic.exception.BusinessException;
 import com.infohold.cms.basic.service.IBusinessService;
 import com.infohold.cms.basic.util.SysConfigUtil;
 import com.infohold.cms.dao.DealerDao;
+import com.infohold.cms.dao.ModelDao;
 import com.infohold.cms.dao.SalesDao;
 import com.infohold.cms.dao.VehicleDao;
 import com.infohold.cms.entity.CarDealerEntity;
@@ -38,6 +39,8 @@ public class VehicleService implements IBusinessService {
 	private DealerDao dealerdao;
 	@Autowired
 	private SalesDao salesdao;
+	@Autowired
+	private ModelDao modeldao;
 
 	@Autowired
 	private SysConfigUtil sysConfigUtil;
@@ -125,7 +128,8 @@ public class VehicleService implements IBusinessService {
 		url.append(sysConfigUtil.getCfgInfo("service_name"));
 		url.append("/upload/image/");
 		url.append(imageName);
-
+//		String anchor=sysConfigUtil.getCfgInfo("vehicle_request");
+		
 		CarVehicleEntity carvehicleentity = new CarVehicleEntity();
 		carvehicleentity.setCarbrand(carbrandname);
 		carvehicleentity.setCarbrandid(carbrandid);
@@ -135,6 +139,7 @@ public class VehicleService implements IBusinessService {
 		carvehicleentity.setUrl(url.toString());
 		carvehicleentity.setUrlreal(urlreal.toString());
 		carvehicleentity.setDescription(description);
+//		carvehicleentity.setAnchor(anchor+carvehicleentity.getId());
 		carvehicleentity.setCreateName(createName);
 		carvehicleentity.setCreateDate(createDate);
 		if (vehicledao.savevehicleEntity(carvehicleentity)) {
@@ -229,11 +234,12 @@ public class VehicleService implements IBusinessService {
 		CarDealerEntity entity = dealerdao.getdealerEntity(id);
 		return entity;
 	}
-/*	public List<Map<String, Object>> salesQueryPage(String dealer,Page page) throws BusinessException {
-		List<Map<String, Object>> saleslist = salesdao.querysalesList1(
-				dealer, page);
-		return saleslist;
-	}*/
+	public List<Map<String, Object>> querymodelPage(String id,Page page) throws BusinessException {
+		page.setPageSize(999);
+		List<Map<String, Object>> modellist = modeldao.querymodelList1(
+				id, page);
+		return modellist;
+	}
 	public TransData salesQueryPage(String dealer,Page page,TransData transData) throws BusinessException {
 		page.setPageSize(2);
 		transData.setPageInfo(page);
