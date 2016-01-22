@@ -1,6 +1,7 @@
 package com.infohold.cms.service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -441,9 +442,31 @@ public class ParallelVehicleService implements IBusinessService {
 	public TransData vehicleQuery(TransData transData) throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
 		logger.info("vehicleQuery-request:" + map);
-		String fivecar = (String) map.get("fivecar");
-		if (fivecar.equals("fivecar")) {
-			List<Map<String, Object>> vehiclelist = vehicledao.queryvehicleList4(transData.getPageInfo());
+		
+		String carbrand = (String) map.get("carbrand");
+		String pricekey = (String) map.get("pricekey");
+		String versionkey = (String) map.get("versionkey");
+		List<Map<String, Object>> vehiclelist = null;
+		int index = 0;
+		if (carbrand.equals("all")&&pricekey.equals("all")&&versionkey.equals("all")) {
+			index = 1;
+		}else if (!carbrand.equals("all")&&pricekey.equals("all")&&versionkey.equals("all")) {
+			index = 2;
+		}else if (carbrand.equals("all")&&!pricekey.equals("all")&&versionkey.equals("all")) {
+			index = 3;
+		}else if (carbrand.equals("all")&&pricekey.equals("all")&&!versionkey.equals("all")) {
+			index = 4;
+		}else if (!carbrand.equals("all")&&!pricekey.equals("all")&&versionkey.equals("all")) {
+			index = 5;
+		}else if (!carbrand.equals("all")&&pricekey.equals("all")&&!versionkey.equals("all")) {
+			index = 6;
+		}else if (carbrand.equals("all")&&!pricekey.equals("all")&&!versionkey.equals("all")) {
+			index = 7;
+		}else if (!carbrand.equals("all")&&!pricekey.equals("all")&&!versionkey.equals("all")) {
+			index = 8;
+		}
+		vehiclelist = vehicledao.queryvehicleList4(index,carbrand,pricekey,versionkey,transData.getPageInfo());
+		
 			if (vehiclelist == null) {
 				transData.setExpCode("-1");
 				transData.setExpMsg("fail");
@@ -452,7 +475,6 @@ public class ParallelVehicleService implements IBusinessService {
 				transData.setExpCode("1");
 				transData.setExpMsg("success");
 			}
-		}
 		return transData;
 	}
 
