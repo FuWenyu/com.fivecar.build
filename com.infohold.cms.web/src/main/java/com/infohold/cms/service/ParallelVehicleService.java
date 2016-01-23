@@ -65,6 +65,12 @@ public class ParallelVehicleService implements IBusinessService {
 			return this.updatePictureEntity(transData);
 		} else if (tradCode.equals("T23007")) {
 			return this.vehicleQuery(transData);
+		}else if (tradCode.equals("T23009")) {
+			return this.queryprice(transData);
+		}else if (tradCode.equals("T23010")) {
+			return this.queryversion(transData);
+		}else if (tradCode.equals("T23011")) {
+			return this.querydealer(transData);
 		}
 		return transData;
 	}
@@ -98,7 +104,48 @@ public class ParallelVehicleService implements IBusinessService {
 		transData.setObj(orgList);
 		return transData;
 	}
-
+	/**
+	 * 价格区间列表
+	 * 
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData queryprice(TransData transData) throws BusinessException {
+		Page page = new Page();
+		page.setPageSize(999);
+		List<Map<String, Object>> orgList = vehicledao.queryPriceList(page);
+		transData.setObj(orgList);
+		return transData;
+	}
+	/**
+	 * 版本列表
+	 * 
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData queryversion(TransData transData) throws BusinessException {
+		Page page = new Page();
+		page.setPageSize(999);
+		List<Map<String, Object>> orgList = vehicledao.queryVersionList(page);
+		transData.setObj(orgList);
+		return transData;
+	}
+	/**
+	 * 版本列表
+	 * 
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData querydealer(TransData transData) throws BusinessException {
+		Page page = new Page();
+		page.setPageSize(999);
+		List<Map<String, Object>> orgList = vehicledao.queryDealerList(page);
+		transData.setObj(orgList);
+		return transData;
+	}
 	public TransData savevehicle(TransData transData) throws BusinessException {
 		// 保存数据库
 		Map<String, Object> map = transData.getViewMap();
@@ -106,6 +153,16 @@ public class ParallelVehicleService implements IBusinessService {
 		String vehicleName = (String) map.get("vehicleName");
 		String carbrandall = (String) map.get("carbrand");
 		String price = (String) map.get("price");
+		
+		String pricearea = (String) map.get("pricearea");
+		String vehicleinfo = (String) map.get("vehicleinfo");
+		String vehicleversion = (String) map.get("vehicleversion");
+		String whereis = (String) map.get("whereis");
+		String salesarea = (String) map.get("salesarea");
+		String color = (String) map.get("color");
+		String epstandard = (String) map.get("epstandard");
+		String wherelook = (String) map.get("wherelook");
+		
 		String description = (String) map.get("description");
 		String imageName = (String) map.get("imageName");
 		String createName = session.getUserName();
@@ -135,6 +192,16 @@ public class ParallelVehicleService implements IBusinessService {
 		parallelvehicleentity.setCarbrandid(carbrandid);
 		parallelvehicleentity.setVehicleName(vehicleName);
 		parallelvehicleentity.setPrice(price);
+		
+		parallelvehicleentity.setPricearea(pricearea);
+		parallelvehicleentity.setVehicleinfo(vehicleinfo);
+		parallelvehicleentity.setVehicleversion(vehicleversion);
+		parallelvehicleentity.setWhereis(whereis);
+		parallelvehicleentity.setSalesarea(salesarea);
+		parallelvehicleentity.setColor(color);
+		parallelvehicleentity.setEpstandard(epstandard);
+		parallelvehicleentity.setWherelook(wherelook);
+		
 		parallelvehicleentity.setImageName(imageName);
 		parallelvehicleentity.setUrl(url.toString());
 		parallelvehicleentity.setUrlreal(urlreal.toString());
@@ -193,6 +260,14 @@ public class ParallelVehicleService implements IBusinessService {
 		String vehicleName = (String) map.get("vehicleName");
 		String carbrandall = (String) map.get("carbrand");
 		String price = (String) map.get("price");
+		String pricearea = (String) map.get("pricearea");
+		String vehicleinfo = (String) map.get("vehicleinfo");
+		String vehicleversion = (String) map.get("vehicleversion");
+		String whereis = (String) map.get("whereis");
+		String salesarea = (String) map.get("salesarea");
+		String color = (String) map.get("color");
+		String epstandard = (String) map.get("epstandard");
+		String wherelook = (String) map.get("wherelook");
 		String description = (String) map.get("description");
 		String imageName = (String) map.get("imageName");
 		String createName = session.getUserName();
@@ -223,6 +298,14 @@ public class ParallelVehicleService implements IBusinessService {
 		parallelvehicleentity.setCarbrandid(carbrandid);
 		parallelvehicleentity.setVehicleName(vehicleName);
 		parallelvehicleentity.setPrice(price);
+		parallelvehicleentity.setPricearea(pricearea);
+		parallelvehicleentity.setVehicleinfo(vehicleinfo);
+		parallelvehicleentity.setVehicleversion(vehicleversion);
+		parallelvehicleentity.setWhereis(whereis);
+		parallelvehicleentity.setSalesarea(salesarea);
+		parallelvehicleentity.setColor(color);
+		parallelvehicleentity.setEpstandard(epstandard);
+		parallelvehicleentity.setWherelook(wherelook);
 		parallelvehicleentity.setImageName(imageName);
 		parallelvehicleentity.setUrl(url.toString());
 		parallelvehicleentity.setUrlreal(urlreal.toString());
@@ -259,6 +342,8 @@ public class ParallelVehicleService implements IBusinessService {
 		}
 		return transData;
 	}
+	
+	
 	/**
 	 * 页面查询
 	 * 

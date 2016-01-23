@@ -13,7 +13,7 @@
 		<div class="row">
 			<div class="col-xs-12">
 			<!-- PAGE CONTENT BEGINS -->
-				<form class="form-horizontal" id="sub_form" action="<%=path%>/mvc/vehicle_save.do"
+				<form class="form-horizontal" id="sub_form" action="<%=path%>/mvc/pavehicle_save.do"
 					method="post">
 					<h3 class="header smaller lighter grey">4s店车辆信息新增</h3>
 					<div class="form-group">
@@ -30,7 +30,17 @@
                		    </select>
 						</div>
 					</div>
-					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">
+							经销商</label>
+						<div class="col-sm-9">
+							<select class="input-medium"  id="dealer" name="dealer">
+							<c:forEach items="${dealerList}" var="list" varStatus="status">
+	                        <option value="${list.id}-${list.dealerName}">${list.dealerName}</option>
+	               		    </c:forEach>
+               		    </select>
+						</div>
+					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
 							车辆名称  </label>
@@ -43,14 +53,89 @@
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
 							价格区间</label>
-						
 						<div class="col-sm-9">
-							<input type="text" id="price" name="price" placeholder="请输入价格区间用‘-’符号分隔！ "
+							<select class="input-medium"  id="pricearea" name="pricearea">
+							<c:forEach items="${priceList}" var="list" varStatus="status">
+	                        <option value="${list.pricekey}">${list.pricevalue}</option>
+	               		    </c:forEach>
+               		    </select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">
+							销售价格</label>
+						<div class="col-sm-9">
+							<input type="text" id="price" name="price" placeholder="请输入价格！ "
 								class="col-xs-10 col-sm-5"
 								value="" /> <span style="color: red"></span>
 						</div>
 					</div>
-
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">
+							车辆信息</label>
+						<div class="col-sm-9">
+							<input type="text" id="vehicleinfo" name="vehicleinfo" placeholder="请输入车辆信息！ "
+								class="col-xs-10 col-sm-5"
+								value="" /> <span style="color: red"></span>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">
+							车辆版本</label>
+						<div class="col-sm-9">
+							<select class="input-medium"  id="vehicleversion" name="vehicleversion">
+							<c:forEach items="${vehicleversionList}" var="list" varStatus="status">
+	                        <option value="${list.versionkey}">${list.versionvalue}</option>
+	               		    </c:forEach>
+               		    </select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">
+							所在城市</label>
+						<div class="col-sm-9">
+							<input type="text" id="whereis" name="whereis" placeholder="请输入所在城市！ "
+								class="col-xs-10 col-sm-5"
+								value="" /> <span style="color: red"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">
+							销售城市</label>
+						<div class="col-sm-9">
+							<input type="text" id="salesarea" name="salesarea" placeholder="请输入销售城市！ "
+								class="col-xs-10 col-sm-5"
+								value="" /> <span style="color: red"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">
+							车辆颜色</label>
+						<div class="col-sm-9">
+							<input type="text" id="color" name="color" placeholder="请输入车辆颜色<！ "
+								class="col-xs-10 col-sm-5"
+								value="" /> <span style="color: red"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">
+							环保标准</label>
+						<div class="col-sm-9">
+							<input type="text" id="epstandard" name="epstandard" placeholder="请输入环保标准！ "
+								class="col-xs-10 col-sm-5"
+								value="" /> <span style="color: red"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">
+							看车地点</label>
+						<div class="col-sm-9">
+							<input type="text" id="wherelook" name="wherelook" placeholder="请输入看车地点！ "
+								class="col-xs-10 col-sm-5"
+								value="" /> <span style="color: red"></span>
+						</div>
+					</div>
 					<div class="form-group">
 							<label class="col-sm-3 control-label no-padding-right" for="fileInput">车辆图片上传</label>
 							<div class="col-sm-3" id="upload">
@@ -190,14 +275,14 @@
 		param["imageHrefReal"]=filePathreal;
 		$.ajax({
 			type : "POST",
-			url : "<%=path%>/mvc/vehicle_save.do",
+			url : "<%=path%>/mvc/pavehicle_save.do",
 			data : param,
 			async : false,
 			dataType:'json',
 			success : function(data) {
 				if(data.msg == "success"){
 					alert("保存成功！");
-					window.location = "<%=path%>/mvc/vehicle.do";
+					window.location = "<%=path%>/mvc/pavehicle.do";
 				}else{
 					alert("保存失败:"+data.msg);
 				}
@@ -247,7 +332,7 @@
 		setHash('${pageContext.request.contextPath}');
 	}
 	function goBack(){
-			window.location = "<%=path%>/mvc/vehicle.do";
+			window.location = "<%=path%>/mvc/pavehicle.do";
 	}
 	</script>
 </body>

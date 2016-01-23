@@ -38,7 +38,7 @@
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id"> </label>
 					</div>
-					<input id="vehicle_id" type="hidden" class="" name="vehicle_id"  value="${vehicle.id}" />
+					<input id="pavehicle_id" type="hidden" class="" name="pavehicle_id"  value="${vehicle.id}" />
 					<input id="carbrand1" type="hidden" class="" name="carbrand1"  value="${vehicle.carbrandid}-${vehicle.carbrand}" />
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
@@ -245,7 +245,7 @@
 	
 	function subForm1(imageName,filePath,filePathreal,imageid){
 		param = {};
-		param["vehicle_id"]=$("#vehicle_id").val();
+		param["pavehicle_id"]=$("#pavehicle_id").val();
 		param["imageName"]=imageName;
 		param["carbrand"]=$("#carbrand").val();
 		param["carbrandid"]=$("#carbrandid").val();
@@ -255,14 +255,14 @@
 		param["imageHrefReal"]=filePathreal;
 		$.ajax({
 			type : "POST",
-			url : "<%=path%>/mvc/vehicle_editSave.do",
+			url : "<%=path%>/mvc/pavehicle_editSave.do",
 			data : param,
 			async : false,
 			dataType:'json',
 			success : function(data) {
 				if(data.msg == "success"){
 					alert("保存成功！");
-					window.location = "<%=path%>/mvc/vehicle.do";
+					window.location = "<%=path%>/mvc/pavehicle.do";
 				}else{
 					alert("保存失败:"+data.msg);
 				}
@@ -312,7 +312,7 @@
 		setHash('${pageContext.request.contextPath}');
 	}
 	function goBack(){
-			window.location = "<%=path%>/mvc/vehicle.do";
+			window.location = "<%=path%>/mvc/pavehicle.do";
 	}
 		function checkOption(id,value)
 		{

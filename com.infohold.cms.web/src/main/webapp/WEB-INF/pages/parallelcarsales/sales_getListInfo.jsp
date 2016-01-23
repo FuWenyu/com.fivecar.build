@@ -10,7 +10,7 @@
 						<thead>
 							<tr>
 								<th width="10%">头像</th>
-								<th width="15%">所属4s店</th>
+								<th width="15%">所属经销商</th>
 								<th width="10%">姓名</th>
 								<th width="10%">联系电话</th>
 								<th width="15%">微信或QQ</th>

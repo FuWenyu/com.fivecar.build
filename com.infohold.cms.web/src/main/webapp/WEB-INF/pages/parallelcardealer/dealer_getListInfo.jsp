@@ -10,7 +10,7 @@
 						<thead>
 							<tr>
 								<th width="10%">经营品牌</th>
-								<th width="15%">4s店名称</th>
+								<th width="15%">经销商名称</th>
 								<th width="15%">联系电话</th>
 								<th width="20%">地址</th>
 								<th width="15%">创建时间</th>

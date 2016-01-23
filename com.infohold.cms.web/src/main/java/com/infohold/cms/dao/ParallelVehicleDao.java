@@ -57,6 +57,49 @@ public class ParallelVehicleDao extends BaseDao<BaseEntity> {
 		return super.excutePageQuery(sql.toString(),page);
 	}
 	/**
+	 * 4s店汽车品牌列表查询
+	 * @param map
+	 * @param page
+	 * @return
+	 */
+	public List<Map<String, Object>> queryPriceList(Page page){
+		StringBuffer sql = new StringBuffer();
+		sql.append("select brd.id,");
+		sql.append("brd.pricekey,");
+		sql.append("brd.pricevalue ");
+		sql.append("from fc_parallel_price brd ");
+		sql.append(" order by brd.pricekey");
+		return super.excutePageQuery(sql.toString(),page);
+	}
+	/**
+	 * 4s店汽车品牌列表查询
+	 * @param map
+	 * @param page
+	 * @return
+	 */
+	public List<Map<String, Object>> queryDealerList(Page page){
+		StringBuffer sql = new StringBuffer();
+		sql.append("select brd.id,");
+		sql.append("brd.dealerName,");
+		sql.append("from fc_parallel_dealer brd ");
+		return super.excutePageQuery(sql.toString(),page);
+	}
+	/**
+	 * 4s店汽车品牌列表查询
+	 * @param map
+	 * @param page
+	 * @return
+	 */
+	public List<Map<String, Object>> queryVersionList(Page page){
+		StringBuffer sql = new StringBuffer();
+		sql.append("select brd.id,");
+		sql.append("brd.versionkey,");
+		sql.append("brd.versionvalue ");
+		sql.append("from fc_parallel_version brd ");
+		sql.append(" order by brd.versionkey");
+		return super.excutePageQuery(sql.toString(),page);
+	}
+	/**
 	 * 4s店车辆信息列表查询
 	 * @param map
 	 * @param page

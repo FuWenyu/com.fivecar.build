@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.infohold.cms.basic.common.TransData;
 import com.infohold.cms.basic.controller.CentreController;
-import com.infohold.cms.entity.CarSalesEntity;;
+import com.infohold.cms.entity.ParallelSalesEntity;;
 
 /**
  * 车辆信息管理模块
@@ -34,7 +34,7 @@ public class ParallelSalesController extends CentreController{
 	@RequestMapping("/mvc/pasales.do")
 	public ModelAndView salesIndex(HttpServletRequest httpServletRequest) throws JsonProcessingException {
 		TransData transData = new TransData();
-		transData.setServiceName("salesService");
+		transData.setServiceName("pasalesService");
 		transData.setTradeCode("T34001");
 		transData=super.doService(httpServletRequest, transData);
 		String qry_type = (String)transData.getViewMap().get("qry_type");
@@ -59,7 +59,7 @@ public class ParallelSalesController extends CentreController{
 	public ModelAndView picture_add(HttpServletRequest httpServletRequest) {
 		ModelAndView mav = new ModelAndView();
 		TransData transData = new TransData();
-		transData.setServiceName("salesService");
+		transData.setServiceName("pasalesService");
 		transData.setTradeCode("T34002");
 		transData=super.doService(httpServletRequest, transData);
 		List<Map<String, Object>> dealerList = (List<Map<String, Object>>)transData.getObj();
@@ -78,7 +78,7 @@ public class ParallelSalesController extends CentreController{
 	@ResponseBody
 	public Map<String,Object> pictureadd(HttpServletRequest httpServletRequest) {
 		TransData transData = new TransData();
-		transData.setServiceName("salesService");
+		transData.setServiceName("pasalesService");
 		transData.setTradeCode("T34003");
 		transData=super.doService(httpServletRequest, transData);
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -95,7 +95,7 @@ public class ParallelSalesController extends CentreController{
 	@ResponseBody
 	public Map<String,Object> version_delete(HttpServletRequest httpServletRequest) {
 		TransData transData = new TransData();
-		transData.setServiceName("salesService");
+		transData.setServiceName("pasalesService");
 		transData.setTradeCode("T34004");
 		transData=super.doService(httpServletRequest, transData);
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -111,13 +111,13 @@ public class ParallelSalesController extends CentreController{
 	@RequestMapping("/mvc/pasales_edit.do")
 	public ModelAndView version_edit(HttpServletRequest httpServletRequest) {
 		TransData transData = new TransData();
-		transData.setServiceName("salesService");
+		transData.setServiceName("pasalesService");
 		transData.setTradeCode("T34005");
 		transData=super.doService(httpServletRequest, transData);
 		ModelAndView mav = new ModelAndView();
-		CarSalesEntity sales = (CarSalesEntity) transData.getObj();
+		ParallelSalesEntity sales = (ParallelSalesEntity) transData.getObj();
 		mav.addObject("sales",sales);
-		transData.setServiceName("salesService");
+		transData.setServiceName("pasalesService");
 		transData.setTradeCode("T34002");
 		transData=super.doService(httpServletRequest, transData);
 		List<Map<String, Object>> dealerList = (List<Map<String, Object>>)transData.getObj();
@@ -135,7 +135,7 @@ public class ParallelSalesController extends CentreController{
 	@ResponseBody
 	public Map<String,Object> picture_editSave(HttpServletRequest httpServletRequest) {
 		TransData transData = new TransData();
-		transData.setServiceName("salesService");
+		transData.setServiceName("pasalesService");
 		transData.setTradeCode("T34006");
 		transData=super.doService(httpServletRequest, transData);
 		Map<String,Object> map = new HashMap<String,Object>();

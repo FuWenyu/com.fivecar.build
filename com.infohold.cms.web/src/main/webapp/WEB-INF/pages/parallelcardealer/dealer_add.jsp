@@ -13,9 +13,9 @@
 		<div class="row">
 			<div class="col-xs-12">
 			<!-- PAGE CONTENT BEGINS -->
-				<form class="form-horizontal" id="sub_form" action="<%=path%>/mvc/dealer_save.do"
+				<form class="form-horizontal" id="sub_form" action="<%=path%>/mvc/padealer_save.do"
 					method="post">
-					<h3 class="header smaller lighter grey">4s店信息新增</h3>
+					<h3 class="header smaller lighter grey">经销商信息新增</h3>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id"> </label>
 					</div>
@@ -33,9 +33,9 @@
 					
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
-							4s店全名 </label>
+							经销商全名 </label>
 						<div class="col-sm-9">
-							<input type="text" id="dealerName" name="dealerName" placeholder="请输入4s店全名 "
+							<input type="text" id="dealerName" name="dealerName" placeholder="请输入经销商全名 "
 								class="col-xs-10 col-sm-5"
 								value="" /> <span style="color: red"></span>
 						</div>
@@ -52,18 +52,18 @@
 					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
-							4s店地址</label>
+							经销商地址</label>
 						<div class="col-sm-9">
-							<input type="text" id="addr" name="addr" placeholder="请输入4s店地址 "
+							<input type="text" id="addr" name="addr" placeholder="请输入经销商地址 "
 								class="col-xs-10 col-sm-5"
 								value="" /> <span style="color: red"></span>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="name">
-							4s店简介 </label>
+							经销商简介 </label>
 						<div class="col-sm-9">
-							<input type="text" id=description placeholder="请输入4s店简介"
+							<input type="text" id=description placeholder="请输入经销商简介"
 								class="col-xs-10 col-sm-5" name="description" value="" />
 						</div>
 					</div>
@@ -130,13 +130,13 @@
 			return;
 		}
 		
-		if (!checkData('dealerName', '4s店全名', 'input')) {
+		if (!checkData('dealerName', '经销商全名', 'input')) {
 			return;
 		}
-		if (!checkData('dealerName', '4s店全名', 'illegal')) {
+		if (!checkData('dealerName', '经销商全名', 'illegal')) {
 			return;
 		}
-		if (!limitCheck('dealerName', '4s店全名', 64)) {
+		if (!limitCheck('dealerName', '经销商全名', 64)) {
 			return;
 		}
 		
@@ -150,10 +150,10 @@
 			return;
 		}
 		
-		if (!checkData('addr', '4s店地址 ', 'input')) {
+		if (!checkData('addr', '经销商地址 ', 'input')) {
 			return;
 		}
-		if (!checkData('description', '4s店简介 ', 'input')) {
+		if (!checkData('description', '经销商简介 ', 'input')) {
 			return;
 		}
 		param = {};
@@ -165,14 +165,14 @@
 		param["anchor"]=$("#anchor").val();
 		$.ajax({
 			type : "POST",
-			url : "<%=path%>/mvc/dealer_save.do",
+			url : "<%=path%>/mvc/padealer_save.do",
 			data : param,
 			async : false,
 			dataType:'json',
 			success : function(data) {
 				if(data.msg == "success"){
 					alert("保存成功！");
-					window.location = "<%=path%>/mvc/dealer.do";
+					window.location = "<%=path%>/mvc/padealer.do";
 				}else{
 					alert("保存失败:"+data.msg);
 				}
@@ -222,7 +222,7 @@
 		setHash('${pageContext.request.contextPath}');
 	}
 	function goBack(){
-			window.location = "<%=path%>/mvc/dealer.do";
+			window.location = "<%=path%>/mvc/padealer.do";
 	}
 	</script>
 </body>

@@ -77,7 +77,7 @@ public class ParallelDealerService implements IBusinessService {
 	}
 
 	/**
-	 * 4s店列表
+	 * 平行进口车经销商列表
 	 * 
 	 * @param transData
 	 * @return

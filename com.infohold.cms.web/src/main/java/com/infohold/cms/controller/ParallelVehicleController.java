@@ -34,7 +34,7 @@ public class ParallelVehicleController extends CentreController{
 	@RequestMapping("/mvc/pavehicle.do")
 	public ModelAndView vehicleIndex(HttpServletRequest httpServletRequest) throws JsonProcessingException {
 		TransData transData = new TransData();
-		transData.setServiceName("vehicleService");
+		transData.setServiceName("pavehicleService");
 		transData.setTradeCode("T32001");
 		transData=super.doService(httpServletRequest, transData);
 		String qry_type = (String)transData.getViewMap().get("qry_type");
@@ -59,11 +59,26 @@ public class ParallelVehicleController extends CentreController{
 	public ModelAndView picture_add(HttpServletRequest httpServletRequest) {
 		ModelAndView mav = new ModelAndView();
 		TransData transData = new TransData();
-		transData.setServiceName("vehicleService");
+		transData.setServiceName("pavehicleService");
 		transData.setTradeCode("T32002");
 		transData=super.doService(httpServletRequest, transData);
 		List<Map<String, Object>> brandList = (List<Map<String, Object>>)transData.getObj();
 		mav.addObject("brandList", brandList);
+		transData.setServiceName("pavehicleService");
+		transData.setTradeCode("T32008");
+		transData=super.doService(httpServletRequest, transData);
+		List<Map<String, Object>> priceList = (List<Map<String, Object>>)transData.getObj();
+		mav.addObject("priceList", priceList);
+		transData.setServiceName("pavehicleService");
+		transData.setTradeCode("T32009");
+		transData=super.doService(httpServletRequest, transData);
+		List<Map<String, Object>> vehicleversionList = (List<Map<String, Object>>)transData.getObj();
+		mav.addObject("vehicleversionList", vehicleversionList);
+		transData.setServiceName("pavehicleService");
+		transData.setTradeCode("T32010");
+		transData=super.doService(httpServletRequest, transData);
+		List<Map<String, Object>> dealerList = (List<Map<String, Object>>)transData.getObj();
+		mav.addObject("dealerList", dealerList);
 		mav.setViewName("/parallelcarvehicle/vehicle_add");
 		return mav;
 	}
@@ -78,7 +93,7 @@ public class ParallelVehicleController extends CentreController{
 	@ResponseBody
 	public Map<String,Object> pictureadd(HttpServletRequest httpServletRequest) {
 		TransData transData = new TransData();
-		transData.setServiceName("vehicleService");
+		transData.setServiceName("pavehicleService");
 		transData.setTradeCode("T32003");
 		transData=super.doService(httpServletRequest, transData);
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -95,7 +110,7 @@ public class ParallelVehicleController extends CentreController{
 	@ResponseBody
 	public Map<String,Object> version_delete(HttpServletRequest httpServletRequest) {
 		TransData transData = new TransData();
-		transData.setServiceName("vehicleService");
+		transData.setServiceName("pavehicleService");
 		transData.setTradeCode("T32004");
 		transData=super.doService(httpServletRequest, transData);
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -111,13 +126,13 @@ public class ParallelVehicleController extends CentreController{
 	@RequestMapping("/mvc/pavehicle_edit.do")
 	public ModelAndView version_edit(HttpServletRequest httpServletRequest) {
 		TransData transData = new TransData();
-		transData.setServiceName("vehicleService");
+		transData.setServiceName("pavehicleService");
 		transData.setTradeCode("T32005");
 		transData=super.doService(httpServletRequest, transData);
 		ModelAndView mav = new ModelAndView();
 		CarVehicleEntity vehicle = (CarVehicleEntity) transData.getObj();
 		mav.addObject("vehicle",vehicle);
-		transData.setServiceName("vehicleService");
+		transData.setServiceName("pavehicleService");
 		transData.setTradeCode("T32002");
 		transData=super.doService(httpServletRequest, transData);
 		List<Map<String, Object>> brandList = (List<Map<String, Object>>)transData.getObj();
@@ -135,7 +150,7 @@ public class ParallelVehicleController extends CentreController{
 	@ResponseBody
 	public Map<String,Object> picture_editSave(HttpServletRequest httpServletRequest) {
 		TransData transData = new TransData();
-		transData.setServiceName("vehicleService");
+		transData.setServiceName("pavehicleService");
 		transData.setTradeCode("T32006");
 		transData=super.doService(httpServletRequest, transData);
 		Map<String,Object> map = new HashMap<String,Object>();

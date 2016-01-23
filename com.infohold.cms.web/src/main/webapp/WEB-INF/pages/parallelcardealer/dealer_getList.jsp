@@ -33,7 +33,7 @@
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
 				<!-- 查询条件begin -->
-				<form class="col-xs-12" id="queryForm" name="qry_form" action="dealer.do" method="post">
+				<form class="col-xs-12" id="queryForm" name="qry_form" action="padealer.do" method="post">
 					<input class="hidden" type="text" name="tradeCode" id="tradeCode" data-min="2" data-max="20" value="T10010" />
 					<div class="row">
 						<div class="space-6"></div>
@@ -63,7 +63,7 @@
 						<thead>
 							<tr>
 								<th width="10%">经营品牌</th>
-								<th width="15%">4s店名称</th>
+								<th width="15%">经销商名称</th>
 								<th width="15%">联系电话</th>
 								<th width="20%">地址</th>
 								<th width="15%">创建时间</th>
@@ -207,7 +207,7 @@
 		{
 			var param = $("#queryForm").serialize();
 			param += "&qry_type=qry";
-			$.post("dealer.do", param, function(result) {			
+			$.post("padealer.do", param, function(result) {			
 				$("#qryContent").html(result).hide();
 				$("#qryContent").fadeIn('fast');
 				setHash('${pageContext.request.contextPath}');
@@ -219,11 +219,11 @@
 		}
 		//跳转至图片新增页面
 		function addEntity(){
-			window.location="<%=path%>/mvc/dealer_add.do";
+			window.location="<%=path%>/mvc/padealer_add.do";
 		};
 		//跳转至图片编辑页面
 		function editEntity(id){
-			window.location="<%=path%>/mvc/dealer_edit.do?id="+id+"";
+			window.location="<%=path%>/mvc/padealer_edit.do?id="+id+"";
 		};
 		
 		//删除图片By id
@@ -231,7 +231,7 @@
 			//异步删除 成功后跳转页面
 			var param={};
 			param["id"]=dealerid;
-			$.post("<%=path%>/mvc/dealer_delete.do",param,function(result){
+			$.post("<%=path%>/mvc/padealer_delete.do",param,function(result){
 				movePage(1);
 			});
 		};

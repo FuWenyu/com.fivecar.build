@@ -44,7 +44,7 @@
 					<input id="dealer1" type="hidden" class="" name="dealer1" value="${sales.belong}-${sales.belongName}" />
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
-							所属4s店</label>
+							所属经销商</label>
 						<div class="col-sm-9">
 							<select class="input-medium"  id="dealer" name="dealer">
 							<c:forEach items="${dealerList}" var="list" varStatus="status">
@@ -190,7 +190,7 @@
 	}
 	
 	function subForm() {
-		if (!checkData('dealer', '所属4s店', 'input')) {
+		if (!checkData('dealer', '所属经销商', 'input')) {
 			return;
 		}
 		
@@ -284,14 +284,14 @@
 		param["imageHrefReal"]=filePathreal;
 		$.ajax({
 			type : "POST",
-			url : "<%=path%>/mvc/sales_editSave.do",
+			url : "<%=path%>/mvc/pasales_editSave.do",
 			data : param,
 			async : false,
 			dataType:'json',
 			success : function(data) {
 				if(data.msg == "success"){
 					alert("保存成功！");
-					window.location = "<%=path%>/mvc/sales.do";
+					window.location = "<%=path%>/mvc/pasales.do";
 				}else{
 					alert("保存失败:"+data.msg);
 				}
@@ -341,7 +341,7 @@
 		setHash('${pageContext.request.contextPath}');
 	}
 	function goBack(){
-			window.location = "<%=path%>/mvc/sales.do";
+			window.location = "<%=path%>/mvc/pasales.do";
 	}
 		function checkOption(id,value)
 		{
