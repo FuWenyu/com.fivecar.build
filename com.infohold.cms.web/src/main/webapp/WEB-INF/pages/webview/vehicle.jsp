@@ -8,6 +8,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>五车</title>
 <link href="css/css.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet"
@@ -30,8 +31,11 @@
 				</div>
 				<div class="wc02-03">
 					<img id="map" src="images/zc_button_ckdt_default.png" width="60" height="60"
-						alt="" /> <img src="images/zc_button_lxsj_default.png"
+						alt="" /> 
+						<a href="tel://${dealer.telephone}">
+						<img src="images/zc_button_lxsj_default.png"
 						width="114" height="114" alt="" />
+						</a>
 				</div>
 			</div>
 		</div>
@@ -39,11 +43,13 @@
 		${dealer.position}
 		</div>
 		<button id="opener">点击加载更多经销商</button>
-		<div id="dialog" title="请选择一个经销商">
+		<div class="tc" id="dialog" title="请选择一个经销商">
+		<div class="tc_text">
 			<c:forEach var="dealerlist" items="${dealerlist}">
 				<a href="${url}${dealerlist.id}&vehicleid=${vehicle.id}">${dealerlist.dealerName}</a>
 				<br />
 			</c:forEach>
+			</div>
 		</div>
 
 		<div class="wc03">
@@ -78,15 +84,16 @@
 						<li class="first"><img src="${saleslist.url}" width="86"
 							height="81">
 							<p class="InfoTime">销售顾问：${saleslist.salesName}</p>
-							<p class="InfoTime">销售车型：${vehicle.vehicleName}</p> <span
-							class="InfoContent"><img
+							<p class="InfoTime">销售车型：${vehicle.vehicleName}</p> 
+							<span class="InfoContent"><img
 								src="images/zc_icon_x_default.jpg" width="20" height="20" alt="" />奥迪车全系85折！</span>
 						</li>
 					</ul>
 				</div>
 				<div>
+				<a href="tel://${saleslist.phone}">
 					<img src="images/zc_button_bddha_default.png" alt="" width="60"
-						height="60" class="tw" />
+						height="60" class="tw" /></a>
 				</div>
 				<div style="clear: both"></div>
 			</div>
@@ -106,8 +113,10 @@
 				优惠参考价：<a>${modellist.discountprice}</a>
 			</div>
 			<div class="wc05_text3">${modellist.Carabstract}</div>
-			<div class="wc05_text4">全款明细</div>
-			<div class="wc05_text5">贷款购车</div>
+			<div class="wc05_text4"><a href="wc://LoanBuy?id=${id}">全款明细</a></div>
+			<div class="wc05_text5"><a href="wc://LoanBuy?id=${id}">贷款购车</a></div>
+										<span class="InfoContent"><img
+								src="images/zc_icon_x_default.jpg" width="20" height="20" alt="" />奥迪车全系85折！</span>
 		</div>
 	</c:forEach>
 	<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>

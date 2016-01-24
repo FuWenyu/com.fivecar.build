@@ -121,8 +121,9 @@ public class ModelDao extends BaseDao<BaseEntity> {
 	 * @param id，用户主键
 	 * @return
 	 */
-	public void model_update(CarModelEntity entity) {
+	public boolean model_update(CarModelEntity entity) {
 		super.update(entity);
+		return true;
 	}
 	
 }

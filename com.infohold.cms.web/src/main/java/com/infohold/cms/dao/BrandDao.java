@@ -96,8 +96,9 @@ public class BrandDao extends BaseDao<BaseEntity> {
 	 * @param id，用户主键
 	 * @return
 	 */
-	public void brand_update(CarBrandEntity entity) {
+	public boolean brand_update(CarBrandEntity entity) {
 		super.update(entity);
+		return true;
 	}
 	
 }

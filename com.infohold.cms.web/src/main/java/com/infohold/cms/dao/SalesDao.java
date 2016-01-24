@@ -116,8 +116,9 @@ public class SalesDao extends BaseDao<BaseEntity> {
 	 * @param id，用户主键
 	 * @return
 	 */
-	public void sales_update(CarSalesEntity entity) {
+	public boolean sales_update(CarSalesEntity entity) {
 		super.update(entity);
+		return true;
 	}
 	
 }

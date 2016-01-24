@@ -151,9 +151,48 @@ public class BrandService implements IBusinessService {
 	 */
 	public TransData updatePictureEntity(TransData transData)
 			throws BusinessException {
-		// 页面数据
-		transData.setExpMsg("success");
+		// 保存数据库
+		Map<String, Object> map = transData.getViewMap();
+		UserSession session = transData.getUserSession();
+		String id = (String) map.get("cardbrand_id");
+		String initial = (String) map.get("initial");
+		String brandNamecn = (String) map.get("brandNamecn");
+		String brandNameen = (String) map.get("brandNameen");
+		String description = (String) map.get("description");
+		String imageName = (String) map.get("imageName");
+		String createName = session.getUserName();
+		Timestamp createDate = dateutil.getTimestamp();
+		StringBuffer urlreal = new StringBuffer("http://");
+		urlreal.append(sysConfigUtil.getCfgInfo("service_ip"));
+		urlreal.append("/");
+		urlreal.append(sysConfigUtil.getCfgInfo("service_name"));
+		urlreal.append("/upload/imagereal/");
+		urlreal.append(imageName);
+
+		StringBuffer url = new StringBuffer("http://");
+		url.append(sysConfigUtil.getCfgInfo("service_ip"));
+		url.append("/");
+		url.append(sysConfigUtil.getCfgInfo("service_name"));
+		url.append("/upload/image/");
+		url.append(imageName);
+		
+		CarBrandEntity carbrandentity = new CarBrandEntity();
+		carbrandentity.setId(id);
+		carbrandentity.setInitial(initial);
+		carbrandentity.setBrandNamecn(brandNamecn);
+		carbrandentity.setBrandNameen(brandNameen);
+		carbrandentity.setImageName(imageName);
+		carbrandentity.setUrl(url.toString());
+		carbrandentity.setUrlreal(urlreal.toString());
+		carbrandentity.setDescription(description);
+		carbrandentity.setCreateName(createName);
+		carbrandentity.setCreateDate(createDate);
+		
+		if (branddao.brand_update(carbrandentity)) {
+			transData.setExpMsg("success");
+		}
 		return transData;
+
 	}
 
 	/**

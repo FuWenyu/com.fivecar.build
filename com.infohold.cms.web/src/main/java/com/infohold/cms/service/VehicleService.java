@@ -93,8 +93,9 @@ public class VehicleService implements IBusinessService {
 	 * @throws BusinessException
 	 */
 	public TransData querybrand(TransData transData) throws BusinessException {
-		List<Map<String, Object>> orgList = vehicledao.queryBrandList(transData
-				.getPageInfo());
+		Page page = new Page();
+		page.setPageSize(999);
+		List<Map<String, Object>> orgList = vehicledao.queryBrandList(page);
 		transData.setObj(orgList);
 		return transData;
 	}
@@ -187,8 +188,52 @@ public class VehicleService implements IBusinessService {
 	 */
 	public TransData updatePictureEntity(TransData transData)
 			throws BusinessException {
-		// 页面数据
-		transData.setExpMsg("success");
+		Map<String, Object> map = transData.getViewMap();
+		UserSession session = transData.getUserSession();
+		String id = (String) map.get("vehicle_id");
+		String vehicleName = (String) map.get("vehicleName");
+		String carbrandall = (String) map.get("carbrand");
+		String price = (String) map.get("price");
+		String description = (String) map.get("description");
+		String imageName = (String) map.get("imageName");
+		String createName = session.getUserName();
+		Timestamp createDate = dateutil.getTimestamp();
+
+		String[] strarray = carbrandall.split("-");
+		String carbrandid = strarray[0];
+		String carbrandname = strarray[1];
+
+		StringBuffer urlreal = new StringBuffer("http://");
+		urlreal.append(sysConfigUtil.getCfgInfo("service_ip"));
+		urlreal.append("/");
+		urlreal.append(sysConfigUtil.getCfgInfo("service_name"));
+		urlreal.append("/upload/imagereal/");
+		urlreal.append(imageName);
+
+		StringBuffer url = new StringBuffer("http://");
+		url.append(sysConfigUtil.getCfgInfo("service_ip"));
+		url.append("/");
+		url.append(sysConfigUtil.getCfgInfo("service_name"));
+		url.append("/upload/image/");
+		url.append(imageName);
+//		String anchor=sysConfigUtil.getCfgInfo("vehicle_request");
+		
+		CarVehicleEntity carvehicleentity = new CarVehicleEntity();
+		carvehicleentity.setId(id);
+		carvehicleentity.setCarbrand(carbrandname);
+		carvehicleentity.setCarbrandid(carbrandid);
+		carvehicleentity.setVehicleName(vehicleName);
+		carvehicleentity.setPrice(price);
+		carvehicleentity.setImageName(imageName);
+		carvehicleentity.setUrl(url.toString());
+		carvehicleentity.setUrlreal(urlreal.toString());
+		carvehicleentity.setDescription(description);
+//		carvehicleentity.setAnchor(anchor+carvehicleentity.getId());
+		carvehicleentity.setCreateName(createName);
+		carvehicleentity.setCreateDate(createDate);
+		if (vehicledao.vehicle_update(carvehicleentity)) {
+			transData.setExpMsg("success");
+		}
 		return transData;
 	}
 

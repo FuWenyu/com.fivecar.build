@@ -159,7 +159,7 @@ public class CarVehicleEntity extends BaseEntity {
 	/**
 	 * @return the anchor
 	 */
-	@Column(name ="anchor",nullable=false,columnDefinition="varchar(255)default ''")
+	@Column(name ="anchor",columnDefinition="varchar(255)default ''")
 	public java.lang.String getAnchor() {
 		return anchor;
 	}

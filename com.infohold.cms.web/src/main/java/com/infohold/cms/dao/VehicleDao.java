@@ -112,8 +112,9 @@ public class VehicleDao extends BaseDao<BaseEntity> {
 	 * @param id，用户主键
 	 * @return
 	 */
-	public void vehicle_update(CarVehicleEntity entity) {
+	public boolean vehicle_update(CarVehicleEntity entity) {
 		super.update(entity);
+		return true;
 	}
 	
 }

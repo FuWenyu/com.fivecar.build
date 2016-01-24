@@ -127,13 +127,37 @@
 		if (!checkData('dealer', '所属4s店', 'input')) {
 			return;
 		}
+		
 		if (!checkData('salesName', '销售员姓名', 'input')) {
 			return;
 		}
+		if (!checkData('salesName', '销售员姓名', 'illegal')) {
+			return;
+		}
+		if (!limitCheck('salesName', '销售员姓名', 64)) {
+			return;
+		}
+		
 		if (!checkData('phone', '联系电话', 'input')) {
 			return;
 		}
+		if (!checkData('phone', '联系电话', 'number')) {
+			return;
+		}
+		if (!limitCheck('phone', '联系电话', 11)) {
+			return;
+		}
+		
 		if (!checkData('wxQQ', '微信/QQ', 'input')) {
+			return;
+		}
+		if (!checkData('wxQQ', '微信/QQ', 'illegal')) {
+			return;
+		}
+		if (!checkData('wxQQ', '微信/QQ', 'chinese')) {
+			return;
+		}
+		if (!limitCheck('wxQQ', '微信/QQ', 64)) {
 			return;
 		}
 		//附件格式控制，ID，白名单

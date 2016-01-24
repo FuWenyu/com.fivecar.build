@@ -40,71 +40,69 @@
 					</div>
 					<%-- <input id="VERSION_FOR" type="hidden" class="" name="VERSION_FOR"   value="${picture.version_flag}" />	
 					<input id="version_ol" type="hidden" class="" name="version_ol"   value="${picture.version_online}" />	 --%>
-					<input id="version_id" type="hidden" class="" name="picture_id" id="picture_id"   value="${picture.id}" />
-					<input id="version_id" type="hidden" class="" name="usefor" id="usefor"   value="${picture.usefo}" />
-					<input id="version_id" type="hidden" class="" name="add_date" id="add_date"   value="${picture.add_date}" />	
+					<input id="sales_id" type="hidden" class="" name="sales_id" value="${sales.id}" />
+					<input id="dealer1" type="hidden" class="" name="dealer1" value="${sales.belong}-${sales.belongName}" />
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
-							图片名称 </label>
+							所属4s店</label>
+						<div class="col-sm-9">
+							<select class="input-medium"  id="dealer" name="dealer">
+							<c:forEach items="${dealerList}" var="list" varStatus="status">
+	                        <option value="${list.id}-${list.dealerName}">${list.dealerName}</option>
+	               		    </c:forEach>
+               		    </select>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">
+							销售员姓名  </label>
+						<div class="col-sm-9">
+							<input type="text" id="salesName" name="salesName" placeholder="请输入销售员姓名 "
+								class="col-xs-10 col-sm-5"
+								value="${sales.salesName}" /> <span style="color: red"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">
+							联系电话</label>
 						
 						<div class="col-sm-9">
-							<input type="text" id="imageName" name="imageName" placeholder="请输入图片名称"
+							<input type="text" id="phone" name="phone" placeholder="请输入销售员联系电话！ "
 								class="col-xs-10 col-sm-5"
-								value="${picture.imageName}" /> <span style="color: red"></span>
+								value="${sales.phone}" /> <span style="color: red"></span>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
-							标题</label>
+							微信/QQ</label>
 						
 						<div class="col-sm-9">
-							<input type="text" id="title" name="title" placeholder="请输入标题"
+							<input type="text" id="wxQQ" name="wxQQ" placeholder="请输入销售员微信或者QQ号码！ "
 								class="col-xs-10 col-sm-5"
-								value="${picture.title}" /> <span style="color: red"></span>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="id">
-							用途</label>
-						<div class="col-sm-9">
-							<select class="input-medium"  id="usefo" name="usefo">
-                                <option value="">-请选择-</option> 
-								<option value="11">行业资讯</option>
-								<option value="21">优惠信息</option>
-								<option value="31">汽车生活</option>
-							</select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="name">
-							图片链接地址 </label>
-		
-						<div class="col-sm-9">
-							<input type="text" id="anchor" placeholder="请输入图片链接地址"
-								class="col-xs-10 col-sm-5" name="anchor" value="" />
+								value="${sales.wxQQ}" /> <span style="color: red"></span>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="name">
-							图片链接地址 </label>
-		
-						<div class="col-sm-9">
-							<input type="text" id="picture_url" placeholder="请输入图片链接地址"
-								class="col-xs-10 col-sm-5" name="picture_url" value="${picture.to_url}" />
-						</div>
+							<label class="col-sm-3 control-label no-padding-right" for="fileInput">头像上传</label>
+							<div class="col-sm-3" id="upload">
+								<div class="ace-file-input col-sm-12" id="fileInputDiv">
+									<input type="file" id="fileInput" name="myfile" class="ace-file-input col-sm-12" onblur="clean()">
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<h6 class="inline blue">请上传|gif|png|jpg|jpeg格式附件。</h6>
+							</div>
 					</div>
-							<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="name">
-							图片描述 </label>
-		
-						<div class="col-sm-9">
-							<%-- <input type="text" id="picture_desc" placeholder="请输入图片描述"
-								class="col-xs-10 col-sm-5" name="picture_desc" value="${picture.picture_desc}" /> --%>
-							<textarea rows="6" cols="72" id="picture_desc" name="picture_desc"> ${picture.picture_desc}</textarea>
-						</div>
+					<div class="form-group hide" id="fileListGroup">
+								<label class="col-sm-2 control-label no-padding-right" for="btn">已上传文件</label>
+								<div class="col-sm-3" id="upload1">
+								</div>
+								<div class="col-sm-4">
+								</div>
 					</div>
-		
+					
 					<div class="clearfix form-actions">
 						<div class="col-md-offset-3 col-md-9">
 							<button class="btn btn-info" type="button" onclick="subForm();">
@@ -112,7 +110,7 @@
 							</button>
 		
 							&nbsp; &nbsp; &nbsp;
-							<button class="btn" type="button" onclick="javascript:window.location = '<%=path%>/mvc/picture.do?type=cms';">
+							<button class="btn" type="button" onclick="goBack();">
 								<i class="icon-reply bigger-110"></i> 返回
 							</button>
 						</div>
@@ -167,67 +165,184 @@
 	<!-- PAGE CONTENT ENDS -->
 	<script type="text/javascript">
 		/*********页面加载区域**********/
-		jQuery(function($) {
-			//加载机构列表
-			$("#organizationId").formComponents("select");
-			$("#cms_roleid").formComponents("check");
-			$("#oms_roleid").formComponents("check");
-			var usefor = document.getElementById('usefor').value;
-			var VERSION_OL = document.getElementById('version_ol').value;
-			
-			checkOption('usefo',usefor);
-			checkOption('version_online',VERSION_OL);
-			/* $("#cms_form-group").hide();
-			$("#organizationId").change(function(){
-				var orgId = $("#organizationId").val();
-				if(orgId == "000000"){
-					$("#oms_form-group").show();
-					$("#cms_form-group").hide();
-				}else{
-					$("#oms_form-group").hide();
-					$("#cms_form-group").show();
-				}
-			}); */
-			//$("#organizationId").addClass("disabled");
-			$("#cms_form-group").find("input[value=2]").attr("checked","checked").attr("disabled","disabled");
+		
+	jQuery(function($) {
+		var dealer1 = document.getElementById('dealer1').value;
+		checkOption('dealer',dealer1);
+		//上传文件控件
+		$('#fileInput').ace_file_input({
+			no_file:'空...',
+			btn_choose:'选择',
+			btn_change:'更改',
+			droppable:false,
+			onchange:null,
+			thumbnail:false
 		});
-		/*********自定于方法**********/
-		//表单提交
-		function subForm() {
-//			if (!checkData('version_no', '版本号', 'input')) {
-//				return;
-//			}
-			/* if (!checkData('version_flag', '系统标记', 'input')) {
-				return;
-			} */
-			if (!checkData('picture_name', '图片名称', 'input')) {
-				return;
-			}
-			if (!checkData('picture_desc', '图片描述', 'input')) {
-				return;
-			}
-			if (!checkData('picture_url', '图片地址 ', 'input')) {
-				return;
-			}
-			$.ajax({
-				type : "POST",
-				url : "<%=path%>/mvc/picture_editSave.do",
-				data : $("#sub_form").serialize(),
-				async : false,
-				dataType:'json',
-				success : function(data) {
-					if(data.msg == "success"){
-						alert("保存成功！");
-						window.location = "<%=path%>/mvc/picture.do";
-					}else{
-						alert("保存失败:"+data.msg);
-					}
-				},
-				error : function(msg) {
-					alert("分配出错  " + msg.msg);
-				}
-			});
+		
+		
+		$(window).resize(function() {
+			setHash('${pageContext.request.contextPath}');
+		});
+	});
+	
+	function pictureupload(){
+		
+	}
+	
+	function subForm() {
+		if (!checkData('dealer', '所属4s店', 'input')) {
+			return;
 		}
+		
+		if (!checkData('salesName', '销售员姓名', 'input')) {
+			return;
+		}
+		if (!checkData('salesName', '销售员姓名', 'illegal')) {
+			return;
+		}
+		if (!limitCheck('salesName', '销售员姓名', 64)) {
+			return;
+		}
+		
+		if (!checkData('phone', '联系电话', 'input')) {
+			return;
+		}
+		if (!checkData('phone', '联系电话', 'number')) {
+			return;
+		}
+		if (!limitCheck('phone', '联系电话', 11)) {
+			return;
+		}
+		
+		if (!checkData('wxQQ', '微信/QQ', 'input')) {
+			return;
+		}
+		if (!checkData('wxQQ', '微信/QQ', 'illegal')) {
+			return;
+		}
+		if (!checkData('wxQQ', '微信/QQ', 'chinese')) {
+			return;
+		}
+		if (!limitCheck('wxQQ', '微信/QQ', 64)) {
+			return;
+		}
+		//附件格式控制，ID，白名单
+		var fileInput=$("#fileInput").val();
+		var array=fileInput.split(".");
+		if("|gif|png|jpg|jpeg|jasper".indexOf(array[1])==-1){
+			myalert("此文件格式不支持上传！");
+			return;
+		}; 
+		//var fileInput = $("#fileInput").val();
+		if(fileInput==null ||fileInput=="" ){
+			$("#fileInputDiv").next().remove();
+			$("#fileInputDiv").after("<div class=\"help-block red\" >&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;请上传附件");
+			return false;
+		}
+		param = {};
+		param["biz_id"]=$("#report_id").val();
+		param["biz_type"]="1";
+		//ajax上传文件
+		$.ajaxFileUpload({
+			url :  "<%=path%>/mvc/pictureUpLoad.do",
+			type : "POST",
+			secureuri : false,
+			fileElementId : 'fileInput',
+			data : param,
+			dataType : 'JSON',
+			success : function(data,status){
+				var obj = $.parseJSON($(data).html());
+				if(obj.reCode == "failed"){
+					myalert(obj.expMsg,initFileInput);
+					return false;
+					/* initFileInput(); */
+				}else{
+					$("#fileListGroup").removeClass("hide");
+// 					$("#upload1").append("<label class='filelist col-sm-12'><a href=\"downloadFile.do?att_id="+obj.fileVo.attId+"\">"+obj.fileVo.attName+" &nbsp;&nbsp;&nbsp;</a><a class=\"remove\" data-attid="+obj.fileVo.attId+" data-fileName="+obj.fileVo.fileName+" href=\"#\" onclick=\"removeFile(this);\"><i class=\"icon-remove\"></i></a></label>");
+					initFileInput();
+					subForm1(obj.imageName,obj.filePath,obj.filePathreal,obj.imageid);
+					return true;
+				}
+				
+			},
+			error : function(data,status,e){
+				initFileInput();
+				return false;
+			}
+		});
+	}
+	
+	function subForm1(imageName,filePath,filePathreal,imageid){
+		param = {};
+		param["sales_id"]=$("#sales_id").val();
+		param["imageName"]=imageName;
+		param["dealer"]=$("#dealer").val();
+		param["salesName"]=$("#salesName").val();
+		param["phone"]=$("#phone").val();
+		param["wxQQ"]=$("#wxQQ").val();
+		param["imageHref"]=filePath;
+		param["imageHrefReal"]=filePathreal;
+		$.ajax({
+			type : "POST",
+			url : "<%=path%>/mvc/sales_editSave.do",
+			data : param,
+			async : false,
+			dataType:'json',
+			success : function(data) {
+				if(data.msg == "success"){
+					alert("保存成功！");
+					window.location = "<%=path%>/mvc/sales.do";
+				}else{
+					alert("保存失败:"+data.msg);
+				}
+			},
+			error : function(msg) {
+				alert("分配出错  " + msg);
+			}
+		});
+	}
+	function removeFile(obj){
+		var param={};
+		param["att_id"]=$(obj).data("attid");
+		$.ajax( {
+			type : "POST",
+			url : "removeFile.do",
+			data : param,
+			async : false,
+			success : function(flag) {
+				if(flag){
+					myalert("删除成功",initFileInput);
+					$(obj).parents("label").remove();
+					$("#fileUpLoadBtn").show();
+				}else{
+					myalert("删除失败",initFileInput);
+				}
+				
+			},
+			error : function(msg) {
+				myalert("表单提交失败："+msg,initFileInput);
+			}
+		}); 
+	}
+	function initFileInput(){
+		var html = "<div class=\"ace-file-input col-sm-12\" id=\"fileInputDiv\"> "+
+		"<input type=\"file\" id=\"fileInput\" name=\"myfile\" class=\"ace-file-input col-sm-12\" onblur=\"clean()\"> "+
+		"<div id=\"fileInput_font\" class=\"help-block red\" onclick=\"clean()\"></div></div>"; 
+		$("#fileInputDiv").remove(); 
+		$("#upload").html(html); 
+		$('#fileInput').ace_file_input({
+			no_file:'空...',
+			btn_choose:'选择',
+			btn_change:'更改',
+			droppable:false,
+			onchange:null,
+			thumbnail:false 
+		}); 
+		setHash('${pageContext.request.contextPath}');
+	}
+	function goBack(){
+			window.location = "<%=path%>/mvc/sales.do";
+	}
 		function checkOption(id,value)
 		{
 			var select = document.getElementById(id);

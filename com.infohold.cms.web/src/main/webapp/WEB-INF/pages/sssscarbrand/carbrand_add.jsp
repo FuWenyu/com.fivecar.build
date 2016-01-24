@@ -116,7 +116,6 @@
 	
 	<script type="text/javascript">
 	
-	
 	jQuery(function($) {
 		
 		//上传文件控件
@@ -143,10 +142,29 @@
 		if (!checkData('initial', '品牌首字母', 'input')) {
 			return;
 		}
+		if (!limitCheck('initial', '品牌首字母', 1)) {
+			return;
+		}
 		if (!checkData('brandNameen', '品牌英文名称', 'input')) {
 			return;
 		}
+		if (!limitCheck('brandNameen', '品牌英文名称', 64)) {
+			return;
+		}
+		if (!checkData('brandNameen', '品牌英文名称', 'chinese')) {
+			return;
+		}
+		if (!checkData('brandNameen', '品牌英文名称', 'illegal')) {
+			return;
+		}
+		
 		if (!checkData('brandNamecn', '品牌中文名称', 'input')) {
+			return;
+		}
+		if (!checkData('brandNamecn', '品牌中文名称', 'illegal')) {
+			return;
+		}
+		if (!limitCheck('brandNamecn', '品牌英文名称', 64)) {
 			return;
 		}
 		//附件格式控制，ID，白名单

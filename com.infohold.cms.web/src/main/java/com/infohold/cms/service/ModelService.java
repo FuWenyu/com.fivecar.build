@@ -51,7 +51,7 @@ public class ModelService implements IBusinessService {
 		} else if (tradCode.equals("T26005")) {
 			return this.modelEdit(transData);
 		} else if (tradCode.equals("T26006")) {
-			return this.updatePictureEntity(transData);
+			return this.modelEditSave(transData);
 		} else if (tradCode.equals("T26007")) {
 			return this.modelQuery(transData);
 		}
@@ -179,10 +179,60 @@ public class ModelService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData updatePictureEntity(TransData transData)
+	public TransData modelEditSave(TransData transData)
 			throws BusinessException {
-		// 页面数据
-		transData.setExpMsg("success");
+		Map<String, Object> map = transData.getViewMap();
+		UserSession session = transData.getUserSession();
+		String id = (String) map.get("model_id");
+		String modelName = (String) map.get("modelName");
+		String originalprice = (String) map.get("originalprice");
+		String discountprice = (String) map.get("discountprice");
+		String description = (String) map.get("description");
+		String imageName = (String) map.get("imageName");
+		String vehicle = (String) map.get("vehicle");
+		String Carabstract = (String) map.get("Carabstract");
+		String createName = session.getUserName();
+		Timestamp createDate = dateutil.getTimestamp();
+
+		String[] strarray = vehicle.split("-");
+		String vehicleid = strarray[0];
+		String vehicleName = strarray[1];
+		String carbrandid = strarray[2];
+		String carbrandname = strarray[3];
+
+		StringBuffer urlreal = new StringBuffer("http://");
+		urlreal.append(sysConfigUtil.getCfgInfo("service_ip"));
+		urlreal.append("/");
+		urlreal.append(sysConfigUtil.getCfgInfo("service_name"));
+		urlreal.append("/upload/imagereal/");
+		urlreal.append(imageName);
+
+		StringBuffer url = new StringBuffer("http://");
+		url.append(sysConfigUtil.getCfgInfo("service_ip"));
+		url.append("/");
+		url.append(sysConfigUtil.getCfgInfo("service_name"));
+		url.append("/upload/image/");
+		url.append(imageName);
+
+		CarModelEntity carmodelentity = new CarModelEntity();
+		carmodelentity.setId(id);
+		carmodelentity.setCarbrand(carbrandname);
+		carmodelentity.setCarbrandid(carbrandid);
+		carmodelentity.setModelName(modelName);
+		carmodelentity.setOriginalprice(originalprice);
+		carmodelentity.setDiscountprice(discountprice);
+		carmodelentity.setVehicleid(vehicleid);
+		carmodelentity.setVehicle(vehicleName);
+		carmodelentity.setImageName(imageName);
+		carmodelentity.setUrl(url.toString());
+		carmodelentity.setUrlreal(urlreal.toString());
+		carmodelentity.setDescription(description);
+		carmodelentity.setCreateName(createName);
+		carmodelentity.setCreateDate(createDate);
+		carmodelentity.setCarabstract(Carabstract);
+		if (modeldao.model_update(carmodelentity)) {
+			transData.setExpMsg("success");
+		}
 		return transData;
 	}
 

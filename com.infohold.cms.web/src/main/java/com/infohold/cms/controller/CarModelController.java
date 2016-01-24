@@ -114,7 +114,11 @@ public class CarModelController extends CentreController{
 		ModelAndView mav = new ModelAndView();
 		CarModelEntity model = (CarModelEntity) transData.getObj();
 		mav.addObject("model",model);
-		mav.addObject("page",transData.getPageInfo());
+		transData.setServiceName("modelService");
+		transData.setTradeCode("T26002");
+		transData=super.doService(httpServletRequest, transData);
+		List<Map<String, Object>> vehicleList = (List<Map<String, Object>>)transData.getObj();
+		mav.addObject("vehicleList", vehicleList);
 		mav.setViewName("/sssscarmodel/model_update");
 		return mav;
 	}

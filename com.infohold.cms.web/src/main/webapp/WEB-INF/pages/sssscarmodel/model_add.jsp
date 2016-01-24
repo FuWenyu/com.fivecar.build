@@ -62,7 +62,7 @@
 						<label class="col-sm-3 control-label no-padding-right" for="id">
 							配置摘要</label>
 						<div class="col-sm-9">
-							<input type="text" id=""Carabstract"" name="Carabstract" placeholder="请输入配置摘要！ "
+							<input type="text" id="Carabstract" name="Carabstract" placeholder="请输入配置摘要！ "
 								class="col-xs-10 col-sm-5"
 								value="" /> <span style="color: red"></span>
 						</div>
@@ -136,10 +136,40 @@
 		if (!checkData('modelName', '车型名称', 'input')) {
 			return;
 		}
+		if (!checkData('modelName', '车型名称', 'illegal')) {
+			return;
+		}
+		if (!limitCheck('modelName', '车型名称', 64)) {
+			return;
+		}
+		
 		if (!checkData('originalprice', '官方指导价格', 'input')) {
 			return;
 		}
+		if (!checkData('originalprice', '官方指导价格', 'illegal')) {
+			return;
+		}
+		if (!limitCheck('originalprice', '官方指导价格', 32)) {
+			return;
+		}
+		
 		if (!checkData('discountprice', '五车折扣价格', 'input')) {
+			return;
+		}
+		if (!checkData('discountprice', '五车折扣价格', 'illegal')) {
+			return;
+		}
+		if (!limitCheck('discountprice', '五车折扣价格', 32)) {
+			return;
+		}
+		
+		if (!checkData('Carabstract', '配置摘要', 'input')) {
+			return;
+		}
+		if (!checkData('Carabstract', '配置摘要', 'illegal')) {
+			return;
+		}
+		if (!limitCheck('Carabstract', '配置摘要', 255)) {
 			return;
 		}
 		//附件格式控制，ID，白名单
@@ -194,6 +224,7 @@
 		param["modelName"]=$("#modelName").val();
 		param["originalprice"]=$("#originalprice").val();
 		param["discountprice"]=$("#discountprice").val();
+		param["Carabstract"]=$("#Carabstract").val();
 		param["imageName"]=imageName;
 		param["imageHref"]=filePath;
 		param["imageHrefReal"]=filePathreal;

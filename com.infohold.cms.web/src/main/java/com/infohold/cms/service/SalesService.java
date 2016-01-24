@@ -51,7 +51,7 @@ public class SalesService implements IBusinessService {
 		} else if (tradCode.equals("T25005")) {
 			return this.salesEdit(transData);
 		} else if (tradCode.equals("T25006")) {
-			return this.updatePictureEntity(transData);
+			return this.salesEditSave(transData);
 		} else if (tradCode.equals("T25007")) {
 			return this.salesQuery(transData);
 		}
@@ -173,10 +173,54 @@ public class SalesService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData updatePictureEntity(TransData transData)
+	public TransData salesEditSave(TransData transData)
 			throws BusinessException {
-		// 页面数据
-		transData.setExpMsg("success");
+		Map<String, Object> map = transData.getViewMap();
+		UserSession session = transData.getUserSession();
+		String id = (String) map.get("sales_id");
+		String salesName = (String) map.get("salesName");
+		String phone = (String) map.get("phone");
+		String wxQQ = (String) map.get("wxQQ");
+		String dealer = (String) map.get("dealer");
+		String description = (String) map.get("description");
+		String imageName = (String) map.get("imageName");
+		String createName = session.getUserName();
+		Timestamp createDate = dateutil.getTimestamp();
+
+		String[] strarray = dealer.split("-");
+		String belong = strarray[0];
+		String belongName = strarray[1];
+		
+		StringBuffer urlreal = new StringBuffer("http://");
+		urlreal.append(sysConfigUtil.getCfgInfo("service_ip"));
+		urlreal.append("/");
+		urlreal.append(sysConfigUtil.getCfgInfo("service_name"));
+		urlreal.append("/upload/imagereal/");
+		urlreal.append(imageName);
+
+		StringBuffer url = new StringBuffer("http://");
+		url.append(sysConfigUtil.getCfgInfo("service_ip"));
+		url.append("/");
+		url.append(sysConfigUtil.getCfgInfo("service_name"));
+		url.append("/upload/image/");
+		url.append(imageName);
+
+		CarSalesEntity carsalesentity = new CarSalesEntity();
+		carsalesentity.setId(id);
+		carsalesentity.setSalesName(salesName);
+		carsalesentity.setPhone(phone);
+		carsalesentity.setWxQQ(wxQQ);
+		carsalesentity.setBelong(belong);
+		carsalesentity.setBelongName(belongName);
+		carsalesentity.setImageName(imageName);
+		carsalesentity.setUrl(url.toString());
+		carsalesentity.setUrlreal(urlreal.toString());
+		carsalesentity.setDescription(description);
+		carsalesentity.setCreateName(createName);
+		carsalesentity.setCreateDate(createDate);
+		if (salesdao.sales_update(carsalesentity)) {
+			transData.setExpMsg("success");
+		}
 		return transData;
 	}
 

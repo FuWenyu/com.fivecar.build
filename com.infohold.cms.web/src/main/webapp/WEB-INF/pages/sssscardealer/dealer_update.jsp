@@ -40,9 +40,9 @@
 					</div>
 					<%-- <input id="VERSION_FOR" type="hidden" class="" name="VERSION_FOR"   value="${dealer.version_flag}" />	
 					<input id="version_ol" type="hidden" class="" name="version_ol"   value="${dealer.version_online}" />	 --%>
-					<input id="dealer_id" type="hidden" class="" name="dealer_id" id="dealer_id"   value="${dealer.id}" />
-					<input id="version_id" type="hidden" class="" name="carbrand1" id="carbrand1"   value="${dealer.carbrandid}-${dealer.carbrand}" />
-					<input id="resource_id" type="hidden" class="" name="resource" id="resource"   value="${list.id}-${list.title}-${list.resourceName}" />
+					<input id="dealer_id" type="hidden" class="" name="dealer_id" value="${dealer.id}" />
+					<input id="version_id" type="hidden" class="" name="carbrand1" value="${dealer.carbrandid}-${dealer.carbrand}" />
+					<input id="resource_id" type="hidden" class="" name="resource" value="${list.id}-${list.title}-${list.resourceName}" />
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
 							经营品牌</label>

@@ -117,10 +117,20 @@
 		if (!checkData('carbrand', '品牌', 'input')) {
 			return;
 		}
+		
 		if (!checkData('vehicleName', '车辆名称', 'input')) {
 			return;
 		}
+		if (!checkData('vehicleName', '车辆名称', 'illegal')) {
+			return;
+		}
+		if (!limitCheck('vehicleName', '车辆名称', 64)) {
+			return;
+		}
 		if (!checkData('price', '价格区间', 'input')) {
+			return;
+		}
+		if (!limitCheck('price', '车辆名称', 36)) {
 			return;
 		}
 		//附件格式控制，ID，白名单
