@@ -51,25 +51,25 @@ public class ParallelVehicleService implements IBusinessService {
 	@Override
 	public TransData execute(TransData transData) throws BusinessException {
 		String tradCode = transData.getTradeCode();
-		if (tradCode.equals("T23001")) {
+		if (tradCode.equals("T32001")) {
 			return this.findvehicleList(transData);
-		} else if (tradCode.equals("T23002")) {
+		} else if (tradCode.equals("T32002")) {
 			return this.querybrand(transData);
-		} else if (tradCode.equals("T23003")) {
+		} else if (tradCode.equals("T32003")) {
 			return this.savevehicle(transData);
-		} else if (tradCode.equals("T23004")) {
+		} else if (tradCode.equals("T32004")) {
 			return this.deletevehicle(transData);
-		} else if (tradCode.equals("T23005")) {
+		} else if (tradCode.equals("T32005")) {
 			return this.vehicleEdit(transData);
-		} else if (tradCode.equals("T23006")) {
+		} else if (tradCode.equals("T32006")) {
 			return this.updatePictureEntity(transData);
-		} else if (tradCode.equals("T23007")) {
+		} else if (tradCode.equals("T32007")) {
 			return this.vehicleQuery(transData);
-		}else if (tradCode.equals("T23009")) {
+		}else if (tradCode.equals("T32009")) {
 			return this.queryprice(transData);
-		}else if (tradCode.equals("T23010")) {
+		}else if (tradCode.equals("T32010")) {
 			return this.queryversion(transData);
-		}else if (tradCode.equals("T23011")) {
+		}else if (tradCode.equals("T32011")) {
 			return this.querydealer(transData);
 		}
 		return transData;
@@ -152,6 +152,7 @@ public class ParallelVehicleService implements IBusinessService {
 		UserSession session = transData.getUserSession();
 		String vehicleName = (String) map.get("vehicleName");
 		String carbrandall = (String) map.get("carbrand");
+		String dealer = (String) map.get("dealer");
 		String price = (String) map.get("price");
 		
 		String pricearea = (String) map.get("pricearea");
@@ -171,7 +172,20 @@ public class ParallelVehicleService implements IBusinessService {
 		String[] strarray = carbrandall.split("-");
 		String carbrandid = strarray[0];
 		String carbrandname = strarray[1];
+		
+		String[] strarray1 = pricearea.split("-");
+		String pricekey = strarray1[0];
+		String pricetagevalue = strarray1[1];
+		
+		String[] strarray2 = vehicleversion.split("-");
+		String vehicleversionkey = strarray2[0];
+		String vehicleversionvalue = strarray2[1];
+		
+		String[] strarray3 = dealer.split("-");
+		String dealerid = strarray3[0];
+		String dealerName = strarray3[1];
 
+		
 		StringBuffer urlreal = new StringBuffer("http://");
 		urlreal.append(sysConfigUtil.getCfgInfo("service_ip"));
 		urlreal.append("/");
@@ -193,9 +207,13 @@ public class ParallelVehicleService implements IBusinessService {
 		parallelvehicleentity.setVehicleName(vehicleName);
 		parallelvehicleentity.setPrice(price);
 		
-		parallelvehicleentity.setPricearea(pricearea);
+		parallelvehicleentity.setPricekey(pricekey);
+		parallelvehicleentity.setPricetagevalue(pricetagevalue);
 		parallelvehicleentity.setVehicleinfo(vehicleinfo);
-		parallelvehicleentity.setVehicleversion(vehicleversion);
+		parallelvehicleentity.setVehicleversionkey(vehicleversionkey);
+		parallelvehicleentity.setVehicleversionvalue(vehicleversionvalue);
+		parallelvehicleentity.setDealerid(dealerid);
+		parallelvehicleentity.setDealerName(dealerName);
 		parallelvehicleentity.setWhereis(whereis);
 		parallelvehicleentity.setSalesarea(salesarea);
 		parallelvehicleentity.setColor(color);
@@ -259,7 +277,9 @@ public class ParallelVehicleService implements IBusinessService {
 		String id = (String) map.get("vehicle_id");
 		String vehicleName = (String) map.get("vehicleName");
 		String carbrandall = (String) map.get("carbrand");
+		String dealer = (String) map.get("dealer");
 		String price = (String) map.get("price");
+		
 		String pricearea = (String) map.get("pricearea");
 		String vehicleinfo = (String) map.get("vehicleinfo");
 		String vehicleversion = (String) map.get("vehicleversion");
@@ -268,6 +288,7 @@ public class ParallelVehicleService implements IBusinessService {
 		String color = (String) map.get("color");
 		String epstandard = (String) map.get("epstandard");
 		String wherelook = (String) map.get("wherelook");
+		
 		String description = (String) map.get("description");
 		String imageName = (String) map.get("imageName");
 		String createName = session.getUserName();
@@ -276,6 +297,18 @@ public class ParallelVehicleService implements IBusinessService {
 		String[] strarray = carbrandall.split("-");
 		String carbrandid = strarray[0];
 		String carbrandname = strarray[1];
+		
+		String[] strarray1 = pricearea.split("-");
+		String pricekey = strarray1[0];
+		String pricetagevalue = strarray1[1];
+		
+		String[] strarray2 = vehicleversion.split("-");
+		String vehicleversionkey = strarray2[0];
+		String vehicleversionvalue = strarray2[1];
+		
+		String[] strarray3 = dealer.split("-");
+		String dealerid = strarray3[0];
+		String dealerName = strarray3[1];
 
 		StringBuffer urlreal = new StringBuffer("http://");
 		urlreal.append(sysConfigUtil.getCfgInfo("service_ip"));
@@ -298,14 +331,20 @@ public class ParallelVehicleService implements IBusinessService {
 		parallelvehicleentity.setCarbrandid(carbrandid);
 		parallelvehicleentity.setVehicleName(vehicleName);
 		parallelvehicleentity.setPrice(price);
-		parallelvehicleentity.setPricearea(pricearea);
+		
+		parallelvehicleentity.setPricekey(pricekey);
+		parallelvehicleentity.setPricetagevalue(pricetagevalue);
 		parallelvehicleentity.setVehicleinfo(vehicleinfo);
-		parallelvehicleentity.setVehicleversion(vehicleversion);
+		parallelvehicleentity.setVehicleversionkey(vehicleversionkey);
+		parallelvehicleentity.setVehicleversionvalue(vehicleversionvalue);
+		parallelvehicleentity.setDealerid(dealerid);
+		parallelvehicleentity.setDealerName(dealerName);
 		parallelvehicleentity.setWhereis(whereis);
 		parallelvehicleentity.setSalesarea(salesarea);
 		parallelvehicleentity.setColor(color);
 		parallelvehicleentity.setEpstandard(epstandard);
 		parallelvehicleentity.setWherelook(wherelook);
+		
 		parallelvehicleentity.setImageName(imageName);
 		parallelvehicleentity.setUrl(url.toString());
 		parallelvehicleentity.setUrlreal(urlreal.toString());

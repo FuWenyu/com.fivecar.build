@@ -15,7 +15,7 @@
 			<!-- PAGE CONTENT BEGINS -->
 				<form class="form-horizontal" id="sub_form" action="<%=path%>/mvc/pavehicle_save.do"
 					method="post">
-					<h3 class="header smaller lighter grey">4s店车辆信息新增</h3>
+					<h3 class="header smaller lighter grey">经销商车辆信息新增</h3>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id"> </label>
 					</div>
@@ -56,7 +56,7 @@
 						<div class="col-sm-9">
 							<select class="input-medium"  id="pricearea" name="pricearea">
 							<c:forEach items="${priceList}" var="list" varStatus="status">
-	                        <option value="${list.pricekey}">${list.pricevalue}</option>
+	                        <option value="${list.pricekey}-${list.pricetagevalue}">${list.pricetagevalue}</option>
 	               		    </c:forEach>
                		    </select>
 						</div>
@@ -86,7 +86,7 @@
 						<div class="col-sm-9">
 							<select class="input-medium"  id="vehicleversion" name="vehicleversion">
 							<c:forEach items="${vehicleversionList}" var="list" varStatus="status">
-	                        <option value="${list.versionkey}">${list.versionvalue}</option>
+	                        <option value="${list.versionkey}-${list.versionvalue}">${list.versionvalue}</option>
 	               		    </c:forEach>
                		    </select>
 						</div>
@@ -102,9 +102,9 @@
 					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
-							销售城市</label>
+							销售范围</label>
 						<div class="col-sm-9">
-							<input type="text" id="salesarea" name="salesarea" placeholder="请输入销售城市！ "
+							<input type="text" id="salesarea" name="salesarea" placeholder="请输入销售范围！ "
 								class="col-xs-10 col-sm-5"
 								value="" /> <span style="color: red"></span>
 						</div>
@@ -113,7 +113,7 @@
 						<label class="col-sm-3 control-label no-padding-right" for="id">
 							车辆颜色</label>
 						<div class="col-sm-9">
-							<input type="text" id="color" name="color" placeholder="请输入车辆颜色<！ "
+							<input type="text" id="color" name="color" placeholder="请输入车辆颜色！ "
 								class="col-xs-10 col-sm-5"
 								value="" /> <span style="color: red"></span>
 						</div>
@@ -134,6 +134,13 @@
 							<input type="text" id="wherelook" name="wherelook" placeholder="请输入看车地点！ "
 								class="col-xs-10 col-sm-5"
 								value="" /> <span style="color: red"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="name">
+							车辆详细信息 </label>
+						<div class="col-sm-9">
+							<textarea rows="6" cols="72" id="description" name="description"> </textarea>
 						</div>
 					</div>
 					<div class="form-group">
@@ -202,7 +209,87 @@
 		if (!checkData('carbrand', '品牌', 'input')) {
 			return;
 		}
-		
+		if (!checkData('dealer', '经销商', 'input')) {
+			return;
+		}
+		if (!checkData('pricearea', '价格区间', 'input')) {
+			return;
+		}
+		if (!checkData('price', '价格', 'input')) {
+			return;
+		}
+		if (!checkData('price', '价格', 'illegal')) {
+			return;
+		}
+		if (!limitCheck('price', '价格', 32)) {
+			return;
+		}
+		if (!checkData('vehicleinfo', '车辆信息', 'input')) {
+			return;
+		}
+		if (!checkData('vehicleinfo', '车辆信息', 'illegal')) {
+			return;
+		}
+		if (!limitCheck('vehicleinfo', '车辆信息', 64)) {
+			return;
+		}
+		if (!checkData('vehicleversion', '车辆版本', 'input')) {
+			return;
+		}
+		if (!checkData('whereis', '所在城市', 'input')) {
+			return;
+		}
+		if (!checkData('whereis', '所在城市', 'illegal')) {
+			return;
+		}
+		if (!limitCheck('whereis', '所在城市', 64)) {
+			return;
+		}
+		if (!checkData('salesarea', '销售范围', 'input')) {
+			return;
+		}
+		if (!checkData('salesarea', '销售范围', 'illegal')) {
+			return;
+		}
+		if (!limitCheck('salesarea', '销售范围', 64)) {
+			return;
+		}
+		if (!checkData('color', '颜色', 'input')) {
+			return;
+		}
+		if (!checkData('color', '颜色', 'illegal')) {
+			return;
+		}
+		if (!limitCheck('color', '颜色', 64)) {
+			return;
+		}
+		if (!checkData('epstandard', '环保标准', 'input')) {
+			return;
+		}
+		if (!checkData('epstandard', '环保标准', 'illegal')) {
+			return;
+		}
+		if (!limitCheck('epstandard', '环保标准', 64)) {
+			return;
+		}
+		if (!checkData('wherelook', '看车地点', 'input')) {
+			return;
+		}
+		if (!checkData('wherelook', '看车地点', 'illegal')) {
+			return;
+		}
+		if (!limitCheck('wherelook', '看车地点', 64)) {
+			return;
+		}
+		if (!checkData('description', '车辆详细信息', 'input')) {
+			return;
+		}
+		if (!checkData('description', '车辆详细信息', 'illegal')) {
+			return;
+		}
+		if (!limitCheck('description', '车辆详细信息', 255)) {
+			return;
+		}
 		if (!checkData('vehicleName', '车辆名称', 'input')) {
 			return;
 		}
@@ -270,7 +357,17 @@
 		param["carbrand"]=$("#carbrand").val();
 		param["carbrandid"]=$("#carbrandid").val();
 		param["vehicleName"]=$("#vehicleName").val();
+		param["pricearea"]=$("#pricearea").val();
 		param["price"]=$("#price").val();
+		param["dealer"]=$("#dealer").val();
+		param["vehicleinfo"]=$("#vehicleinfo").val();
+		param["vehicleversion"]=$("#vehicleversion").val();
+		param["whereis"]=$("#whereis").val();
+		param["salesarea"]=$("#salesarea").val();
+		param["color"]=$("#color").val();
+		param["epstandard"]=$("#epstandard").val();
+		param["wherelook"]=$("#wherelook").val();
+		param["description"]=$("#description").val();
 		param["imageHref"]=filePath;
 		param["imageHrefReal"]=filePathreal;
 		$.ajax({

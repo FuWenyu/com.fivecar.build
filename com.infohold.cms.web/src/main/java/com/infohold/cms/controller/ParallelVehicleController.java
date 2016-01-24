@@ -14,7 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.infohold.cms.basic.common.TransData;
 import com.infohold.cms.basic.controller.CentreController;
-import com.infohold.cms.entity.CarVehicleEntity;;
+import com.infohold.cms.entity.CarVehicleEntity;
+import com.infohold.cms.entity.ParallelVehicleEntity;;
 
 /**
  * 车辆信息管理模块
@@ -65,17 +66,17 @@ public class ParallelVehicleController extends CentreController{
 		List<Map<String, Object>> brandList = (List<Map<String, Object>>)transData.getObj();
 		mav.addObject("brandList", brandList);
 		transData.setServiceName("pavehicleService");
-		transData.setTradeCode("T32008");
+		transData.setTradeCode("T32009");
 		transData=super.doService(httpServletRequest, transData);
 		List<Map<String, Object>> priceList = (List<Map<String, Object>>)transData.getObj();
 		mav.addObject("priceList", priceList);
 		transData.setServiceName("pavehicleService");
-		transData.setTradeCode("T32009");
+		transData.setTradeCode("T32010");
 		transData=super.doService(httpServletRequest, transData);
 		List<Map<String, Object>> vehicleversionList = (List<Map<String, Object>>)transData.getObj();
 		mav.addObject("vehicleversionList", vehicleversionList);
 		transData.setServiceName("pavehicleService");
-		transData.setTradeCode("T32010");
+		transData.setTradeCode("T32011");
 		transData=super.doService(httpServletRequest, transData);
 		List<Map<String, Object>> dealerList = (List<Map<String, Object>>)transData.getObj();
 		mav.addObject("dealerList", dealerList);
@@ -130,13 +131,28 @@ public class ParallelVehicleController extends CentreController{
 		transData.setTradeCode("T32005");
 		transData=super.doService(httpServletRequest, transData);
 		ModelAndView mav = new ModelAndView();
-		CarVehicleEntity vehicle = (CarVehicleEntity) transData.getObj();
+		ParallelVehicleEntity vehicle = (ParallelVehicleEntity) transData.getObj();
 		mav.addObject("vehicle",vehicle);
 		transData.setServiceName("pavehicleService");
 		transData.setTradeCode("T32002");
 		transData=super.doService(httpServletRequest, transData);
 		List<Map<String, Object>> brandList = (List<Map<String, Object>>)transData.getObj();
 		mav.addObject("brandList", brandList);
+		transData.setServiceName("pavehicleService");
+		transData.setTradeCode("T32009");
+		transData=super.doService(httpServletRequest, transData);
+		List<Map<String, Object>> priceList = (List<Map<String, Object>>)transData.getObj();
+		mav.addObject("priceList", priceList);
+		transData.setServiceName("pavehicleService");
+		transData.setTradeCode("T32010");
+		transData=super.doService(httpServletRequest, transData);
+		List<Map<String, Object>> vehicleversionList = (List<Map<String, Object>>)transData.getObj();
+		mav.addObject("vehicleversionList", vehicleversionList);
+		transData.setServiceName("pavehicleService");
+		transData.setTradeCode("T32011");
+		transData=super.doService(httpServletRequest, transData);
+		List<Map<String, Object>> dealerList = (List<Map<String, Object>>)transData.getObj();
+		mav.addObject("dealerList", dealerList);
 		mav.setViewName("/parallelcarvehicle/vehicle_update");
 		return mav;
 	}

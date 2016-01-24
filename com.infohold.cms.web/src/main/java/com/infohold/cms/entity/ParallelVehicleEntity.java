@@ -33,8 +33,10 @@ public class ParallelVehicleEntity extends BaseEntity {
 	private java.lang.String carbrand;
 	/**价格区间*/
 	private java.lang.String price;
-	/**价格区间*/
-	private java.lang.String pricearea;
+	/**价格key*/
+	private java.lang.String pricekey;
+	/**价格*/
+	private java.lang.String pricetagevalue;
 	/**logo url*/
 	private java.lang.String url;
 	/**logo原地址*/
@@ -42,7 +44,9 @@ public class ParallelVehicleEntity extends BaseEntity {
 	/**车辆信息*/
 	private java.lang.String vehicleinfo;
 	/**车辆版本*/
-	private java.lang.String vehicleversion;
+	private java.lang.String vehicleversionkey;
+	/**车辆版本*/
+	private java.lang.String vehicleversionvalue;
 	/**所在位置*/
 	private java.lang.String whereis;
 	/**销售范围*/
@@ -150,17 +154,56 @@ public class ParallelVehicleEntity extends BaseEntity {
 	}
 	
 	/**
-	 * @return the pricearea
+	 * @return the pricekey
 	 */
-	@Column(name ="pricearea",nullable=false,columnDefinition="varchar(64)default ''")
-	public java.lang.String getPricearea() {
-		return pricearea;
+	@Column(name ="pricekey",nullable=false,columnDefinition="varchar(32)default ''")
+	public java.lang.String getPricekey() {
+		return pricekey;
 	}
 	/**
-	 * @param pricearea the pricearea to set
+	 * @param pricekey the pricekey to set
 	 */
-	public void setPricearea(java.lang.String pricearea) {
-		this.pricearea = pricearea;
+	public void setPricekey(java.lang.String pricekey) {
+		this.pricekey = pricekey;
+	}
+	/**
+	 * @return the pricetagevalue
+	 */
+	@Column(name ="pricetagevalue",nullable=false,columnDefinition="varchar(64)default ''")
+	public java.lang.String getPricetagevalue() {
+		return pricetagevalue;
+	}
+	/**
+	 * @param pricetagevalue the pricetagevalue to set
+	 */
+	public void setPricetagevalue(java.lang.String pricetagevalue) {
+		this.pricetagevalue = pricetagevalue;
+	}
+	/**
+	 * @return the vehicleversionkey
+	 */
+	@Column(name ="vehicleversionkey",nullable=false,columnDefinition="varchar(32)default ''")
+	public java.lang.String getVehicleversionkey() {
+		return vehicleversionkey;
+	}
+	/**
+	 * @param vehicleversionkey the vehicleversionkey to set
+	 */
+	public void setVehicleversionkey(java.lang.String vehicleversionkey) {
+		this.vehicleversionkey = vehicleversionkey;
+	}
+	/**
+	 * @return the vehicleversionvalue
+	 */
+	@Column(name ="vehicleversionvalue",nullable=false,columnDefinition="varchar(64)default ''")
+	public java.lang.String getVehicleversionvalue() {
+		return vehicleversionvalue;
+	}
+	/**
+	 * @param vehicleversionvalue the vehicleversionvalue to set
+	 */
+	public void setVehicleversionvalue(java.lang.String vehicleversionvalue) {
+		this.vehicleversionvalue = vehicleversionvalue;
 	}
 	/**
 	 * @return the url
@@ -215,19 +258,6 @@ public class ParallelVehicleEntity extends BaseEntity {
 	 */
 	public void setVehicleinfo(java.lang.String vehicleinfo) {
 		this.vehicleinfo = vehicleinfo;
-	}
-	/**
-	 * @return the vehicleversion
-	 */
-	@Column(name ="vehicleversion",columnDefinition="varchar(64)default ''")
-	public java.lang.String getVehicleversion() {
-		return vehicleversion;
-	}
-	/**
-	 * @param vehicleversion the vehicleversion to set
-	 */
-	public void setVehicleversion(java.lang.String vehicleversion) {
-		this.vehicleversion = vehicleversion;
 	}
 	/**
 	 * @return the whereis
