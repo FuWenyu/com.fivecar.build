@@ -27,6 +27,8 @@ public class CarDealerEntity extends BaseEntity {
 	private java.lang.String dealerName;
 	/**联系电话*/
 	private java.lang.String telephone;
+	/**图文资源id*/
+	private java.lang.String resourceid;
 	/**经营品牌*/
 	private java.lang.String carbrandid;
 	/**经营品牌*/
@@ -220,6 +222,19 @@ public class CarDealerEntity extends BaseEntity {
 	 */
 	public void setPrivilegestile(java.lang.String privilegestile) {
 		this.privilegestile = privilegestile;
+	}
+	/**
+	 * @return the resourceid
+	 */
+	@Column(name ="resourceid",nullable=false,columnDefinition="varchar(64)default ''")
+	public java.lang.String getResourceid() {
+		return resourceid;
+	}
+	/**
+	 * @param resourceid the resourceid to set
+	 */
+	public void setResourceid(java.lang.String resourceid) {
+		this.resourceid = resourceid;
 	}
 
 }

@@ -55,7 +55,9 @@ public class DealerService implements IBusinessService {
 			return this.updatePictureEntity(transData);
 		} else if (tradCode.equals("T24007")) {
 			return this.dealerQuery(transData);
-		}
+		} else if (tradCode.equals("T24008")) {
+			return this.getResources(transData);
+	}
 		return transData;
 	}
 
@@ -115,6 +117,7 @@ public class DealerService implements IBusinessService {
 		anchor1.append(resourceId);
 		
 		CarDealerEntity CarDealerEntity = new CarDealerEntity();
+		CarDealerEntity.setResourceid(resourceId);
 		CarDealerEntity.setPrivileges(resourceName);
 		CarDealerEntity.setPrivilegestile(resourceTitle);
 		CarDealerEntity.setPrivilegesurl(anchor1.toString());
@@ -200,6 +203,7 @@ public class DealerService implements IBusinessService {
 		
 		CarDealerEntity CarDealerEntity = new CarDealerEntity();
 		CarDealerEntity.setPrivileges(resourceName);
+		CarDealerEntity.setResourceid(resourceId);
 		CarDealerEntity.setPrivilegestile(resourceTitle);
 		CarDealerEntity.setPrivilegesurl(anchor1.toString());
 		CarDealerEntity.setId(id);
@@ -242,5 +246,18 @@ public class DealerService implements IBusinessService {
 		}
 		return transData;
 	}
-
+	/**
+	 * 首页图片新增图文资源查询
+	 * 
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData getResources(TransData transData)
+			throws BusinessException {
+		List<Map<String, Object>> orgList = dealerdao.getResources();
+		transData.setObj(orgList);
+		transData.setExpMsg("success");
+		return transData;
+	}
 }

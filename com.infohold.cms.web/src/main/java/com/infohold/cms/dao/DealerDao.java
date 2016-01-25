@@ -131,6 +131,7 @@ public class DealerDao extends BaseDao<BaseEntity> {
 		sql.append("dle.dealerName,");
 		sql.append("dle.carbrand,");
 		sql.append("dle.privileges,");
+		sql.append("dle.resourceid,");
 		sql.append("dle.privilegesurl,");
 		sql.append("dle.privilegestile,");
 		sql.append("dle.telephone,");
@@ -146,5 +147,17 @@ public class DealerDao extends BaseDao<BaseEntity> {
 		sql.append("'");
 		sql.append(" order by dle.createDate desc");
 		return super.excutePageQuery(sql.toString(),page);
+	}
+	/**
+	 * 图文信息查询
+	 * @return
+	 */
+	public List<Map<String, Object>> getResources() {
+		StringBuffer sql = new StringBuffer();
+		sql.append("select pm.id,");
+		sql.append("pm.title,");
+		sql.append("pm.resourceName ");
+		sql.append("from fc_app_resources pm order by pm.id desc ");
+		return super.queryForList(sql.toString());
 	}
 }

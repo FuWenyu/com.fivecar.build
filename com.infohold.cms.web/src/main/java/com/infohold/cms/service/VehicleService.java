@@ -272,6 +272,7 @@ public class VehicleService implements IBusinessService {
 		return entity;
 	}
 	public List<Map<String, Object>> querydealerListPage(String id,Page page) throws BusinessException {
+		page.setPageSize(999);
 		List<Map<String, Object>> orglist = dealerdao.querydealerListPage(id,page);
 		return orglist;
 	}

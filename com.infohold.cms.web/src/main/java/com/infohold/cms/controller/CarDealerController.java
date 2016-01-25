@@ -63,8 +63,7 @@ public class CarDealerController extends CentreController{
 		transData.setTradeCode("T24002");
 		transData=super.doService(httpServletRequest, transData);
 		List<Map<String, Object>> brandList = (List<Map<String, Object>>)transData.getObj();
-		transData.setServiceName("pictureService");
-		transData.setTradeCode("T20010");
+		transData.setTradeCode("T24008");
 		transData=super.doService(httpServletRequest, transData);
 		mav.addObject("resourcesList",transData.getObj());
 		mav.addObject("brandList", brandList);
