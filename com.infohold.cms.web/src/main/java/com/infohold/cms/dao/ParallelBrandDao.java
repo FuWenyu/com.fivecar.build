@@ -13,7 +13,7 @@ import com.infohold.cms.basic.entity.BaseEntity;
 import com.infohold.cms.entity.ParallelBrandEntity;
 
 /**
- * 4s店品牌Dao
+ * 经销商品牌Dao
  * @author wag
  *
  */
@@ -22,7 +22,7 @@ import com.infohold.cms.entity.ParallelBrandEntity;
 public class ParallelBrandDao extends BaseDao<BaseEntity> {
 	
 	/**
-	 * 4s店汽车品牌列表查询
+	 * 经销商汽车品牌列表查询
 	 * @param map
 	 * @param page
 	 * @return
@@ -43,7 +43,7 @@ public class ParallelBrandDao extends BaseDao<BaseEntity> {
 		return super.excutePageQuery(sql.toString(),page);
 	}
 	/**
-	 * 4s店汽车品牌列表查询
+	 * 经销商汽车品牌列表查询
 	 * @param map
 	 * @param page
 	 * @return
@@ -61,7 +61,7 @@ public class ParallelBrandDao extends BaseDao<BaseEntity> {
 		return super.excutePageQuery(sql.toString(),page);
 	}
 	/**
-	 * 保存4s店汽车品牌
+	 * 保存经销商汽车品牌
 	 * @param VersionEntity
 	 * @return boolean
 	 */
@@ -71,7 +71,7 @@ public class ParallelBrandDao extends BaseDao<BaseEntity> {
 	}
 	
 	/**
-	 * 4s店汽车品牌删除
+	 * 经销商汽车品牌删除
 	 * @param id
 	 * @return
 	 */
@@ -81,7 +81,7 @@ public class ParallelBrandDao extends BaseDao<BaseEntity> {
 		return true;
 	}
 	/**
-	 * 通过ID查询4s店汽车品牌信息
+	 * 通过ID查询经销商汽车品牌信息
 	 * @return
 	 */
 
@@ -92,7 +92,7 @@ public class ParallelBrandDao extends BaseDao<BaseEntity> {
 	}
 	
 	/**
-	 * 4s店汽车品牌更新
+	 * 经销商汽车品牌更新
 	 * @param id，用户主键
 	 * @return
 	 */
@@ -100,5 +100,34 @@ public class ParallelBrandDao extends BaseDao<BaseEntity> {
 		super.update(entity);
 		return true;
 	}
-	
+	/**
+	 * 经销商汽车价格区间列表查询
+	 * @param map
+	 * @param page
+	 * @return
+	 */
+	public List<Map<String, Object>> queryPriceList(Page page){
+		StringBuffer sql = new StringBuffer();
+		sql.append("select prc.id,");
+		sql.append("prc.pricekey,");
+		sql.append("prc.pricetagevalue ");
+		sql.append("from fc_parallel_pricelist prc ");
+		sql.append(" order by prc.id");
+		return super.excutePageQuery(sql.toString(),page);
+	}
+	/**
+	 * 经销商车辆版本列表查询
+	 * @param map
+	 * @param page
+	 * @return
+	 */
+	public List<Map<String, Object>> queryVersionList(Page page){
+		StringBuffer sql = new StringBuffer();
+		sql.append("select vsn.id,");
+		sql.append("vsn.versionkey,");
+		sql.append("vsn.versionvalue ");
+		sql.append("from fc_parallel_versionlist vsn ");
+		sql.append(" order by vsn.id");
+		return super.excutePageQuery(sql.toString(),page);
+	}
 }

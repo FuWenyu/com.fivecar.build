@@ -52,6 +52,10 @@ public class ParallelBrandService implements IBusinessService {
 			return this.updatePictureEntity(transData);
 		} else if (tradCode.equals("T31007")) {
 			return this.brandQuery(transData);
+		}	else if (tradCode.equals("T31008")) {
+			return this.priceQuery(transData);
+		}	else if (tradCode.equals("T31009")) {
+			return this.versionQuery(transData);
 		}	
 		return transData;
 	}
@@ -214,6 +218,56 @@ public class ParallelBrandService implements IBusinessService {
 				transData.setExpMsg("fail");
 			}else {
 				transData.setObj(brandlist);
+				transData.setExpCode("1");
+				transData.setExpMsg("success");
+			}
+		}
+		return transData;
+	}
+	/**
+	 * http请求查询价格区间列表
+	 * 
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData priceQuery(TransData transData)
+			throws BusinessException {
+		Map<String, Object> map = transData.getViewMap();
+		logger.info("priceQuery-request:"+map);
+		String fivecar = (String) map.get("fivecar");
+		if (fivecar.equals("fivecar")) {
+			List<Map<String, Object>> pricelist=branddao.queryPriceList(transData.getPageInfo());
+			if (pricelist==null) {
+				transData.setExpCode("-1");
+				transData.setExpMsg("fail");
+			}else {
+				transData.setObj(pricelist);
+				transData.setExpCode("1");
+				transData.setExpMsg("success");
+			}
+		}
+		return transData;
+	}
+	/**
+	 * http请求查询车辆版本列表
+	 * 
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData versionQuery(TransData transData)
+			throws BusinessException {
+		Map<String, Object> map = transData.getViewMap();
+		logger.info("versionQuery-request:"+map);
+		String fivecar = (String) map.get("fivecar");
+		if (fivecar.equals("fivecar")) {
+			List<Map<String, Object>> versionlist=branddao.queryVersionList(transData.getPageInfo());
+			if (versionlist==null) {
+				transData.setExpCode("-1");
+				transData.setExpMsg("fail");
+			}else {
+				transData.setObj(versionlist);
 				transData.setExpCode("1");
 				transData.setExpMsg("success");
 			}

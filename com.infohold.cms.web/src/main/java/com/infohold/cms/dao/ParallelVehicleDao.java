@@ -108,8 +108,10 @@ public class ParallelVehicleDao extends BaseDao<BaseEntity> {
 	public List<Map<String, Object>> queryvehicleList1(String cardbrand,Page page){
 		StringBuffer sql = new StringBuffer();
 		sql.append("select vcl.id,");
-		sql.append("vcl.carbrand,");
+		sql.append("vcl.dealerName,");
 		sql.append("vcl.vehicleName,");
+		sql.append("vcl.description,");
+		sql.append("vcl.price,");
 		sql.append("vcl.url,");
 		sql.append("vcl.urlreal ");
 		sql.append("from fc_parallel_vehicle vcl ");
@@ -117,6 +119,68 @@ public class ParallelVehicleDao extends BaseDao<BaseEntity> {
 		sql.append("'");
 		sql.append(cardbrand);
 		sql.append("'");
+		return super.excutePageQuery(sql.toString(),page);
+	}
+	/**
+	 * 4s店车辆信息列表查询
+	 * @param map
+	 * @param page
+	 * @return
+	 */
+	public List<Map<String, Object>> queryvehicleList2(String pricekey,Page page){
+		StringBuffer sql = new StringBuffer();
+		sql.append("select vcl.id,");
+		sql.append("vcl.dealerName,");
+		sql.append("vcl.vehicleName,");
+		sql.append("vcl.description,");
+		sql.append("vcl.price,");
+		sql.append("vcl.url,");
+		sql.append("vcl.urlreal ");
+		sql.append("from fc_parallel_vehicle vcl ");
+		sql.append(" where vcl.pricekey=");
+		sql.append("'");
+		sql.append(pricekey);
+		sql.append("'");
+		return super.excutePageQuery(sql.toString(),page);
+	}
+	/**
+	 * 4s店车辆信息列表查询
+	 * @param map
+	 * @param page
+	 * @return
+	 */
+	public List<Map<String, Object>> queryvehicleList3(String versionkey,Page page){
+		StringBuffer sql = new StringBuffer();
+		sql.append("select vcl.id,");
+		sql.append("vcl.dealerName,");
+		sql.append("vcl.vehicleName,");
+		sql.append("vcl.description,");
+		sql.append("vcl.price,");
+		sql.append("vcl.url,");
+		sql.append("vcl.urlreal ");
+		sql.append("from fc_parallel_vehicle vcl ");
+		sql.append(" where vcl.vehicleversionkey=");
+		sql.append("'");
+		sql.append(versionkey);
+		sql.append("'");
+		return super.excutePageQuery(sql.toString(),page);
+	}
+	/**
+	 * 4s店车辆信息列表查询
+	 * @param map
+	 * @param page
+	 * @return
+	 */
+	public List<Map<String, Object>> queryvehicleList4(Page page){
+		StringBuffer sql = new StringBuffer();
+		sql.append("select vcl.id,");
+		sql.append("vcl.dealerName,");
+		sql.append("vcl.vehicleName,");
+		sql.append("vcl.description,");
+		sql.append("vcl.price,");
+		sql.append("vcl.url,");
+		sql.append("vcl.urlreal ");
+		sql.append("from fc_parallel_vehicle vcl ");
 		return super.excutePageQuery(sql.toString(),page);
 	}
 	/**

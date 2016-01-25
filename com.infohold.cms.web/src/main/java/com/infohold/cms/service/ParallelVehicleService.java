@@ -45,7 +45,7 @@ public class ParallelVehicleService implements IBusinessService {
 	private SysConfigUtil sysConfigUtil;
 
 	private DateUtil dateutil = new DateUtil();
-	
+
 	private Logger logger = Logger.getLogger(ParallelVehicleService.class);
 
 	@Override
@@ -64,13 +64,19 @@ public class ParallelVehicleService implements IBusinessService {
 		} else if (tradCode.equals("T32006")) {
 			return this.updatePictureEntity(transData);
 		} else if (tradCode.equals("T32007")) {
-			return this.vehicleQuery(transData);
-		}else if (tradCode.equals("T32009")) {
+			return this.vehicleQueryBrand(transData);
+		} else if (tradCode.equals("T32009")) {
 			return this.queryprice(transData);
-		}else if (tradCode.equals("T32010")) {
+		} else if (tradCode.equals("T32010")) {
 			return this.queryversion(transData);
-		}else if (tradCode.equals("T32011")) {
+		} else if (tradCode.equals("T32011")) {
 			return this.querydealer(transData);
+		} else if (tradCode.equals("T32012")) {
+			return this.vehicleQueryPrice(transData);
+		} else if (tradCode.equals("T32013")) {
+			return this.vehicleQueryVersion(transData);
+		} else if (tradCode.equals("T32014")) {
+			return this.vehicleQuery(transData);
 		}
 		return transData;
 	}
@@ -82,10 +88,8 @@ public class ParallelVehicleService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData findvehicleList(TransData transData)
-			throws BusinessException {
-		List<Map<String, Object>> orgList = vehicledao
-				.queryvehicleList(transData.getPageInfo());
+	public TransData findvehicleList(TransData transData) throws BusinessException {
+		List<Map<String, Object>> orgList = vehicledao.queryvehicleList(transData.getPageInfo());
 		transData.setObj(orgList);
 		return transData;
 	}
@@ -104,6 +108,7 @@ public class ParallelVehicleService implements IBusinessService {
 		transData.setObj(orgList);
 		return transData;
 	}
+
 	/**
 	 * 价格区间列表
 	 * 
@@ -118,6 +123,7 @@ public class ParallelVehicleService implements IBusinessService {
 		transData.setObj(orgList);
 		return transData;
 	}
+
 	/**
 	 * 版本列表
 	 * 
@@ -132,6 +138,7 @@ public class ParallelVehicleService implements IBusinessService {
 		transData.setObj(orgList);
 		return transData;
 	}
+
 	/**
 	 * 版本列表
 	 * 
@@ -146,6 +153,7 @@ public class ParallelVehicleService implements IBusinessService {
 		transData.setObj(orgList);
 		return transData;
 	}
+
 	public TransData savevehicle(TransData transData) throws BusinessException {
 		// 保存数据库
 		Map<String, Object> map = transData.getViewMap();
@@ -154,7 +162,7 @@ public class ParallelVehicleService implements IBusinessService {
 		String carbrandall = (String) map.get("carbrand");
 		String dealer = (String) map.get("dealer");
 		String price = (String) map.get("price");
-		
+
 		String pricearea = (String) map.get("pricearea");
 		String vehicleinfo = (String) map.get("vehicleinfo");
 		String vehicleversion = (String) map.get("vehicleversion");
@@ -163,7 +171,7 @@ public class ParallelVehicleService implements IBusinessService {
 		String color = (String) map.get("color");
 		String epstandard = (String) map.get("epstandard");
 		String wherelook = (String) map.get("wherelook");
-		
+
 		String description = (String) map.get("description");
 		String imageName = (String) map.get("imageName");
 		String createName = session.getUserName();
@@ -172,20 +180,19 @@ public class ParallelVehicleService implements IBusinessService {
 		String[] strarray = carbrandall.split("-");
 		String carbrandid = strarray[0];
 		String carbrandname = strarray[1];
-		
+
 		String[] strarray1 = pricearea.split("-");
 		String pricekey = strarray1[0];
 		String pricetagevalue = strarray1[1];
-		
+
 		String[] strarray2 = vehicleversion.split("-");
 		String vehicleversionkey = strarray2[0];
 		String vehicleversionvalue = strarray2[1];
-		
+
 		String[] strarray3 = dealer.split("-");
 		String dealerid = strarray3[0];
 		String dealerName = strarray3[1];
 
-		
 		StringBuffer urlreal = new StringBuffer("http://");
 		urlreal.append(sysConfigUtil.getCfgInfo("service_ip"));
 		urlreal.append("/");
@@ -199,14 +206,14 @@ public class ParallelVehicleService implements IBusinessService {
 		url.append(sysConfigUtil.getCfgInfo("service_name"));
 		url.append("/upload/image/");
 		url.append(imageName);
-//		String anchor=sysConfigUtil.getCfgInfo("vehicle_request");
-		
+		// String anchor=sysConfigUtil.getCfgInfo("vehicle_request");
+
 		ParallelVehicleEntity parallelvehicleentity = new ParallelVehicleEntity();
 		parallelvehicleentity.setCarbrand(carbrandname);
 		parallelvehicleentity.setCarbrandid(carbrandid);
 		parallelvehicleentity.setVehicleName(vehicleName);
 		parallelvehicleentity.setPrice(price);
-		
+
 		parallelvehicleentity.setPricekey(pricekey);
 		parallelvehicleentity.setPricetagevalue(pricetagevalue);
 		parallelvehicleentity.setVehicleinfo(vehicleinfo);
@@ -219,12 +226,12 @@ public class ParallelVehicleService implements IBusinessService {
 		parallelvehicleentity.setColor(color);
 		parallelvehicleentity.setEpstandard(epstandard);
 		parallelvehicleentity.setWherelook(wherelook);
-		
+
 		parallelvehicleentity.setImageName(imageName);
 		parallelvehicleentity.setUrl(url.toString());
 		parallelvehicleentity.setUrlreal(urlreal.toString());
 		parallelvehicleentity.setDescription(description);
-//		carvehicleentity.setAnchor(anchor+carvehicleentity.getId());
+		// carvehicleentity.setAnchor(anchor+carvehicleentity.getId());
 		parallelvehicleentity.setCreateName(createName);
 		parallelvehicleentity.setCreateDate(createDate);
 		if (vehicledao.savevehicleEntity(parallelvehicleentity)) {
@@ -240,8 +247,7 @@ public class ParallelVehicleService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData deletevehicle(TransData transData)
-			throws BusinessException {
+	public TransData deletevehicle(TransData transData) throws BusinessException {
 		String id = (String) transData.getViewMap().get("id");
 		vehicledao.deletevehicleEntity(id);
 		transData.setObj(true);
@@ -270,8 +276,7 @@ public class ParallelVehicleService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData updatePictureEntity(TransData transData)
-			throws BusinessException {
+	public TransData updatePictureEntity(TransData transData) throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
 		UserSession session = transData.getUserSession();
 		String id = (String) map.get("vehicle_id");
@@ -279,7 +284,7 @@ public class ParallelVehicleService implements IBusinessService {
 		String carbrandall = (String) map.get("carbrand");
 		String dealer = (String) map.get("dealer");
 		String price = (String) map.get("price");
-		
+
 		String pricearea = (String) map.get("pricearea");
 		String vehicleinfo = (String) map.get("vehicleinfo");
 		String vehicleversion = (String) map.get("vehicleversion");
@@ -288,7 +293,7 @@ public class ParallelVehicleService implements IBusinessService {
 		String color = (String) map.get("color");
 		String epstandard = (String) map.get("epstandard");
 		String wherelook = (String) map.get("wherelook");
-		
+
 		String description = (String) map.get("description");
 		String imageName = (String) map.get("imageName");
 		String createName = session.getUserName();
@@ -297,15 +302,15 @@ public class ParallelVehicleService implements IBusinessService {
 		String[] strarray = carbrandall.split("-");
 		String carbrandid = strarray[0];
 		String carbrandname = strarray[1];
-		
+
 		String[] strarray1 = pricearea.split("-");
 		String pricekey = strarray1[0];
 		String pricetagevalue = strarray1[1];
-		
+
 		String[] strarray2 = vehicleversion.split("-");
 		String vehicleversionkey = strarray2[0];
 		String vehicleversionvalue = strarray2[1];
-		
+
 		String[] strarray3 = dealer.split("-");
 		String dealerid = strarray3[0];
 		String dealerName = strarray3[1];
@@ -323,15 +328,15 @@ public class ParallelVehicleService implements IBusinessService {
 		url.append(sysConfigUtil.getCfgInfo("service_name"));
 		url.append("/upload/image/");
 		url.append(imageName);
-//		String anchor=sysConfigUtil.getCfgInfo("vehicle_request");
-		
+		// String anchor=sysConfigUtil.getCfgInfo("vehicle_request");
+
 		ParallelVehicleEntity parallelvehicleentity = new ParallelVehicleEntity();
 		parallelvehicleentity.setId(id);
 		parallelvehicleentity.setCarbrand(carbrandname);
 		parallelvehicleentity.setCarbrandid(carbrandid);
 		parallelvehicleentity.setVehicleName(vehicleName);
 		parallelvehicleentity.setPrice(price);
-		
+
 		parallelvehicleentity.setPricekey(pricekey);
 		parallelvehicleentity.setPricetagevalue(pricetagevalue);
 		parallelvehicleentity.setVehicleinfo(vehicleinfo);
@@ -344,12 +349,12 @@ public class ParallelVehicleService implements IBusinessService {
 		parallelvehicleentity.setColor(color);
 		parallelvehicleentity.setEpstandard(epstandard);
 		parallelvehicleentity.setWherelook(wherelook);
-		
+
 		parallelvehicleentity.setImageName(imageName);
 		parallelvehicleentity.setUrl(url.toString());
 		parallelvehicleentity.setUrlreal(urlreal.toString());
 		parallelvehicleentity.setDescription(description);
-//		carvehicleentity.setAnchor(anchor+carvehicleentity.getId());
+		// carvehicleentity.setAnchor(anchor+carvehicleentity.getId());
 		parallelvehicleentity.setCreateName(createName);
 		parallelvehicleentity.setCreateDate(createDate);
 		if (vehicledao.vehicle_update(parallelvehicleentity)) {
@@ -365,12 +370,11 @@ public class ParallelVehicleService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData vehicleQuery(TransData transData) throws BusinessException {
+	public TransData vehicleQueryBrand(TransData transData) throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
-		logger.info("vehicleQuery-request:"+map);
+		logger.info("vehicleQuery-request:" + map);
 		String carbrand = (String) map.get("carbrand");
-		List<Map<String, Object>> vehiclelist = vehicledao.queryvehicleList1(
-				carbrand, transData.getPageInfo());
+		List<Map<String, Object>> vehiclelist = vehicledao.queryvehicleList1(carbrand, transData.getPageInfo());
 		if (vehiclelist == null) {
 			transData.setExpCode("-1");
 			transData.setExpMsg("fail");
@@ -381,8 +385,77 @@ public class ParallelVehicleService implements IBusinessService {
 		}
 		return transData;
 	}
-	
-	
+
+	/**
+	 * http请求根据价格区间查询车辆列表
+	 * 
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData vehicleQueryPrice(TransData transData) throws BusinessException {
+		Map<String, Object> map = transData.getViewMap();
+		logger.info("vehicleQuery-request:" + map);
+		String pricekey = (String) map.get("pricekey");
+		List<Map<String, Object>> vehiclelist = vehicledao.queryvehicleList2(pricekey, transData.getPageInfo());
+		if (vehiclelist == null) {
+			transData.setExpCode("-1");
+			transData.setExpMsg("fail");
+		} else {
+			transData.setObj(vehiclelist);
+			transData.setExpCode("1");
+			transData.setExpMsg("success");
+		}
+		return transData;
+	}
+
+	/**
+	 * http请求根据车辆版本查询车辆列表
+	 * 
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData vehicleQueryVersion(TransData transData) throws BusinessException {
+		Map<String, Object> map = transData.getViewMap();
+		logger.info("vehicleQuery-request:" + map);
+		String versionkey = (String) map.get("versionkey");
+		List<Map<String, Object>> vehiclelist = vehicledao.queryvehicleList3(versionkey, transData.getPageInfo());
+		if (vehiclelist == null) {
+			transData.setExpCode("-1");
+			transData.setExpMsg("fail");
+		} else {
+			transData.setObj(vehiclelist);
+			transData.setExpCode("1");
+			transData.setExpMsg("success");
+		}
+		return transData;
+	}
+	/**
+	 * http请求根据车辆版本查询车辆列表
+	 * 
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData vehicleQuery(TransData transData) throws BusinessException {
+		Map<String, Object> map = transData.getViewMap();
+		logger.info("vehicleQuery-request:" + map);
+		String fivecar = (String) map.get("fivecar");
+		if (fivecar.equals("fivecar")) {
+			List<Map<String, Object>> vehiclelist = vehicledao.queryvehicleList4(transData.getPageInfo());
+			if (vehiclelist == null) {
+				transData.setExpCode("-1");
+				transData.setExpMsg("fail");
+			} else {
+				transData.setObj(vehiclelist);
+				transData.setExpCode("1");
+				transData.setExpMsg("success");
+			}
+		}
+		return transData;
+	}
+
 	/**
 	 * 页面查询
 	 * 
@@ -390,38 +463,33 @@ public class ParallelVehicleService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public ParallelVehicleEntity VehicleQueryPage(String  id) throws BusinessException {
+	public ParallelVehicleEntity VehicleQueryPage(String id) throws BusinessException {
 		ParallelVehicleEntity entity = vehicledao.getvehicleEntity(id);
 		return entity;
 	}
-	public List<Map<String, Object>> querydealerListPage(String id,Page page) throws BusinessException {
+
+	public List<Map<String, Object>> querydealerListPage(String id, Page page) throws BusinessException {
 		page.setPageSize(999);
-		List<Map<String, Object>> orglist = dealerdao.querydealerListPage(id,page);
+		List<Map<String, Object>> orglist = dealerdao.querydealerListPage(id, page);
 		return orglist;
 	}
+
 	public ParallelDealerEntity querydealerPage(String id) throws BusinessException {
 		ParallelDealerEntity entity = dealerdao.getdealerEntity(id);
 		return entity;
 	}
-	public List<Map<String, Object>> querymodelPage(String id,Page page) throws BusinessException {
+
+	public List<Map<String, Object>> querymodelPage(String id, Page page) throws BusinessException {
 		page.setPageSize(999);
-		List<Map<String, Object>> modellist = modeldao.querymodelList1(
-				id, page);
+		List<Map<String, Object>> modellist = modeldao.querymodelList1(id, page);
 		return modellist;
 	}
-	public TransData salesQueryPage(String dealer,Page page,TransData transData) throws BusinessException {
-		page.setPageSize(2);
+
+	public List<Map<String, Object>> salesQueryPage(String dealer, Page page, TransData transData)
+			throws BusinessException {
+		page.setPageSize(999);
 		transData.setPageInfo(page);
-		List<Map<String, Object>> saleslist = salesdao.querysalesList1(
-				dealer, transData.getPageInfo());
-		if (saleslist == null) {
-			transData.setExpCode("-1");
-			transData.setExpMsg("fail");
-		} else {
-			transData.setObj(saleslist);
-			transData.setExpCode("1");
-			transData.setExpMsg("success");
-		}
-		return transData;
+		List<Map<String, Object>> saleslist = salesdao.querysalesList1(dealer, transData.getPageInfo());
+		return saleslist;
 	}
 }

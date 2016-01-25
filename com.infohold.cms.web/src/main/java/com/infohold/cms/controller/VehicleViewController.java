@@ -11,13 +11,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.infohold.cms.basic.common.Page;
 import com.infohold.cms.basic.common.TransData;
 import com.infohold.cms.basic.controller.CentreController;
 import com.infohold.cms.basic.util.SysConfigUtil;
 import com.infohold.cms.entity.CarDealerEntity;
 import com.infohold.cms.entity.CarVehicleEntity;
+import com.infohold.cms.entity.ParallelDealerEntity;
+import com.infohold.cms.entity.ParallelVehicleEntity;
 import com.infohold.cms.service.CarVehicleService;
+import com.infohold.cms.service.ParallelVehicleService;
 
 /**
  * 版本模块
@@ -36,12 +40,14 @@ public class VehicleViewController extends CentreController {
 	 */
 	@Autowired
 	private CarVehicleService vehicleService;
-
+	
+	@Autowired
+	private ParallelVehicleService pavehicleService;
 	@Autowired
 	private SysConfigUtil sysConfigUtil;
 
 	@RequestMapping("/vehicleWebview.do")
-	public ModelAndView organization_getList(HttpServletRequest httpServletRequest) {
+	public ModelAndView ssssvehicleWebview(HttpServletRequest httpServletRequest) {
 		TransData transData = new TransData();
 		String vehicleid = httpServletRequest.getParameter("vehicleid");
 		String delrid = httpServletRequest.getParameter("dealerid");
@@ -74,6 +80,24 @@ public class VehicleViewController extends CentreController {
 		mav.addObject("dealerlist", dealerlist);
 		mav.addObject("modellist", modellist);
 		mav.setViewName("/webview/vehicle");
+		return mav;
+	}
+
+	@RequestMapping("/pavehicleWebview.do")
+	public ModelAndView parallelvehicleWebview(HttpServletRequest httpServletRequest) {
+		TransData transData = new TransData();
+		String vehicleid = httpServletRequest.getParameter("vehicleid");
+//		List<Map<String, Object>> saleslist = new ArrayList<>();
+		ModelAndView mav = new ModelAndView();
+		ParallelVehicleEntity pavehicle = new ParallelVehicleEntity();
+		Page page = new Page();
+		pavehicle = pavehicleService.VehicleQueryPage(vehicleid);
+		List<Map<String, Object>> saleslist = pavehicleService.salesQueryPage(pavehicle.getDealerid(), page, transData);
+		ParallelDealerEntity dealer = pavehicleService.querydealerPage(pavehicle.getDealerid());
+		mav.addObject("vehicle", pavehicle);
+		mav.addObject("dealer", dealer);
+		mav.addObject("saleslist",saleslist);
+		mav.setViewName("/webview/pavehicle");
 		return mav;
 	}
 

@@ -254,7 +254,6 @@
 		var carbrand1 = document.getElementById('carbrand1').value;
 		var carbrand = document.getElementById('carbrand').value;
 		checkOption('carbrand',carbrand1);
-		alert(carbrand1);
 		var dealer1 = document.getElementById('dealer1').value;
 		checkOption('dealer',dealer1);
 		var vehicleversion1 = document.getElementById('vehicleversion1').value;
