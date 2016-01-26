@@ -24,6 +24,18 @@ public enum TradeCodeDef implements Serializable {
 	T25001(), T25002(), T25003, T25004(), T25005(), T25006(),T25007(),T25008(),T25009(),T25010(),
 	//4s店车型管理
 	T26001(), T26002(), T26003, T26004(), T26005(), T26006(),T26007(),T26008(),T26009(),T26010(),
+	
+	//平行进口车品牌管理模块
+	T31001(), T31002(), T31003, T31004(), T31005(), T31006(),T31007(),T31008(),T31009(),T31010(),
+	//平行进口车车辆管理模块
+	T32001(), T32002(), T32003, T32004(), T32005(), T32006(),T32007(),T32008(),T32009(),T32010(),
+	//平行进口车信息管理
+	T33001(), T33002(), T33003, T33004(), T33005(), T33006(),T33007(),T33008(),T33009(),T33010(),
+	//平行进口车销售员管理
+	T34001(), T34002(), T34003, T34004(), T34005(), T34006(),T34007(),T34008(),T34009(),T34010(),
+	//平行进口车车型管理
+	T35001(), T35002(), T35003, T35004(), T35005(), T35006(),T35007(),T35008(),T35009(),T35010(),
+	
 // 版本管理模块
 	T30001(), T30002(), T30003(), T30004(), T30005(), T30006(),
 	//APP客户端用户模块
@@ -199,6 +211,112 @@ public enum TradeCodeDef implements Serializable {
 		case T26009:
 			return "暂不用";
 		case T26010:
+			return "暂不用";
+			
+			
+		case T31001:
+			return "进口车品牌列表查询";
+		case T31002:
+			return "进口车品牌新增查询";
+		case T31003:
+			return "进口车品牌保存";
+		case T31004:
+			return "进口车品牌删除";
+		case T31005:
+			return "进口车品牌编辑查询";
+		case T31006:
+			return "进口车品牌编辑保存";
+		case T31007:
+			return "进口车品牌app请求";
+		case T31008:
+			return "暂不用";
+		case T31009:
+			return "暂不用";
+		case T31010:
+			return "暂不用";
+			
+		case T32001:
+			return "进口车车辆列表查询";
+		case T32002:
+			return "进口车车辆新增查询";
+		case T32003:
+			return "进口车车辆保存";
+		case T32004:
+			return "进口车车辆删除";
+		case T32005:
+			return "进口车车辆编辑查询";
+		case T32006:
+			return "进口车车辆编辑保存";
+		case T32007:
+			return "进口车车辆app请求";
+		case T32008:
+			return "进口车车辆webview";
+		case T32009:
+			return "暂不用";
+		case T32010:
+			return "暂不用";
+			
+		case T33001:
+			return "进口车列表查询";
+		case T33002:
+			return "进口车新增查询";
+		case T33003:
+			return "进口车保存";
+		case T33004:
+			return "进口车删除";
+		case T33005:
+			return "进口车编辑查询";
+		case T33006:
+			return "进口车编辑保存";
+		case T33007:
+			return "进口车app请求";
+		case T33008:
+			return "暂不用";
+		case T33009:
+			return "暂不用";
+		case T33010:
+			return "暂不用";
+			
+		case T34001:
+			return "进口车销售员列表查询";
+		case T34002:
+			return "进口车销售员新增查询";
+		case T34003:
+			return "进口车销售员保存";
+		case T34004:
+			return "进口车销售员删除";
+		case T34005:
+			return "进口车销售员编辑查询";
+		case T34006:
+			return "进口车销售员编辑保存";
+		case T34007:
+			return "进口车销售员app请求";
+		case T34008:
+			return "暂不用";
+		case T34009:
+			return "暂不用";
+		case T34010:
+			return "暂不用";
+			
+		case T35001:
+			return "进口车车型列表查询";
+		case T35002:
+			return "进口车车型新增查询";
+		case T35003:
+			return "进口车车型保存";
+		case T35004:
+			return "进口车车型删除";
+		case T35005:
+			return "进口车车型编辑查询";
+		case T35006:
+			return "进口车车型编辑保存";
+		case T35007:
+			return "进口车车型app请求";
+		case T35008:
+			return "暂不用";
+		case T35009:
+			return "暂不用";
+		case T35010:
 			return "暂不用";
 			
 		case T30001:

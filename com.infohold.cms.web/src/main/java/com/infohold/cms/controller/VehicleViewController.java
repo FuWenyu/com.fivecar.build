@@ -17,7 +17,7 @@ import com.infohold.cms.basic.controller.CentreController;
 import com.infohold.cms.basic.util.SysConfigUtil;
 import com.infohold.cms.entity.CarDealerEntity;
 import com.infohold.cms.entity.CarVehicleEntity;
-import com.infohold.cms.service.VehicleService;
+import com.infohold.cms.service.CarVehicleService;
 
 /**
  * 版本模块
@@ -35,7 +35,7 @@ public class VehicleViewController extends CentreController {
 	 * @return map
 	 */
 	@Autowired
-	private VehicleService vehicleService;
+	private CarVehicleService vehicleService;
 
 	@Autowired
 	private SysConfigUtil sysConfigUtil;

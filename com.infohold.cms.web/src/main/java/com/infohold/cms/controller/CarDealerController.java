@@ -124,8 +124,7 @@ public class CarDealerController extends CentreController{
 		transData=super.doService(httpServletRequest, transData);
 		List<Map<String, Object>> brandList = (List<Map<String, Object>>)transData.getObj();
 		mav.addObject("brandList", brandList);
-		transData.setServiceName("pictureService");
-		transData.setTradeCode("T20010");
+		transData.setTradeCode("T24008");
 		transData=super.doService(httpServletRequest, transData);
 		mav.addObject("resourcesList",transData.getObj());
 		mav.setViewName("/sssscardealer/dealer_update");
