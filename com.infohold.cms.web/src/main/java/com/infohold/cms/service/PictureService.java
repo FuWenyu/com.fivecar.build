@@ -206,7 +206,7 @@ public class PictureService implements IBusinessService {
 		UserSession session = transData.getUserSession();
 		String imageName = (String) map.get("imageName");
 		String title = (String) map.get("title");
-		String usefo = (String) map.get("usefo");
+		String usefoall = (String) map.get("usefo");
 		String anchor = (String) map.get("anchor");
 		String description = (String) map.get("description");
 		String imageHref = (String) map.get("imageHref");
@@ -235,6 +235,10 @@ public class PictureService implements IBusinessService {
 		url.append("/upload/image/");
 		url.append(imageName);
 		
+		String[] strarray2 = usefoall.split("-");
+		String usefo = strarray2[0];
+		String usefoName = strarray2[1];
+		
 		StringBuffer anchor1 = new StringBuffer("");
 		anchor1.append(sysConfigUtil.getCfgInfo("resource_request"));
 		anchor1.append(anchor);
@@ -243,6 +247,8 @@ public class PictureService implements IBusinessService {
 		adentity.setImageName(imageName);
 		adentity.setTitle(title);
 		adentity.setUsefo(usefo);
+		adentity.setUsefoName(usefoName);
+		adentity.setAnchorid(anchor);
 		adentity.setAnchor(anchor1.toString());
 		adentity.setDescription(description);
 		adentity.setImageHref(imageHref);
@@ -306,29 +312,57 @@ public class PictureService implements IBusinessService {
 	public TransData updatePictureEntity(TransData transData)
 			throws BusinessException {
 		// 页面数据
+		UserSession session = transData.getUserSession();
 		Map<String, Object> map = transData.getViewMap();
+		String id = (String) map.get("picture_id");
 		String imageName = (String) map.get("imageName");
 		String title = (String) map.get("title");
-		String usefo = (String) map.get("usefo");
+		String usefoall = (String) map.get("usefo");
 		String anchor = (String) map.get("anchor");
 		String description = (String) map.get("description");
 		String imageHref = (String) map.get("imageHref");
 		String imageHrefReal = (String) map.get("imageHrefReal");
 		String imageid = (String) map.get("imageid");
-		Timestamp picture_date = dateutil.getTimestamp();
+		Timestamp createDate = dateutil.getTimestamp();
 
+		String[] strarray2 = usefoall.split("-");
+		String usefo = strarray2[0];
+		String usefoName = strarray2[1];
+		
 		AdEntity adentity = new AdEntity();
-		/*
-		 * pm.setPicture_id(picture_id); pm.setPicture_desc(picture_desc);
-		 * pm.setPicture_name(picture_name); pm.setFrom_url(from_url);
-		 * pm.setTo_url(to_url); pm.setAdd_date(picture_date);
-		 */
-		// if("null".equals(version_id) || "".equals(version_id) ||
-		// null==version_id){
-		// version.setVersion_id("#");
-		// }else{
-		// version.setVersion_id(version_id);
-		// }
+		StringBuffer urlreal = new StringBuffer("http://");
+		urlreal.append(sysConfigUtil.getCfgInfo("service_ip"));
+		urlreal.append("/");
+		urlreal.append(sysConfigUtil.getCfgInfo("service_name"));
+		urlreal.append("/upload/imagereal/");
+		urlreal.append(imageName);
+
+		StringBuffer url = new StringBuffer("http://");
+		url.append(sysConfigUtil.getCfgInfo("service_ip"));
+		url.append("/");
+		url.append(sysConfigUtil.getCfgInfo("service_name"));
+		url.append("/upload/image/");
+		url.append(imageName);
+		
+		StringBuffer anchor1 = new StringBuffer("");
+		anchor1.append(sysConfigUtil.getCfgInfo("resource_request"));
+		anchor1.append(anchor);
+		
+		adentity.setId(id);
+		adentity.setImageName(imageName);
+		adentity.setTitle(title);
+		adentity.setUsefo(usefo);
+		adentity.setUsefoName(usefoName);
+		adentity.setAnchorid(anchor);
+		adentity.setAnchor(anchor1.toString());
+		adentity.setDescription(description);
+		adentity.setImageHref(imageHref);
+		adentity.setImageHrefReal(imageHrefReal);
+		adentity.setCreateDate(createDate);
+		adentity.setImageid(imageid);
+		adentity.setUrl(url.toString());
+		adentity.setUrlreal(urlreal.toString());
+		adentity.setCreateName(session.getUserName());
 		pictureDao.picture_update(adentity);
 		transData.setExpMsg("success");
 		return transData;

@@ -157,7 +157,12 @@ public class CarDealerDao extends BaseDao<BaseEntity> {
 		sql.append("select pm.id,");
 		sql.append("pm.title,");
 		sql.append("pm.resourceName ");
-		sql.append("from fc_app_resources pm order by pm.id desc ");
+		sql.append("from fc_app_resources pm ");
+		sql.append(" where pm.purpose = ");
+		sql.append("'");
+		sql.append("ssss");
+		sql.append("'");
+		sql.append(" order by pm.id desc ");
 		return super.queryForList(sql.toString());
 	}
 }

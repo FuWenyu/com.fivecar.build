@@ -39,6 +39,19 @@
 								value="" /> <span style="color: red"></span>
 						</div>
 					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">
+							资源用途</label>
+						<div class="col-sm-9">
+							<select class="input-medium"  id="purpose" name="purpose">
+                                <option value="">-请选择-</option> 
+								<option value="homepage-首页">首页</option>
+								<option value="ssss-4s店优惠">4s店优惠</option>
+								<option value="parallel-平行进口车优惠">平行进口车优惠</option>
+								<option value="map-地图信息">地图信息</option>
+							</select>
+						</div>
+					</div>
  					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="name">
 							连接图文 </label>
@@ -50,15 +63,6 @@
 							</script>
 						</div> 
 					</div> 
-					<div class="form-group hide" id="fileListGroup">
-								<label class="col-sm-2 control-label no-padding-right" for="btn">已上传文件</label>
-								<div class="col-sm-3" id="upload1">
-							
-								</div>
-								<div class="col-sm-4">
-								
-								</div>
-					</div>
 					
 					<div class="clearfix form-actions">
 						<div class="col-md-offset-3 col-md-9">
@@ -86,6 +90,9 @@
 	});
 		function subForm() {
 			if (!checkData('title', '标题', 'input')) {
+				return;
+			}
+			if (!checkData('purpose', '用途', 'input')) {
 				return;
 			}
 			if (!checkData('resourceName', '资源名称 ', 'input')) {

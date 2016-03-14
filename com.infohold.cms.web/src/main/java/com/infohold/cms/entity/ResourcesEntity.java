@@ -38,6 +38,10 @@ public class ResourcesEntity extends BaseEntity {
 	private java.lang.String id;
 	/**标题*/
 	private java.lang.String title;
+	/**资源用途*/
+	private java.lang.String purpose;
+	/**资源用途*/
+	private java.lang.String purposeName;
 	/**资源名称*/
 	private java.lang.String resourceName;
 	/**创建人*/
@@ -100,6 +104,36 @@ public class ResourcesEntity extends BaseEntity {
 		this.resourceName = resourceName;
 	}
 
+
+	/**
+	 * @return the purpose
+	 */
+	@Column(name ="purpose",nullable=false,columnDefinition="varchar(64)default ''")
+	public java.lang.String getPurpose() {
+		return purpose;
+	}
+
+	/**
+	 * @param purpose the purpose to set
+	 */
+	public void setPurpose(java.lang.String purpose) {
+		this.purpose = purpose;
+	}
+
+	/**
+	 * @return the purposeName
+	 */
+	@Column(name ="purposeName",nullable=false,columnDefinition="varchar(64)default ''")
+	public java.lang.String getPurposeName() {
+		return purposeName;
+	}
+
+	/**
+	 * @param purposeName the purposeName to set
+	 */
+	public void setPurposeName(java.lang.String purposeName) {
+		this.purposeName = purposeName;
+	}
 
 	/**
 	 *方法: 取得java.lang.String

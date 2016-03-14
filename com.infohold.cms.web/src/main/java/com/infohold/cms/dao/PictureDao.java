@@ -14,6 +14,7 @@ import com.infohold.cms.basic.dao.BaseDao;
 import com.infohold.cms.basic.entity.BaseEntity;
 import com.infohold.cms.basic.util.StrUtil;
 import com.infohold.cms.entity.AdEntity;
+import com.infohold.cms.entity.ParallelSalesEntity;
 import com.infohold.cms.entity.ResourcesEntity;
 
 /**
@@ -38,9 +39,12 @@ public class PictureDao extends BaseDao<BaseEntity> {
 		sql.append("pm.imageName,");
 		sql.append("pm.imageHref,");
 		sql.append("pm.imageHrefReal,");
+		sql.append("pm.anchorid,");
 		sql.append("pm.anchor,");
 		sql.append("pm.createDate,");
+		sql.append("pm.createName,");
 		sql.append("pm.usefo,");
+		sql.append("pm.usefoName,");
 		sql.append("pm.imageid ");
 		sql.append("from fc_cms_ad pm ");
 		sql.append("where pm.usefo like '%1'");		
@@ -60,9 +64,12 @@ public class PictureDao extends BaseDao<BaseEntity> {
 		sql.append("pm.imageName,");
 		sql.append("pm.imageHref,");
 		sql.append("pm.imageHrefReal,");
+		sql.append("pm.anchorid,");
 		sql.append("pm.anchor,");
 		sql.append("pm.createDate,");
+		sql.append("pm.createName,");
 		sql.append("pm.usefo,");
+		sql.append("pm.usefoName,");
 		sql.append("pm.imageid ");
 		sql.append("from fc_cms_ad pm ");
 		sql.append("where pm.usefo = ");
@@ -95,7 +102,7 @@ public class PictureDao extends BaseDao<BaseEntity> {
 	 * @return
 	 */
 	public AdEntity getPictureByid(String id) {
-		StringBuffer sql = new StringBuffer();
+		/*StringBuffer sql = new StringBuffer();
 		sql.append("select pm.id,");
 		sql.append("pm.title,");
 		sql.append("pm.imageName,");
@@ -104,7 +111,8 @@ public class PictureDao extends BaseDao<BaseEntity> {
 		sql.append("pm.anchor,");
 		sql.append("pm.createDate,");
 		sql.append("pm.usefo,");
-		sql.append("pm.imageid ");
+		sql.append("pm.imageid,");
+		sql.append("pm.anchorid ");
 		sql.append("from fc_cms_ad pm where pm.id = ?");
 		
 		List<Object[]> objectsList = super.findBySQL(sql.toString(), id);
@@ -119,9 +127,12 @@ public class PictureDao extends BaseDao<BaseEntity> {
 			adentity.setCreateDate(Timestamp.valueOf(objects[6].toString()));
 			adentity.setUsefo((String) objects[7]);
 			adentity.setImageid((String) objects[8]);
+			adentity.setAnchorid((String) objects[9]);
 			return adentity;
-		}
-		return null;
+		}*/
+		AdEntity entity = new AdEntity();
+		entity = (AdEntity) super.get(AdEntity.class, id);
+		return entity;
 	}
 	/**
 	 * 图片更新
@@ -129,8 +140,6 @@ public class PictureDao extends BaseDao<BaseEntity> {
 	 * @return
 	 */
 	public void picture_update(AdEntity entity) {
-//		PictureEntity oldentity = new PictureEntity();
-//		oldentity = (VersionEntity) super.get(entity.getClass(), entity.getVersion_id());
 		super.update(entity);
 	}
 	
@@ -184,8 +193,14 @@ public class PictureDao extends BaseDao<BaseEntity> {
 	public List<Map<String, Object>> getResources() {
 		StringBuffer sql = new StringBuffer();
 		sql.append("select pm.id,");
+		sql.append("pm.title,");
 		sql.append("pm.resourceName ");
-		sql.append("from fc_app_resources pm order by pm.id desc ");
+		sql.append("from fc_app_resources pm ");
+		sql.append(" where pm.purpose = ");
+		sql.append("'");
+		sql.append("homepage");
+		sql.append("'");
+		sql.append(" order by pm.id desc ");
 		return super.queryForList(sql.toString());
 	}
 }

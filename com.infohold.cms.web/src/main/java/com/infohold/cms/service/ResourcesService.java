@@ -43,7 +43,7 @@ public class ResourcesService implements IBusinessService {
 	private SysConfigUtil sysConfigUtil;
 
 	private DateUtil dateutil = new DateUtil();
-	
+
 	private Logger logger = Logger.getLogger(ResourcesService.class);
 
 	@Override
@@ -65,9 +65,9 @@ public class ResourcesService implements IBusinessService {
 			return this.picture_query(transData);
 		} else if (tradCode.equals("T21008")) {
 			return this.entry_query(transData);
-		}else if (tradCode.equals("T21009")) {
+		} else if (tradCode.equals("T21009")) {
 			return this.entry_query(transData);
-		}else if (tradCode.equals("T21010")) {
+		} else if (tradCode.equals("T21010")) {
 			return this.entry_query(transData);
 		}
 		return transData;
@@ -81,12 +81,13 @@ public class ResourcesService implements IBusinessService {
 	 * @throws BusinessException
 	 */
 	public TransData findResources(TransData transData) throws BusinessException {
-		List<Map<String, Object>> orgList = resourcesdao.queryOmsResourceList(
-				transData.getViewMap(), transData.getPageInfo());
+		List<Map<String, Object>> orgList = resourcesdao.queryOmsResourceList(transData.getViewMap(),
+				transData.getPageInfo());
 		transData.setObj(orgList);
 		return transData;
 
 	}
+
 	/**
 	 * 资源保存
 	 * 
@@ -101,11 +102,17 @@ public class ResourcesService implements IBusinessService {
 		String resourceName = (String) map.get("resourceName");
 		String key = (String) map.get("key");
 		String title = (String) map.get("title");
+		String purposeall = (String) map.get("purpose");
+		String[] strarray2 = purposeall.split("-");
+		String purpose = strarray2[0];
+		String purposeName = strarray2[1];
 		UserSession session = transData.getUserSession();
 		Timestamp createDate = dateutil.getTimestamp();
 		ResourcesEntity resources = new ResourcesEntity();
 		resources.setResource(key);
 		resources.setTitle(title);
+		resources.setPurpose(purpose);
+		resources.setPurposeName(purposeName);
 		resources.setResourceName(resourceName);
 		resources.setCreateDate(createDate);
 		resources.setCreateName(session.getUserName());
@@ -123,8 +130,7 @@ public class ResourcesService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData deletePicture(TransData transData)
-			throws BusinessException {
+	public TransData deletePicture(TransData transData) throws BusinessException {
 		String id = (String) transData.getViewMap().get("id");
 		resourcesdao.deleteResourceEntity(id);
 		transData.setObj(true);
@@ -141,7 +147,7 @@ public class ResourcesService implements IBusinessService {
 	public TransData Picture_edit(TransData transData) throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
 		String id = map.get("id") + "";
-		ResourcesEntity resourceentity = resourcesdao.getResourceByid(id);
+		ResourcesEntity resourceentity = resourcesdao.getResourceEntity(id);
 		transData.setObj(resourceentity);
 		return transData;
 	}
@@ -153,8 +159,7 @@ public class ResourcesService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData updateResourceEntity(TransData transData)
-			throws BusinessException {
+	public TransData updateResourceEntity(TransData transData) throws BusinessException {
 		// 页面数据
 		Map<String, Object> map = transData.getViewMap();
 		String id = (String) map.get("id");
@@ -164,7 +169,7 @@ public class ResourcesService implements IBusinessService {
 		UserSession session = transData.getUserSession();
 		Timestamp createDate = dateutil.getTimestamp();
 		ResourcesEntity resources = resourcesdao.getResourceEntity(id);
-		
+
 		resources.setResource(key);
 		resources.setTitle(title);
 		resources.setResourceName(resourceName);
@@ -183,22 +188,22 @@ public class ResourcesService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData picture_query(TransData transData)
-			throws BusinessException {
+	public TransData picture_query(TransData transData) throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
-		logger.info("picture_query-request"+map);
+		logger.info("picture_query-request" + map);
 		String usefo = (String) map.get("usefo");
-		List<Map<String, Object>> orgList = resourcesdao.getResource(usefo,transData.getPageInfo());
+		List<Map<String, Object>> orgList = resourcesdao.getResource(usefo, transData.getPageInfo());
 		if (orgList.isEmpty()) {
 			transData.setExpCode("-1");
 			transData.setExpMsg("fail");
-		}else {
+		} else {
 			transData.setObj(orgList);
 			transData.setExpCode("1");
 			transData.setExpMsg("success");
 		}
 		return transData;
 	}
+
 	/**
 	 * 首页条目查询
 	 * 
@@ -206,16 +211,15 @@ public class ResourcesService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData entry_query(TransData transData)
-			throws BusinessException {
+	public TransData entry_query(TransData transData) throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
-		logger.info("entry_query-request"+map);
+		logger.info("entry_query-request" + map);
 		String usefo = (String) map.get("usefo");
-		List<Map<String, Object>> orgList = resourcesdao.getEntry(usefo,transData.getPageInfo());
+		List<Map<String, Object>> orgList = resourcesdao.getEntry(usefo, transData.getPageInfo());
 		if (orgList.isEmpty()) {
 			transData.setExpCode("-1");
 			transData.setExpMsg("fail");
-		}else {
+		} else {
 			transData.setObj(orgList);
 			transData.setExpCode("1");
 			transData.setExpMsg("success");

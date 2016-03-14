@@ -82,7 +82,7 @@
 									</td>
 									<%-- <td>${pictureList.from_url}</td> --%>
 									<td>${pictureList.title}</td>
-									<td>${pictureList.usefo}</td>
+									<td>${pictureList.usefoName}</td>
 									<td>${pictureList.createDate}</td>
 									<td>${pictureList.createName}</td>
 									<td>
@@ -219,23 +219,6 @@
 		}
 		//展示图片
 		function viewFile(from_url,file_name){
-			
-			
-			<%--alert("<tr><td>aaaaaa</td></tr> ");
-			$("#myRepUpload").modal("show");
-			//showModal($("#myModal"));
-			var $tr = "<tr><td>aaaa</td></tr> ";
-			alert(document.getElementById("custList"));
-			
-			//$(window.parent.document).find("#custList").append($tr);
-			
-			 
-			
-			 var $tr = "<img src=<%=path%>/upload/goodsimg/"+from_url+"/"+file_name+">"; 
-			 //document.getElementById("imgid").src="<%=path%>/upload/goodsimg/"+from_url+"/"+file_name";
-			//$(window.parent.document).find("#imgid").src("<%=path%>/upload/goodsimg/"+from_url+"/"+file_name);
-			$(window.parent.document).find("#imgid").append($tr); --%>
-<%-- 			window.open("<%=path%>/upload/imagereal/"+from_url+"/"+file_name); --%>
 			window.open("<%=path%>/upload/image/"+file_name);
 		}
 		//跳转至图片新增页面
@@ -245,7 +228,7 @@
 		};
 		//跳转至图片编辑页面
 		function editEntity(id){
-			window.location="<%=path%>/mvc/picture_edit.do?id="+id+"";
+			window.location="<%=path%>/mvc/entry_edit.do?id="+id+"";
 		};
 		
 		//删除图片By id

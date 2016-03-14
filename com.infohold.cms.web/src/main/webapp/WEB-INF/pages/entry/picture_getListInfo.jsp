@@ -28,7 +28,7 @@
 									</td>
 									<%-- <td>${pictureList.from_url}</td> --%>
 									<td>${pictureList.title}</td>
-									<td>${pictureList.usefo}</td>
+									<td>${pictureList.usefoName}</td>
 									<td>${pictureList.createDate}</td>
 									<td>${pictureList.createName}</td>
 									<td>

@@ -20,16 +20,7 @@
 						<label class="col-sm-3 control-label no-padding-right" for="id"> </label>
 					</div>
 					<input id="usfo" type="hidden" class="" name="usfo"value="${usfo}" />	
-					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="id">
-							图片名称 </label>
-						
-						<div class="col-sm-9">
-							<input type="text" id="imageName" name="imageName" placeholder="请输入图片名称 "
-								class="col-xs-10 col-sm-5"
-								value="" /> <span style="color: red"></span>
-						</div>
-					</div>
+					<input id="usfo1" type="hidden" class="" name="usfo"value="${usfo1}" />	
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
 							标题</label>
@@ -46,9 +37,9 @@
 						<div class="col-sm-9">
 							<select class="input-medium"  id="usefo" name="usefo" disabled="disabled">
                                 <option value="">-请选择-</option> 
-								<option value="12">行业资讯</option>
-								<option value="22">优惠信息</option>
-								<option value="32">汽车生活</option>
+								<option value="12-行业资讯">行业资讯</option>
+								<option value="22-优惠信息">优惠信息</option>
+								<option value="32-汽车生活">汽车生活</option>
 							</select>
 						</div>
 					</div>
@@ -67,7 +58,7 @@
 						<label class="col-sm-3 control-label no-padding-right" for="name">
 							图片描述 </label>
 						<div class="col-sm-9">
-							<textarea rows="6" cols="72" id="description" name="description"> </textarea>
+							<textarea rows="6" cols="72" id="description" name="description"></textarea>
 						</div>
 					</div>
 
@@ -138,9 +129,6 @@
 	}
 	
 	function subForm() {
-		if (!checkData('imageName', '图片名称', 'input')) {
-			return;
-		}
 		if (!checkData('title', '标题', 'input')) {
 			return;
 		}
@@ -218,7 +206,7 @@
 			success : function(data) {
 				if(data.msg == "success"){
 					alert("保存成功！");
-					var usefo=$("#usefo").val();
+					var usefo=$("#usfo1").val();
 					window.location = "<%=path%>/mvc/entry.do?usefo="+usefo+"";
 				}else{
 					alert("保存失败:"+data.msg);

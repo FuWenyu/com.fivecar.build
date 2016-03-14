@@ -107,13 +107,28 @@ public class PictureController extends CentreController{
 	@RequestMapping("/mvc/entry_add.do")
 	public ModelAndView entry_add(HttpServletRequest httpServletRequest) {
 		String usfo = (String)httpServletRequest.getParameter("usefo");
+		String usfo1 = (String)httpServletRequest.getParameter("usefo");
 		ModelAndView mav = new ModelAndView();
 		TransData transData = new TransData();
 		transData.setServiceName("pictureService");
 		transData.setTradeCode("T20010");
 		transData=super.doService(httpServletRequest, transData);
 		mav.addObject("resourcesList",transData.getObj());
+		switch (usfo) {
+		case "12":
+			usfo = usfo+"-行业资讯";
+			break;
+		case "22":
+			usfo = usfo+"-优惠信息";
+			break;
+		case "32":
+			usfo = usfo+"-汽车生活";
+			break;
+		default:
+			break;
+		}
 		mav.addObject("usfo", usfo);
+		mav.addObject("usfo1", usfo1);
 		mav.setViewName("/entry/picture_add");
 		return mav;
 	}
@@ -196,7 +211,7 @@ public class PictureController extends CentreController{
 	 * @return
 	 */
 	@RequestMapping("/mvc/picture_edit.do")
-	public ModelAndView version_edit(HttpServletRequest httpServletRequest) {
+	public ModelAndView picture_edit(HttpServletRequest httpServletRequest) {
 		TransData transData = new TransData();
 		transData.setServiceName("pictureService");
 		transData.setTradeCode("T20005");
@@ -205,7 +220,32 @@ public class PictureController extends CentreController{
 		AdEntity picture = (AdEntity) transData.getObj();
 		mav.addObject("picture",picture);
 		mav.addObject("page",transData.getPageInfo());
+		transData.setTradeCode("T20010");
+		transData=super.doService(httpServletRequest, transData);
+		mav.addObject("resourcesList",transData.getObj());
 		mav.setViewName("/picture/picture_update");
+		return mav;
+	}
+
+	/**
+	 * entry修改界面
+	 * @param httpServletRequest
+	 * @return
+	 */
+	@RequestMapping("/mvc/entry_edit.do")
+	public ModelAndView entry_edit(HttpServletRequest httpServletRequest) {
+		TransData transData = new TransData();
+		transData.setServiceName("pictureService");
+		transData.setTradeCode("T20005");
+		transData=super.doService(httpServletRequest, transData);
+		ModelAndView mav = new ModelAndView();
+		AdEntity picture = (AdEntity) transData.getObj();
+		mav.addObject("picture",picture);
+		mav.addObject("page",transData.getPageInfo());
+		transData.setTradeCode("T20010");
+		transData=super.doService(httpServletRequest, transData);
+		mav.addObject("resourcesList",transData.getObj());
+		mav.setViewName("/entry/picture_update");
 		return mav;
 	}
 	

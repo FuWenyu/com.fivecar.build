@@ -45,9 +45,13 @@ public class AdEntity extends BaseEntity {
 	/**原图片地址*/
 	private java.lang.String urlreal;
 	/**连接地址*/
+	private java.lang.String anchorid;
+	/**连接地址*/
 	private java.lang.String anchor;
 	/**用途*/
 	private java.lang.String usefo;
+	/**用途*/
+	private java.lang.String usefoName;
 	/**创建人*/
 	private java.lang.String createName;
 	/**创建日期*/
@@ -158,7 +162,7 @@ public class AdEntity extends BaseEntity {
 	/**
 	 * @return the usefo
 	 */
-	@Column(name ="usefo",nullable=false,columnDefinition="varchar(2)default ''")
+	@Column(name ="usefo",nullable=true,columnDefinition="varchar(2)default ''")
 	public java.lang.String getUsefo() {
 		return usefo;
 	}
@@ -168,6 +172,36 @@ public class AdEntity extends BaseEntity {
 	 */
 	public void setUsefo(java.lang.String usefo) {
 		this.usefo = usefo;
+	}
+
+	/**
+	 * @return the usefoName
+	 */
+	@Column(name ="usefoName",nullable=false,columnDefinition="varchar(64)default ''")
+	public java.lang.String getUsefoName() {
+		return usefoName;
+	}
+
+	/**
+	 * @param usefoName the usefoName to set
+	 */
+	public void setUsefoName(java.lang.String usefoName) {
+		this.usefoName = usefoName;
+	}
+
+	/**
+	 * @return the anchorid
+	 */
+	@Column(name ="anchorid",nullable=false,columnDefinition="varchar(36)default ''")
+	public java.lang.String getAnchorid() {
+		return anchorid;
+	}
+
+	/**
+	 * @param anchorid the anchorid to set
+	 */
+	public void setAnchorid(java.lang.String anchorid) {
+		this.anchorid = anchorid;
 	}
 
 	/**
