@@ -106,17 +106,18 @@ public class CarFullPaymentlService implements IBusinessService {
 //		CarFullPaymentEntity carFullPaymententity = new CarFullPaymentEntity();
 		CarFullPaymentEntity carFullPaymententity = (CarFullPaymentEntity) FullPaymentdao.get(CarFullPaymentEntity.class, modelid);
 		if (carFullPaymententity==null) {
-			carFullPaymententity.setModelid(modelid);
-			carFullPaymententity.setModelName(modelName);
-			carFullPaymententity.setTax(tax);
-			carFullPaymententity.setCompulsoryInsurance(CompulsoryInsurance);
-			carFullPaymententity.setLicensePlate(LicensePlate);
-			carFullPaymententity.setCDW(CDW);
-			carFullPaymententity.setThirdParityLiability(ThirdParityLiability);
-			carFullPaymententity.setOtherInsurance(OtherInsurance);
-			carFullPaymententity.setCreateName(createName);
-			carFullPaymententity.setCreateDate(createDate);
-			if (FullPaymentdao.saveFullPaymentEntity(carFullPaymententity)) {
+			CarFullPaymentEntity carFullPaymententitynew = new CarFullPaymentEntity();
+			carFullPaymententitynew.setModelid(modelid);
+			carFullPaymententitynew.setModelName(modelName);
+			carFullPaymententitynew.setTax(tax);
+			carFullPaymententitynew.setCompulsoryInsurance(CompulsoryInsurance);
+			carFullPaymententitynew.setLicensePlate(LicensePlate);
+			carFullPaymententitynew.setCDW(CDW);
+			carFullPaymententitynew.setThirdParityLiability(ThirdParityLiability);
+			carFullPaymententitynew.setOtherInsurance(OtherInsurance);
+			carFullPaymententitynew.setCreateName(createName);
+			carFullPaymententitynew.setCreateDate(createDate);
+			if (FullPaymentdao.saveFullPaymentEntity(carFullPaymententitynew)) {
 				transData.setExpMsg("success");
 			}
 		}else {
