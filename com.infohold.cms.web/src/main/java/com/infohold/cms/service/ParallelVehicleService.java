@@ -78,7 +78,9 @@ public class ParallelVehicleService implements IBusinessService {
 			return this.vehicleQueryVersion(transData);
 		} else if (tradCode.equals("T32014")) {
 			return this.vehicleQuery(transData);
-		}
+		}else if (tradCode.equals("T32015")) {
+		return this.vehicleQueryDealer(transData);
+	}
 		return transData;
 	}
 
@@ -475,6 +477,29 @@ public class ParallelVehicleService implements IBusinessService {
 				transData.setExpCode("1");
 				transData.setExpMsg("success");
 			}
+		return transData;
+	}
+	/**
+	 * http请求根据车辆版本查询车辆列表
+	 * 
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData vehicleQueryDealer(TransData transData) throws BusinessException {
+		Map<String, Object> map = transData.getViewMap();
+		logger.info("vehicleQuery-request:" + map);
+		String dealerid = (String) map.get("dealerid");
+		List<Map<String, Object>> vehiclelist = null;
+		vehiclelist = vehicledao.queryvehicleList5(dealerid,transData.getPageInfo());
+		if (vehiclelist == null) {
+			transData.setExpCode("-1");
+			transData.setExpMsg("fail");
+		} else {
+			transData.setObj(vehiclelist);
+			transData.setExpCode("1");
+			transData.setExpMsg("success");
+		}
 		return transData;
 	}
 

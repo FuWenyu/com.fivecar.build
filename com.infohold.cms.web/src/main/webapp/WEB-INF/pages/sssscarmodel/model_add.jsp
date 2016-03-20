@@ -15,7 +15,7 @@
 			<!-- PAGE CONTENT BEGINS -->
 				<form class="form-horizontal" id="sub_form" action="<%=path%>/mvc/vehicle_save.do"
 					method="post">
-					<h3 class="header smaller lighter grey">4s店车辆信息新增</h3>
+					<h3 class="header smaller lighter grey">4s店车型信息新增</h3>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id"> </label>
 					</div>

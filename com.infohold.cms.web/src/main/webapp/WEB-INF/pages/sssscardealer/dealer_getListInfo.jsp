@@ -13,9 +13,9 @@
 								<th width="15%">4s店名称</th>
 								<th width="15%">联系电话</th>
 								<th width="20%">地址</th>
-								<th width="15%">创建时间</th>
-								<th width="15%">创建人</th>
-								<th width="10%"></th>
+								<th width="12%">创建时间</th>
+								<th width="13%">创建人</th>
+								<th width="15%"></th>
 							</tr>
 						</thead>
 
@@ -31,11 +31,9 @@
 									<td>
 										<!-- 列表按钮区域 -->
 										<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-											<%-- <button type="button" class="btn btn-xs btn-primary" onclick="addversionEntity()">新增</button>
-											<button type="button" class="btn btn-xs btn-primary" onclick="viewEntity('${vehicleList.id}')">查看</button> --%>
 											<button type="button" class="btn btn-xs btn-primary" onclick="editEntity('${vehicleList.id}')">编辑</button>
 											<button type="button" class="btn btn-xs btn-primary" onclick="deleteEntity('${vehicleList.id}')">删除</button>
-											
+											<button type="button" class="btn btn-xs btn-primary" onclick="addSalesEntity();">添加销售员</button>
 										</div>
 									</td>
 								</tr>

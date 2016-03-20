@@ -13,9 +13,9 @@
 								<th width="10%">车辆品牌</th>
 								<th width="10%">车辆名称</th>
 								<th width="20%">价格区间</th>
-								<th width="20%">创建时间</th>
+								<th width="15%">创建时间</th>
 								<th width="20%">创建人</th>
-								<th width="10%"></th>
+								<th width="15%"></th>
 							</tr>
 						</thead>
 
@@ -37,6 +37,7 @@
 											<button type="button" class="btn btn-xs btn-primary" onclick="viewEntity('${vehicleList.id}')">查看</button> --%>
 											<button type="button" class="btn btn-xs btn-primary" onclick="editEntity('${vehicleList.id}')">编辑</button>
 											<button type="button" class="btn btn-xs btn-primary" onclick="deleteEntity('${vehicleList.id}')">删除</button>
+											<button type="button" class="btn btn-xs btn-primary" onclick="addModelEntity();">添加车型</button>
 										</div>
 									</td>
 								</tr>

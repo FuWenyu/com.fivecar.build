@@ -66,9 +66,9 @@
 								<th width="15%">英文名</th>
 								<th width="15%">中文名</th>
 								<th width="10%">首字母</th>
-								<th width="20%">创建时间</th>
+								<th width="15%">创建时间</th>
 								<th width="20%">创建人</th>
-								<th width="10%"></th>
+								<th width="15%"></th>
 							</tr>
 						</thead>
 
@@ -87,11 +87,9 @@
 									<td>
 										<!-- 列表按钮区域 -->
 										<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-											<%-- <button type="button" class="btn btn-xs btn-primary" onclick="addversionEntity()">新增</button>
-											<button type="button" class="btn btn-xs btn-primary" onclick="viewEntity('${brandList.id}')">查看</button> --%>
 											<button type="button" class="btn btn-xs btn-primary" onclick="editEntity('${brandList.id}')">编辑</button>
 											<button type="button" class="btn btn-xs btn-primary" onclick="deleteEntity('${brandList.id}')">删除</button>
-											
+											<button type="button" class="btn btn-xs btn-primary" onclick="addPavehicleEntity();">添加车辆</button>
 										</div>
 									</td>
 								</tr>
@@ -228,7 +226,9 @@
 		function editEntity(id){
 			window.location="<%=path%>/mvc/pabrand_edit.do?id="+id+"";
 		};
-		
+		function addPavehicleEntity(){
+			window.location="<%=path%>/mvc/pavehicle_add.do";
+		};
 		//删除图片By id
 		function deleteEntity(brandid){
 			//异步删除 成功后跳转页面

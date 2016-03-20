@@ -66,9 +66,9 @@
 								<th width="15%">英文名</th>
 								<th width="15%">中文名</th>
 								<th width="10%">首字母</th>
-								<th width="20%">创建时间</th>
+								<th width="15%">创建时间</th>
 								<th width="20%">创建人</th>
-								<th width="10%"></th>
+								<th width="15%"></th>
 							</tr>
 						</thead>
 
@@ -91,6 +91,7 @@
 											<button type="button" class="btn btn-xs btn-primary" onclick="viewEntity('${brandList.id}')">查看</button> --%>
 											<button type="button" class="btn btn-xs btn-primary" onclick="editEntity('${brandList.id}')">编辑</button>
 											<button type="button" class="btn btn-xs btn-primary" onclick="deleteEntity('${brandList.id}')">删除</button>
+											<button type="button" class="btn btn-xs btn-primary" onclick="addVehicleEntity();">添加车辆</button>
 											
 										</div>
 									</td>
@@ -228,7 +229,9 @@
 		function editEntity(id){
 			window.location="<%=path%>/mvc/brand_edit.do?id="+id+"";
 		};
-		
+		function addVehicleEntity(){
+			window.location="<%=path%>/mvc/vehicle_add.do";
+		};
 		//删除图片By id
 		function deleteEntity(brandid){
 			//异步删除 成功后跳转页面

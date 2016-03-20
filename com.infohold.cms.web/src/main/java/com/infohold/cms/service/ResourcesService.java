@@ -166,12 +166,14 @@ public class ResourcesService implements IBusinessService {
 		String resourceName = (String) map.get("resourceName");
 		String key = (String) map.get("key");
 		String title = (String) map.get("title");
+		String purpose = (String) map.get("purpose");
 		UserSession session = transData.getUserSession();
 		Timestamp createDate = dateutil.getTimestamp();
 		ResourcesEntity resources = resourcesdao.getResourceEntity(id);
 
 		resources.setResource(key);
 		resources.setTitle(title);
+		resources.setPurpose(purpose);
 		resources.setResourceName(resourceName);
 		resources.setCreateDate(createDate);
 		resources.setCreateName(session.getUserName());

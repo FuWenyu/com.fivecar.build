@@ -65,10 +65,10 @@
 								<th width="10%">车辆图片</th>
 								<th width="10%">车辆品牌</th>
 								<th width="10%">车辆名称</th>
-								<th width="20%">价格区间</th>
+								<th width="15%">价格区间</th>
 								<th width="20%">创建时间</th>
-								<th width="20%">创建人</th>
-								<th width="10%"></th>
+								<th width="25%">创建人</th>
+								<th width="20%"></th>
 							</tr>
 						</thead>
 
@@ -91,7 +91,7 @@
 											<button type="button" class="btn btn-xs btn-primary" onclick="viewEntity('${vehicleList.id}')">查看</button> --%>
 											<button type="button" class="btn btn-xs btn-primary" onclick="editEntity('${vehicleList.id}')">编辑</button>
 											<button type="button" class="btn btn-xs btn-primary" onclick="deleteEntity('${vehicleList.id}')">删除</button>
-											
+											<button type="button" class="btn btn-xs btn-primary" onclick="addModelEntity();">添加车型</button>
 										</div>
 									</td>
 								</tr>
@@ -228,7 +228,18 @@
 		function editEntity(id){
 			window.location="<%=path%>/mvc/vehicle_edit.do?id="+id+"";
 		};
-		
+		//跳转至图片新增页面
+		function addModelEntity(){
+			window.location="<%=path%>/mvc/model_add.do";
+		};
+		//跳转至全款购车编辑页面
+		function editFullpay(vehicle){
+			window.location="<%=path%>/mvc/fullpay_edit.do?vehicle="+vehicle+"";
+		};
+		//跳转至贷款购车编辑页面
+		function loan(vehicle){
+			window.location="<%=path%>/mvc/vehicle_edit.do?vehicle="+vehicle+"";
+		};
 		//删除图片By id
 		function deleteEntity(vehicleid){
 			//异步删除 成功后跳转页面

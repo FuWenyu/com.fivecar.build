@@ -67,14 +67,7 @@ public class ParallelDealerDao extends BaseDao<BaseEntity> {
 	public List<Map<String, Object>> querydealerList1(Page page){
 		StringBuffer sql = new StringBuffer();
 		sql.append("select dle.id,");
-		sql.append("dle.carbrand,");
-		sql.append("dle.privileges,");
-		sql.append("dle.privilegesurl,");
-		sql.append("dle.privilegestile,");
 		sql.append("dle.dealerName,");
-		sql.append("dle.telephone,");
-		sql.append("dle.addr,");
-		sql.append("dle.position,");
 		sql.append("dle.description ");
 		sql.append("from fc_parallel_dealer dle ");
 

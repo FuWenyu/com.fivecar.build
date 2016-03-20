@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.infohold.cms.basic.common.TransData;
 import com.infohold.cms.basic.controller.CentreController;
+import com.infohold.cms.entity.CarFullPaymentEntity;
 import com.infohold.cms.entity.ResourcesEntity;
 import com.infohold.cms.entity.VersionEntity;
 import com.infohold.cms.service.BaseService;
@@ -32,7 +33,7 @@ import com.infohold.cms.service.VersionService;
  * 
  */
 @Controller
-public class CarBrandAppController extends CentreController{
+public class AppCarBrandController extends CentreController{
 
 	/**
 	 * APP-品牌列表查询
@@ -114,6 +115,35 @@ public class CarBrandAppController extends CentreController{
 			List<Map<String, Object>> cardealerList = (List<Map<String, Object>>)transData.getObj();
 			map.put("cardealerList", cardealerList);
 			map.put("page",transData.getPageInfo());
+			return map;
+		}
+		System.out.println(map);
+		return map;
+	}
+	
+
+	/**
+	 * APP-4s店信息列表查询
+	 * 
+	 * @param httpServletRequest
+	 * @return map
+	 */
+	
+	@RequestMapping("/app/carfullpay.do")
+	@ResponseBody
+	public Map<String, Object> Carfullpay(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletresponse) throws Exception {
+		TransData transData = new TransData();
+		transData.setServiceName("fullpayService");
+		transData.setTradeCode("T27003");
+		transData=super.doService(httpServletRequest, transData);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(!"".equals(transData.getExpCode())){
+			map.put("expCode", transData.getExpCode());
+			map.put("expMsg", transData.getExpMsg());
+			CarFullPaymentEntity fullpay = (CarFullPaymentEntity)transData.getObj();
+			map.put("fullpay", fullpay);
 			return map;
 		}
 		System.out.println(map);

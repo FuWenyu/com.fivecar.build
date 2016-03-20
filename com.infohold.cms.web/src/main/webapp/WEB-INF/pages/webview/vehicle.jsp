@@ -113,10 +113,10 @@
 			</div>
 			<div class="wc05_text3">${modellist.Carabstract}</div>
 			<div class="wc05_text4">
-				<a href="wc://LoanBuy?id=${id}">全款明细</a>
+				<a href="wc://LoanBuy?id=${modellist.modelid}">全款明细</a>
 			</div>
 			<div class="wc05_text5">
-				<a href="wc://LoanBuy?id=${id}">贷款购车</a>
+				<a href="wc://LoanBuy?id=${modellist.modelid}">贷款购车</a>
 			</div>
 			<span class="InfoContent"><img
 				src="images/zc_icon_x_default.jpg" width="20" height="20" alt="" />奥迪车全系85折！</span>
