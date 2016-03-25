@@ -1,6 +1,7 @@
 package com.infohold.cms.service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +47,7 @@ public class CarVehicleService implements IBusinessService {
 	private SysConfigUtil sysConfigUtil;
 
 	private DateUtil dateutil = new DateUtil();
-	
+
 	private Logger logger = Logger.getLogger(CarVehicleService.class);
 
 	@Override
@@ -77,10 +78,8 @@ public class CarVehicleService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData findvehicleList(TransData transData)
-			throws BusinessException {
-		List<Map<String, Object>> orgList = vehicledao
-				.queryvehicleList(transData.getPageInfo());
+	public TransData findvehicleList(TransData transData) throws BusinessException {
+		List<Map<String, Object>> orgList = vehicledao.queryvehicleList(transData.getPageInfo());
 		transData.setObj(orgList);
 		return transData;
 	}
@@ -129,8 +128,8 @@ public class CarVehicleService implements IBusinessService {
 		url.append(sysConfigUtil.getCfgInfo("service_name"));
 		url.append("/upload/image/");
 		url.append(imageName);
-//		String anchor=sysConfigUtil.getCfgInfo("vehicle_request");
-		
+		// String anchor=sysConfigUtil.getCfgInfo("vehicle_request");
+
 		CarVehicleEntity carvehicleentity = new CarVehicleEntity();
 		carvehicleentity.setCarbrand(carbrandname);
 		carvehicleentity.setCarbrandid(carbrandid);
@@ -140,7 +139,7 @@ public class CarVehicleService implements IBusinessService {
 		carvehicleentity.setUrl(url.toString());
 		carvehicleentity.setUrlreal(urlreal.toString());
 		carvehicleentity.setDescription(description);
-//		carvehicleentity.setAnchor(anchor+carvehicleentity.getId());
+		// carvehicleentity.setAnchor(anchor+carvehicleentity.getId());
 		carvehicleentity.setCreateName(createName);
 		carvehicleentity.setCreateDate(createDate);
 		if (vehicledao.savevehicleEntity(carvehicleentity)) {
@@ -156,8 +155,7 @@ public class CarVehicleService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData deletevehicle(TransData transData)
-			throws BusinessException {
+	public TransData deletevehicle(TransData transData) throws BusinessException {
 		String id = (String) transData.getViewMap().get("id");
 		vehicledao.deletevehicleEntity(id);
 		transData.setObj(true);
@@ -186,8 +184,7 @@ public class CarVehicleService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData updatePictureEntity(TransData transData)
-			throws BusinessException {
+	public TransData updatePictureEntity(TransData transData) throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
 		UserSession session = transData.getUserSession();
 		String id = (String) map.get("vehicle_id");
@@ -216,8 +213,8 @@ public class CarVehicleService implements IBusinessService {
 		url.append(sysConfigUtil.getCfgInfo("service_name"));
 		url.append("/upload/image/");
 		url.append(imageName);
-//		String anchor=sysConfigUtil.getCfgInfo("vehicle_request");
-		
+		// String anchor=sysConfigUtil.getCfgInfo("vehicle_request");
+
 		CarVehicleEntity carvehicleentity = new CarVehicleEntity();
 		carvehicleentity.setId(id);
 		carvehicleentity.setCarbrand(carbrandname);
@@ -228,7 +225,7 @@ public class CarVehicleService implements IBusinessService {
 		carvehicleentity.setUrl(url.toString());
 		carvehicleentity.setUrlreal(urlreal.toString());
 		carvehicleentity.setDescription(description);
-//		carvehicleentity.setAnchor(anchor+carvehicleentity.getId());
+		// carvehicleentity.setAnchor(anchor+carvehicleentity.getId());
 		carvehicleentity.setCreateName(createName);
 		carvehicleentity.setCreateDate(createDate);
 		if (vehicledao.vehicle_update(carvehicleentity)) {
@@ -246,10 +243,14 @@ public class CarVehicleService implements IBusinessService {
 	 */
 	public TransData vehicleQuery(TransData transData) throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
-		logger.info("vehicleQuery-request:"+map);
+		logger.info("vehicleQuery-request:" + map);
 		String carbrand = (String) map.get("carbrand");
-		List<Map<String, Object>> vehiclelist = vehicledao.queryvehicleList1(
-				carbrand, transData.getPageInfo());
+		List<Map<String, Object>> vehiclelist = new ArrayList<>();
+		if (carbrand.equals("all")) {
+			vehiclelist = vehicledao.queryvehicleList2(carbrand, transData.getPageInfo());
+		} else {
+			vehiclelist = vehicledao.queryvehicleList1(carbrand, transData.getPageInfo());
+		}
 		if (vehiclelist == null) {
 			transData.setExpCode("-1");
 			transData.setExpMsg("fail");
@@ -260,6 +261,7 @@ public class CarVehicleService implements IBusinessService {
 		}
 		return transData;
 	}
+
 	/**
 	 * 页面查询
 	 * 
@@ -267,30 +269,32 @@ public class CarVehicleService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public CarVehicleEntity VehicleQueryPage(String  id) throws BusinessException {
+	public CarVehicleEntity VehicleQueryPage(String id) throws BusinessException {
 		CarVehicleEntity entity = vehicledao.getvehicleEntity(id);
 		return entity;
 	}
-	public List<Map<String, Object>> querydealerListPage(String id,Page page) throws BusinessException {
+
+	public List<Map<String, Object>> querydealerListPage(String id, Page page) throws BusinessException {
 		page.setPageSize(999);
-		List<Map<String, Object>> orglist = dealerdao.querydealerListPage(id,page);
+		List<Map<String, Object>> orglist = dealerdao.querydealerListPage(id, page);
 		return orglist;
 	}
+
 	public CarDealerEntity querydealerPage(String id) throws BusinessException {
 		CarDealerEntity entity = dealerdao.getdealerEntity(id);
 		return entity;
 	}
-	public List<Map<String, Object>> querymodelPage(String id,Page page) throws BusinessException {
+
+	public List<Map<String, Object>> querymodelPage(String id, Page page) throws BusinessException {
 		page.setPageSize(999);
-		List<Map<String, Object>> modellist = modeldao.querymodelList1(
-				id, page);
+		List<Map<String, Object>> modellist = modeldao.querymodelList1(id, page);
 		return modellist;
 	}
-	public TransData salesQueryPage(String dealer,Page page,TransData transData) throws BusinessException {
+
+	public TransData salesQueryPage(String dealer, Page page, TransData transData) throws BusinessException {
 		page.setPageSize(2);
 		transData.setPageInfo(page);
-		List<Map<String, Object>> saleslist = salesdao.querysalesList1(
-				dealer, transData.getPageInfo());
+		List<Map<String, Object>> saleslist = salesdao.querysalesList1(dealer, transData.getPageInfo());
 		if (saleslist == null) {
 			transData.setExpCode("-1");
 			transData.setExpMsg("fail");

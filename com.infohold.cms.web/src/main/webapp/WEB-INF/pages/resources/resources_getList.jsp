@@ -80,8 +80,6 @@
 									<td>
 										<!-- 列表按钮区域 -->
 										<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-											<%-- <button type="button" class="btn btn-xs btn-primary" onclick="addversionEntity()">新增</button>
-											<button type="button" class="btn btn-xs btn-primary" onclick="viewEntity('${resourcesList.id}')">查看</button> --%>
 											<button type="button" class="btn btn-xs btn-primary" onclick="editEntity('${resourcesList.id}')">编辑</button>
 											<button type="button" class="btn btn-xs btn-primary" onclick="deleteEntity('${resourcesList.id}')">删除</button>
 											

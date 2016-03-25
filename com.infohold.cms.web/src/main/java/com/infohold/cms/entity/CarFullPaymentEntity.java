@@ -28,6 +28,8 @@ public class CarFullPaymentEntity extends BaseEntity {
 	private java.lang.String modelid;
 	/**车辆名称*/
 	private java.lang.String modelName;
+	/**裸车价格*/
+	private BigDecimal price;
 	/**购置税*/
 	private BigDecimal tax;
 	/**交强险*/
@@ -77,8 +79,6 @@ public class CarFullPaymentEntity extends BaseEntity {
 	public void setModelid(java.lang.String modelid) {
 		this.modelid = modelid;
 	}
-	
-
 	/**
 	 * @return the modelName
 	 */
@@ -92,7 +92,19 @@ public class CarFullPaymentEntity extends BaseEntity {
 	public void setModelName(java.lang.String modelName) {
 		this.modelName = modelName;
 	}
-	
+	@Column(name ="price",precision=12, scale=2)
+	/**
+	 * @return the price
+	 */
+	public BigDecimal getPrice() {
+		return price;
+	}
+	/**
+	 * @param price the price to set
+	 */
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
 	/**
 	 * @return the tax
 	 */

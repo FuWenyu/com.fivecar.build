@@ -38,9 +38,10 @@
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id"> </label>
 					</div>
-					<input id=modelid type="hidden" class="" name="modelid" value="${modelid}" />
-					<input id=modelName type="hidden" class="" name="modelName" value="${modelName}" />
-					
+					<input id="loan_id" type="hidden" class="" name="loan_id" value="${loan.id}" />
+					<input id="lender1" type="hidden" class="" name="lender1" value="${lender.id}-${lender.lenderName}-${lender.url}" />
+					<input id="modelid"type="hidden" class="" name="modelid" value="${modelid}" />
+					<input id="modelName" type="hidden" class="" name="modelName" value="${modelName}" />
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
 							车型 </label>
@@ -52,65 +53,86 @@
 					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
-							裸车价格</label>
+							金融机构</label>
 						<div class="col-sm-9">
-							<input type="text" id="price" name="price" placeholder="请输入裸车价格 "
+							<select class="input-medium"  id="lender" name="lender">
+							<c:forEach items="${lenderList}" var="list" varStatus="status">
+	                        <option value="${list.id}-${list.lenderName}-${list.url}">${list.lenderName}</option>
+	               		    </c:forEach>
+               		    </select>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">
+							4s店全名 </label>
+						<div class="col-sm-9">
+							<input type="text" id="carprice" name="carprice" placeholder="请输入裸车价格 "
 								class="col-xs-10 col-sm-5"
-								value="${FullPay.price}" /> <span style="color: red"></span>
+								value="${loan.carprice}" /> <span style="color: red"></span>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
-							购置税 </label>
+							首付金额</label>
 						<div class="col-sm-9">
-							<input type="text" id="tax" name="tax" placeholder="请输入购置税金额 "
+							<input type="text" id="downpayment" name="downpayment" placeholder="请输入首付金额 "
 								class="col-xs-10 col-sm-5"
-								value="${FullPay.tax}" /> <span style="color: red"></span>
+								value="${loan.downpayment}" /> <span style="color: red"></span>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
-							交强险</label>
+							首付百分比</label>
 						<div class="col-sm-9">
-							<input type="text" id="CompulsoryInsurance" name="CompulsoryInsurance" placeholder="请输入交强险金额 "
+							<input type="text" id="downPaymentPercent" name="downPaymentPercent" placeholder="请输入首付百分比 "
 								class="col-xs-10 col-sm-5"
-								value="${FullPay.compulsoryInsurance}" /> <span style="color: red"></span>
+								value="${loan.downPaymentPercent}" /> <span style="color: red"></span>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
-							牌照费用</label>
+							额外费用</label>
 						<div class="col-sm-9">
-							<input type="text" id="LicensePlate" name="LicensePlate" placeholder="请输入牌照费用 "
+							<input type="text" id="premium" name="premium" placeholder="请输入额外费用 "
 								class="col-xs-10 col-sm-5"
-								value="${FullPay.licensePlate}" /> <span style="color: red"></span>
+								value="${loan.premium}" /> <span style="color: red"></span>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
-							车损险</label>
+							12期每期金额</label>
 						<div class="col-sm-9">
-							<input type="text" id="CDW" name="CDW" placeholder="请输入车损险金额"
+							<input type="text" id="loan12" name="loan12" placeholder="请输入12期每期金额 "
 								class="col-xs-10 col-sm-5"
-								value="${FullPay.CDW}" /> <span style="color: red"></span>
+								value="${loan.loan12}" /> <span style="color: red"></span>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
-							第三者责任险</label>
+							24期每期金额</label>
 						<div class="col-sm-9">
-							<input type="text" id="ThirdParityLiability" name="ThirdParityLiability" placeholder="请输入第三者责任险金额"
+							<input type="text" id="loan24" name="loan24" placeholder="请输入24期每期金额"
 								class="col-xs-10 col-sm-5"
-								value="${FullPay.thirdParityLiability}" /> <span style="color: red"></span>
+								value="${loan.loan24}" /> <span style="color: red"></span>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
-							其它保险</label>
+							36期每期金额</label>
 						<div class="col-sm-9">
-							<input type="text" id="OtherInsurance" name="OtherInsurance" placeholder="请输入其它保险金额"
+							<input type="text" id="loan36" name="loan36" placeholder="请输入36期每期金额 "
 								class="col-xs-10 col-sm-5"
-								value="${FullPay.otherInsurance}" /> <span style="color: red"></span>
+								value="${loan.loan36}" /> <span style="color: red"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">
+							48期每期金额</label>
+						<div class="col-sm-9">
+							<input type="text" id="loan48" name="loan48" placeholder="请输入48期每期金额 "
+								class="col-xs-10 col-sm-5"
+								value="${loan.loan48}" /> <span style="color: red"></span>
 						</div>
 					</div>
 					
@@ -119,9 +141,8 @@
 							<button class="btn btn-info" type="button" onclick="subForm();">
 								<i class="icon-ok bigger-110"></i> 提交
 							</button>
-		
 							&nbsp; &nbsp; &nbsp;
-							<button class="btn" type="button" onclick="javascript:window.location = '<%=path%>/mvc/model.do';">
+							<button class="btn" type="button" onclick="goBack('${modelid}-${modelName}');">
 								<i class="icon-reply bigger-110"></i> 返回
 							</button>
 						</div>
@@ -177,6 +198,9 @@
 	<script type="text/javascript">
 		/*********页面加载区域**********/
 		jQuery(function($) {
+			var lender1 = document.getElementById('lender1').value;
+			checkOption('lender',lender1);
+			
 			$(window).resize(function() {
 				setHash('${pageContext.request.contextPath}');
 			});
@@ -184,80 +208,100 @@
 		/*********自定于方法**********/
 		//表单提交
 		function subForm() {
-			if (!checkData('modelName', '车型名称', 'input')) {
+			if (!checkData('lender', '金融机构', 'input')) {
 				return;
 			}
 			
-			if (!checkData('tax', '购置税', 'input')) {
+			if (!checkData('carprice', '裸车价格', 'input')) {
 				return;
 			}
-			if (!checkData('tax', '购置税', 'number')) {
+			if (!limitCheck('carprice', '裸车价格', 12)) {
 				return;
 			}
-			if (!limitCheck('tax', '购置税', 12)) {
-				return;
-			}
-			
-			if (!checkData('CompulsoryInsurance', '交强险', 'input')) {
-				return;
-			}
-			if (!checkData('CompulsoryInsurance', '交强险', 'number')) {
-				return;
-			}
-			if (!limitCheck('CompulsoryInsurance', '交强险', 12)) {
+			if (!checkData('carprice', '裸车价格', 'number')) {
 				return;
 			}
 			
-			if (!checkData('LicensePlate', '牌照费用', 'input')) {
+			
+			if (!checkData('downpayment', '首付金额', 'input')) {
 				return;
 			}
-			if (!checkData('LicensePlate', '牌照费用', 'number')) {
+			if (!limitCheck('downpayment', '首付金额', 12)) {
 				return;
 			}
-			if (!limitCheck('LicensePlate', '牌照费用', 12)) {
+			if (!checkData('downpayment', '首付金额', 'number')) {
 				return;
 			}
 			
-			if (!checkData('CDW', '车损险', 'input')) {
-				return;
-			}
-			if (!checkData('CDW', '车损险', 'number')) {
-				return;
-			}
-			if (!limitCheck('CDW', '车损险', 12)) {
+			if (!checkData('downPaymentPercent', '首付百分比', 'input')) {
 				return;
 			}
 			
-			if (!checkData('ThirdParityLiability', '第三者责任险', 'input')) {
+			if (!checkData('premium', '额外费用', 'input')) {
 				return;
 			}
-			if (!checkData('ThirdParityLiability', '第三者责任险', 'number')) {
+			if (!limitCheck('premium', '额外费用', 12)) {
 				return;
 			}
-			if (!limitCheck('ThirdParityLiability', '第三者责任险', 12)) {
-				return;
-			}
-			
-			if (!checkData('OtherInsurance', '其它保险', 'input')) {
-				return;
-			}
-			if (!checkData('OtherInsurance', '其它保险', 'number')) {
-				return;
-			}
-			if (!limitCheck('OtherInsurance', '其它保险', 12)) {
+			if (!checkData('premium', '额外费用', 'number')) {
 				return;
 			}
 			
+			
+			if (!checkData('loan12', '12期每期金额', 'input')) {
+				return;
+			}
+			if (!limitCheck('loan12', '12期每期金额', 12)) {
+				return;
+			}
+			if (!checkData('loan12', '12期每期金额', 'number')) {
+				return;
+			}
+			
+			if (!checkData('loan24', '24期每期金额', 'input')) {
+				return;
+			}
+			if (!limitCheck('loan24', '24期每期金额', 12)) {
+				return;
+			}
+			if (!checkData('loan24', '24期每期金额', 'number')) {
+				return;
+			}
+			
+			
+			if (!checkData('loan36', '36期每期金额', 'input')) {
+				return;
+			}
+			if (!limitCheck('loan36', '36期每期金额', 12)) {
+				return;
+			}
+			if (!checkData('loan36', '36期每期金额', 'number')) {
+				return;
+			}
+			
+			
+			if (!checkData('loan48', '48期每期金额', 'input')) {
+				return;
+			}
+			if (!limitCheck('loan48', '48期每期金额', 12)) {
+				return;
+			}
+			if (!checkData('loan48', '48期每期金额', 'number')) {
+				return;
+			}
 			$.ajax({
 				type : "POST",
-				url : "<%=path%>/mvc/fullpay_editSave.do",
+				url : "<%=path%>/mvc/loan_editSave.do",
 				data : $("#sub_form").serialize(),
 				async : false,
 				dataType:'json',
 				success : function(data) {
 					if(data.msg == "success"){
 						alert("保存成功！");
-						window.location = "<%=path%>/mvc/model.do";
+						var modelid =$("#modelid").val();
+						var modelName =$("#modelName").val();
+						var model = modelid+"-"+modelName;
+						window.location = "<%=path%>/mvc/loan.do?model="+model+"";
 					}else{
 						alert("保存失败:"+data.msg);
 					}
@@ -279,6 +323,9 @@
 					break;
 				}
 			}
+		}
+		function goBack(model){
+			window.location = "<%=path%>/mvc/loan.do?model="+model+"";
 		}
 	</script>
 	</body>

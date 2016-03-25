@@ -26,6 +26,10 @@ public enum TradeCodeDef implements Serializable {
 	T26001(), T26002(), T26003, T26004(), T26005(), T26006(),T26007(),T26008(),T26009(),T26010(),
 	//4s店全款购车模块
 	T27001(), T27002(), T27003, T27004(), T27005(), T27006(),T27007(),T27008(),T27009(),T27010(),
+	//4s店贷款购车模块
+	T28001(), T28002(), T28003, T28004(), T28005(), T28006(),T28007(),T28008(),T28009(),T28010(),
+	//金融机构管理模块
+	T29001(), T29002(), T29003, T29004(), T29005(), T29006(),T29007(),T29008(),T29009(),T29010(),
 	
 	//平行进口车品牌管理模块
 	T31001(), T31002(), T31003, T31004(), T31005(), T31006(),T31007(),T31008(),T31009(),T31010(),
@@ -217,7 +221,7 @@ public enum TradeCodeDef implements Serializable {
 			
 			
 		case T27001:
-			return "4s店全款购车编辑查询";
+			return "4s店贷款购车列表查询";
 		case T27002:
 			return "4s店全款购车编辑保存";
 		case T27003:
@@ -237,6 +241,47 @@ public enum TradeCodeDef implements Serializable {
 		case T27010:
 			return "暂不用";
 			
+		case T28001:
+			return "4s店全款购车编辑查询";
+		case T28002:
+			return "4s店全款购车编辑保存";
+		case T28003:
+			return "4s店全款购车app请求";
+		case T28004:
+			return "暂不用";
+		case T28005:
+			return "暂不用";
+		case T28006:
+			return "暂不用";
+		case T28007:
+			return "暂不用";
+		case T28008:
+			return "暂不用";
+		case T28009:
+			return "暂不用";
+		case T28010:
+			return "暂不用";
+			
+		case T29001:
+			return "金融机构列表查询";
+		case T29002:
+			return "金融机构新增查询";
+		case T29003:
+			return "金融机构保存";
+		case T29004:
+			return "金融机构删除";
+		case T29005:
+			return "金融机构编辑查询";
+		case T29006:
+			return "金融机构编辑保存";
+		case T29007:
+			return "金融机构app请求";
+		case T29008:
+			return "暂不用";
+		case T29009:
+			return "暂不用";
+		case T29010:
+			return "暂不用";
 			
 		case T31001:
 			return "进口车品牌列表查询";

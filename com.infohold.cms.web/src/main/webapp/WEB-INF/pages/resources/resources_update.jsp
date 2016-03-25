@@ -50,6 +50,7 @@
 								<option value="homepage-首页">首页</option>
 								<option value="ssss-4s店优惠">4s店优惠</option>
 								<option value="parallel-平行进口车优惠">平行进口车优惠</option>
+								<option value="lender-金融">金融</option>
 								<option value="map-地图信息">地图信息</option>
 							</select>
 						</div>

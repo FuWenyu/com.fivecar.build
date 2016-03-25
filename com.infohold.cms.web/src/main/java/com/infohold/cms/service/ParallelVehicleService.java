@@ -488,7 +488,7 @@ public class ParallelVehicleService implements IBusinessService {
 	 */
 	public TransData vehicleQueryDealer(TransData transData) throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
-		logger.info("vehicleQuery-request:" + map);
+		logger.info("vehicleQueryDealer-request:" + map);
 		String dealerid = (String) map.get("dealerid");
 		List<Map<String, Object>> vehiclelist = null;
 		vehiclelist = vehicledao.queryvehicleList5(dealerid,transData.getPageInfo());

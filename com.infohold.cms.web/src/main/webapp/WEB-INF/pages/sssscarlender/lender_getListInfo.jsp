@@ -9,36 +9,33 @@
 					<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2">
 						<thead>
 							<tr>
-								<th width="10%">车型图片</th>
-								<th width="15%">所属车辆</th>
-								<th width="15%">车型名称</th>
-								<th width="15%">指导价格</th>
-								<th width="15%">折扣价格</th>
-								<th width="10%">创建时间</th>
-								<th width="10%">创建人</th>
-								<th width="10%"></th>
+								<th width="15%">logo</th>
+								<th width="15%">金融机构名称</th>
+								<th width="15%">联系电话</th>
+								<th width="15%">专属优惠</th>
+								<th width="15%">创建时间</th>
+								<th width="15%">创建人</th>
+								<th width="15%"></th>
 							</tr>
 						</thead>
 
 						<tbody>
-							<c:forEach items="${modelList}" var="modelList">
+							<c:forEach items="${lenderList}" var="lenderList">
 								<tr>
 									<td>
-										<label class='filelist col-sm-12'><a href="javascript:viewFile('${modelList.id }','${modelList.imageName}')">${modelList.imageName}</a></label>
+										<label class='filelist col-sm-12'><a href="javascript:viewFile('${lenderList.id }','${lenderList.imageName}')">${lenderList.imageName}</a></label>
 									</td>
-									<td>${modelList.vehicle}</td>
-									<td>${modelList.modelName}</td>
-									<td>${modelList.originalprice}</td>
-									<td>${modelList.discountprice}</td>
-									<td>${modelList.createDate}</td>
-									<td>${modelList.createName}</td>
+									<td>${lenderList.lenderName}</td>
+									<td>${lenderList.telephone}</td>
+									<td>${lenderList.privilegestile}</td>
+									<td>${lenderList.createDate}</td>
+									<td>${lenderList.createName}</td>
 									<td>
 										<!-- 列表按钮区域 -->
 										<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-											<button type="button" class="btn btn-xs btn-primary" onclick="editEntity('${modelList.id}')">编辑</button>
-											<button type="button" class="btn btn-xs btn-primary" onclick="deleteEntity('${modelList.id}')">删除</button>
-											<button type="button" class="btn btn-xs btn-primary" onclick="editFullpay('${modelList.id}-${modelList.modelName}');">全款购车</button>
-											<button type="button" class="btn btn-xs btn-primary" onclick="loan('${modelList.id}-${modelList.modelName}');">贷款购车</button>
+											<button type="button" class="btn btn-xs btn-primary" onclick="editEntity('${lenderList.id}')">编辑</button>
+											<button type="button" class="btn btn-xs btn-primary" onclick="deleteEntity('${lenderList.id}')">删除</button>
+											
 										</div>
 									</td>
 								</tr>

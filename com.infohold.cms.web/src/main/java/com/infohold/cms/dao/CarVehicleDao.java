@@ -77,6 +77,23 @@ public class CarVehicleDao extends BaseDao<BaseEntity> {
 		return super.excutePageQuery(sql.toString(),page);
 	}
 	/**
+	 * 4s店车辆信息列表查询
+	 * @param map
+	 * @param page
+	 * @return
+	 */
+	public List<Map<String, Object>> queryvehicleList2(String cardbrand,Page page){
+		StringBuffer sql = new StringBuffer();
+		sql.append("select vcl.id,");
+		sql.append("vcl.carbrand,");
+		sql.append("vcl.vehicleName,");
+		sql.append("vcl.url,");
+		sql.append("vcl.urlreal ");
+		sql.append("from fc_ssss_vehicle vcl ");
+		sql.append(" order by vcl.carbrand");
+		return super.excutePageQuery(sql.toString(),page);
+	}
+	/**
 	 * 保存4s店车辆信息
 	 * @param VersionEntity
 	 * @return boolean

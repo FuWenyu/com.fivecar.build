@@ -21,11 +21,6 @@
 	<link rel="stylesheet" href="<%=path%>/css/jquery-ui-1.10.3.full.min.css" />
 	<script src="<%=path%>/js/ace-extra.min.js"></script>
 	</head>
-	<!-- 该页面为iframe嵌套页面，以下代码用于计算iframe高度，不允许修改：
-			<body id="iframe_body" onload="setHash('${pageContext.request.contextPath}')">
-			<div id="iframeDiv" style="display:none"></div>
-			<div class="page-content" id="loadPageContent">
-	-->
 	<body id="iframe_body" onload="setHash('${pageContext.request.contextPath}')">
 		<div id="iframeDiv" style="display:none"></div>
 		<div class="page-content" id="loadPageContent">
@@ -33,7 +28,7 @@
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
 				<!-- 查询条件begin -->
-				<form class="col-xs-12" id="queryForm" name="qry_form" action="model.do?type=cms" method="post">
+				<form class="col-xs-12" id="queryForm" name="qry_form" action="loan.do" method="post">
 					<input class="hidden" type="text" name="tradeCode" id="tradeCode" data-min="2" data-max="20" value="T10010" />
 					<div class="row">
 						<div class="space-6"></div>
@@ -62,37 +57,34 @@
 					<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2">
 						<thead>
 							<tr>
-								<th width="10%">车型图片</th>
-								<th width="15%">所属车辆</th>
 								<th width="15%">车型名称</th>
-								<th width="10%">指导价格</th>
-								<th width="10%">折扣价格</th>
-								<th width="10%">创建时间</th>
-								<th width="10%">创建人</th>
-								<th width="20%"></th>
+								<th width="15%">金融机构</th>
+								<th width="10%">裸车价</th>
+								<th width="10%">首付</th>
+								<th width="5%">首付百分比</th>
+								<th width="10%">额外费用</th>
+								<th width="12%">创建时间</th>
+								<th width="13%">创建人</th>
+								<th width="10%"></th>
 							</tr>
 						</thead>
 
 						<tbody>
-							<c:forEach items="${modelList}" var="modelList">
+							<c:forEach items="${loanList}" var="loanList">
 								<tr>
-									<%-- javascript:viewFile('${modelList.from_url }','${modelList.file_name}') --%>
-									<td>
-										<label class='filelist col-sm-12'><a href="javascript:viewFile('${modelList.id }','${modelList.imageName}')">${modelList.imageName}</a></label>
-									</td>
-									<td>${modelList.vehicle}</td>
-									<td>${modelList.modelName}</td>
-									<td>${modelList.originalprice}</td>
-									<td>${modelList.discountprice}</td>
-									<td>${modelList.createDate}</td>
-									<td>${modelList.createName}</td>
+									<td>${loanList.modelName}</td>
+									<td>${loanList.lender}</td>
+									<td>${loanList.carprice}</td>
+									<td>${loanList.downpayment}</td>
+									<td>${loanList.downPaymentPercent}</td>
+									<td>${loanList.premium}</td>
+									<td>${loanList.createDate}</td>
+									<td>${loanList.createName}</td>
 									<td>
 										<!-- 列表按钮区域 -->
 										<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-											<button type="button" class="btn btn-xs btn-primary" onclick="editEntity('${modelList.id}')">编辑</button>
-											<button type="button" class="btn btn-xs btn-primary" onclick="deleteEntity('${modelList.id}')">删除</button>
-											<button type="button" class="btn btn-xs btn-primary" onclick="editFullpay('${modelList.id}-${modelList.modelName}');">全款购车</button>
-											<button type="button" class="btn btn-xs btn-primary" onclick="loan('${modelList.id}-${modelList.modelName}');">贷款购车</button>
+											<button type="button" class="btn btn-xs btn-primary" onclick="editEntity('${modelid}-${modelName}-${loanList.id}')">编辑</button>
+											<button type="button" class="btn btn-xs btn-primary" onclick="deleteEntity('${modelid}-${modelName}-${loanList.id}')">删除</button>
 										</div>
 									</td>
 								</tr>
@@ -103,7 +95,7 @@
 						<div class="col-sm-4">
 							<div class="btn-group">
 								<!-- 列表底部按钮区域 -->
-							 	<button class="btn btn-sm btn-primary" onclick="addEntity();"
+							 	<button class="btn btn-sm btn-primary" onclick="addEntity('${modelid}-${modelName}');"
 									type="button">新增</button> 
 							</div>
 						</div>
@@ -211,7 +203,7 @@
 		{
 			var param = $("#queryForm").serialize();
 			param += "&qry_type=qry";
-			$.post("model.do", param, function(result) {			
+			$.post("loan.do", param, function(result) {			
 				$("#qryContent").html(result).hide();
 				$("#qryContent").fadeIn('fast');
 				setHash('${pageContext.request.contextPath}');
@@ -222,29 +214,19 @@
 			window.open("<%=path%>/upload/image/"+file_name);
 		}
 		//跳转至图片新增页面
-		function addEntity(){
-			window.location="<%=path%>/mvc/model_add.do";
+		function addEntity(model){
+			window.location="<%=path%>/mvc/loan_add.do?model="+model+"";
 		};
 		//跳转至图片编辑页面
-		function editEntity(id){
-			window.location="<%=path%>/mvc/model_edit.do?id="+id+"";
+		function editEntity(model){
+			window.location="<%=path%>/mvc/loan_edit.do?model="+model+"";
 		};
-		//跳转至全款购车编辑页面
-		function editFullpay(model){
-			window.location="<%=path%>/mvc/fullpay_edit.do?model="+model+"";
-		};
-		//跳转至贷款购车编辑页面
-		function loan(model){
-			window.location="<%=path%>/mvc/loan.do?model="+model+"";
+		function addSalesEntity(){
+			window.location="<%=path%>/mvc/sales_add.do";
 		};
 		//删除图片By id
-		function deleteEntity(modelid){
-			//异步删除 成功后跳转页面
-			var param={};
-			param["id"]=modelid;
-			$.post("<%=path%>/mvc/model_delete.do",param,function(result){
-				movePage(1);
-			});
+		function deleteEntity(model){
+			window.location="<%=path%>/mvc/loan_delete.do?model="+model+"";
 		};
 	</script>
 	</body>

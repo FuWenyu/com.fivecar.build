@@ -100,6 +100,9 @@ public class CarFullPaymentlService implements IBusinessService {
 		Object  OtherInsurance1 = map.get("OtherInsurance");
 		BigDecimal OtherInsurance = MathUtils.getBigDecimal(OtherInsurance1);
 		
+		Object  price1 = map.get("price");
+		BigDecimal price = MathUtils.getBigDecimal(price1);
+		
 		String createName = session.getUserName();
 		Timestamp createDate = dateutil.getTimestamp();
 
@@ -109,6 +112,7 @@ public class CarFullPaymentlService implements IBusinessService {
 			CarFullPaymentEntity carFullPaymententitynew = new CarFullPaymentEntity();
 			carFullPaymententitynew.setModelid(modelid);
 			carFullPaymententitynew.setModelName(modelName);
+			carFullPaymententitynew.setPrice(price);
 			carFullPaymententitynew.setTax(tax);
 			carFullPaymententitynew.setCompulsoryInsurance(CompulsoryInsurance);
 			carFullPaymententitynew.setLicensePlate(LicensePlate);
@@ -123,6 +127,7 @@ public class CarFullPaymentlService implements IBusinessService {
 		}else {
 //			carFullPaymententity.setModelid(modelid);
 			carFullPaymententity.setModelName(modelName);
+			carFullPaymententity.setPrice(price);
 			carFullPaymententity.setTax(tax);
 			carFullPaymententity.setCompulsoryInsurance(CompulsoryInsurance);
 			carFullPaymententity.setLicensePlate(LicensePlate);

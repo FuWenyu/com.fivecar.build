@@ -33,7 +33,7 @@
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
 				<!-- 查询条件begin -->
-				<form class="col-xs-12" id="queryForm" name="qry_form" action="model.do?type=cms" method="post">
+				<form class="col-xs-12" id="queryForm" name="qry_form" action="lender.do?type=cms" method="post">
 					<input class="hidden" type="text" name="tradeCode" id="tradeCode" data-min="2" data-max="20" value="T10010" />
 					<div class="row">
 						<div class="space-6"></div>
@@ -62,37 +62,33 @@
 					<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2">
 						<thead>
 							<tr>
-								<th width="10%">车型图片</th>
-								<th width="15%">所属车辆</th>
-								<th width="15%">车型名称</th>
-								<th width="10%">指导价格</th>
-								<th width="10%">折扣价格</th>
-								<th width="10%">创建时间</th>
-								<th width="10%">创建人</th>
-								<th width="20%"></th>
+								<th width="15%">logo</th>
+								<th width="15%">金融机构名称</th>
+								<th width="15%">联系电话</th>
+								<th width="15%">专属优惠</th>
+								<th width="15%">创建时间</th>
+								<th width="15%">创建人</th>
+								<th width="15%"></th>
 							</tr>
 						</thead>
 
 						<tbody>
-							<c:forEach items="${modelList}" var="modelList">
+							<c:forEach items="${lenderList}" var="lenderList">
 								<tr>
-									<%-- javascript:viewFile('${modelList.from_url }','${modelList.file_name}') --%>
+									<%-- javascript:viewFile('${lenderList.from_url }','${lenderList.file_name}') --%>
 									<td>
-										<label class='filelist col-sm-12'><a href="javascript:viewFile('${modelList.id }','${modelList.imageName}')">${modelList.imageName}</a></label>
+										<label class='filelist col-sm-12'><a href="javascript:viewFile('${lenderList.id }','${lenderList.imageName}')">${lenderList.imageName}</a></label>
 									</td>
-									<td>${modelList.vehicle}</td>
-									<td>${modelList.modelName}</td>
-									<td>${modelList.originalprice}</td>
-									<td>${modelList.discountprice}</td>
-									<td>${modelList.createDate}</td>
-									<td>${modelList.createName}</td>
+									<td>${lenderList.lenderName}</td>
+									<td>${lenderList.telephone}</td>
+									<td>${lenderList.privilegestile}</td>
+									<td>${lenderList.createDate}</td>
+									<td>${lenderList.createName}</td>
 									<td>
 										<!-- 列表按钮区域 -->
 										<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-											<button type="button" class="btn btn-xs btn-primary" onclick="editEntity('${modelList.id}')">编辑</button>
-											<button type="button" class="btn btn-xs btn-primary" onclick="deleteEntity('${modelList.id}')">删除</button>
-											<button type="button" class="btn btn-xs btn-primary" onclick="editFullpay('${modelList.id}-${modelList.modelName}');">全款购车</button>
-											<button type="button" class="btn btn-xs btn-primary" onclick="loan('${modelList.id}-${modelList.modelName}');">贷款购车</button>
+											<button type="button" class="btn btn-xs btn-primary" onclick="editEntity('${lenderList.id}')">编辑</button>
+											<button type="button" class="btn btn-xs btn-primary" onclick="deleteEntity('${lenderList.id}')">删除</button>
 										</div>
 									</td>
 								</tr>
@@ -211,7 +207,7 @@
 		{
 			var param = $("#queryForm").serialize();
 			param += "&qry_type=qry";
-			$.post("model.do", param, function(result) {			
+			$.post("lender.do", param, function(result) {			
 				$("#qryContent").html(result).hide();
 				$("#qryContent").fadeIn('fast');
 				setHash('${pageContext.request.contextPath}');
@@ -223,26 +219,26 @@
 		}
 		//跳转至图片新增页面
 		function addEntity(){
-			window.location="<%=path%>/mvc/model_add.do";
+			window.location="<%=path%>/mvc/lender_add.do";
 		};
 		//跳转至图片编辑页面
 		function editEntity(id){
-			window.location="<%=path%>/mvc/model_edit.do?id="+id+"";
+			window.location="<%=path%>/mvc/lender_edit.do?id="+id+"";
 		};
 		//跳转至全款购车编辑页面
-		function editFullpay(model){
-			window.location="<%=path%>/mvc/fullpay_edit.do?model="+model+"";
+		function editFullpay(lender){
+			window.location="<%=path%>/mvc/fullpay_edit.do?lender="+lender+"";
 		};
 		//跳转至贷款购车编辑页面
-		function loan(model){
-			window.location="<%=path%>/mvc/loan.do?model="+model+"";
+		function loan(lender){
+			window.location="<%=path%>/mvc/vehicle_edit.do?lender="+lender+"";
 		};
 		//删除图片By id
-		function deleteEntity(modelid){
+		function deleteEntity(lenderid){
 			//异步删除 成功后跳转页面
 			var param={};
-			param["id"]=modelid;
-			$.post("<%=path%>/mvc/model_delete.do",param,function(result){
+			param["id"]=lenderid;
+			$.post("<%=path%>/mvc/lender_delete.do",param,function(result){
 				movePage(1);
 			});
 		};
