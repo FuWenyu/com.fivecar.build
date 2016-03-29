@@ -235,28 +235,28 @@ public enum TradeCodeDef implements Serializable {
 		case T27007:
 			return "暂不用";
 		case T27008:
-			return "暂不用";
+			return "APP全款购车查询";
 		case T27009:
 			return "暂不用";
 		case T27010:
 			return "暂不用";
 			
 		case T28001:
-			return "4s店全款购车编辑查询";
+			return "贷款信息列表";
 		case T28002:
-			return "4s店全款购车编辑保存";
+			return "贷款信息新增查询";
 		case T28003:
-			return "4s店全款购车app请求";
+			return "贷款信息新增保存";
 		case T28004:
-			return "暂不用";
+			return "贷款信息删除";
 		case T28005:
-			return "暂不用";
+			return "贷款信息编辑查询";
 		case T28006:
-			return "暂不用";
+			return "贷款信息编辑保存";
 		case T28007:
-			return "暂不用";
+			return "APP车型贷款查询";
 		case T28008:
-			return "暂不用";
+			return "贷款信息资源查询";
 		case T28009:
 			return "暂不用";
 		case T28010:

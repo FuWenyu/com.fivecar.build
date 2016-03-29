@@ -81,7 +81,7 @@ public class CarLoanDao extends BaseDao<BaseEntity> {
 	 * @param page
 	 * @return
 	 */
-	public List<Map<String, Object>> queryloanList1(Page page){
+	public List<Map<String, Object>> queryloanList1(String modelid,Page page){
 		StringBuffer sql = new StringBuffer();
 		sql.append("select loan.modelid,");
 		sql.append("loan.id,");
@@ -89,13 +89,19 @@ public class CarLoanDao extends BaseDao<BaseEntity> {
 		sql.append("loan.carprice,");
 		sql.append("loan.downpayment,");
 		sql.append("loan.downPaymentPercent,");
-		sql.append("loan.loanInstitution,");
 		sql.append("loan.premium,");
+		sql.append("loan.lenderId,");
+		sql.append("loan.lender,");
+		sql.append("loan.lenderLogo,");
 		sql.append("loan.loan12,");
 		sql.append("loan.loan24,");
 		sql.append("loan.loan36,");
-		sql.append("loan.loan48,");
+		sql.append("loan.loan48 ");
 		sql.append("from fc_ssss_loan loan ");
+		sql.append("where loan.modelid = ");
+		sql.append("'");
+		sql.append(modelid);
+		sql.append("'");
 
 		return super.excutePageQuery(sql.toString(),page);
 	}

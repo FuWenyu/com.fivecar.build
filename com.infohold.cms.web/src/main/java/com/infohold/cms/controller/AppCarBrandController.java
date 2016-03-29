@@ -121,9 +121,8 @@ public class AppCarBrandController extends CentreController{
 		return map;
 	}
 	
-
 	/**
-	 * APP-4s店信息列表查询
+	 * APP-全款购车查询
 	 * 
 	 * @param httpServletRequest
 	 * @return map
@@ -150,4 +149,31 @@ public class AppCarBrandController extends CentreController{
 		return map;
 	}
 	
+	
+	/**
+	 * APP-贷款购车查询
+	 * 
+	 * @param httpServletRequest
+	 * @return map
+	 */
+	
+	@RequestMapping("/app/carloan.do")
+	@ResponseBody
+	public Map<String, Object> Carloan(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletresponse) throws Exception {
+		TransData transData = new TransData();
+		transData.setServiceName("loanService");
+		transData.setTradeCode("T28007");
+		transData=super.doService(httpServletRequest, transData);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(!"".equals(transData.getExpCode())){
+			map.put("expCode", transData.getExpCode());
+			map.put("expMsg", transData.getExpMsg());
+			List<Map<String, Object>> loanlist = (List<Map<String, Object>>)transData.getObj();
+			map.put("loanlist", loanlist);
+			return map;
+		}
+		System.out.println(map);
+		return map;
+	}
 }

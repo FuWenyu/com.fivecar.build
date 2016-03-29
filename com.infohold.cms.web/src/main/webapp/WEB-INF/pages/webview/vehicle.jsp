@@ -113,7 +113,7 @@
 			</div>
 			<div class="wc05_text3">${modellist.Carabstract}</div>
 			<div class="wc05_text4">
-				<a href="wc://LoanBuy?id=${modellist.modelid}">全款明细</a>
+				<a href="wc://FullBuy?id=${modellist.modelid}">全款明细</a>
 			</div>
 			<div class="wc05_text5">
 				<a href="wc://LoanBuy?id=${modellist.modelid}">贷款购车</a>

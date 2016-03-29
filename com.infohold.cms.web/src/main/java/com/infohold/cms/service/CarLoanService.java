@@ -42,7 +42,7 @@ public class CarLoanService implements IBusinessService {
 		if (tradCode.equals("T28001")) {
 			return this.findloanList(transData);
 		} else if (tradCode.equals("T28002")) {
-			return this.querybrand(transData);
+			return this.querylender(transData);
 		} else if (tradCode.equals("T28003")) {
 			return this.saveloan(transData);
 		} else if (tradCode.equals("T28004")) {
@@ -83,7 +83,7 @@ public class CarLoanService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData querybrand(TransData transData) throws BusinessException {
+	public TransData querylender(TransData transData) throws BusinessException {
 		List<Map<String, Object>> orgList = loandao.querylenderList(transData
 				.getPageInfo());
 		transData.setObj(orgList);
@@ -254,9 +254,8 @@ public class CarLoanService implements IBusinessService {
 	public TransData loanQuery(TransData transData) throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
 		logger.info("loanQuery-request:"+map);
-		String loan = (String) map.get("loan");
-		if (loan.equals("loan")) {
-			List<Map<String, Object>> loanlist = loandao.queryloanList1(transData.getPageInfo());
+		String modelid = (String) map.get("modelid");
+			List<Map<String, Object>> loanlist = loandao.queryloanList1(modelid,transData.getPageInfo());
 			if (loanlist == null) {
 				transData.setExpCode("-1");
 				transData.setExpMsg("fail");
@@ -265,7 +264,6 @@ public class CarLoanService implements IBusinessService {
 				transData.setExpCode("1");
 				transData.setExpMsg("success");
 			}
-		}
 		return transData;
 	}
 	/**
