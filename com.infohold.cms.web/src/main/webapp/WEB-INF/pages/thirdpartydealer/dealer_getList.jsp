@@ -33,7 +33,7 @@
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
 				<!-- 查询条件begin -->
-				<form class="col-xs-12" id="queryForm" name="qry_form" action="dealer.do" method="post">
+				<form class="col-xs-12" id="queryForm" name="qry_form" action="tpdealer.do" method="post">
 					<input class="hidden" type="text" name="tradeCode" id="tradeCode" data-min="2" data-max="20" value="T10010" />
 					<div class="row">
 						<div class="space-6"></div>
@@ -62,32 +62,30 @@
 					<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2">
 						<thead>
 							<tr>
-								<th width="10%">经营品牌</th>
-								<th width="15%">4s店名称</th>
+								<th width="20%">经销商名称</th>
 								<th width="15%">联系电话</th>
 								<th width="20%">地址</th>
-								<th width="12%">创建时间</th>
-								<th width="13%">创建人</th>
+								<th width="15%">创建时间</th>
+								<th width="15%">创建人</th>
 								<th width="15%"></th>
 							</tr>
 						</thead>
 
 						<tbody>
-							<c:forEach items="${dealerList}" var="dealerList">
+							<c:forEach items="${tpdealerList}" var="tpdealerList">
 								<tr>
-									<td>${dealerList.carbrand}</td>
-									<td>${dealerList.dealerName}</td>
-									<td>${dealerList.telephone}</td>
-									<td>${dealerList.addr}</td>
-									<td>${dealerList.createDate}</td>
-									<td>${dealerList.createName}</td>
+									<td>${tpdealerList.dealerName}</td>
+									<td>${tpdealerList.telephone}</td>
+									<td>${tpdealerList.addr}</td>
+									<td>${tpdealerList.createDate}</td>
+									<td>${tpdealerList.createName}</td>
 									<td>
 										<!-- 列表按钮区域 -->
 										<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 											<%-- <button type="button" class="btn btn-xs btn-primary" onclick="addversionEntity()">新增</button>
-											<button type="button" class="btn btn-xs btn-primary" onclick="viewEntity('${dealerList.id}')">查看</button> --%>
-											<button type="button" class="btn btn-xs btn-primary" onclick="editEntity('${dealerList.id}')">编辑</button>
-											<button type="button" class="btn btn-xs btn-primary" onclick="deleteEntity('${dealerList.id}')">删除</button>
+											<button type="button" class="btn btn-xs btn-primary" onclick="viewEntity('${tpdealerList.id}')">查看</button> --%>
+											<button type="button" class="btn btn-xs btn-primary" onclick="editEntity('${tpdealerList.id}')">编辑</button>
+											<button type="button" class="btn btn-xs btn-primary" onclick="deleteEntity('${tpdealerList.id}')">删除</button>
 											<button type="button" class="btn btn-xs btn-primary" onclick="addSalesEntity();">添加销售员</button>
 										</div>
 									</td>
@@ -207,7 +205,7 @@
 		{
 			var param = $("#queryForm").serialize();
 			param += "&qry_type=qry";
-			$.post("dealer.do", param, function(result) {			
+			$.post("tpdealer.do", param, function(result) {			
 				$("#qryContent").html(result).hide();
 				$("#qryContent").fadeIn('fast');
 				setHash('${pageContext.request.contextPath}');
@@ -219,21 +217,21 @@
 		}
 		//跳转至图片新增页面
 		function addEntity(){
-			window.location="<%=path%>/mvc/dealer_add.do";
+			window.location="<%=path%>/mvc/tpdealer_add.do";
 		};
 		//跳转至图片编辑页面
 		function editEntity(id){
-			window.location="<%=path%>/mvc/dealer_edit.do?id="+id+"";
+			window.location="<%=path%>/mvc/tpdealer_edit.do?id="+id+"";
 		};
 		function addSalesEntity(){
 			window.location="<%=path%>/mvc/sales_add.do";
 		};
 		//删除图片By id
-		function deleteEntity(dealerid){
+		function deleteEntity(tpdealerid){
 			//异步删除 成功后跳转页面
 			var param={};
-			param["id"]=dealerid;
-			$.post("<%=path%>/mvc/dealer_delete.do",param,function(result){
+			param["id"]=tpdealerid;
+			$.post("<%=path%>/mvc/tpdealer_delete.do",param,function(result){
 				movePage(1);
 			});
 		};

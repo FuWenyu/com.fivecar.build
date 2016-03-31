@@ -29,6 +29,8 @@ public class ThirdPartyDealerEntity extends BaseEntity {
 	private java.lang.String telephone;
 	/**图文资源id*/
 	private java.lang.String resourceid;
+	/**经营项目box*/
+	private java.lang.String thirdparty_type;
 	/**经营保养项目*/
 	private boolean maintain;
 	/**经营维修项目*/
@@ -94,10 +96,24 @@ public class ThirdPartyDealerEntity extends BaseEntity {
 	public void setTelephone(java.lang.String telephone) {
 		this.telephone = telephone;
 	}
+	
+	/**
+	 * @return the thirdparty_type
+	 */
+	@Column(name ="thirdparty_type",columnDefinition="varchar(64)default ''")
+	public java.lang.String getThirdparty_type() {
+		return thirdparty_type;
+	}
+	/**
+	 * @param thirdparty_type the thirdparty_type to set
+	 */
+	public void setThirdparty_type(java.lang.String thirdparty_type) {
+		this.thirdparty_type = thirdparty_type;
+	}
 	/**
 	 * @return the maintain
 	 */
-	@Column(name ="maintain",nullable=false,columnDefinition="tinyint(1)default ''0")
+	@Column(name ="maintain",nullable=false,columnDefinition="tinyint(1)default '0'")
 	public boolean isMaintain() {
 		return maintain;
 	}
@@ -111,7 +127,7 @@ public class ThirdPartyDealerEntity extends BaseEntity {
 	/**
 	 * @return the repair
 	 */
-	@Column(name ="repair",nullable=false,columnDefinition="tinyint(1)default ''0")
+	@Column(name ="repair",nullable=false,columnDefinition="tinyint(1)default '0'")
 	public boolean isRepair() {
 		return repair;
 	}
@@ -124,7 +140,7 @@ public class ThirdPartyDealerEntity extends BaseEntity {
 	/**
 	 * @return the parts
 	 */
-	@Column(name ="parts", nullable=false,columnDefinition="tinyint(1)default ''0")
+	@Column(name ="parts", nullable=false,columnDefinition="tinyint(1)default '0'")
 	public boolean isParts() {
 		return parts;
 	}

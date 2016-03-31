@@ -38,30 +38,29 @@
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id"> </label>
 					</div>
-					<%-- <input id="VERSION_FOR" type="hidden" class="" name="VERSION_FOR"   value="${dealer.version_flag}" />	
-					<input id="version_ol" type="hidden" class="" name="version_ol"   value="${dealer.version_online}" />	 --%>
-					<input id="dealer_id" type="hidden" class="" name="dealer_id" value="${dealer.id}" />
-					<input id="carbrand1" type="hidden" class="" name="carbrand1" value="${dealer.carbrandid}-${dealer.carbrand}" />
-					<input id="resource" type="hidden" class="" name="resource" value="${dealer.resourceid}-${dealer.privilegestile}-${dealer.privileges}" />
-					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="id">
-							经营品牌</label>
-						<div class="col-sm-9">
-							<select class="input-medium"  id="carbrand" name="carbrand">
-							<c:forEach items="${brandList}" var="list" varStatus="status">
-	                        <option value="${list.id}-${list.brandNamecn}">${list.initial}-${list.brandNamecn}</option>
-	               		    </c:forEach>
-               		    </select>
+					<input id="tpdealer_id" type="hidden" class="" name="tpdealer_id" value="${tpdealer.id}" />
+					<input id="resource" type="hidden" class="" name="resource" value="${tpdealer.resourceid}-${tpdealer.privilegestile}-${tpdealer.privileges}" />
+						<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">经营项目</label>
+							<div class="col-sm-9">	
+								<div class="checkbox">
+									<input name="thirdparty_type_check"	id="thirdparty_type_check" type="hidden" value="${tpdealer.thirdparty_type }"/>
+									<label><input name="thirdparty_type"	id="thirdparty_type" type="checkbox" class="ace"
+										value="1"><span class="lbl">保养</span></label>
+									<label><input name="thirdparty_type" id="thirdparty_type" type="checkbox" class="ace" 
+									    value="2"><span class="lbl">维修</span></label>
+									 <label><input name="thirdparty_type" id="thirdparty_type" type="checkbox" class="ace" 
+									 	value="3"><span class="lbl">配件</span></label>
+								</div>
+							</div>
 						</div>
-					</div>
-					
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
 							4s店全名 </label>
 						<div class="col-sm-9">
-							<input type="text" id="dealerName" name="dealerName" placeholder="请输入4s店全名 "
+							<input type="text" id="tpdealerName" name="tpdealerName" placeholder="请输入4s店全名 "
 								class="col-xs-10 col-sm-5"
-								value="${dealer.dealerName}" /> <span style="color: red"></span>
+								value="${tpdealer.dealerName}" /> <span style="color: red"></span>
 						</div>
 					</div>
 					<div class="form-group">
@@ -71,7 +70,7 @@
 						<div class="col-sm-9">
 							<input type="text" id="telephone" name="telephone" placeholder="请输入联系电话 "
 								class="col-xs-10 col-sm-5"
-								value="${dealer.telephone}" /> <span style="color: red"></span>
+								value="${tpdealer.telephone}" /> <span style="color: red"></span>
 						</div>
 					</div>
 					<div class="form-group">
@@ -81,7 +80,7 @@
 						<div class="col-sm-9">
 							<input type="text" id="addr" name="addr" placeholder="请输入4s店地址 "
 								class="col-xs-10 col-sm-5"
-								value="${dealer.addr}" /> <span style="color: red"></span>
+								value="${tpdealer.addr}" /> <span style="color: red"></span>
 						</div>
 					</div>
 					<div class="form-group">
@@ -89,7 +88,7 @@
 							4s店简介 </label>
 						<div class="col-sm-9">
 							<input type="text" id=description placeholder="请输入4s店简介"
-								class="col-xs-10 col-sm-5" name="description" value="${dealer.description}" />
+								class="col-xs-10 col-sm-5" name="description" value="${tpdealer.description}" />
 						</div>
 					</div>
 					
@@ -112,7 +111,7 @@
 							</button>
 		
 							&nbsp; &nbsp; &nbsp;
-							<button class="btn" type="button" onclick="javascript:window.location = '<%=path%>/mvc/dealer.do';">
+							<button class="btn" type="button" onclick="javascript:window.location = '<%=path%>/mvc/tpdealer.do';">
 								<i class="icon-reply bigger-110"></i> 返回
 							</button>
 						</div>
@@ -168,33 +167,34 @@
 	<script type="text/javascript">
 		/*********页面加载区域**********/
 		jQuery(function($) {
-			var carbrand1 = document.getElementById('carbrand1').value;
 			var resource = document.getElementById('resource').value;
-			checkOption('carbrand',carbrand1);
 			checkOption('anchor',resource);
 			
 			$(window).resize(function() {
 				setHash('${pageContext.request.contextPath}');
 			});
 		});
+		jQuery(function($){
+			var thirdparty_type=$("#thirdparty_type_check").val().split(",");
+			for(var i=0;i<thirdparty_type.length;i++){
+				$('[name="thirdparty_type"]:checkbox').each(function(){if(this.value==thirdparty_type[i]){this.checked=true;}});
+			}
+		});
 		/*********自定于方法**********/
 		//表单提交
 		function subForm() {
-			if (!checkData('carbrand', '经营品牌', 'input')) {
-				return;
-			}
 			
 			if (!checkData('anchor', '五车专享特权', 'input')) {
 				return;
 			}
 			
-			if (!checkData('dealerName', '4s店全名', 'input')) {
+			if (!checkData('tpdealerName', '4s店全名', 'input')) {
 				return;
 			}
-			if (!checkData('dealerName', '4s店全名', 'illegal')) {
+			if (!checkData('tpdealerName', '4s店全名', 'illegal')) {
 				return;
 			}
-			if (!limitCheck('dealerName', '4s店全名', 64)) {
+			if (!limitCheck('tpdealerName', '4s店全名', 64)) {
 				return;
 			}
 			
@@ -214,16 +214,24 @@
 			if (!checkData('description', '4s店简介 ', 'input')) {
 				return;
 			}
+			param = {};
+			param["thirdparty_type"]=$("input[name='thirdparty_type']:checked").serialize();
+			param["tpdealer_id"]=$("#tpdealer_id").val();
+			param["tpdealerName"]=$("#tpdealerName").val();
+			param["telephone"]=$("#telephone").val();
+			param["addr"]=$("#addr").val();
+			param["description"]=$("#description").val();
+			param["anchor"]=$("#anchor").val();
 			$.ajax({
 				type : "POST",
-				url : "<%=path%>/mvc/dealer_editSave.do",
-				data : $("#sub_form").serialize(),
+				url : "<%=path%>/mvc/tpdealer_editSave.do",
+				data : param,
 				async : false,
 				dataType:'json',
 				success : function(data) {
 					if(data.msg == "success"){
 						alert("保存成功！");
-						window.location = "<%=path%>/mvc/dealer.do";
+						window.location = "<%=path%>/mvc/tpdealer.do";
 					}else{
 						alert("保存失败:"+data.msg);
 					}

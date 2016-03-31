@@ -60,13 +60,9 @@ public class ThirdPartyDealerController extends CentreController{
 		ModelAndView mav = new ModelAndView();
 		TransData transData = new TransData();
 		transData.setServiceName("tpdealerService");
-		transData.setTradeCode("T36002");
-		transData=super.doService(httpServletRequest, transData);
-		List<Map<String, Object>> brandList = (List<Map<String, Object>>)transData.getObj();
 		transData.setTradeCode("T36008");
 		transData=super.doService(httpServletRequest, transData);
 		mav.addObject("resourcesList",transData.getObj());
-		mav.addObject("brandList", brandList);
 		mav.setViewName("/thirdpartydealer/dealer_add");
 		return mav;
 	}
@@ -81,6 +77,7 @@ public class ThirdPartyDealerController extends CentreController{
 	@ResponseBody
 	public Map<String,Object> pictureadd(HttpServletRequest httpServletRequest) {
 		TransData transData = new TransData();
+//		String g =httpServletRequest.getParameter("thirdparty_type");
 		transData.setServiceName("tpdealerService");
 		transData.setTradeCode("T36003");
 		transData=super.doService(httpServletRequest, transData);
@@ -120,10 +117,6 @@ public class ThirdPartyDealerController extends CentreController{
 		ModelAndView mav = new ModelAndView();
 		ThirdPartyDealerEntity tpdealer = (ThirdPartyDealerEntity) transData.getObj();
 		mav.addObject("tpdealer",tpdealer);
-		transData.setTradeCode("T36002");
-		transData=super.doService(httpServletRequest, transData);
-		List<Map<String, Object>> brandList = (List<Map<String, Object>>)transData.getObj();
-		mav.addObject("brandList", brandList);
 		transData.setTradeCode("T36008");
 		transData=super.doService(httpServletRequest, transData);
 		mav.addObject("resourcesList",transData.getObj());

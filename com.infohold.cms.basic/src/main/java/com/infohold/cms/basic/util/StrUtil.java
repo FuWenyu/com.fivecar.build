@@ -164,7 +164,25 @@ public class StrUtil {
         String data=str.toString().replace("\"","'");
         return data;
     }  
-    
+    /**
+     * 将String 转换成MAP对象
+     * @param map
+     * @return
+     */
+    public static Map<String, Object> getMap(String param) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        if ("".equals(param) || null == param) {
+            return map;
+        }
+        String[] params = param.split("&");
+        for (int i = 0; i < params.length; i++) {
+            String[] p = params[i].split("=");
+            if (p.length == 2) {
+                map.put(p[0], p[1]);
+            }
+        }
+        return map;
+    }
 	
 	/**
 	 * 测试入口

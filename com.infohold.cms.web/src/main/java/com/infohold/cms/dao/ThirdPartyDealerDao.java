@@ -29,7 +29,10 @@ public class ThirdPartyDealerDao extends BaseDao<BaseEntity> {
 		StringBuffer sql = new StringBuffer();
 		sql.append("select dle.id,");
 		sql.append("dle.dealerName,");
-		sql.append("dle.carbrand,");
+		sql.append("dle.thirdparty_type,");
+		sql.append("dle.maintain,");
+		sql.append("dle.repair,");
+		sql.append("dle.parts,");
 		sql.append("dle.privileges,");
 		sql.append("dle.privilegesurl,");
 		sql.append("dle.privilegestile,");
@@ -67,7 +70,10 @@ public class ThirdPartyDealerDao extends BaseDao<BaseEntity> {
 	public List<Map<String, Object>> querydealerList1(Page page){
 		StringBuffer sql = new StringBuffer();
 		sql.append("select dle.id,");
-		sql.append("dle.carbrand,");
+		sql.append("dle.thirdparty_type,");
+		sql.append("dle.maintain,");
+		sql.append("dle.repair,");
+		sql.append("dle.parts,");
 		sql.append("dle.privileges,");
 		sql.append("dle.privilegesurl,");
 		sql.append("dle.privilegestile,");
@@ -129,7 +135,10 @@ public class ThirdPartyDealerDao extends BaseDao<BaseEntity> {
 		StringBuffer sql = new StringBuffer();
 		sql.append("select dle.id,");
 		sql.append("dle.dealerName,");
-		sql.append("dle.carbrand,");
+		sql.append("dle.thirdparty_type,");
+		sql.append("dle.maintain,");
+		sql.append("dle.repair,");
+		sql.append("dle.parts,");
 		sql.append("dle.privileges,");
 		sql.append("dle.resourceid,");
 		sql.append("dle.privilegesurl,");

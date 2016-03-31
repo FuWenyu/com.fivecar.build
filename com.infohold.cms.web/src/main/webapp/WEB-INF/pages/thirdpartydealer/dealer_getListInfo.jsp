@@ -9,12 +9,11 @@
 					<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2">
 						<thead>
 							<tr>
-								<th width="10%">经营品牌</th>
-								<th width="15%">4s店名称</th>
+								<th width="20%">经销商名称</th>
 								<th width="15%">联系电话</th>
 								<th width="20%">地址</th>
-								<th width="12%">创建时间</th>
-								<th width="13%">创建人</th>
+								<th width="15%">创建时间</th>
+								<th width="15%">创建人</th>
 								<th width="15%"></th>
 							</tr>
 						</thead>
@@ -22,17 +21,16 @@
 						<tbody>
 							<c:forEach items="${dealerList}" var="dealerList">
 								<tr>
-									<td>${dealerList.carbrand}</td>
-									<td>${dealerList.dealerName}</td>
-									<td>${dealerList.telephone}</td>
-									<td>${dealerList.addr}</td>
-									<td>${dealerList.createDate}</td>
-									<td>${dealerList.createName}</td>
+									<td>${tpdealerList.dealerName}</td>
+									<td>${tpdealerList.telephone}</td>
+									<td>${tpdealerList.addr}</td>
+									<td>${tpdealerList.createDate}</td>
+									<td>${tpdealerList.createName}</td>
 									<td>
 										<!-- 列表按钮区域 -->
 										<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-											<button type="button" class="btn btn-xs btn-primary" onclick="editEntity('${vehicleList.id}')">编辑</button>
-											<button type="button" class="btn btn-xs btn-primary" onclick="deleteEntity('${vehicleList.id}')">删除</button>
+											<button type="button" class="btn btn-xs btn-primary" onclick="editEntity('${tpdealerList.id}')">编辑</button>
+											<button type="button" class="btn btn-xs btn-primary" onclick="deleteEntity('${tpdealerList.id}')">删除</button>
 											<button type="button" class="btn btn-xs btn-primary" onclick="addSalesEntity();">添加销售员</button>
 										</div>
 									</td>

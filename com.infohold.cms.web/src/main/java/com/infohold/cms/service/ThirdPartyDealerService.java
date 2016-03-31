@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.infohold.cms.basic.common.TransData;
 import com.infohold.cms.basic.common.UserSession;
-import com.infohold.cms.basic.controller.CentreController;
 import com.infohold.cms.basic.exception.BusinessException;
 import com.infohold.cms.basic.service.IBusinessService;
+import com.infohold.cms.basic.util.StrUtil;
 import com.infohold.cms.basic.util.SysConfigUtil;
 import com.infohold.cms.dao.ThirdPartyDealerDao;
 import com.infohold.cms.entity.ThirdPartyDealerEntity;
@@ -35,7 +35,7 @@ public class ThirdPartyDealerService implements IBusinessService {
 	private SysConfigUtil sysConfigUtil;
 
 	private DateUtil dateutil = new DateUtil();
-
+	
 	private Logger logger = Logger.getLogger(ThirdPartyDealerService.class);
 	
 	@Override
@@ -94,8 +94,8 @@ public class ThirdPartyDealerService implements IBusinessService {
 		// 保存数据库
 		Map<String, Object> map = transData.getViewMap();
 		UserSession session = transData.getUserSession();
-		String dealerName = (String) map.get("dealerName");
-		String ThirdPartybrandall = (String) map.get("ThirdPartybrand");
+		String tpdealerName = (String) map.get("tpdealerName");
+		String thirdparty_type = (String) map.get("thirdparty_type");
 		String anchor = (String) map.get("anchor");
 		String telephone = (String) map.get("telephone");
 		String addr = (String) map.get("addr");
@@ -104,10 +104,30 @@ public class ThirdPartyDealerService implements IBusinessService {
 		String createName = session.getUserName();
 		Timestamp createDate = dateutil.getTimestamp();
 
-		String[] strarray = ThirdPartybrandall.split("-");
-		String ThirdPartybrandid = strarray[0];
-		String ThirdPartybrandname = strarray[1];
+		boolean maintain = false;
+		boolean repair = false;
+		boolean parts = false;
 		
+		StringBuffer thirdparty_type1 = new StringBuffer();
+        String[] params = thirdparty_type.split("&");
+        for (int i = 0; i < params.length; i++) {
+            String[] p = params[i].split("=");
+            if (p.length == 2) {
+            	thirdparty_type1.append(p[1]);
+            }
+            if ((params.length-i)>1) {
+            	thirdparty_type1.append(",");
+			}
+            if ("1".equals(p[1])) {
+            	maintain=true;
+			}
+            if ("2".equals(p[1])) {
+            	repair=true;
+            }
+            if ("3".equals(p[1])) {
+            	parts=true;
+            }
+        }
 		String[] strarray1 = anchor.split("-");
 		String resourceId = strarray1[0];
 		String resourceTitle = strarray1[1];
@@ -121,9 +141,11 @@ public class ThirdPartyDealerService implements IBusinessService {
 		ThirdPartyDealerEntity.setPrivileges(resourceName);
 		ThirdPartyDealerEntity.setPrivilegestile(resourceTitle);
 		ThirdPartyDealerEntity.setPrivilegesurl(anchor1.toString());
-		ThirdPartyDealerEntity.setDealerName(dealerName);
-//		ThirdPartyDealerEntity.setThirdPartybrandid(ThirdPartybrandid);
-//		ThirdPartyDealerEntity.setThirdPartybrand(ThirdPartybrandname);
+		ThirdPartyDealerEntity.setDealerName(tpdealerName);
+		ThirdPartyDealerEntity.setThirdparty_type(thirdparty_type1.toString());
+		ThirdPartyDealerEntity.setMaintain(maintain);
+		ThirdPartyDealerEntity.setRepair(repair);
+		ThirdPartyDealerEntity.setParts(parts);
 		ThirdPartyDealerEntity.setTelephone(telephone);
 		ThirdPartyDealerEntity.setAddr(addr);
 		ThirdPartyDealerEntity.setPosition(position);
@@ -178,10 +200,10 @@ public class ThirdPartyDealerService implements IBusinessService {
 		// 页面数据
 		Map<String, Object> map = transData.getViewMap();
 		UserSession session = transData.getUserSession();
-		String id = (String)  map.get("dealer_id");
+		String id = (String)  map.get("tpdealer_id");
+		String tpdealerName = (String) map.get("tpdealerName");
+		String thirdparty_type = (String) map.get("thirdparty_type");
 		String anchor = (String) map.get("anchor");
-		String dealerName = (String) map.get("dealerName");
-		String ThirdPartybrandall = (String) map.get("ThirdPartybrand");
 		String telephone = (String) map.get("telephone");
 		String addr = (String) map.get("addr");
 		String position = (String) map.get("position");
@@ -189,10 +211,30 @@ public class ThirdPartyDealerService implements IBusinessService {
 		String createName = session.getUserName();
 		Timestamp createDate = dateutil.getTimestamp();
 
-		String[] strarray = ThirdPartybrandall.split("-");
-		String ThirdPartybrandid = strarray[0];
-		String ThirdPartybrandname = strarray[1];
+		boolean maintain = false;
+		boolean repair = false;
+		boolean parts = false;
 		
+		StringBuffer thirdparty_type1 = new StringBuffer();
+        String[] params = thirdparty_type.split("&");
+        for (int i = 0; i < params.length; i++) {
+            String[] p = params[i].split("=");
+            if (p.length == 2) {
+            	thirdparty_type1.append(p[1]);
+            }
+            if ((params.length-i)>1) {
+            	thirdparty_type1.append(",");
+			}
+            if ("1".equals(p[1])) {
+            	maintain=true;
+			}
+            if ("2".equals(p[1])) {
+            	repair=true;
+            }
+            if ("3".equals(p[1])) {
+            	parts=true;
+            }
+        }
 		String[] strarray1 = anchor.split("-");
 		String resourceId = strarray1[0];
 		String resourceTitle = strarray1[1];
@@ -202,14 +244,16 @@ public class ThirdPartyDealerService implements IBusinessService {
 		anchor1.append(resourceId);
 		
 		ThirdPartyDealerEntity ThirdPartyDealerEntity = new ThirdPartyDealerEntity();
-		ThirdPartyDealerEntity.setPrivileges(resourceName);
+		ThirdPartyDealerEntity.setId(id);
 		ThirdPartyDealerEntity.setResourceid(resourceId);
+		ThirdPartyDealerEntity.setPrivileges(resourceName);
 		ThirdPartyDealerEntity.setPrivilegestile(resourceTitle);
 		ThirdPartyDealerEntity.setPrivilegesurl(anchor1.toString());
-		ThirdPartyDealerEntity.setId(id);
-		ThirdPartyDealerEntity.setDealerName(dealerName);
-//		ThirdPartyDealerEntity.setThirdPartybrandid(ThirdPartybrandid);
-//		ThirdPartyDealerEntity.setThirdPartybrand(ThirdPartybrandname);
+		ThirdPartyDealerEntity.setDealerName(tpdealerName);
+		ThirdPartyDealerEntity.setThirdparty_type(thirdparty_type1.toString());
+		ThirdPartyDealerEntity.setMaintain(maintain);
+		ThirdPartyDealerEntity.setRepair(repair);
+		ThirdPartyDealerEntity.setParts(parts);
 		ThirdPartyDealerEntity.setTelephone(telephone);
 		ThirdPartyDealerEntity.setAddr(addr);
 		ThirdPartyDealerEntity.setPosition(position);

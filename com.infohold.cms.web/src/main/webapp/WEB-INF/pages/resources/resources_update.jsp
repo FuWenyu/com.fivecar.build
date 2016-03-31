@@ -52,6 +52,7 @@
 								<option value="parallel-平行进口车优惠">平行进口车优惠</option>
 								<option value="lender-金融">金融</option>
 								<option value="map-地图信息">地图信息</option>
+								<option value="thirdparty-第三方经销商">第三方经销商</option>
 							</select>
 						</div>
 					</div>

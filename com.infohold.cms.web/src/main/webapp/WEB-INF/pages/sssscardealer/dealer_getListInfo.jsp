@@ -31,8 +31,8 @@
 									<td>
 										<!-- 列表按钮区域 -->
 										<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-											<button type="button" class="btn btn-xs btn-primary" onclick="editEntity('${vehicleList.id}')">编辑</button>
-											<button type="button" class="btn btn-xs btn-primary" onclick="deleteEntity('${vehicleList.id}')">删除</button>
+											<button type="button" class="btn btn-xs btn-primary" onclick="editEntity('${dealerList.id}')">编辑</button>
+											<button type="button" class="btn btn-xs btn-primary" onclick="deleteEntity('${dealerList.id}')">删除</button>
 											<button type="button" class="btn btn-xs btn-primary" onclick="addSalesEntity();">添加销售员</button>
 										</div>
 									</td>
