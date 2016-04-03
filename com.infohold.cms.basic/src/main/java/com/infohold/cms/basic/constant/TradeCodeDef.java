@@ -43,6 +43,10 @@ public enum TradeCodeDef implements Serializable {
 	T35001(), T35002(), T35003, T35004(), T35005(), T35006(),T35007(),T35008(),T35009(),T35010(),
 	//第三方机构管理模块
 	T36001(), T36002(), T36003, T36004(), T36005(), T36006(),T36007(),T36008(),T36009(),T36010(),
+	//第三方销售管理模块 
+	T37001(), T37002(), T37003, T37004(), T37005(), T37006(),T37007(),T37008(),T37009(),T37010(),
+	//第三方图文资源管理
+	T38001(), T38002(), T38003, T38004(), T38005(), T38006(),T38007(),T38008(),T38009(),T38010(),
 	
 // 版本管理模块
 	T30001(), T30002(), T30003(), T30004(), T30005(), T30006(),
@@ -420,6 +424,48 @@ public enum TradeCodeDef implements Serializable {
 			return "暂不用";
 		case T36010:
 			return "暂不用";
+			
+		case T37001:
+			return "第三方销售员列表查询";
+		case T37002:
+			return "第三方销售员新增查询";
+		case T37003:
+			return "第三方销售员保存";
+		case T37004:
+			return "第三方销售员删除";
+		case T37005:
+			return "第三方销售员编辑查询";
+		case T37006:
+			return "第三方销售员编辑保存";
+		case T37007:
+			return "第三方销售员app请求";
+		case T37008:
+			return "暂不用";
+		case T37009:
+			return "暂不用";
+		case T37010:
+			return "暂不用";
+			
+		case T38001:
+			return "第三方资源查询";
+		case T38002:
+			return "第三方资源保存";
+		case T38003:
+			return "第三方资源删除";
+		case T38004:
+			return "第三方资源编辑跳转";
+		case T38005:
+			return "第三方资源编辑保存";
+		case T38006:
+			return "资源上传";
+		case T38007:
+			return "首页广告";
+		case T38008:
+			return "首页条目";
+		case T38009:
+			return "条目查询";
+		case T38010:
+			return "条目连接";
 			
 		case T30001:
 			return "版本查询";
