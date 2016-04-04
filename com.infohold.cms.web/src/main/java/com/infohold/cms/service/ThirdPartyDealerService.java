@@ -35,9 +35,9 @@ public class ThirdPartyDealerService implements IBusinessService {
 	private SysConfigUtil sysConfigUtil;
 
 	private DateUtil dateutil = new DateUtil();
-	
+
 	private Logger logger = Logger.getLogger(ThirdPartyDealerService.class);
-	
+
 	@Override
 	public TransData execute(TransData transData) throws BusinessException {
 		String tradCode = transData.getTradeCode();
@@ -57,7 +57,7 @@ public class ThirdPartyDealerService implements IBusinessService {
 			return this.dealerQuery(transData);
 		} else if (tradCode.equals("T36008")) {
 			return this.getResources(transData);
-	}
+		}
 		return transData;
 	}
 
@@ -68,10 +68,8 @@ public class ThirdPartyDealerService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData finddealerList(TransData transData)
-			throws BusinessException {
-		List<Map<String, Object>> orgList = tpdealerdao
-				.querydealerList(transData.getPageInfo());
+	public TransData finddealerList(TransData transData) throws BusinessException {
+		List<Map<String, Object>> orgList = tpdealerdao.querydealerList(transData.getPageInfo());
 		transData.setObj(orgList);
 		return transData;
 	}
@@ -84,8 +82,7 @@ public class ThirdPartyDealerService implements IBusinessService {
 	 * @throws BusinessException
 	 */
 	public TransData querybrand(TransData transData) throws BusinessException {
-		List<Map<String, Object>> orgList = tpdealerdao.queryBrandList(transData
-				.getPageInfo());
+		List<Map<String, Object>> orgList = tpdealerdao.queryBrandList(transData.getPageInfo());
 		transData.setObj(orgList);
 		return transData;
 	}
@@ -107,27 +104,27 @@ public class ThirdPartyDealerService implements IBusinessService {
 		boolean maintain = false;
 		boolean repair = false;
 		boolean parts = false;
-		
+
 		StringBuffer thirdparty_type1 = new StringBuffer();
-        String[] params = thirdparty_type.split("&");
-        for (int i = 0; i < params.length; i++) {
-            String[] p = params[i].split("=");
-            if (p.length == 2) {
-            	thirdparty_type1.append(p[1]);
-            }
-            if ((params.length-i)>1) {
-            	thirdparty_type1.append(",");
+		String[] params = thirdparty_type.split("&");
+		for (int i = 0; i < params.length; i++) {
+			String[] p = params[i].split("=");
+			if (p.length == 2) {
+				thirdparty_type1.append(p[1]);
 			}
-            if ("1".equals(p[1])) {
-            	maintain=true;
+			if ((params.length - i) > 1) {
+				thirdparty_type1.append(",");
 			}
-            if ("2".equals(p[1])) {
-            	repair=true;
-            }
-            if ("3".equals(p[1])) {
-            	parts=true;
-            }
-        }
+			if ("1".equals(p[1])) {
+				maintain = true;
+			}
+			if ("2".equals(p[1])) {
+				repair = true;
+			}
+			if ("3".equals(p[1])) {
+				parts = true;
+			}
+		}
 		String[] strarray1 = anchor.split("-");
 		String resourceId = strarray1[0];
 		String resourceTitle = strarray1[1];
@@ -135,7 +132,7 @@ public class ThirdPartyDealerService implements IBusinessService {
 		StringBuffer anchor1 = new StringBuffer("");
 		anchor1.append(sysConfigUtil.getCfgInfo("resource_request"));
 		anchor1.append(resourceId);
-		
+
 		ThirdPartyDealerEntity ThirdPartyDealerEntity = new ThirdPartyDealerEntity();
 		ThirdPartyDealerEntity.setResourceid(resourceId);
 		ThirdPartyDealerEntity.setPrivileges(resourceName);
@@ -165,8 +162,7 @@ public class ThirdPartyDealerService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData deletedealer(TransData transData)
-			throws BusinessException {
+	public TransData deletedealer(TransData transData) throws BusinessException {
 		String id = (String) transData.getViewMap().get("id");
 		tpdealerdao.deletedealerEntity(id);
 		transData.setObj(true);
@@ -195,12 +191,11 @@ public class ThirdPartyDealerService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData updatePictureEntity(TransData transData)
-			throws BusinessException {
+	public TransData updatePictureEntity(TransData transData) throws BusinessException {
 		// 页面数据
 		Map<String, Object> map = transData.getViewMap();
 		UserSession session = transData.getUserSession();
-		String id = (String)  map.get("tpdealer_id");
+		String id = (String) map.get("tpdealer_id");
 		String tpdealerName = (String) map.get("tpdealerName");
 		String thirdparty_type = (String) map.get("thirdparty_type");
 		String anchor = (String) map.get("anchor");
@@ -214,27 +209,27 @@ public class ThirdPartyDealerService implements IBusinessService {
 		boolean maintain = false;
 		boolean repair = false;
 		boolean parts = false;
-		
+
 		StringBuffer thirdparty_type1 = new StringBuffer();
-        String[] params = thirdparty_type.split("&");
-        for (int i = 0; i < params.length; i++) {
-            String[] p = params[i].split("=");
-            if (p.length == 2) {
-            	thirdparty_type1.append(p[1]);
-            }
-            if ((params.length-i)>1) {
-            	thirdparty_type1.append(",");
+		String[] params = thirdparty_type.split("&");
+		for (int i = 0; i < params.length; i++) {
+			String[] p = params[i].split("=");
+			if (p.length == 2) {
+				thirdparty_type1.append(p[1]);
 			}
-            if ("1".equals(p[1])) {
-            	maintain=true;
+			if ((params.length - i) > 1) {
+				thirdparty_type1.append(",");
 			}
-            if ("2".equals(p[1])) {
-            	repair=true;
-            }
-            if ("3".equals(p[1])) {
-            	parts=true;
-            }
-        }
+			if ("1".equals(p[1])) {
+				maintain = true;
+			}
+			if ("2".equals(p[1])) {
+				repair = true;
+			}
+			if ("3".equals(p[1])) {
+				parts = true;
+			}
+		}
 		String[] strarray1 = anchor.split("-");
 		String resourceId = strarray1[0];
 		String resourceTitle = strarray1[1];
@@ -242,7 +237,7 @@ public class ThirdPartyDealerService implements IBusinessService {
 		StringBuffer anchor1 = new StringBuffer("");
 		anchor1.append(sysConfigUtil.getCfgInfo("resource_request"));
 		anchor1.append(resourceId);
-		
+
 		ThirdPartyDealerEntity ThirdPartyDealerEntity = new ThirdPartyDealerEntity();
 		ThirdPartyDealerEntity.setId(id);
 		ThirdPartyDealerEntity.setResourceid(resourceId);
@@ -275,21 +270,20 @@ public class ThirdPartyDealerService implements IBusinessService {
 	 */
 	public TransData dealerQuery(TransData transData) throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
-		logger.info("dealerQuery-request:"+map);
-		String dealer = (String) map.get("dealer");
-		if (dealer.equals("dealer")) {
-			List<Map<String, Object>> dealerlist = tpdealerdao.querydealerList1(transData.getPageInfo());
-			if (dealerlist == null) {
-				transData.setExpCode("-1");
-				transData.setExpMsg("fail");
-			} else {
-				transData.setObj(dealerlist);
-				transData.setExpCode("1");
-				transData.setExpMsg("success");
-			}
+		logger.info("dealerQuery-request:" + map);
+		String thirdparty_type = (String) map.get("thirdparty_type");
+		List<Map<String, Object>> dealerlist = tpdealerdao.querydealerList1(transData.getPageInfo(), thirdparty_type);
+		if (dealerlist == null) {
+			transData.setExpCode("-1");
+			transData.setExpMsg("fail");
+		} else {
+			transData.setObj(dealerlist);
+			transData.setExpCode("1");
+			transData.setExpMsg("success");
 		}
 		return transData;
 	}
+
 	/**
 	 * 首页图片新增图文资源查询
 	 * 
@@ -297,8 +291,7 @@ public class ThirdPartyDealerService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData getResources(TransData transData)
-			throws BusinessException {
+	public TransData getResources(TransData transData) throws BusinessException {
 		List<Map<String, Object>> orgList = tpdealerdao.getResources();
 		transData.setObj(orgList);
 		transData.setExpMsg("success");

@@ -67,22 +67,16 @@ public class ThirdPartyDealerDao extends BaseDao<BaseEntity> {
 	 * @param page
 	 * @return
 	 */
-	public List<Map<String, Object>> querydealerList1(Page page){
+	public List<Map<String, Object>> querydealerList1(Page page,String thirdparty_type){
 		StringBuffer sql = new StringBuffer();
 		sql.append("select dle.id,");
-		sql.append("dle.thirdparty_type,");
-		sql.append("dle.maintain,");
-		sql.append("dle.repair,");
-		sql.append("dle.parts,");
-		sql.append("dle.privileges,");
-		sql.append("dle.privilegesurl,");
-		sql.append("dle.privilegestile,");
 		sql.append("dle.dealerName,");
-		sql.append("dle.telephone,");
-		sql.append("dle.addr,");
-		sql.append("dle.position,");
 		sql.append("dle.description ");
 		sql.append("from fc_thirdparty_dealer dle ");
+		sql.append("where dle.");
+		sql.append(thirdparty_type);
+		sql.append("=");
+		sql.append("1");
 
 		return super.excutePageQuery(sql.toString(),page);
 	}
