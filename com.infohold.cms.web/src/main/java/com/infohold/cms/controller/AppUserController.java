@@ -30,7 +30,7 @@ import com.infohold.cms.service.VersionService;
  *
  */
 @Controller
-public class UserAppController extends CentreController{
+public class AppUserController extends CentreController{
 
 	/**
 	 * APP-注册
@@ -57,7 +57,12 @@ public class UserAppController extends CentreController{
 		System.out.println(map);
 		return map;
 	}
-	
+	/**
+	 * APP-登录
+	 * 
+	 * @param httpServletRequest
+	 * @return map
+	 */
 	@RequestMapping("/app/login.do")
 	@ResponseBody
 	public Map<String, Object> login(HttpServletRequest httpServletRequest,
@@ -77,5 +82,76 @@ public class UserAppController extends CentreController{
 		System.out.println(map);
 		return map;
 	}
-	
+	/**
+	 * APP-修改密码
+	 * 
+	 * @param httpServletRequest
+	 * @return map
+	 */
+	@RequestMapping("/app/updatepwd.do")
+	@ResponseBody
+	public Map<String, Object> updatePWD(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletresponse) throws Exception {
+		TransData transData = new TransData();
+		transData.setServiceName("appUserService");
+		transData.setTradeCode("T40003");
+		transData=super.doService(httpServletRequest, transData);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(!"".equals(transData.getExpCode())){
+			map.put("expCode", transData.getExpCode());
+			map.put("expMsg", transData.getExpMsg());
+			return map;
+		}
+		System.out.println(map);
+		return map;
+	}
+	/**
+	 * APP-忘记密码验证码
+	 * 
+	 * @param httpServletRequest
+	 * @return map
+	 */
+	@RequestMapping("/app/updatepwdSMS.do")
+	@ResponseBody
+	public Map<String, Object> updatePWDforSMS(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletresponse) throws Exception {
+		TransData transData = new TransData();
+		transData.setServiceName("appUserService");
+		transData.setTradeCode("T40004");
+		transData=super.doService(httpServletRequest, transData);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(!"".equals(transData.getExpCode())){
+			map.put("expCode", transData.getExpCode());
+			map.put("expMsg", transData.getExpMsg());
+			return map;
+		}
+		System.out.println(map);
+		return map;
+	}
+	/**
+	 * APP-忘记密码验证码
+	 * 
+	 * @param httpServletRequest
+	 * @return map
+	 */
+	@RequestMapping("/app/updateUser.do")
+	@ResponseBody
+	public Map<String, Object> updatePWDforU(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletresponse) throws Exception {
+		TransData transData = new TransData();
+		transData.setServiceName("appUserService");
+		transData.setTradeCode("T40006");
+		transData=super.doService(httpServletRequest, transData);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(!"".equals(transData.getExpCode())){
+			map.put("expCode", transData.getExpCode());
+			map.put("expMsg", transData.getExpMsg());
+			return map;
+		}
+		System.out.println(map);
+		return map;
+	}
 }

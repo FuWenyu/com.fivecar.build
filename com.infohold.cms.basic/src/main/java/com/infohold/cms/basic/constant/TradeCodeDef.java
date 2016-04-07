@@ -51,7 +51,7 @@ public enum TradeCodeDef implements Serializable {
 // 版本管理模块
 	T30001(), T30002(), T30003(), T30004(), T30005(), T30006(),
 	//APP客户端用户模块
-	T40001(),T40002(),
+	T40001(),T40002(),T40003(),T40004(),T40005(),T40006(),T40007(),T40008(),
 	// 角色管理模块
 	T50001(), T50002(), T50003(), T50004(), T50005(), T50006(), T50007(), T50008(), T50009(), T50010(),
 	// 用户管理模块
@@ -477,10 +477,23 @@ public enum TradeCodeDef implements Serializable {
 			return "版本编辑";
 		case T30005:
 			return "版本编辑跳转";
+			
 		case T40001:
 			return "APP用户注册";
 		case T40002:
 			return "APP用户登录";
+		case T40003:
+			return "APP修改密码";
+		case T40004:
+			return "APP忘记密码手机验证";
+		case T40005:
+			return "APP忘记密码问题验证";
+		case T40006:
+			return "APP客户信息补全";
+		case T40007:
+			return "APP收藏图文";
+		case T40008:
+			return "APP收藏查询";
 			
 		case T50001:
 			return "角色查询";

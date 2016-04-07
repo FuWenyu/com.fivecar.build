@@ -33,7 +33,7 @@ public class AppUserEntity extends BaseEntity {
 	@Column(name = "user_no",columnDefinition="varchar(32)default ''")
 	private String user_no;
 	
-	@Column(name = "user_name",columnDefinition="varchar(32)default ''")
+	@Column(name = "user_name",unique=true,columnDefinition="varchar(32)default ''")
 	private String user_name;
 	
 	@Column(name = "password",nullable=false,columnDefinition="varchar(128)default ''")
@@ -41,8 +41,8 @@ public class AppUserEntity extends BaseEntity {
 	
 	@Column(name = "email",columnDefinition="varchar(32)default ''")
 	private String email;
-	@Id
-	@Column(name = "phone",nullable=false,columnDefinition="numeric(11)default 0")
+	
+	@Column(name = "phone",unique=true,nullable=false,columnDefinition="numeric(11)default 0")
 	private String phone;
 	
 	@Column(name = "create_date")
@@ -77,18 +77,6 @@ public class AppUserEntity extends BaseEntity {
 	
 	@Column(name = "user_answer1",columnDefinition="varchar(64)default ''")
 	private String user_answer1;
-	
-	@Column(name = "user_ask2",columnDefinition="varchar(64)default ''")
-	private String user_ask2;
-	
-	@Column(name = "user_answer2",columnDefinition="varchar(64)default ''")
-	private String user_answer2;
-	
-	@Column(name = "user_ask3",columnDefinition="varchar(64)default ''")
-	private String user_ask3;
-	
-	@Column(name = "user_answer3",columnDefinition="varchar(64)default ''")
-	private String user_answer3;
 	
 	@Column(name = "user_desc",columnDefinition="varchar(64)default ''")
 	private String user_desc;
@@ -301,62 +289,6 @@ public class AppUserEntity extends BaseEntity {
 	 */
 	public void setUser_answer1(String user_answer1) {
 		this.user_answer1 = user_answer1;
-	}
-
-	/**
-	 * @return the user_ask2
-	 */
-	public String getUser_ask2() {
-		return user_ask2;
-	}
-
-	/**
-	 * @param user_ask2 the user_ask2 to set
-	 */
-	public void setUser_ask2(String user_ask2) {
-		this.user_ask2 = user_ask2;
-	}
-
-	/**
-	 * @return the user_answer2
-	 */
-	public String getUser_answer2() {
-		return user_answer2;
-	}
-
-	/**
-	 * @param user_answer2 the user_answer2 to set
-	 */
-	public void setUser_answer2(String user_answer2) {
-		this.user_answer2 = user_answer2;
-	}
-
-	/**
-	 * @return the user_ask3
-	 */
-	public String getUser_ask3() {
-		return user_ask3;
-	}
-
-	/**
-	 * @param user_ask3 the user_ask3 to set
-	 */
-	public void setUser_ask3(String user_ask3) {
-		this.user_ask3 = user_ask3;
-	}
-
-	/**
-	 * @return the user_answer3
-	 */
-	public String getUser_answer3() {
-		return user_answer3;
-	}
-
-	/**
-	 * @param user_answer3 the user_answer3 to set
-	 */
-	public void setUser_answer3(String user_answer3) {
-		this.user_answer3 = user_answer3;
 	}
 
 	/**

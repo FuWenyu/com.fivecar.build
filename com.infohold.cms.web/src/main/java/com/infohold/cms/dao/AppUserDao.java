@@ -8,6 +8,7 @@ import com.infohold.cms.basic.common.Page;
 import com.infohold.cms.basic.dao.BaseDao;
 import com.infohold.cms.basic.entity.BaseEntity;
 import com.infohold.cms.entity.AppUserEntity;
+import com.infohold.cms.entity.CarBrandEntity;
 import com.infohold.cms.entity.VersionEntity;
 
 /**
@@ -19,26 +20,7 @@ import com.infohold.cms.entity.VersionEntity;
 @Repository("appuserdao")
 public class AppUserDao extends BaseDao<BaseEntity> {
 	
-	/**
-	 * 版本列表查询
-	 * @param map
-	 * @param page
-	 * @return
-	 */
-	public List<Map<String, Object>> queryOmsVersionList(Map<String,Object> map,Page page){
-		StringBuffer sql = new StringBuffer();
-		sql.append("select v.version_id,");
-		sql.append("v.version_no,");
-		sql.append("v.version_online,");
-		sql.append("v.version_desc,");
-		sql.append("v.version_url,");
-		sql.append("v.version_date,");
-		sql.append("v.version_flag ");
-		sql.append("from auth_version v order by v.version_date desc");
-		
-		return super.excutePageQuery(sql.toString(),page);
-		
-	}
+	
 	/**
 	 * 保存版本信息
 	 * @param VersionEntity
@@ -50,53 +32,13 @@ public class AppUserDao extends BaseDao<BaseEntity> {
 	}
 	
 	/**
-	 * 用户删除
-	 * @param id
-	 * @return
-	 */
-	public boolean deleteVersionEntity(String id) {
-		String deleteUser_HQL = "delete from VersionEntity v where v.version_id = ?";
-		excuteUpdate(deleteUser_HQL,id);
-		return true;
-	}
-	/**
-	 * 通过ID查询版本
-	 * @return
-	 */
-	public VersionEntity getVersionByid(String id) {
-		StringBuffer sql = new StringBuffer();
-		sql.append("select v.version_id,");
-		sql.append("v.version_no,");
-		sql.append("v.version_desc,");
-		sql.append("v.version_url,");
-		sql.append("v.version_date,");
-		sql.append("v.version_flag,");
-		sql.append("v.version_online ");
-		sql.append("from auth_version v where v.version_id = ?");
-		
-		List<Object[]> objectsList = super.findBySQL(sql.toString(), id);
-		for (Object[] objects : objectsList) {
-			VersionEntity version = new VersionEntity();
-			version.setVersion_id((String) objects[0]);
-			version.setVersion_no((String) objects[1]);
-			version.setVersion_desc((String) objects[2]);
-			version.setVersion_url((String)objects[3]);
-			version.setVersion_date(Timestamp.valueOf(objects[4].toString()));
-			version.setVersion_flag((String) objects[5]);
-			version.setVersion_online((String) objects[6]);
-			return version;
-		}
-		return null;
-	}
-	/**
-	 * 用户签退
+	 * 更新userEntity
 	 * @param id，用户主键
 	 * @return
 	 */
-	public void version_update(VersionEntity entity) {
-		VersionEntity oldentity = new VersionEntity();
-//		oldentity = (VersionEntity) super.get(entity.getClass(), entity.getVersion_id());
+	public boolean user_update(AppUserEntity entity) {
 		super.update(entity);
+		return true;
 	}
 	/**
 	 * 通过注册电话号查询
@@ -112,6 +54,22 @@ public class AppUserDao extends BaseDao<BaseEntity> {
 			return false;
 		}
 		return true;
+	}
+	/**
+	 * 通过注册电话号查询
+	 * @return
+	 */
+	public String getuserbyphone(String phone) {
+		StringBuffer sql = new StringBuffer();
+		sql.append("select v.id ");
+		sql.append("from fc_app_user v where v.phone =  "+phone);
+		
+		Map<String, Object> map = super.queryForMap(sql.toString());
+		if (map.isEmpty()) {
+			return null;
+		}else {
+			return (String) map.get("id");
+		}
 	}
 	/**
 	 * 登录检查
@@ -146,5 +104,10 @@ public class AppUserDao extends BaseDao<BaseEntity> {
 			return user;
 		}
 			return null;
+	}
+	public AppUserEntity getuserEntity(String id) {
+		AppUserEntity entity = new AppUserEntity();
+		entity = (AppUserEntity) super.get(AppUserEntity.class, id);
+		return entity;
 	}
 }
