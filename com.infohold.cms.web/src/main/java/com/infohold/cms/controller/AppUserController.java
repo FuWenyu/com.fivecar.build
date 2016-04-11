@@ -131,14 +131,38 @@ public class AppUserController extends CentreController{
 		return map;
 	}
 	/**
-	 * APP-忘记密码验证码
+	 * APP-忘记密码手机找回
+	 * 
+	 * @param httpServletRequest
+	 * @return map
+	 */
+	@RequestMapping("/app/updatePWDforAS.do")
+	@ResponseBody
+	public Map<String, Object> updatePWDforU(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletresponse) throws Exception {
+		TransData transData = new TransData();
+		transData.setServiceName("appUserService");
+		transData.setTradeCode("T40005");
+		transData=super.doService(httpServletRequest, transData);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(!"".equals(transData.getExpCode())){
+			map.put("expCode", transData.getExpCode());
+			map.put("expMsg", transData.getExpMsg());
+			return map;
+		}
+		System.out.println(map);
+		return map;
+	}
+	/**
+	 * APP-客户信息补全
 	 * 
 	 * @param httpServletRequest
 	 * @return map
 	 */
 	@RequestMapping("/app/updateUser.do")
 	@ResponseBody
-	public Map<String, Object> updatePWDforU(HttpServletRequest httpServletRequest,
+	public Map<String, Object> updateUser(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletresponse) throws Exception {
 		TransData transData = new TransData();
 		transData.setServiceName("appUserService");
@@ -149,6 +173,55 @@ public class AppUserController extends CentreController{
 		if(!"".equals(transData.getExpCode())){
 			map.put("expCode", transData.getExpCode());
 			map.put("expMsg", transData.getExpMsg());
+			return map;
+		}
+		System.out.println(map);
+		return map;
+	}
+	/**
+	 * APP-收藏图文
+	 * 
+	 * @param httpServletRequest
+	 * @return map
+	 */
+	@RequestMapping("/app/saveCollection.do")
+	@ResponseBody
+	public Map<String, Object> saveCollection(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletresponse) throws Exception {
+		TransData transData = new TransData();
+		transData.setServiceName("appUserService");
+		transData.setTradeCode("T40007");
+		transData=super.doService(httpServletRequest, transData);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(!"".equals(transData.getExpCode())){
+			map.put("expCode", transData.getExpCode());
+			map.put("expMsg", transData.getExpMsg());
+			return map;
+		}
+		System.out.println(map);
+		return map;
+	}
+	/**
+	 * APP-查询图文
+	 * 
+	 * @param httpServletRequest
+	 * @return map
+	 */
+	@RequestMapping("/app/queryCollection.do")
+	@ResponseBody
+	public Map<String, Object> queryCollection(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletresponse) throws Exception {
+		TransData transData = new TransData();
+		transData.setServiceName("appUserService");
+		transData.setTradeCode("T40008");
+		transData=super.doService(httpServletRequest, transData);
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Map<String, Object>> collectionList  = (List<Map<String, Object>>)transData.getObj();
+		if(!"".equals(transData.getExpCode())){
+			map.put("expCode", transData.getExpCode());
+			map.put("expMsg", transData.getExpMsg());
+			map.put("collectionList", collectionList);
 			return map;
 		}
 		System.out.println(map);

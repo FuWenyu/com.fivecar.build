@@ -11,6 +11,7 @@ import com.infohold.cms.basic.common.Page;
 import com.infohold.cms.basic.dao.BaseDao;
 import com.infohold.cms.basic.entity.BaseEntity;
 import com.infohold.cms.basic.util.StrUtil;
+import com.infohold.cms.entity.OrganizationEntity;
 
 @Repository("organizationDao")
 public class OrganizationDao extends BaseDao<BaseEntity>{
@@ -189,7 +190,8 @@ public class OrganizationDao extends BaseDao<BaseEntity>{
 		else{
 			int length=pid.length()+3;
 			List<Map<String,Object>> list = getid(length);
-			if(null==pid || "".equals(pid)){
+			String pid1=list.get(0).get("id")+"";
+			if(null==pid1 || "".equals(pid1)||"null".equals(pid1)){
 				return pid+"001";
 			}else{
 				String oldid=list.get(0).get("id")+"";
@@ -236,4 +238,9 @@ public class OrganizationDao extends BaseDao<BaseEntity>{
 				;
 		return super.queryForMap(sql);
 	}
+	public OrganizationEntity getOrgnByid(String id) {
+			OrganizationEntity entity = new OrganizationEntity();
+			entity = (OrganizationEntity) super.get(OrganizationEntity.class, id);
+			return entity;
+		}
 }

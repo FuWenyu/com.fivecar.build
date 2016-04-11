@@ -67,8 +67,10 @@ public class CarModelService implements IBusinessService {
 	 */
 	public TransData findmodelList(TransData transData)
 			throws BusinessException {
+		UserSession session = transData.getUserSession();
+		String orgid = session.getBranchNo();
 		List<Map<String, Object>> orgList = modeldao
-				.querymodelList(transData.getPageInfo());
+				.querymodelList(transData.getPageInfo(),orgid);
 		transData.setObj(orgList);
 		return transData;
 	}
@@ -81,8 +83,10 @@ public class CarModelService implements IBusinessService {
 	 * @throws BusinessException
 	 */
 	public TransData querybrand(TransData transData) throws BusinessException {
+		UserSession session = transData.getUserSession();
+		String orgid = session.getBranchNo();
 		List<Map<String, Object>> orgList = modeldao.queryVehicleList(transData
-				.getPageInfo());
+				.getPageInfo(),orgid);
 		transData.setObj(orgList);
 		return transData;
 	}
@@ -99,6 +103,7 @@ public class CarModelService implements IBusinessService {
 		String vehicle = (String) map.get("vehicle");
 		String Carabstract = (String) map.get("Carabstract");
 		String createName = session.getUserName();
+		String orgid = session.getBranchNo();
 		Timestamp createDate = dateutil.getTimestamp();
 
 		String[] strarray = vehicle.split("-");
@@ -122,6 +127,7 @@ public class CarModelService implements IBusinessService {
 		url.append(imageName);
 
 		CarModelEntity carmodelentity = new CarModelEntity();
+		carmodelentity.setOrgid(orgid);
 		carmodelentity.setCarbrand(carbrandname);
 		carmodelentity.setCarbrandid(carbrandid);
 		carmodelentity.setModelName(modelName);
@@ -192,6 +198,7 @@ public class CarModelService implements IBusinessService {
 		String vehicle = (String) map.get("vehicle");
 		String Carabstract = (String) map.get("Carabstract");
 		String createName = session.getUserName();
+		String orgid = session.getBranchNo();
 		Timestamp createDate = dateutil.getTimestamp();
 
 		String[] strarray = vehicle.split("-");
@@ -216,6 +223,7 @@ public class CarModelService implements IBusinessService {
 
 		CarModelEntity carmodelentity = new CarModelEntity();
 		carmodelentity.setId(id);
+		carmodelentity.setOrgid(orgid);
 		carmodelentity.setCarbrand(carbrandname);
 		carmodelentity.setCarbrandid(carbrandid);
 		carmodelentity.setModelName(modelName);

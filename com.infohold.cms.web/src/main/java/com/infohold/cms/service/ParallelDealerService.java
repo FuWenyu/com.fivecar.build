@@ -103,7 +103,9 @@ public class ParallelDealerService implements IBusinessService {
 		String description = (String) map.get("description");
 		String createName = session.getUserName();
 		Timestamp createDate = dateutil.getTimestamp();
-
+		if (null == position || "".equals(position) || "null".equals(position)) {
+			position = "<iframe class=\"ueditor_baidumap\" src=\"./ueditor/dialogs/map/show.html#center=121.807603,39.058436&zoom=13&width=530&height=340&markers=121.805375,39.05796&markerStyles=l,A\" frameborder=\"0\" width=\"534\" height=\"344\"></iframe>";
+		}
 		String[] strarray = carbrandall.split("-");
 		String carbrandid = strarray[0];
 		String carbrandname = strarray[1];
@@ -188,7 +190,9 @@ public class ParallelDealerService implements IBusinessService {
 		String description = (String) map.get("description");
 		String createName = session.getUserName();
 		Timestamp createDate = dateutil.getTimestamp();
-
+		if (null == position || "".equals(position) || "null".equals(position)) {
+			position = "<iframe class=\"ueditor_baidumap\" src=\"./ueditor/dialogs/map/show.html#center=121.807603,39.058436&zoom=13&width=530&height=340&markers=121.805375,39.05796&markerStyles=l,A\" frameborder=\"0\" width=\"534\" height=\"344\"></iframe>";
+		}
 		String[] strarray = carbrandall.split("-");
 		String carbrandid = strarray[0];
 		String carbrandname = strarray[1];

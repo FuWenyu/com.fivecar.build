@@ -146,8 +146,14 @@ public class OrganizationController extends CentreController{
 	 */
 	@RequestMapping("/mvc/organization_delete.do")
 	@ResponseBody
-    public void organization_delete(OrganizationEntity organizationEntity){
-	//	organizationService.remove(organizationEntity);
+    public Map<String,Object> organization_delete(HttpServletRequest httpServletRequest){
+		TransData transData = new TransData();
+		transData.setServiceName("organizationService");
+		transData.setTradeCode("T50024");
+		transData=super.doService(httpServletRequest, transData);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("msg", "success");
+		return map;
 	}
 	
 	/**

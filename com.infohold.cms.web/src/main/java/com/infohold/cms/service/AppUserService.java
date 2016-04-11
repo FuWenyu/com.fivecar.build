@@ -19,6 +19,7 @@ import com.infohold.cms.basic.util.MD5Util;
 import com.infohold.cms.basic.util.SysConfigUtil;
 import com.infohold.cms.dao.AppUserDao;
 import com.infohold.cms.entity.AppUserEntity;
+import com.infohold.cms.entity.CollectionEntity;
 import com.infohold.cms.util.CustomPropertyUtil;
 import com.infohold.cms.util.DateUtil;
 import com.infohold.cms.util.SmsVerifyKit;
@@ -61,9 +62,9 @@ public class AppUserService implements IBusinessService {
 		} else if (tradCode.equals("T40006")) {
 			return this.updateUser(transData);
 		} else if (tradCode.equals("T40007")) {
-			return this.loginCheck(transData);
+			return this.saveCollection(transData);
 		} else if (tradCode.equals("T40008")) {
-			return this.loginCheck(transData);
+			return this.queryCollection(transData);
 		}
 		return transData;
 	}
@@ -79,11 +80,12 @@ public class AppUserService implements IBusinessService {
 		logger.info("AppRegister-request:" + map);
 		String phone_no = (String) map.get("phone_no");
 		String password = (String) map.get("password");
-		String code = (String) map.get("code");
+		String code = (String) map.get("vccode");
 		Timestamp create_date = dateutil.getTimestamp();
 		String response = null;
 		try {
 			response = new SmsVerifyKit(appkey, phone_no, "86", code).go();
+			System.out.println(response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -197,7 +199,7 @@ public class AppUserService implements IBusinessService {
 		Map<String, Object> map = transData.getViewMap();
 		logger.info("updatePWDforSMS-request:" + map);
 		String phone_no = (String) map.get("phone_no");
-		String code = (String) map.get("code");
+		String code = (String) map.get("vccode");
 		String newpassword = (String) map.get("newpassword");
 		String response = null;
 		try {
@@ -253,6 +255,7 @@ public class AppUserService implements IBusinessService {
 		String user_addr = (String) map.get("user_addr");
 		String user_ask = (String) map.get("user_ask");
 		String user_answer = (String) map.get("user_answer");
+		String profile_images = (String) map.get("profile_images");
 
 		AppUserEntity user = appuserdao.getuserEntity(id);
 		if (user != null) {
@@ -262,6 +265,7 @@ public class AppUserService implements IBusinessService {
 			user.setUser_addr(user_addr);
 			user.setUser_ask1(user_ask);
 			user.setUser_answer1(user_answer);
+			user.setProfile_images(profile_images);
 			if (appuserdao.user_update(user)) {
 				transData.setExpCode("1");
 				transData.setExpMsg("success");
@@ -296,7 +300,7 @@ public class AppUserService implements IBusinessService {
 			transData.setExpMsg("用户不存在！");
 		} else {
 			AppUserEntity user = appuserdao.getuserEntity(id);
-			if (user != null&&user_answer.equals(user.getUser_answer1())) {
+			if (user != null && user_answer.equals(user.getUser_answer1())) {
 				user.setPassword(newmd5pwd);
 				if (appuserdao.user_update(user)) {
 					transData.setExpCode("1");
@@ -305,10 +309,63 @@ public class AppUserService implements IBusinessService {
 					transData.setExpCode("-1");
 					transData.setExpMsg("更新失败请重试！");
 				}
-			}else {
+			} else {
 				transData.setExpCode("-1");
 				transData.setExpMsg("密保答案错误！");
 			}
+		}
+		return transData;
+	}
+
+	/**
+	 * 收藏图文信息
+	 * 
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData saveCollection(TransData transData) throws BusinessException {
+		Map<String, Object> map = transData.getViewMap();
+		logger.info("saveCollection-request:" + map);
+		String user_id = (String) map.get("user_id");
+		String resource_id = (String) map.get("resource_id");
+		String resource_type = (String) map.get("resource_type");
+		String title = (String) map.get("title");
+		CollectionEntity collection = new CollectionEntity();
+		collection.setUser_id(user_id);
+		collection.setResource_id(resource_id);
+		collection.setResource_type(resource_type);
+		collection.setTitle(title);
+		boolean iswork = appuserdao.saveCollectionEntity(collection);
+		if (iswork) {
+			transData.setExpCode("1");
+			transData.setExpMsg("success");
+		} else {
+			transData.setExpCode("-1");
+			transData.setExpMsg("收藏失败请重试！");
+		}
+		return transData;
+	}
+
+	/**
+	 * 查询图文信息
+	 * 
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData queryCollection(TransData transData) throws BusinessException {
+		Map<String, Object> map = transData.getViewMap();
+		logger.info("queryCollection-request:" + map);
+		String user_id = (String) map.get("user_id");
+		List<Map<String, Object>> collectionList = appuserdao.queryCollectionEntity(user_id, transData.getPageInfo());
+		if (!(collectionList==null)) {
+			transData.setExpCode("1");
+			transData.setExpMsg("success");
+			transData.setObj(collectionList);
+		} else {
+			transData.setExpCode("1");
+			transData.setExpMsg("亲！您的收藏夹是空的哦！");
 		}
 		return transData;
 	}

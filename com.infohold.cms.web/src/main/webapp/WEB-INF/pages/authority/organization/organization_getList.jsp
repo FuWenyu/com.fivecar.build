@@ -245,7 +245,7 @@
 			});
 		};
 		function editEntity(id){
-			window.location="<%=path%>/mvc/role_edit.do?id="+id+"&pageNo="+$("#pageNo").val();
+			window.location="<%=path%>/mvc/organization_view.do?id="+id+"&pageNo="+$("#pageNo").val();
 		};
 		function deleteEntity(id){
 			 var param={};

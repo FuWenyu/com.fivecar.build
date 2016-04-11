@@ -54,7 +54,7 @@ public class ParallelDealerDao extends BaseDao<BaseEntity> {
 		sql.append("select brd.id,");
 		sql.append("brd.initial,");
 		sql.append("brd.brandNamecn ");
-		sql.append("from fc_parallel_brand brd ");
+		sql.append("from fc_ssss_brand brd ");
 		sql.append(" order by brd.initial");
 		return super.excutePageQuery(sql.toString(),page);
 	}

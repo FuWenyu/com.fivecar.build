@@ -9,6 +9,7 @@ import com.infohold.cms.basic.dao.BaseDao;
 import com.infohold.cms.basic.entity.BaseEntity;
 import com.infohold.cms.entity.AppUserEntity;
 import com.infohold.cms.entity.CarBrandEntity;
+import com.infohold.cms.entity.CollectionEntity;
 import com.infohold.cms.entity.VersionEntity;
 
 /**
@@ -22,8 +23,8 @@ public class AppUserDao extends BaseDao<BaseEntity> {
 	
 	
 	/**
-	 * 保存版本信息
-	 * @param VersionEntity
+	 * 保存userEntity
+	 * @param userEntity
 	 * @return boolean
 	 */
 	public boolean saveAppUserEntity(AppUserEntity entity) {
@@ -105,9 +106,39 @@ public class AppUserDao extends BaseDao<BaseEntity> {
 		}
 			return null;
 	}
+	/**
+	 * 通过id查询用户信息
+	 * @return
+	 */
 	public AppUserEntity getuserEntity(String id) {
 		AppUserEntity entity = new AppUserEntity();
 		entity = (AppUserEntity) super.get(AppUserEntity.class, id);
 		return entity;
+	}
+	/**
+	 * 保存userEntity
+	 * @param userEntity
+	 * @return boolean
+	 */
+	public boolean saveCollectionEntity(CollectionEntity entity) {
+		super.save(entity);
+		return true;
+	}
+	/**
+	 * 通过id查询用户信息
+	 * @return
+	 */
+	public List<Map<String, Object>> queryCollectionEntity(String user_id,Page page) {
+		StringBuffer sql = new StringBuffer();
+		sql.append("select co.user_id,");
+		sql.append("co.resource_id,");
+		sql.append("co.resource_type,");
+		sql.append("co.title ");
+		sql.append("from fc_user_collection co ");
+		sql.append("where co.user_id = ");
+		sql.append("'");
+		sql.append(user_id);
+		sql.append("'");
+		return super.excutePageQuery(sql.toString(),page);
 	}
 }

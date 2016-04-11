@@ -23,7 +23,7 @@ public class CarModelDao extends BaseDao<BaseEntity> {
 	 * @param page
 	 * @return
 	 */
-	public List<Map<String, Object>> querymodelList(Page page){
+	public List<Map<String, Object>> querymodelList(Page page,String orgid){
 		StringBuffer sql = new StringBuffer();
 		sql.append("select mdl.id,");
 		sql.append("mdl.modelName,");
@@ -40,6 +40,10 @@ public class CarModelDao extends BaseDao<BaseEntity> {
 		sql.append("mdl.createDate,");
 		sql.append("mdl.createName ");
 		sql.append("from fc_ssss_model mdl ");
+		sql.append(" where mdl.orgid=");
+		sql.append("'");
+		sql.append(orgid);
+		sql.append("'");
 		sql.append(" order by mdl.createDate desc");
 		return super.excutePageQuery(sql.toString(),page);
 	}
@@ -49,7 +53,7 @@ public class CarModelDao extends BaseDao<BaseEntity> {
 	 * @param page
 	 * @return
 	 */
-	public List<Map<String, Object>> queryVehicleList(Page page){
+	public List<Map<String, Object>> queryVehicleList(Page page,String orgid){
 		page.setPageSize(999);
 		StringBuffer sql = new StringBuffer();
 		sql.append("select vcl.id,");
@@ -57,6 +61,10 @@ public class CarModelDao extends BaseDao<BaseEntity> {
 		sql.append("vcl.carbrandid,");
 		sql.append("vcl.carbrand ");
 		sql.append("from fc_ssss_vehicle vcl ");
+		sql.append(" where vcl.orgid=");
+		sql.append("'");
+		sql.append(orgid);
+		sql.append("'");
 		sql.append(" order by vcl.createDate desc");
 		return super.excutePageQuery(sql.toString(),page);
 	}

@@ -67,8 +67,10 @@ public class CarSalesService implements IBusinessService {
 	 */
 	public TransData findsalesList(TransData transData)
 			throws BusinessException {
+		UserSession session = transData.getUserSession();
+		String orgid = session.getBranchNo();
 		List<Map<String, Object>> orgList = salesdao
-				.querysalesList(transData.getPageInfo());
+				.querysalesList(transData.getPageInfo(),orgid);
 		transData.setObj(orgList);
 		return transData;
 	}
@@ -81,8 +83,10 @@ public class CarSalesService implements IBusinessService {
 	 * @throws BusinessException
 	 */
 	public TransData querydealer(TransData transData) throws BusinessException {
+		UserSession session = transData.getUserSession();
+		String orgid = session.getBranchNo();
 		List<Map<String, Object>> orgList = salesdao.queryDealerList(transData
-				.getPageInfo());
+				.getPageInfo(),orgid);
 		transData.setObj(orgList);
 		return transData;
 	}
@@ -98,6 +102,7 @@ public class CarSalesService implements IBusinessService {
 		String description = (String) map.get("description");
 		String imageName = (String) map.get("imageName");
 		String createName = session.getUserName();
+		String orgid = session.getBranchNo();
 		Timestamp createDate = dateutil.getTimestamp();
 
 		String[] strarray = dealer.split("-");
@@ -119,6 +124,7 @@ public class CarSalesService implements IBusinessService {
 		url.append(imageName);
 
 		CarSalesEntity carsalesentity = new CarSalesEntity();
+		carsalesentity.setOrgid(orgid);
 		carsalesentity.setSalesName(salesName);
 		carsalesentity.setPhone(phone);
 		carsalesentity.setWxQQ(wxQQ);
@@ -185,6 +191,7 @@ public class CarSalesService implements IBusinessService {
 		String description = (String) map.get("description");
 		String imageName = (String) map.get("imageName");
 		String createName = session.getUserName();
+		String orgid = session.getBranchNo();
 		Timestamp createDate = dateutil.getTimestamp();
 
 		String[] strarray = dealer.split("-");
@@ -207,6 +214,7 @@ public class CarSalesService implements IBusinessService {
 
 		CarSalesEntity carsalesentity = new CarSalesEntity();
 		carsalesentity.setId(id);
+		carsalesentity.setOrgid(orgid);
 		carsalesentity.setSalesName(salesName);
 		carsalesentity.setPhone(phone);
 		carsalesentity.setWxQQ(wxQQ);

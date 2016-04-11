@@ -29,11 +29,31 @@ import com.infohold.cms.basic.entity.BaseEntity;
 @SuppressWarnings("serial")
 public class CollectionEntity extends BaseEntity {
 	/**主键*/
+	private java.lang.String id;
+	/**用户id*/
 	private java.lang.String user_id;
-	/**标题*/
+	/**资源id*/
 	private java.lang.String resource_id;
-	/**图片名称*/
+	/**资源类型*/
 	private java.lang.String resource_type;
+	/**资源名称*/
+	private java.lang.String title;
+	/**
+	 * @return the id
+	 */
+	@Id
+	@GeneratedValue(generator = "paymentableGenerator")
+	@GenericGenerator(name = "paymentableGenerator", strategy = "uuid")
+	@Column(name ="ID",nullable=false,length=36)
+	public java.lang.String getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(java.lang.String id) {
+		this.id = id;
+	}
 	/**
 	 * @return the user_id
 	 */
@@ -73,4 +93,18 @@ public class CollectionEntity extends BaseEntity {
 	public void setResource_type(java.lang.String resource_type) {
 		this.resource_type = resource_type;
 	}
+	/**
+	 * @return the title
+	 */
+	@Column(name ="title",nullable=false,columnDefinition="varchar(64)default ''")
+	public java.lang.String getTitle() {
+		return title;
+	}
+	/**
+	 * @param title the title to set
+	 */
+	public void setTitle(java.lang.String title) {
+		this.title = title;
+	}
+	
 }

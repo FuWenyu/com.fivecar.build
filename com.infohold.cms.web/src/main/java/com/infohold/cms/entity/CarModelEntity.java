@@ -23,6 +23,8 @@ import com.infohold.cms.basic.entity.BaseEntity;
 public class CarModelEntity extends BaseEntity {
 	/**主键*/
 	private java.lang.String id;
+	/**机构id*/
+	private java.lang.String orgid;
 	/**车型名称*/
 	private java.lang.String modelName;
 	/**车型照片*/
@@ -66,6 +68,19 @@ public class CarModelEntity extends BaseEntity {
 	 */
 	public void setId(java.lang.String id) {
 		this.id = id;
+	}
+	/**
+	 * @return the orgid
+	 */
+	@Column(name = "orgid", nullable=true,length = 32)
+	public java.lang.String getOrgid() {
+		return orgid;
+	}
+	/**
+	 * @param orgid the orgid to set
+	 */
+	public void setOrgid(java.lang.String orgid) {
+		this.orgid = orgid;
 	}
 	/**
 	 * @return the modelName

@@ -470,8 +470,8 @@ public class ParallelVehicleService implements IBusinessService {
 		vehiclelist = vehicledao.queryvehicleList4(index,carbrand,pricekey,versionkey,transData.getPageInfo());
 		
 			if (vehiclelist == null) {
-				transData.setExpCode("-1");
-				transData.setExpMsg("fail");
+				transData.setExpCode("1");
+				transData.setExpMsg("暂时没有这样的车型哦！");
 			} else {
 				transData.setObj(vehiclelist);
 				transData.setExpCode("1");

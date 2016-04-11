@@ -57,10 +57,10 @@ public class AppUserEntity extends BaseEntity {
 	@Column(name = "sex",columnDefinition="varchar(8)default ''")
 	private String sex;
 	
-	@Column(name = "user_addr",columnDefinition="varchar(64)default ''")
+	@Column(name = "user_addr",columnDefinition="varchar(255)default ''")
 	private String user_addr;
 	
-	@Column(name = "user_addradd",columnDefinition="varchar(64)default ''")
+	@Column(name = "user_addradd",columnDefinition="varchar(255)default ''")
 	private String user_addradd;
 	
 	@Column(name = "profile_images",columnDefinition="varchar(255)default ''")
@@ -72,10 +72,10 @@ public class AppUserEntity extends BaseEntity {
 	@Column(name = "user_type",columnDefinition="varchar(8)default ''")
 	private String user_type;
 	
-	@Column(name = "user_ask1",columnDefinition="varchar(64)default ''")
+	@Column(name = "user_ask1",columnDefinition="varchar(255)default ''")
 	private String user_ask1;
 	
-	@Column(name = "user_answer1",columnDefinition="varchar(64)default ''")
+	@Column(name = "user_answer1",columnDefinition="varchar(255)default ''")
 	private String user_answer1;
 	
 	@Column(name = "user_desc",columnDefinition="varchar(64)default ''")

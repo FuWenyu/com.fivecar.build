@@ -25,7 +25,7 @@ public class CarDealerDao extends BaseDao<BaseEntity> {
 	 * @param page
 	 * @return
 	 */
-	public List<Map<String, Object>> querydealerList(Page page){
+	public List<Map<String, Object>> querydealerList(Page page,String orgid){
 		StringBuffer sql = new StringBuffer();
 		sql.append("select dle.id,");
 		sql.append("dle.dealerName,");
@@ -40,6 +40,10 @@ public class CarDealerDao extends BaseDao<BaseEntity> {
 		sql.append("dle.createDate,");
 		sql.append("dle.createName ");
 		sql.append("from fc_ssss_dealer dle ");
+		sql.append(" where dle.orgid=");
+		sql.append("'");
+		sql.append(orgid);
+		sql.append("'");
 		sql.append(" order by dle.createDate desc");
 		return super.excutePageQuery(sql.toString(),page);
 	}

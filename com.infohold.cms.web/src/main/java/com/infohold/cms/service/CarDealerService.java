@@ -37,7 +37,7 @@ public class CarDealerService implements IBusinessService {
 	private DateUtil dateutil = new DateUtil();
 
 	private Logger logger = Logger.getLogger(CarDealerService.class);
-	
+
 	@Override
 	public TransData execute(TransData transData) throws BusinessException {
 		String tradCode = transData.getTradeCode();
@@ -57,7 +57,7 @@ public class CarDealerService implements IBusinessService {
 			return this.dealerQuery(transData);
 		} else if (tradCode.equals("T24008")) {
 			return this.getResources(transData);
-	}
+		}
 		return transData;
 	}
 
@@ -68,10 +68,10 @@ public class CarDealerService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData finddealerList(TransData transData)
-			throws BusinessException {
-		List<Map<String, Object>> orgList = dealerdao
-				.querydealerList(transData.getPageInfo());
+	public TransData finddealerList(TransData transData) throws BusinessException {
+		UserSession session = transData.getUserSession();
+		String orgid = session.getBranchNo();
+		List<Map<String, Object>> orgList = dealerdao.querydealerList(transData.getPageInfo(), orgid);
 		transData.setObj(orgList);
 		return transData;
 	}
@@ -84,8 +84,7 @@ public class CarDealerService implements IBusinessService {
 	 * @throws BusinessException
 	 */
 	public TransData querybrand(TransData transData) throws BusinessException {
-		List<Map<String, Object>> orgList = dealerdao.queryBrandList(transData
-				.getPageInfo());
+		List<Map<String, Object>> orgList = dealerdao.queryBrandList(transData.getPageInfo());
 		transData.setObj(orgList);
 		return transData;
 	}
@@ -102,12 +101,15 @@ public class CarDealerService implements IBusinessService {
 		String position = (String) map.get("position");
 		String description = (String) map.get("description");
 		String createName = session.getUserName();
+		String orgid = session.getBranchNo();
 		Timestamp createDate = dateutil.getTimestamp();
-
+		if (null == position || "".equals(position) || "null".equals(position)) {
+			position = "<iframe class=\"ueditor_baidumap\" src=\"./ueditor/dialogs/map/show.html#center=121.807603,39.058436&zoom=13&width=530&height=340&markers=121.805375,39.05796&markerStyles=l,A\" frameborder=\"0\" width=\"534\" height=\"344\"></iframe>";
+		}
 		String[] strarray = carbrandall.split("-");
 		String carbrandid = strarray[0];
 		String carbrandname = strarray[1];
-		
+
 		String[] strarray1 = anchor.split("-");
 		String resourceId = strarray1[0];
 		String resourceTitle = strarray1[1];
@@ -115,9 +117,10 @@ public class CarDealerService implements IBusinessService {
 		StringBuffer anchor1 = new StringBuffer("");
 		anchor1.append(sysConfigUtil.getCfgInfo("resource_request"));
 		anchor1.append(resourceId);
-		
+
 		CarDealerEntity CarDealerEntity = new CarDealerEntity();
 		CarDealerEntity.setResourceid(resourceId);
+		CarDealerEntity.setOrgid(orgid);
 		CarDealerEntity.setPrivileges(resourceName);
 		CarDealerEntity.setPrivilegestile(resourceTitle);
 		CarDealerEntity.setPrivilegesurl(anchor1.toString());
@@ -143,8 +146,7 @@ public class CarDealerService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData deletedealer(TransData transData)
-			throws BusinessException {
+	public TransData deletedealer(TransData transData) throws BusinessException {
 		String id = (String) transData.getViewMap().get("id");
 		dealerdao.deletedealerEntity(id);
 		transData.setObj(true);
@@ -173,12 +175,11 @@ public class CarDealerService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData updatePictureEntity(TransData transData)
-			throws BusinessException {
+	public TransData updatePictureEntity(TransData transData) throws BusinessException {
 		// 页面数据
 		Map<String, Object> map = transData.getViewMap();
 		UserSession session = transData.getUserSession();
-		String id = (String)  map.get("dealer_id");
+		String id = (String) map.get("dealer_id");
 		String anchor = (String) map.get("anchor");
 		String dealerName = (String) map.get("dealerName");
 		String carbrandall = (String) map.get("carbrand");
@@ -187,12 +188,15 @@ public class CarDealerService implements IBusinessService {
 		String position = (String) map.get("position");
 		String description = (String) map.get("description");
 		String createName = session.getUserName();
+		String orgid = session.getBranchNo();
 		Timestamp createDate = dateutil.getTimestamp();
-
+		if (null == position || "".equals(position) || "null".equals(position)) {
+			position = "<iframe class=\"ueditor_baidumap\" src=\"./ueditor/dialogs/map/show.html#center=121.807603,39.058436&zoom=13&width=530&height=340&markers=121.805375,39.05796&markerStyles=l,A\" frameborder=\"0\" width=\"534\" height=\"344\"></iframe>";
+		}
 		String[] strarray = carbrandall.split("-");
 		String carbrandid = strarray[0];
 		String carbrandname = strarray[1];
-		
+
 		String[] strarray1 = anchor.split("-");
 		String resourceId = strarray1[0];
 		String resourceTitle = strarray1[1];
@@ -200,8 +204,9 @@ public class CarDealerService implements IBusinessService {
 		StringBuffer anchor1 = new StringBuffer("");
 		anchor1.append(sysConfigUtil.getCfgInfo("resource_request"));
 		anchor1.append(resourceId);
-		
+
 		CarDealerEntity CarDealerEntity = new CarDealerEntity();
+		CarDealerEntity.setOrgid(orgid);
 		CarDealerEntity.setPrivileges(resourceName);
 		CarDealerEntity.setResourceid(resourceId);
 		CarDealerEntity.setPrivilegestile(resourceTitle);
@@ -231,7 +236,7 @@ public class CarDealerService implements IBusinessService {
 	 */
 	public TransData dealerQuery(TransData transData) throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
-		logger.info("dealerQuery-request:"+map);
+		logger.info("dealerQuery-request:" + map);
 		String dealer = (String) map.get("dealer");
 		if (dealer.equals("dealer")) {
 			List<Map<String, Object>> dealerlist = dealerdao.querydealerList1(transData.getPageInfo());
@@ -246,6 +251,7 @@ public class CarDealerService implements IBusinessService {
 		}
 		return transData;
 	}
+
 	/**
 	 * 首页图片新增图文资源查询
 	 * 
@@ -253,8 +259,7 @@ public class CarDealerService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData getResources(TransData transData)
-			throws BusinessException {
+	public TransData getResources(TransData transData) throws BusinessException {
 		List<Map<String, Object>> orgList = dealerdao.getResources();
 		transData.setObj(orgList);
 		transData.setExpMsg("success");

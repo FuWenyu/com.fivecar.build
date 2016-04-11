@@ -79,7 +79,9 @@ public class CarVehicleService implements IBusinessService {
 	 * @throws BusinessException
 	 */
 	public TransData findvehicleList(TransData transData) throws BusinessException {
-		List<Map<String, Object>> orgList = vehicledao.queryvehicleList(transData.getPageInfo());
+		UserSession session = transData.getUserSession();
+		String orgid = session.getBranchNo();
+		List<Map<String, Object>> orgList = vehicledao.queryvehicleList(transData.getPageInfo(),orgid);
 		transData.setObj(orgList);
 		return transData;
 	}
@@ -109,6 +111,7 @@ public class CarVehicleService implements IBusinessService {
 		String description = (String) map.get("description");
 		String imageName = (String) map.get("imageName");
 		String createName = session.getUserName();
+		String orgid = session.getBranchNo();
 		Timestamp createDate = dateutil.getTimestamp();
 
 		String[] strarray = carbrandall.split("-");
@@ -131,6 +134,7 @@ public class CarVehicleService implements IBusinessService {
 		// String anchor=sysConfigUtil.getCfgInfo("vehicle_request");
 
 		CarVehicleEntity carvehicleentity = new CarVehicleEntity();
+		carvehicleentity.setOrgid(orgid);
 		carvehicleentity.setCarbrand(carbrandname);
 		carvehicleentity.setCarbrandid(carbrandid);
 		carvehicleentity.setVehicleName(vehicleName);
@@ -194,6 +198,7 @@ public class CarVehicleService implements IBusinessService {
 		String description = (String) map.get("description");
 		String imageName = (String) map.get("imageName");
 		String createName = session.getUserName();
+		String orgid = session.getBranchNo();
 		Timestamp createDate = dateutil.getTimestamp();
 
 		String[] strarray = carbrandall.split("-");
@@ -217,6 +222,7 @@ public class CarVehicleService implements IBusinessService {
 
 		CarVehicleEntity carvehicleentity = new CarVehicleEntity();
 		carvehicleentity.setId(id);
+		carvehicleentity.setOrgid(orgid);
 		carvehicleentity.setCarbrand(carbrandname);
 		carvehicleentity.setCarbrandid(carbrandid);
 		carvehicleentity.setVehicleName(vehicleName);
