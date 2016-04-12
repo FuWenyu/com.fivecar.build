@@ -57,7 +57,7 @@ public class CarLoanDao extends BaseDao<BaseEntity> {
 	 * @param page
 	 * @return
 	 */
-	public List<Map<String, Object>> querylenderList(Page page){
+	public List<Map<String, Object>> querylenderList(Page page,String orgid){
 		page.setPageSize(999);
 		StringBuffer sql = new StringBuffer();
 		sql.append("select led.id,");
@@ -71,6 +71,10 @@ public class CarLoanDao extends BaseDao<BaseEntity> {
 		sql.append("led.urlreal,");
 		sql.append("led.description ");
 		sql.append("from fc_ssss_lender led ");
+		sql.append(" where led.orgid=");
+		sql.append("'");
+		sql.append(orgid);
+		sql.append("'");
 		sql.append(" order by led.createDate desc");
 	
 		return super.excutePageQuery(sql.toString(),page);

@@ -40,6 +40,7 @@
 					</div>
 					<input id="vehicle_id" type="hidden" class="" name="vehicle_id"  value="${vehicle.id}" />
 					<input id="carbrand1" type="hidden" class="" name="carbrand1"  value="${vehicle.carbrandid}-${vehicle.carbrand}" />
+					<input id="dealer1" type="hidden" class="" name="dealer1" value="${vehicle.belong}-${vehicle.belongName}" />
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
 							车辆品牌</label>
@@ -51,7 +52,17 @@
                		    </select>
 						</div>
 					</div>
-					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">
+							所属4s店</label>
+						<div class="col-sm-9">
+							<select class="input-medium"  id="dealer" name="dealer">
+							<c:forEach items="${dealerList}" var="list" varStatus="status">
+	                        <option value="${list.id}-${list.dealerName}">${list.dealerName}</option>
+	               		    </c:forEach>
+               		    </select>
+						</div>
+					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
 							车辆名称  </label>
@@ -157,6 +168,8 @@
 	jQuery(function($) {
 		var carbrand1 = document.getElementById('carbrand1').value;
 		checkOption('carbrand',carbrand1);
+		var dealer1 = document.getElementById('dealer1').value;
+		checkOption('dealer',dealer1);
 		//上传文件控件
 		$('#fileInput').ace_file_input({
 			no_file:'空...',
@@ -181,7 +194,9 @@
 		if (!checkData('carbrand', '品牌', 'input')) {
 			return;
 		}
-		
+		if (!checkData('dealer', '所属4s店', 'input')) {
+			return;
+		}
 		if (!checkData('vehicleName', '车辆名称', 'input')) {
 			return;
 		}
@@ -248,6 +263,7 @@
 		param["vehicle_id"]=$("#vehicle_id").val();
 		param["imageName"]=imageName;
 		param["carbrand"]=$("#carbrand").val();
+		param["dealer"]=$("#dealer").val();
 		param["carbrandid"]=$("#carbrandid").val();
 		param["vehicleName"]=$("#vehicleName").val();
 		param["price"]=$("#price").val();

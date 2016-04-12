@@ -35,6 +35,7 @@
 				<!-- 查询条件begin -->
 				<form class="col-xs-12" id="queryForm" name="qry_form" action="dealer.do" method="post">
 					<input class="hidden" type="text" name="tradeCode" id="tradeCode" data-min="2" data-max="20" value="T10010" />
+					<input class="hidden" type="text" name="orgid" id="orgid"  value="${orgid}"  />
 					<div class="row">
 						<div class="space-6"></div>
 						<div class="form-group">
@@ -219,7 +220,12 @@
 		}
 		//跳转至图片新增页面
 		function addEntity(){
+			var orgid = document.getElementById('orgid').value;
+			if (orgid=="9999") {
 			window.location="<%=path%>/mvc/dealer_add.do";
+			}else {
+				alert("您没有权限新增4s店");
+			}
 		};
 		//跳转至图片编辑页面
 		function editEntity(id){

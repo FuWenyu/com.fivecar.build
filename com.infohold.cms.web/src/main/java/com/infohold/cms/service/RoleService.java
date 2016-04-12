@@ -94,6 +94,12 @@ public class RoleService implements IBusinessService{
 		String[] ids = (String[]) param_map.get("ids");
 		
 		roleDao.deleteMenuById(roleId);
+		if (roleId.equals("1")) {
+			roleDao.saveRole_Menu(roleId,"001");
+			roleDao.saveRole_Menu(roleId,"001001");
+			roleDao.saveRole_Menu(roleId,"001002");
+			roleDao.saveRole_Menu(roleId,"001003");
+		}
 		for(String menuId : ids){
 			if(!StrUtil.isNullOrEmpty(menuId)){
 				roleDao.saveRole_Menu(roleId,menuId);

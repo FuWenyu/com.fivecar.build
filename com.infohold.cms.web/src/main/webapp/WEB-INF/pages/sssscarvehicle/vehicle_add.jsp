@@ -30,7 +30,17 @@
                		    </select>
 						</div>
 					</div>
-					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">
+							所属4s店</label>
+						<div class="col-sm-9">
+							<select class="input-medium"  id="dealer" name="dealer">
+							<c:forEach items="${dealerList}" var="list" varStatus="status">
+	                        <option value="${list.id}-${list.dealerName}">${list.dealerName}</option>
+	               		    </c:forEach>
+               		    </select>
+						</div>
+					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
 							车辆名称  </label>
@@ -183,6 +193,7 @@
 		param = {};
 		param["imageName"]=imageName;
 		param["carbrand"]=$("#carbrand").val();
+		param["dealer"]=$("#dealer").val();
 		param["carbrandid"]=$("#carbrandid").val();
 		param["vehicleName"]=$("#vehicleName").val();
 		param["price"]=$("#price").val();

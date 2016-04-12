@@ -2,6 +2,7 @@ package com.infohold.cms.service;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -96,8 +97,15 @@ public class CarVehicleService implements IBusinessService {
 	public TransData querybrand(TransData transData) throws BusinessException {
 		Page page = new Page();
 		page.setPageSize(999);
-		List<Map<String, Object>> orgList = vehicledao.queryBrandList(page);
-		transData.setObj(orgList);
+		List<Map<String, Object>> brandList = vehicledao.queryBrandList(page);
+		UserSession session = transData.getUserSession();
+		String orgid = session.getBranchNo();
+		List<Map<String, Object>> dealerList = salesdao.queryDealerList(transData
+				.getPageInfo(),orgid);
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("brandList", brandList);
+		map.put("dealerList", dealerList);
+		transData.setObj(map);
 		return transData;
 	}
 
@@ -107,6 +115,7 @@ public class CarVehicleService implements IBusinessService {
 		UserSession session = transData.getUserSession();
 		String vehicleName = (String) map.get("vehicleName");
 		String carbrandall = (String) map.get("carbrand");
+		String dealer = (String) map.get("dealer");
 		String price = (String) map.get("price");
 		String description = (String) map.get("description");
 		String imageName = (String) map.get("imageName");
@@ -117,6 +126,10 @@ public class CarVehicleService implements IBusinessService {
 		String[] strarray = carbrandall.split("-");
 		String carbrandid = strarray[0];
 		String carbrandname = strarray[1];
+		
+		String[] strarray1 = dealer.split("-");
+		String belong = strarray1[0];
+		String belongName = strarray1[1];
 
 		StringBuffer urlreal = new StringBuffer("http://");
 		urlreal.append(sysConfigUtil.getCfgInfo("service_ip"));
@@ -135,6 +148,8 @@ public class CarVehicleService implements IBusinessService {
 
 		CarVehicleEntity carvehicleentity = new CarVehicleEntity();
 		carvehicleentity.setOrgid(orgid);
+		carvehicleentity.setBelong(belong);
+		carvehicleentity.setBelongName(belongName);
 		carvehicleentity.setCarbrand(carbrandname);
 		carvehicleentity.setCarbrandid(carbrandid);
 		carvehicleentity.setVehicleName(vehicleName);
@@ -143,7 +158,6 @@ public class CarVehicleService implements IBusinessService {
 		carvehicleentity.setUrl(url.toString());
 		carvehicleentity.setUrlreal(urlreal.toString());
 		carvehicleentity.setDescription(description);
-		// carvehicleentity.setAnchor(anchor+carvehicleentity.getId());
 		carvehicleentity.setCreateName(createName);
 		carvehicleentity.setCreateDate(createDate);
 		if (vehicledao.savevehicleEntity(carvehicleentity)) {
@@ -194,6 +208,7 @@ public class CarVehicleService implements IBusinessService {
 		String id = (String) map.get("vehicle_id");
 		String vehicleName = (String) map.get("vehicleName");
 		String carbrandall = (String) map.get("carbrand");
+		String dealer = (String) map.get("dealer");
 		String price = (String) map.get("price");
 		String description = (String) map.get("description");
 		String imageName = (String) map.get("imageName");
@@ -205,6 +220,10 @@ public class CarVehicleService implements IBusinessService {
 		String carbrandid = strarray[0];
 		String carbrandname = strarray[1];
 
+		String[] strarray1 = dealer.split("-");
+		String belong = strarray1[0];
+		String belongName = strarray1[1];
+		
 		StringBuffer urlreal = new StringBuffer("http://");
 		urlreal.append(sysConfigUtil.getCfgInfo("service_ip"));
 		urlreal.append("/");
@@ -223,6 +242,8 @@ public class CarVehicleService implements IBusinessService {
 		CarVehicleEntity carvehicleentity = new CarVehicleEntity();
 		carvehicleentity.setId(id);
 		carvehicleentity.setOrgid(orgid);
+		carvehicleentity.setBelong(belong);
+		carvehicleentity.setBelongName(belongName);
 		carvehicleentity.setCarbrand(carbrandname);
 		carvehicleentity.setCarbrandid(carbrandid);
 		carvehicleentity.setVehicleName(vehicleName);

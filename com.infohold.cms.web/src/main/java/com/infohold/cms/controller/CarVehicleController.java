@@ -62,8 +62,11 @@ public class CarVehicleController extends CentreController{
 		transData.setServiceName("vehicleService");
 		transData.setTradeCode("T23002");
 		transData=super.doService(httpServletRequest, transData);
-		List<Map<String, Object>> brandList = (List<Map<String, Object>>)transData.getObj();
+		Map<String,Object> map=(Map<String,Object>)transData.getObj();
+		List<Map<String, Object>> brandList = (List<Map<String, Object>>)map.get("brandList");
+		List<Map<String, Object>> dealerList = (List<Map<String, Object>>)map.get("dealerList");
 		mav.addObject("brandList", brandList);
+		mav.addObject("dealerList", dealerList);
 		mav.setViewName("/sssscarvehicle/vehicle_add");
 		return mav;
 	}
@@ -120,8 +123,11 @@ public class CarVehicleController extends CentreController{
 		transData.setServiceName("vehicleService");
 		transData.setTradeCode("T23002");
 		transData=super.doService(httpServletRequest, transData);
-		List<Map<String, Object>> brandList = (List<Map<String, Object>>)transData.getObj();
+		Map<String,Object> map=(Map<String,Object>)transData.getObj();
+		List<Map<String, Object>> brandList = (List<Map<String, Object>>)map.get("brandList");
+		List<Map<String, Object>> dealerList = (List<Map<String, Object>>)map.get("dealerList");
 		mav.addObject("brandList", brandList);
+		mav.addObject("dealerList", dealerList);
 		mav.setViewName("/sssscarvehicle/vehicle_update");
 		return mav;
 	}

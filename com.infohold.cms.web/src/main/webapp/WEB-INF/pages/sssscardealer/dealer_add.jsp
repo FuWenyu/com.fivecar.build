@@ -30,6 +30,17 @@
                		    </select>
 						</div>
 					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">
+							所属机构</label>
+						<div class="col-sm-9">
+							<select class="input-medium"  id="orgid" name="orgid">
+							<c:forEach items="${orgList}" var="list" varStatus="status">
+	                        <option value="${list.orgid}">${list.NAME}</option>
+	               		    </c:forEach>
+               		    </select>
+						</div>
+					</div>
 					
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
@@ -116,13 +127,11 @@
 			setHash('${pageContext.request.contextPath}');
 		});
 	});
-	
-	function pictureupload(){
-		
-	}
-	
 	function subForm(){
 		if (!checkData('carbrand', '经营品牌', 'input')) {
+			return;
+		}
+		if (!checkData('orgid', '所属机构', 'input')) {
 			return;
 		}
 		
@@ -158,6 +167,7 @@
 		}
 		param = {};
 		param["carbrand"]=$("#carbrand").val();
+		param["orgid"]=$("#orgid").val();
 		param["dealerName"]=$("#dealerName").val();
 		param["telephone"]=$("#telephone").val();
 		param["addr"]=$("#addr").val();

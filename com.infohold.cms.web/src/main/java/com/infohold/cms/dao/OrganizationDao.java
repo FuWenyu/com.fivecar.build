@@ -238,9 +238,29 @@ public class OrganizationDao extends BaseDao<BaseEntity>{
 				;
 		return super.queryForMap(sql);
 	}
+	
 	public OrganizationEntity getOrgnByid(String id) {
 			OrganizationEntity entity = new OrganizationEntity();
 			entity = (OrganizationEntity) super.get(OrganizationEntity.class, id);
 			return entity;
 		}
+	/**
+	 * 按照机构级别查询机构信息
+	 * @param id，用户主键
+	 * @return
+	 */
+	public List<Map<String, Object>> queryOrgn(String orgtype,Page page){
+		page.setPageSize(99);
+		StringBuffer sql = new StringBuffer();
+		sql.append("select org.ID,");
+		sql.append("org.orgid,");
+		sql.append("org.NAME ");
+		sql.append("from auth_organization org ");
+		sql.append("where org.orgtype = ");
+		sql.append("'");
+		sql.append(orgtype);
+		sql.append("'");
+		sql.append(" order by org.orgid desc");
+		return super.excutePageQuery(sql.toString(),page);
+	}
 }

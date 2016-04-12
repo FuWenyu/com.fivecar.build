@@ -26,20 +26,23 @@ import com.infohold.cms.entity.CarDealerEntity;;
 public class CarDealerController extends CentreController{
 
 	/**
-	 * 品牌列表
+	 * 4s店列表
 	 * @param httpServletRequest
 	 * @return ModelAndView
 	 * @throws JsonProcessingException 
 	 */
 	@RequestMapping("/mvc/dealer.do")
 	public ModelAndView dealerIndex(HttpServletRequest httpServletRequest) throws JsonProcessingException {
+		ModelAndView mav = new ModelAndView();
 		TransData transData = new TransData();
 		transData.setServiceName("dealerService");
 		transData.setTradeCode("T24001");
 		transData=super.doService(httpServletRequest, transData);
 		String qry_type = (String)transData.getViewMap().get("qry_type");
-		ModelAndView mav = new ModelAndView();
-		List<Map<String, Object>> dealerList = (List<Map<String, Object>>)transData.getObj();
+		Map<String,Object> map=(Map<String,Object>)transData.getObj();
+		String orgid = (String)map.get("orgid");
+		List<Map<String, Object>> dealerList = (List<Map<String, Object>>)map.get("orgList");
+		mav.addObject("orgid", orgid);
 		mav.addObject("dealerList", dealerList);
 		mav.addObject("page",transData.getPageInfo());
 		if(qry_type!=null){
@@ -62,11 +65,14 @@ public class CarDealerController extends CentreController{
 		transData.setServiceName("dealerService");
 		transData.setTradeCode("T24002");
 		transData=super.doService(httpServletRequest, transData);
-		List<Map<String, Object>> brandList = (List<Map<String, Object>>)transData.getObj();
+		Map<String,Object> map=(Map<String,Object>)transData.getObj();
+		List<Map<String, Object>> brandList = (List<Map<String, Object>>)map.get("brandList");
+		List<Map<String, Object>> orgList = (List<Map<String, Object>>)map.get("orgList");
 		transData.setTradeCode("T24008");
 		transData=super.doService(httpServletRequest, transData);
 		mav.addObject("resourcesList",transData.getObj());
 		mav.addObject("brandList", brandList);
+		mav.addObject("orgList", orgList);
 		mav.setViewName("/sssscardealer/dealer_add");
 		return mav;
 	}
@@ -122,7 +128,8 @@ public class CarDealerController extends CentreController{
 		mav.addObject("dealer",dealer);
 		transData.setTradeCode("T24002");
 		transData=super.doService(httpServletRequest, transData);
-		List<Map<String, Object>> brandList = (List<Map<String, Object>>)transData.getObj();
+		Map<String,Object> map=(Map<String,Object>)transData.getObj();
+		List<Map<String, Object>> brandList = (List<Map<String, Object>>)map.get("brandList");
 		mav.addObject("brandList", brandList);
 		transData.setTradeCode("T24008");
 		transData=super.doService(httpServletRequest, transData);

@@ -84,8 +84,10 @@ public class CarLoanService implements IBusinessService {
 	 * @throws BusinessException
 	 */
 	public TransData querylender(TransData transData) throws BusinessException {
+		UserSession session = transData.getUserSession();
+		String orgid = session.getBranchNo();
 		List<Map<String, Object>> orgList = loandao.querylenderList(transData
-				.getPageInfo());
+				.getPageInfo(),orgid);
 		transData.setObj(orgList);
 		return transData;
 	}

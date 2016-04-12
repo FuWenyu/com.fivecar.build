@@ -67,8 +67,10 @@ public class CarLenderService implements IBusinessService {
 	 */
 	public TransData findlenderList(TransData transData)
 			throws BusinessException {
+		UserSession session = transData.getUserSession();
+		String orgid = session.getBranchNo();
 		List<Map<String, Object>> orgList = lenderdao
-				.querylenderList(transData.getPageInfo());
+				.querylenderList(transData.getPageInfo(),orgid);
 		transData.setObj(orgList);
 		return transData;
 	}
@@ -83,6 +85,7 @@ public class CarLenderService implements IBusinessService {
 		String description = (String) map.get("description");
 		String imageName = (String) map.get("imageName");
 		String createName = session.getUserName();
+		String orgid = (String) map.get("orgid");
 		Timestamp createDate = dateutil.getTimestamp();
 
 		String[] strarray1 = anchor.split("-");
@@ -108,6 +111,7 @@ public class CarLenderService implements IBusinessService {
 		url.append(imageName);
 
 		CarLenderEntity carlenderentity = new CarLenderEntity();
+		carlenderentity.setOrgid(orgid);
 		carlenderentity.setLenderName(lenderName);
 		carlenderentity.setTelephone(telephone);
 		carlenderentity.setResourceid(resourceId);
@@ -174,6 +178,7 @@ public class CarLenderService implements IBusinessService {
 		String description = (String) map.get("description");
 		String imageName = (String) map.get("imageName");
 		String createName = session.getUserName();
+		String orgid = (String) map.get("orgid");
 		Timestamp createDate = dateutil.getTimestamp();
 
 		String[] strarray1 = anchor.split("-");
@@ -200,6 +205,7 @@ public class CarLenderService implements IBusinessService {
 
 		CarLenderEntity carlenderentity = new CarLenderEntity();
 		carlenderentity.setId(id);
+		carlenderentity.setOrgid(orgid);
 		carlenderentity.setLenderName(lenderName);
 		carlenderentity.setResourceid(resourceId);
 		carlenderentity.setPrivileges(resourceName);
