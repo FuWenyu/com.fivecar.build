@@ -1,6 +1,7 @@
 package com.infohold.cms.service;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import com.infohold.cms.basic.controller.CentreController;
 import com.infohold.cms.basic.exception.BusinessException;
 import com.infohold.cms.basic.service.IBusinessService;
 import com.infohold.cms.basic.util.SysConfigUtil;
+import com.infohold.cms.dao.OrganizationDao;
 import com.infohold.cms.dao.ParallelDealerDao;
 import com.infohold.cms.entity.ParallelDealerEntity;
 import com.infohold.cms.util.DateUtil;
@@ -30,6 +32,8 @@ public class ParallelDealerService implements IBusinessService {
 
 	@Autowired
 	private ParallelDealerDao dealerdao;
+	@Autowired
+	private OrganizationDao orgdao;
 
 	@Autowired
 	private SysConfigUtil sysConfigUtil;
@@ -62,7 +66,7 @@ public class ParallelDealerService implements IBusinessService {
 	}
 
 	/**
-	 * 4s店列表
+	 * 进口车经销商列表
 	 * 
 	 * @param transData
 	 * @return
@@ -70,9 +74,13 @@ public class ParallelDealerService implements IBusinessService {
 	 */
 	public TransData finddealerList(TransData transData)
 			throws BusinessException {
-		List<Map<String, Object>> orgList = dealerdao
-				.querydealerList(transData.getPageInfo());
-		transData.setObj(orgList);
+		UserSession session = transData.getUserSession();
+		String orgid = session.getBranchNo();
+		List<Map<String, Object>> orgList = dealerdao.querydealerList(transData.getPageInfo(), orgid);
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("orgList", orgList);
+		map.put("orgid", orgid);
+		transData.setObj(map);
 		return transData;
 	}
 
@@ -84,9 +92,12 @@ public class ParallelDealerService implements IBusinessService {
 	 * @throws BusinessException
 	 */
 	public TransData querybrand(TransData transData) throws BusinessException {
-		List<Map<String, Object>> orgList = dealerdao.queryBrandList(transData
-				.getPageInfo());
-		transData.setObj(orgList);
+		List<Map<String, Object>> brandList = dealerdao.queryBrandList(transData.getPageInfo());
+		List<Map<String, Object>> orgList = orgdao.queryOrgn("2", transData.getPageInfo());
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("brandList", brandList);
+		map.put("orgList", orgList);
+		transData.setObj(map);
 		return transData;
 	}
 
@@ -102,6 +113,7 @@ public class ParallelDealerService implements IBusinessService {
 		String position = (String) map.get("position");
 		String description = (String) map.get("description");
 		String createName = session.getUserName();
+		String orgid = (String) map.get("orgid");
 		Timestamp createDate = dateutil.getTimestamp();
 		if (null == position || "".equals(position) || "null".equals(position)) {
 			position = "<iframe class=\"ueditor_baidumap\" src=\"./ueditor/dialogs/map/show.html#center=121.807603,39.058436&zoom=13&width=530&height=340&markers=121.805375,39.05796&markerStyles=l,A\" frameborder=\"0\" width=\"534\" height=\"344\"></iframe>";
@@ -120,6 +132,7 @@ public class ParallelDealerService implements IBusinessService {
 		
 		ParallelDealerEntity ParallelDealerEntity = new ParallelDealerEntity();
 		ParallelDealerEntity.setResourceid(resourceId);
+		ParallelDealerEntity.setOrgid(orgid);
 		ParallelDealerEntity.setPrivileges(resourceName);
 		ParallelDealerEntity.setPrivilegestile(resourceTitle);
 		ParallelDealerEntity.setPrivilegesurl(anchor1.toString());
@@ -189,6 +202,7 @@ public class ParallelDealerService implements IBusinessService {
 		String position = (String) map.get("position");
 		String description = (String) map.get("description");
 		String createName = session.getUserName();
+		String orgid = (String) map.get("orgid");
 		Timestamp createDate = dateutil.getTimestamp();
 		if (null == position || "".equals(position) || "null".equals(position)) {
 			position = "<iframe class=\"ueditor_baidumap\" src=\"./ueditor/dialogs/map/show.html#center=121.807603,39.058436&zoom=13&width=530&height=340&markers=121.805375,39.05796&markerStyles=l,A\" frameborder=\"0\" width=\"534\" height=\"344\"></iframe>";
@@ -208,6 +222,7 @@ public class ParallelDealerService implements IBusinessService {
 		ParallelDealerEntity ParallelDealerEntity = new ParallelDealerEntity();
 		ParallelDealerEntity.setPrivileges(resourceName);
 		ParallelDealerEntity.setResourceid(resourceId);
+		ParallelDealerEntity.setOrgid(orgid);
 		ParallelDealerEntity.setPrivilegestile(resourceTitle);
 		ParallelDealerEntity.setPrivilegesurl(anchor1.toString());
 		ParallelDealerEntity.setId(id);

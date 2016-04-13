@@ -25,7 +25,7 @@ public class ParallelSalesDao extends BaseDao<BaseEntity> {
 	 * @param page
 	 * @return
 	 */
-	public List<Map<String, Object>> querysalesList(Page page){
+	public List<Map<String, Object>> querysalesList(Page page,String orgid){
 		StringBuffer sql = new StringBuffer();
 		sql.append("select sl.id,");
 		sql.append("sl.salesName,");
@@ -40,6 +40,10 @@ public class ParallelSalesDao extends BaseDao<BaseEntity> {
 		sql.append("sl.createDate,");
 		sql.append("sl.createName ");
 		sql.append("from fc_parallel_sales sl ");
+		sql.append(" where sl.orgid=");
+		sql.append("'");
+		sql.append(orgid);
+		sql.append("'");
 		sql.append(" order by sl.createDate desc");
 		return super.excutePageQuery(sql.toString(),page);
 	}
@@ -49,12 +53,16 @@ public class ParallelSalesDao extends BaseDao<BaseEntity> {
 	 * @param page
 	 * @return
 	 */
-	public List<Map<String, Object>> queryDealerList(Page page){
+	public List<Map<String, Object>> queryDealerList(Page page,String orgid){
 		StringBuffer sql = new StringBuffer();
 		sql.append("select dlr.id,");
 		sql.append("dlr.telephone,");
 		sql.append("dlr.dealerName ");
 		sql.append("from fc_parallel_dealer dlr ");
+		sql.append(" where dlr.orgid=");
+		sql.append("'");
+		sql.append(orgid);
+		sql.append("'");
 		return super.excutePageQuery(sql.toString(),page);
 	}
 	/**

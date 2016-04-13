@@ -222,14 +222,14 @@
 		function addEntity(){
 			var orgid = document.getElementById('orgid').value;
 			if (orgid=="9999") {
-			window.location="<%=path%>/mvc/dealer_add.do";
+			window.location="<%=path%>/dealer_add.do";
 			}else {
-				alert("您没有权限新增4s店");
+				alert("您没有权限新增4s店，请联系五车管理员！");
 			}
 		};
 		//跳转至图片编辑页面
 		function editEntity(id){
-			window.location="<%=path%>/mvc/dealer_edit.do?id="+id+"";
+			window.location="<%=path%>/dealer_edit.do?id="+id+"";
 		};
 		function addSalesEntity(){
 			window.location="<%=path%>/mvc/sales_add.do";

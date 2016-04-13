@@ -2,6 +2,7 @@ package com.infohold.cms.service;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -55,7 +56,7 @@ public class ParallelVehicleService implements IBusinessService {
 		if (tradCode.equals("T32001")) {
 			return this.findvehicleList(transData);
 		} else if (tradCode.equals("T32002")) {
-			return this.querybrand(transData);
+			return this.querybrand1(transData);
 		} else if (tradCode.equals("T32003")) {
 			return this.savevehicle(transData);
 		} else if (tradCode.equals("T32004")) {
@@ -92,11 +93,34 @@ public class ParallelVehicleService implements IBusinessService {
 	 * @throws BusinessException
 	 */
 	public TransData findvehicleList(TransData transData) throws BusinessException {
-		List<Map<String, Object>> orgList = vehicledao.queryvehicleList(transData.getPageInfo());
+		UserSession session = transData.getUserSession();
+		String orgid = session.getBranchNo();
+		List<Map<String, Object>> orgList = vehicledao.queryvehicleList(transData.getPageInfo(),orgid);
 		transData.setObj(orgList);
 		return transData;
 	}
 
+	/**
+	 * 新增查询列表
+	 * 
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData querybrand1(TransData transData) throws BusinessException {
+		Page page = new Page();
+		page.setPageSize(999);
+		List<Map<String, Object>> brandList = vehicledao.queryBrandList(page);
+		UserSession session = transData.getUserSession();
+		String orgid = session.getBranchNo();
+		List<Map<String, Object>> dealerList = salesdao.queryDealerList(transData
+				.getPageInfo(),orgid);
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("brandList", brandList);
+		map.put("dealerList", dealerList);
+		transData.setObj(map);
+		return transData;
+	}
 	/**
 	 * 品牌列表
 	 * 
@@ -143,7 +167,7 @@ public class ParallelVehicleService implements IBusinessService {
 	}
 
 	/**
-	 * 版本列表
+	 *经销商列表
 	 * 
 	 * @param transData
 	 * @return
@@ -178,6 +202,7 @@ public class ParallelVehicleService implements IBusinessService {
 		String description = (String) map.get("description");
 		String imageName = (String) map.get("imageName");
 		String createName = session.getUserName();
+		String orgid = session.getBranchNo();
 		Timestamp createDate = dateutil.getTimestamp();
 
 		String[] strarray = carbrandall.split("-");
@@ -212,6 +237,7 @@ public class ParallelVehicleService implements IBusinessService {
 		// String anchor=sysConfigUtil.getCfgInfo("vehicle_request");
 
 		ParallelVehicleEntity parallelvehicleentity = new ParallelVehicleEntity();
+		parallelvehicleentity.setOrgid(orgid);
 		parallelvehicleentity.setCarbrand(carbrandname);
 		parallelvehicleentity.setCarbrandid(carbrandid);
 		parallelvehicleentity.setVehicleName(vehicleName);
@@ -300,6 +326,7 @@ public class ParallelVehicleService implements IBusinessService {
 		String description = (String) map.get("description");
 		String imageName = (String) map.get("imageName");
 		String createName = session.getUserName();
+		String orgid = session.getBranchNo();
 		Timestamp createDate = dateutil.getTimestamp();
 
 		String[] strarray = carbrandall.split("-");
@@ -335,6 +362,7 @@ public class ParallelVehicleService implements IBusinessService {
 
 		ParallelVehicleEntity parallelvehicleentity = new ParallelVehicleEntity();
 		parallelvehicleentity.setId(id);
+		parallelvehicleentity.setOrgid(orgid);
 		parallelvehicleentity.setCarbrand(carbrandname);
 		parallelvehicleentity.setCarbrandid(carbrandid);
 		parallelvehicleentity.setVehicleName(vehicleName);

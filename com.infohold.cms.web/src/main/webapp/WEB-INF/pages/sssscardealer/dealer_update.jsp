@@ -6,6 +6,7 @@
 %>
 <!DOCTYPE html>
 <html lang="en">
+<jsp:include page="../common/commonList.jsp"></jsp:include><!-- 引入公供js -->
 	<head>
 	<meta charset="utf-8" />
 	<!-- basic styles -->
@@ -20,6 +21,38 @@
 	<link rel="stylesheet" href="<%=path%>/css/daterangepicker.css" />
 	<link rel="stylesheet" href="<%=path%>/css/jquery-ui-1.10.3.full.min.css" />
 	<script src="<%=path%>/js/ace-extra.min.js"></script>
+	<script type="text/javascript">
+    //重新实例化一个编辑器，防止在上面的editor编辑器中显示上传的图片或者文件
+    UEDITOR_CONFIG.UEDITOR_HOME_URL = './ueditor/';
+    var _editor = UE.getEditor('position');
+    _editor.ready(function () {
+        //设置编辑器不可用
+        //_editor.setDisabled();
+        //隐藏编辑器，因为不会用到这个编辑器实例，所以要隐藏
+        _editor.hide();
+        //侦听图片上传
+        _editor.addListener('beforeInsertImage', function (t, arg) {
+            //将地址赋值给相应的input
+            $("#picture").attr("value", arg[0].src);
+            //图片预览
+            $("#preview").attr("src", arg[0].src);
+        })
+        //侦听文件上传
+        _editor.addListener('afterUpfile', function (t, arg) {
+            $("#file").attr("value", _editor.options.filePath + arg[0].url);
+        })
+    });
+    //弹出图片上传的对话框
+    function upImage() {
+        var myImage = _editor.getDialog("map");
+        myImage.open();
+    }
+    //弹出文件上传的对话框
+    function upFiles() {
+        var myFiles = _editor.getDialog("attachment");
+        myFiles.open();
+    }
+</script>
 	</head>
 	<!-- 该页面为iframe嵌套页面，以下代码用于计算iframe高度，不允许修改：
 			<body id="iframe_body" onload="setHash('${pageContext.request.contextPath}')">
@@ -104,6 +137,14 @@
 	               		    </c:forEach>
                		    </select>
                		    </div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">
+							4s店地图</label>
+						<div class="col-sm-9">
+						<button class="btn btn-sm btn-primary" onclick="upImage();" type="button">添加地图信息</button>
+								 <textarea name="position" id="position">${dealer.position}</textarea>
+						</div>
 					</div>
 					
 					<div class="clearfix form-actions">

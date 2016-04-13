@@ -54,6 +54,7 @@ public class CarDealerDao extends BaseDao<BaseEntity> {
 	 * @return
 	 */
 	public List<Map<String, Object>> queryBrandList(Page page){
+		page.setPageSize(999);
 		StringBuffer sql = new StringBuffer();
 		sql.append("select brd.id,");
 		sql.append("brd.initial,");

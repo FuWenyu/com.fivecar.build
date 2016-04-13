@@ -58,7 +58,7 @@ public class CarDealerController extends CentreController{
 	 * @param httpServletRequest
 	 * @return
 	 */
-	@RequestMapping("/mvc/dealer_add.do")
+	@RequestMapping("/dealer_add.do")
 	public ModelAndView picture_add(HttpServletRequest httpServletRequest) {
 		ModelAndView mav = new ModelAndView();
 		TransData transData = new TransData();
@@ -117,7 +117,7 @@ public class CarDealerController extends CentreController{
 	 * @param httpServletRequest
 	 * @return
 	 */
-	@RequestMapping("/mvc/dealer_edit.do")
+	@RequestMapping("/dealer_edit.do")
 	public ModelAndView version_edit(HttpServletRequest httpServletRequest) {
 		TransData transData = new TransData();
 		transData.setServiceName("dealerService");

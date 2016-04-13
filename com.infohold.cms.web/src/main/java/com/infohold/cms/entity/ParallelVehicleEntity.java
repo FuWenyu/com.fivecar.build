@@ -23,6 +23,8 @@ import com.infohold.cms.basic.entity.BaseEntity;
 public class ParallelVehicleEntity extends BaseEntity {
 	/**主键*/
 	private java.lang.String id;
+	/**机构id*/
+	private java.lang.String orgid;
 	/**车辆名称*/
 	private java.lang.String vehicleName;
 	/**车辆图片*/
@@ -31,6 +33,10 @@ public class ParallelVehicleEntity extends BaseEntity {
 	private java.lang.String carbrandid;
 	/**品牌*/
 	private java.lang.String carbrand;
+	/**所属4s店经销商*/
+	private java.lang.String belong;
+	/**经销商名称*/
+	private java.lang.String belongName;
 	/**价格区间*/
 	private java.lang.String price;
 	/**价格key*/
@@ -85,7 +91,19 @@ public class ParallelVehicleEntity extends BaseEntity {
 	public void setId(java.lang.String id) {
 		this.id = id;
 	}
-
+	/**
+	 * @return the orgid
+	 */
+	@Column(name = "orgid", nullable=true,length = 32)
+	public java.lang.String getOrgid() {
+		return orgid;
+	}
+	/**
+	 * @param orgid the orgid to set
+	 */
+	public void setOrgid(java.lang.String orgid) {
+		this.orgid = orgid;
+	}
 	/**
 	 * @return the imageName
 	 */
@@ -138,6 +156,32 @@ public class ParallelVehicleEntity extends BaseEntity {
 	 */
 	public void setCarbrand(java.lang.String carbrand) {
 		this.carbrand = carbrand;
+	}
+	/**
+	 * @return the belong
+	 */
+	@Column(name ="belong",nullable=false,columnDefinition="varchar(36)default ''")
+	public java.lang.String getBelong() {
+		return belong;
+	}
+	/**
+	 * @param belong the belong to set
+	 */
+	public void setBelong(java.lang.String belong) {
+		this.belong = belong;
+	}
+	/**
+	 * @return the belongName
+	 */
+	@Column(name ="belongName",nullable=false,columnDefinition="varchar(64)default ''")
+	public java.lang.String getBelongName() {
+		return belongName;
+	}
+	/**
+	 * @param belongName the belongName to set
+	 */
+	public void setBelongName(java.lang.String belongName) {
+		this.belongName = belongName;
 	}
 	/**
 	 * @return the price
