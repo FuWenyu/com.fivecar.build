@@ -178,6 +178,7 @@
 	
 	jQuery(function($) {
 		var usefor = document.getElementById('usefor').value;
+		alert(usefor);
 		checkOption('usefo',usefor);
 		var anchor1 = document.getElementById('anchor1').value;
 		checkOption('anchor',anchor1);
