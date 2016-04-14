@@ -25,6 +25,7 @@ import com.infohold.cms.dao.ResourcesDao;
 import com.infohold.cms.dao.ThirdPartyResourcesDao;
 import com.infohold.cms.entity.AdEntity;
 import com.infohold.cms.entity.ThirdPartyResourcesEntity;
+import com.infohold.cms.util.CustomPropertyUtil;
 import com.infohold.cms.util.DateUtil;
 
 /**
@@ -39,9 +40,6 @@ public class ThirdPartyResourcesService implements IBusinessService {
 
 	@Autowired
 	private ThirdPartyResourcesDao resourcesdao;
-
-	@Autowired
-	private SysConfigUtil sysConfigUtil;
 
 	private DateUtil dateutil = new DateUtil();
 

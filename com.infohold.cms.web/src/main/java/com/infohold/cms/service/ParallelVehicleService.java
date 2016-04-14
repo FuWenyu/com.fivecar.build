@@ -22,6 +22,7 @@ import com.infohold.cms.dao.ParallelSalesDao;
 import com.infohold.cms.dao.ParallelVehicleDao;
 import com.infohold.cms.entity.ParallelDealerEntity;
 import com.infohold.cms.entity.ParallelVehicleEntity;
+import com.infohold.cms.util.CustomPropertyUtil;
 import com.infohold.cms.util.DateUtil;
 
 /**
@@ -43,9 +44,9 @@ public class ParallelVehicleService implements IBusinessService {
 	@Autowired
 	private ParallelModelDao modeldao;
 
-	@Autowired
-	private SysConfigUtil sysConfigUtil;
-
+	private static String service_name = CustomPropertyUtil
+			.getProperties("service_name");
+	
 	private DateUtil dateutil = new DateUtil();
 
 	private Logger logger = Logger.getLogger(ParallelVehicleService.class);
@@ -113,7 +114,7 @@ public class ParallelVehicleService implements IBusinessService {
 		List<Map<String, Object>> brandList = vehicledao.queryBrandList(page);
 		UserSession session = transData.getUserSession();
 		String orgid = session.getBranchNo();
-		List<Map<String, Object>> dealerList = salesdao.queryDealerList(transData
+		List<Map<String, Object>> dealerList = vehicledao.queryDealerList(transData
 				.getPageInfo(),orgid);
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("brandList", brandList);
@@ -176,7 +177,9 @@ public class ParallelVehicleService implements IBusinessService {
 	public TransData querydealer(TransData transData) throws BusinessException {
 		Page page = new Page();
 		page.setPageSize(999);
-		List<Map<String, Object>> orgList = vehicledao.queryDealerList(page);
+		UserSession session = transData.getUserSession();
+		String orgid = session.getBranchNo();
+		List<Map<String, Object>> orgList = vehicledao.queryDealerList(page,orgid);
 		transData.setObj(orgList);
 		return transData;
 	}
@@ -209,7 +212,7 @@ public class ParallelVehicleService implements IBusinessService {
 		String carbrandid = strarray[0];
 		String carbrandname = strarray[1];
 
-		String[] strarray1 = pricearea.split("-");
+		String[] strarray1 = pricearea.split("_");
 		String pricekey = strarray1[0];
 		String pricetagevalue = strarray1[1];
 
@@ -221,20 +224,15 @@ public class ParallelVehicleService implements IBusinessService {
 		String dealerid = strarray3[0];
 		String dealerName = strarray3[1];
 
-		StringBuffer urlreal = new StringBuffer("http://");
-		urlreal.append(sysConfigUtil.getCfgInfo("service_ip"));
-		urlreal.append("/");
-		urlreal.append(sysConfigUtil.getCfgInfo("service_name"));
+		StringBuffer urlreal = new StringBuffer("");
+		urlreal.append(service_name);
 		urlreal.append("/upload/imagereal/");
 		urlreal.append(imageName);
 
-		StringBuffer url = new StringBuffer("http://");
-		url.append(sysConfigUtil.getCfgInfo("service_ip"));
-		url.append("/");
-		url.append(sysConfigUtil.getCfgInfo("service_name"));
+		StringBuffer url = new StringBuffer("");
+		url.append(service_name);
 		url.append("/upload/image/");
 		url.append(imageName);
-		// String anchor=sysConfigUtil.getCfgInfo("vehicle_request");
 
 		ParallelVehicleEntity parallelvehicleentity = new ParallelVehicleEntity();
 		parallelvehicleentity.setOrgid(orgid);
@@ -333,7 +331,7 @@ public class ParallelVehicleService implements IBusinessService {
 		String carbrandid = strarray[0];
 		String carbrandname = strarray[1];
 
-		String[] strarray1 = pricearea.split("-");
+		String[] strarray1 = pricearea.split("_");
 		String pricekey = strarray1[0];
 		String pricetagevalue = strarray1[1];
 
@@ -345,20 +343,15 @@ public class ParallelVehicleService implements IBusinessService {
 		String dealerid = strarray3[0];
 		String dealerName = strarray3[1];
 
-		StringBuffer urlreal = new StringBuffer("http://");
-		urlreal.append(sysConfigUtil.getCfgInfo("service_ip"));
-		urlreal.append("/");
-		urlreal.append(sysConfigUtil.getCfgInfo("service_name"));
+		StringBuffer urlreal = new StringBuffer("");
+		urlreal.append(service_name);
 		urlreal.append("/upload/imagereal/");
 		urlreal.append(imageName);
 
-		StringBuffer url = new StringBuffer("http://");
-		url.append(sysConfigUtil.getCfgInfo("service_ip"));
-		url.append("/");
-		url.append(sysConfigUtil.getCfgInfo("service_name"));
+		StringBuffer url = new StringBuffer("");
+		url.append(service_name);
 		url.append("/upload/image/");
 		url.append(imageName);
-		// String anchor=sysConfigUtil.getCfgInfo("vehicle_request");
 
 		ParallelVehicleEntity parallelvehicleentity = new ParallelVehicleEntity();
 		parallelvehicleentity.setId(id);

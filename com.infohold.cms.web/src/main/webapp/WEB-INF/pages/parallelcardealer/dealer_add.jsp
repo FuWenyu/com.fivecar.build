@@ -64,7 +64,17 @@
                		    </select>
 						</div>
 					</div>
-					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">
+							所属机构</label>
+						<div class="col-sm-9">
+							<select class="input-medium"  id="orgid" name="orgid">
+							<c:forEach items="${orgList}" var="list" varStatus="status">
+	                        <option value="${list.orgid}">${list.NAME}</option>
+	               		    </c:forEach>
+               		    </select>
+						</div>
+					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
 							经销商全名 </label>

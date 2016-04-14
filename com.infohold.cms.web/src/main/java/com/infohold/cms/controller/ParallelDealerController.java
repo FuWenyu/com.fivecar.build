@@ -42,7 +42,7 @@ public class ParallelDealerController extends CentreController{
 		String qry_type = (String)transData.getViewMap().get("qry_type");
 		Map<String,Object> map=(Map<String,Object>)transData.getObj();
 		String orgid = (String)map.get("orgid");
-		List<Map<String, Object>> dealerList = (List<Map<String, Object>>)map.get("orgList");
+		List<Map<String, Object>> dealerList = (List<Map<String, Object>>)map.get("dealerList");
 		mav.addObject("orgid", orgid);
 		mav.addObject("dealerList", dealerList);
 		mav.addObject("page",transData.getPageInfo());
@@ -65,6 +65,7 @@ public class ParallelDealerController extends CentreController{
 		TransData transData = new TransData();
 		transData.setServiceName("padealerService");
 		transData.setTradeCode("T33002");
+		transData=super.doService(httpServletRequest, transData);
 		Map<String,Object> map=(Map<String,Object>)transData.getObj();
 		List<Map<String, Object>> brandList = (List<Map<String, Object>>)map.get("brandList");
 		List<Map<String, Object>> orgList = (List<Map<String, Object>>)map.get("orgList");

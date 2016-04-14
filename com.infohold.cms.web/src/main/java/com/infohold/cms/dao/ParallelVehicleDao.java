@@ -89,11 +89,15 @@ public class ParallelVehicleDao extends BaseDao<BaseEntity> {
 	 * @param page
 	 * @return
 	 */
-	public List<Map<String, Object>> queryDealerList(Page page) {
+	public List<Map<String, Object>> queryDealerList(Page page,String orgid) {
 		StringBuffer sql = new StringBuffer();
 		sql.append("select brd.id,");
 		sql.append("brd.dealerName ");
 		sql.append("from fc_parallel_dealer brd ");
+		sql.append(" where brd.orgid=");
+		sql.append("'");
+		sql.append(orgid);
+		sql.append("'");
 		return super.excutePageQuery(sql.toString(), page);
 	}
 

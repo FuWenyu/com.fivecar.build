@@ -24,6 +24,7 @@ import com.infohold.cms.basic.util.SysConfigUtil;
 import com.infohold.cms.dao.PictureDao;
 import com.infohold.cms.entity.AdEntity;
 import com.infohold.cms.entity.ResourcesEntity;
+import com.infohold.cms.util.CustomPropertyUtil;
 import com.infohold.cms.util.DateUtil;
 
 /**
@@ -38,9 +39,14 @@ public class PictureService implements IBusinessService {
 
 	@Autowired
 	private PictureDao pictureDao;
-
 	@Autowired
 	private SysConfigUtil sysConfigUtil;
+	
+	private static String service_name = CustomPropertyUtil
+			.getProperties("service_name");
+	
+	private static String resource_request = CustomPropertyUtil
+			.getProperties("resource_request");
 
 	private DateUtil dateutil = new DateUtil();
 	
@@ -221,17 +227,13 @@ public class PictureService implements IBusinessService {
 				+ "/" + imageName;
 		String zippath = "/var/tomcat/tomcat-7/webapps/com.fivecar.cms.web/upload/image"
 				+ "/" + imageName;*/
-		StringBuffer urlreal = new StringBuffer("http://");
-		urlreal.append(sysConfigUtil.getCfgInfo("service_ip"));
-		urlreal.append("/");
-		urlreal.append(sysConfigUtil.getCfgInfo("service_name"));
+		StringBuffer urlreal = new StringBuffer("");
+		urlreal.append(service_name);
 		urlreal.append("/upload/imagereal/");
 		urlreal.append(imageName);
 
-		StringBuffer url = new StringBuffer("http://");
-		url.append(sysConfigUtil.getCfgInfo("service_ip"));
-		url.append("/");
-		url.append(sysConfigUtil.getCfgInfo("service_name"));
+		StringBuffer url = new StringBuffer("");
+		url.append(service_name);
 		url.append("/upload/image/");
 		url.append(imageName);
 		
@@ -240,7 +242,7 @@ public class PictureService implements IBusinessService {
 		String usefoName = strarray2[1];
 		
 		StringBuffer anchor1 = new StringBuffer("");
-		anchor1.append(sysConfigUtil.getCfgInfo("resource_request"));
+		anchor1.append(resource_request);
 		anchor1.append(anchor);
 		
 		AdEntity adentity = new AdEntity();
@@ -330,17 +332,13 @@ public class PictureService implements IBusinessService {
 		String usefoName = strarray2[1];
 		
 		AdEntity adentity = new AdEntity();
-		StringBuffer urlreal = new StringBuffer("http://");
-		urlreal.append(sysConfigUtil.getCfgInfo("service_ip"));
-		urlreal.append("/");
-		urlreal.append(sysConfigUtil.getCfgInfo("service_name"));
+		StringBuffer urlreal = new StringBuffer("");
+		urlreal.append(service_name);
 		urlreal.append("/upload/imagereal/");
 		urlreal.append(imageName);
 
-		StringBuffer url = new StringBuffer("http://");
-		url.append(sysConfigUtil.getCfgInfo("service_ip"));
-		url.append("/");
-		url.append(sysConfigUtil.getCfgInfo("service_name"));
+		StringBuffer url = new StringBuffer("");
+		url.append(service_name);
 		url.append("/upload/image/");
 		url.append(imageName);
 		

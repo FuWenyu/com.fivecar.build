@@ -18,6 +18,7 @@ import com.infohold.cms.basic.util.SysConfigUtil;
 import com.infohold.cms.dao.CarDealerDao;
 import com.infohold.cms.dao.OrganizationDao;
 import com.infohold.cms.entity.CarDealerEntity;
+import com.infohold.cms.util.CustomPropertyUtil;
 import com.infohold.cms.util.DateUtil;
 
 /**
@@ -35,10 +36,10 @@ public class CarDealerService implements IBusinessService {
 	@Autowired
 	private OrganizationDao orgdao;
 
-	@Autowired
-	private SysConfigUtil sysConfigUtil;
-
 	private DateUtil dateutil = new DateUtil();
+	
+	private static String resource_request = CustomPropertyUtil
+			.getProperties("resource_request");
 
 	private Logger logger = Logger.getLogger(CarDealerService.class);
 
@@ -126,7 +127,7 @@ public class CarDealerService implements IBusinessService {
 		String resourceTitle = strarray1[1];
 		String resourceName = strarray1[2];
 		StringBuffer anchor1 = new StringBuffer("");
-		anchor1.append(sysConfigUtil.getCfgInfo("resource_request"));
+		anchor1.append(resource_request);
 		anchor1.append(resourceId);
 
 		CarDealerEntity CarDealerEntity = new CarDealerEntity();
@@ -213,7 +214,7 @@ public class CarDealerService implements IBusinessService {
 		String resourceTitle = strarray1[1];
 		String resourceName = strarray1[2];
 		StringBuffer anchor1 = new StringBuffer("");
-		anchor1.append(sysConfigUtil.getCfgInfo("resource_request"));
+		anchor1.append(resource_request);
 		anchor1.append(resourceId);
 
 		CarDealerEntity CarDealerEntity = new CarDealerEntity();

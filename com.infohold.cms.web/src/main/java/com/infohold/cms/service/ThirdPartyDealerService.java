@@ -16,6 +16,7 @@ import com.infohold.cms.basic.util.StrUtil;
 import com.infohold.cms.basic.util.SysConfigUtil;
 import com.infohold.cms.dao.ThirdPartyDealerDao;
 import com.infohold.cms.entity.ThirdPartyDealerEntity;
+import com.infohold.cms.util.CustomPropertyUtil;
 import com.infohold.cms.util.DateUtil;
 
 /**
@@ -31,8 +32,8 @@ public class ThirdPartyDealerService implements IBusinessService {
 	@Autowired
 	private ThirdPartyDealerDao tpdealerdao;
 
-	@Autowired
-	private SysConfigUtil sysConfigUtil;
+	private static String resource_request = CustomPropertyUtil
+			.getProperties("resource_request");
 
 	private DateUtil dateutil = new DateUtil();
 
@@ -132,7 +133,7 @@ public class ThirdPartyDealerService implements IBusinessService {
 		String resourceTitle = strarray1[1];
 		String resourceName = strarray1[2];
 		StringBuffer anchor1 = new StringBuffer("");
-		anchor1.append(sysConfigUtil.getCfgInfo("resource_request"));
+		anchor1.append(resource_request);
 		anchor1.append(resourceId);
 
 		ThirdPartyDealerEntity ThirdPartyDealerEntity = new ThirdPartyDealerEntity();
@@ -239,7 +240,7 @@ public class ThirdPartyDealerService implements IBusinessService {
 		String resourceTitle = strarray1[1];
 		String resourceName = strarray1[2];
 		StringBuffer anchor1 = new StringBuffer("");
-		anchor1.append(sysConfigUtil.getCfgInfo("resource_request"));
+		anchor1.append(resource_request);
 		anchor1.append(resourceId);
 
 		ThirdPartyDealerEntity ThirdPartyDealerEntity = new ThirdPartyDealerEntity();

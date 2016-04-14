@@ -40,7 +40,7 @@
 					</div>
 					<input id="vehicle_id" type="hidden" class="" name="vehicle_id"  value="${vehicle.id}" />
 					<input id="carbrand1" type="hidden" class="" name="carbrand1"  value="${vehicle.carbrandid}-${vehicle.carbrand}" />
-					<input id="pricearea1" type="hidden" class="" name="pricearea1"  value="${vehicle.pricekey}-${vehicle.pricetagevalue}" />
+					<input id="pricearea1" type="hidden" class="" name="pricearea1"  value="${vehicle.pricekey}_${vehicle.pricetagevalue}" />
 					<input id="vehicleversion1" type="hidden" class="" name="vehicleversion1"  value="${vehicle.vehicleversionkey}-${vehicle.vehicleversionvalue}" />
 					<input id="dealer1" type="hidden" class="" name="dealer1"  value="${vehicle.dealerid}-${vehicle.dealerName}" />
 					<div class="form-group">
@@ -80,7 +80,7 @@
 						<div class="col-sm-9">
 							<select class="input-medium"  id="pricearea" name="pricearea">
 							<c:forEach items="${priceList}" var="list" varStatus="status">
-	                        <option value="${list.pricekey}-${list.pricetagevalue}">${list.pricetagevalue}</option>
+	                        <option value="${list.pricekey}_${list.pricetagevalue}">${list.pricetagevalue}</option>
 	               		    </c:forEach>
                		    </select>
 						</div>

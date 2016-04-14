@@ -12,9 +12,9 @@ import com.infohold.cms.basic.common.TransData;
 import com.infohold.cms.basic.common.UserSession;
 import com.infohold.cms.basic.exception.BusinessException;
 import com.infohold.cms.basic.service.IBusinessService;
-import com.infohold.cms.basic.util.SysConfigUtil;
 import com.infohold.cms.dao.CarLenderDao;
 import com.infohold.cms.entity.CarLenderEntity;
+import com.infohold.cms.util.CustomPropertyUtil;
 import com.infohold.cms.util.DateUtil;
 
 /**
@@ -30,10 +30,13 @@ public class CarLenderService implements IBusinessService {
 	@Autowired
 	private CarLenderDao lenderdao;
 
-	@Autowired
-	private SysConfigUtil sysConfigUtil;
-
 	private DateUtil dateutil = new DateUtil();
+	
+	private static String service_name = CustomPropertyUtil
+			.getProperties("service_name");
+	
+	private static String resource_request = CustomPropertyUtil
+			.getProperties("resource_request");
 	
 	private Logger logger = Logger.getLogger(CarLenderService.class);
 
@@ -93,20 +96,16 @@ public class CarLenderService implements IBusinessService {
 		String resourceTitle = strarray1[1];
 		String resourceName = strarray1[2];
 		StringBuffer anchor1 = new StringBuffer("");
-		anchor1.append(sysConfigUtil.getCfgInfo("resource_request"));
+		anchor1.append(resource_request);
 		anchor1.append(resourceId);
 		
-		StringBuffer urlreal = new StringBuffer("http://");
-		urlreal.append(sysConfigUtil.getCfgInfo("service_ip"));
-		urlreal.append("/");
-		urlreal.append(sysConfigUtil.getCfgInfo("service_name"));
+		StringBuffer urlreal = new StringBuffer("");
+		urlreal.append(service_name);
 		urlreal.append("/upload/imagereal/");
 		urlreal.append(imageName);
 
-		StringBuffer url = new StringBuffer("http://");
-		url.append(sysConfigUtil.getCfgInfo("service_ip"));
-		url.append("/");
-		url.append(sysConfigUtil.getCfgInfo("service_name"));
+		StringBuffer url = new StringBuffer("");
+		url.append(service_name);
 		url.append("/upload/image/");
 		url.append(imageName);
 
@@ -186,20 +185,16 @@ public class CarLenderService implements IBusinessService {
 		String resourceTitle = strarray1[1];
 		String resourceName = strarray1[2];
 		StringBuffer anchor1 = new StringBuffer("");
-		anchor1.append(sysConfigUtil.getCfgInfo("resource_request"));
+		anchor1.append(resource_request);
 		anchor1.append(resourceId);
 
-		StringBuffer urlreal = new StringBuffer("http://");
-		urlreal.append(sysConfigUtil.getCfgInfo("service_ip"));
-		urlreal.append("/");
-		urlreal.append(sysConfigUtil.getCfgInfo("service_name"));
+		StringBuffer urlreal = new StringBuffer("");
+		urlreal.append(service_name);
 		urlreal.append("/upload/imagereal/");
 		urlreal.append(imageName);
 
-		StringBuffer url = new StringBuffer("http://");
-		url.append(sysConfigUtil.getCfgInfo("service_ip"));
-		url.append("/");
-		url.append(sysConfigUtil.getCfgInfo("service_name"));
+		StringBuffer url = new StringBuffer("");
+		url.append(service_name);
 		url.append("/upload/image/");
 		url.append(imageName);
 

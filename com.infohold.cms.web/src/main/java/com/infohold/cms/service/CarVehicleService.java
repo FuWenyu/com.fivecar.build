@@ -23,6 +23,7 @@ import com.infohold.cms.dao.CarVehicleDao;
 import com.infohold.cms.entity.CarDealerEntity;
 import com.infohold.cms.entity.CarSalesEntity;
 import com.infohold.cms.entity.CarVehicleEntity;
+import com.infohold.cms.util.CustomPropertyUtil;
 import com.infohold.cms.util.DateUtil;
 
 /**
@@ -44,9 +45,9 @@ public class CarVehicleService implements IBusinessService {
 	@Autowired
 	private CarModelDao modeldao;
 
-	@Autowired
-	private SysConfigUtil sysConfigUtil;
-
+	private static String service_name = CustomPropertyUtil
+			.getProperties("service_name");
+	
 	private DateUtil dateutil = new DateUtil();
 
 	private Logger logger = Logger.getLogger(CarVehicleService.class);
@@ -131,20 +132,15 @@ public class CarVehicleService implements IBusinessService {
 		String belong = strarray1[0];
 		String belongName = strarray1[1];
 
-		StringBuffer urlreal = new StringBuffer("http://");
-		urlreal.append(sysConfigUtil.getCfgInfo("service_ip"));
-		urlreal.append("/");
-		urlreal.append(sysConfigUtil.getCfgInfo("service_name"));
+		StringBuffer urlreal = new StringBuffer("");
+		urlreal.append(service_name);
 		urlreal.append("/upload/imagereal/");
 		urlreal.append(imageName);
 
-		StringBuffer url = new StringBuffer("http://");
-		url.append(sysConfigUtil.getCfgInfo("service_ip"));
-		url.append("/");
-		url.append(sysConfigUtil.getCfgInfo("service_name"));
+		StringBuffer url = new StringBuffer("");
+		url.append(service_name);
 		url.append("/upload/image/");
 		url.append(imageName);
-		// String anchor=sysConfigUtil.getCfgInfo("vehicle_request");
 
 		CarVehicleEntity carvehicleentity = new CarVehicleEntity();
 		carvehicleentity.setOrgid(orgid);
@@ -224,20 +220,15 @@ public class CarVehicleService implements IBusinessService {
 		String belong = strarray1[0];
 		String belongName = strarray1[1];
 		
-		StringBuffer urlreal = new StringBuffer("http://");
-		urlreal.append(sysConfigUtil.getCfgInfo("service_ip"));
-		urlreal.append("/");
-		urlreal.append(sysConfigUtil.getCfgInfo("service_name"));
+		StringBuffer urlreal = new StringBuffer("");
+		urlreal.append(service_name);
 		urlreal.append("/upload/imagereal/");
 		urlreal.append(imageName);
 
-		StringBuffer url = new StringBuffer("http://");
-		url.append(sysConfigUtil.getCfgInfo("service_ip"));
-		url.append("/");
-		url.append(sysConfigUtil.getCfgInfo("service_name"));
+		StringBuffer url = new StringBuffer("");
+		url.append(service_name);
 		url.append("/upload/image/");
 		url.append(imageName);
-		// String anchor=sysConfigUtil.getCfgInfo("vehicle_request");
 
 		CarVehicleEntity carvehicleentity = new CarVehicleEntity();
 		carvehicleentity.setId(id);

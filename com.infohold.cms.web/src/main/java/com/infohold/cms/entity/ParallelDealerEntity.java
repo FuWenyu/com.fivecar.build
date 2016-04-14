@@ -1,12 +1,17 @@
 package com.infohold.cms.entity;
 
 import java.sql.Timestamp;
+
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
 import com.infohold.cms.basic.entity.BaseEntity;
 
 /**   
@@ -149,7 +154,9 @@ public class ParallelDealerEntity extends BaseEntity {
 	/**
 	 * @return the position
 	 */
-	@Column(name ="position",columnDefinition="varchar(255)default ''")
+	@Basic(fetch = FetchType.LAZY)   
+	@Type(type="text")
+	@Column(name="position", nullable=true)
 	public java.lang.String getPosition() {
 		return position;
 	}

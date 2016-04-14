@@ -18,6 +18,7 @@ import com.infohold.cms.basic.util.SysConfigUtil;
 import com.infohold.cms.dao.OrganizationDao;
 import com.infohold.cms.dao.ParallelDealerDao;
 import com.infohold.cms.entity.ParallelDealerEntity;
+import com.infohold.cms.util.CustomPropertyUtil;
 import com.infohold.cms.util.DateUtil;
 
 /**
@@ -35,8 +36,8 @@ public class ParallelDealerService implements IBusinessService {
 	@Autowired
 	private OrganizationDao orgdao;
 
-	@Autowired
-	private SysConfigUtil sysConfigUtil;
+	private static String resource_request = CustomPropertyUtil
+			.getProperties("resource_request");
 
 	private DateUtil dateutil = new DateUtil();
 
@@ -76,9 +77,9 @@ public class ParallelDealerService implements IBusinessService {
 			throws BusinessException {
 		UserSession session = transData.getUserSession();
 		String orgid = session.getBranchNo();
-		List<Map<String, Object>> orgList = dealerdao.querydealerList(transData.getPageInfo(), orgid);
+		List<Map<String, Object>> dealerList = dealerdao.querydealerList(transData.getPageInfo(), orgid);
 		Map<String,Object> map = new HashMap<String, Object>();
-		map.put("orgList", orgList);
+		map.put("dealerList", dealerList);
 		map.put("orgid", orgid);
 		transData.setObj(map);
 		return transData;
@@ -118,6 +119,7 @@ public class ParallelDealerService implements IBusinessService {
 		if (null == position || "".equals(position) || "null".equals(position)) {
 			position = "<iframe class=\"ueditor_baidumap\" src=\"./ueditor/dialogs/map/show.html#center=121.807603,39.058436&zoom=13&width=530&height=340&markers=121.805375,39.05796&markerStyles=l,A\" frameborder=\"0\" width=\"534\" height=\"344\"></iframe>";
 		}
+//		var reg = /<p[^>]*>(?:(?!<\/p>)[\s\S])*<\/p>/gi;
 		String[] strarray = carbrandall.split("-");
 		String carbrandid = strarray[0];
 		String carbrandname = strarray[1];
@@ -127,7 +129,7 @@ public class ParallelDealerService implements IBusinessService {
 		String resourceTitle = strarray1[1];
 		String resourceName = strarray1[2];
 		StringBuffer anchor1 = new StringBuffer("");
-		anchor1.append(sysConfigUtil.getCfgInfo("resource_request"));
+		anchor1.append(resource_request);
 		anchor1.append(resourceId);
 		
 		ParallelDealerEntity ParallelDealerEntity = new ParallelDealerEntity();
@@ -216,7 +218,7 @@ public class ParallelDealerService implements IBusinessService {
 		String resourceTitle = strarray1[1];
 		String resourceName = strarray1[2];
 		StringBuffer anchor1 = new StringBuffer("");
-		anchor1.append(sysConfigUtil.getCfgInfo("resource_request"));
+		anchor1.append(resource_request);
 		anchor1.append(resourceId);
 		
 		ParallelDealerEntity ParallelDealerEntity = new ParallelDealerEntity();

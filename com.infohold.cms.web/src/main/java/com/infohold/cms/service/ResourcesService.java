@@ -39,9 +39,6 @@ public class ResourcesService implements IBusinessService {
 	@Autowired
 	private ResourcesDao resourcesdao;
 
-	@Autowired
-	private SysConfigUtil sysConfigUtil;
-
 	private DateUtil dateutil = new DateUtil();
 
 	private Logger logger = Logger.getLogger(ResourcesService.class);

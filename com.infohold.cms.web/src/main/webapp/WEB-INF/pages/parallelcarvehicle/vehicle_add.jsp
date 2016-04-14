@@ -56,7 +56,7 @@
 						<div class="col-sm-9">
 							<select class="input-medium"  id="pricearea" name="pricearea">
 							<c:forEach items="${priceList}" var="list" varStatus="status">
-	                        <option value="${list.pricekey}-${list.pricetagevalue}">${list.pricetagevalue}</option>
+	                        <option value="${list.pricekey}_${list.pricetagevalue}">${list.pricetagevalue}</option>
 	               		    </c:forEach>
                		    </select>
 						</div>

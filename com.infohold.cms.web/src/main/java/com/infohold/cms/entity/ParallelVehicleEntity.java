@@ -33,10 +33,6 @@ public class ParallelVehicleEntity extends BaseEntity {
 	private java.lang.String carbrandid;
 	/**品牌*/
 	private java.lang.String carbrand;
-	/**所属4s店经销商*/
-	private java.lang.String belong;
-	/**经销商名称*/
-	private java.lang.String belongName;
 	/**价格区间*/
 	private java.lang.String price;
 	/**价格key*/
@@ -158,32 +154,6 @@ public class ParallelVehicleEntity extends BaseEntity {
 		this.carbrand = carbrand;
 	}
 	/**
-	 * @return the belong
-	 */
-	@Column(name ="belong",nullable=false,columnDefinition="varchar(36)default ''")
-	public java.lang.String getBelong() {
-		return belong;
-	}
-	/**
-	 * @param belong the belong to set
-	 */
-	public void setBelong(java.lang.String belong) {
-		this.belong = belong;
-	}
-	/**
-	 * @return the belongName
-	 */
-	@Column(name ="belongName",nullable=false,columnDefinition="varchar(64)default ''")
-	public java.lang.String getBelongName() {
-		return belongName;
-	}
-	/**
-	 * @param belongName the belongName to set
-	 */
-	public void setBelongName(java.lang.String belongName) {
-		this.belongName = belongName;
-	}
-	/**
 	 * @return the price
 	 */
 	@Column(name ="price",nullable=false,columnDefinition="varchar(32)default ''")
@@ -196,7 +166,6 @@ public class ParallelVehicleEntity extends BaseEntity {
 	public void setPrice(java.lang.String price) {
 		this.price = price;
 	}
-	
 	/**
 	 * @return the pricekey
 	 */

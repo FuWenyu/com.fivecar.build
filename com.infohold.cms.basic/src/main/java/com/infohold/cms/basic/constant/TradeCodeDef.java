@@ -342,21 +342,21 @@ public enum TradeCodeDef implements Serializable {
 			return "app进口车根据经销商查询";
 			
 		case T33001:
-			return "进口车列表查询";
+			return "进口车经销商列表查询";
 		case T33002:
-			return "进口车新增查询";
+			return "进口车经销商新增查询";
 		case T33003:
-			return "进口车保存";
+			return "进口车经销商保存";
 		case T33004:
-			return "进口车删除";
+			return "进口车经销商删除";
 		case T33005:
 			return "进口车编辑查询";
 		case T33006:
-			return "进口车编辑保存";
+			return "进口车经销商编辑保存";
 		case T33007:
-			return "进口车app请求";
+			return "进口车经销商app请求";
 		case T33008:
-			return "优惠信息查询";
+			return "进口车经销商优惠信息查询";
 		case T33009:
 			return "暂不用";
 		case T33010:

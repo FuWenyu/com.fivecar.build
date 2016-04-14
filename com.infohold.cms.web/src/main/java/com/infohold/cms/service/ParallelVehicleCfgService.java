@@ -15,6 +15,7 @@ import com.infohold.cms.basic.service.IBusinessService;
 import com.infohold.cms.basic.util.SysConfigUtil;
 import com.infohold.cms.dao.ParallelModelDao;
 import com.infohold.cms.entity.ParallelVehicleCfgEntity;
+import com.infohold.cms.util.CustomPropertyUtil;
 import com.infohold.cms.util.DateUtil;
 
 /**
@@ -30,9 +31,9 @@ public class ParallelVehicleCfgService implements IBusinessService {
 	@Autowired
 	private ParallelModelDao modeldao;
 
-	@Autowired
-	private SysConfigUtil sysConfigUtil;
-
+	private static String service_name = CustomPropertyUtil
+			.getProperties("service_name");
+	
 	private DateUtil dateutil = new DateUtil();
 	
 	private Logger logger = Logger.getLogger(ParallelVehicleCfgService.class);
@@ -107,17 +108,13 @@ public class ParallelVehicleCfgService implements IBusinessService {
 		String carbrandid = strarray[2];
 		String carbrandname = strarray[3];
 
-		StringBuffer urlreal = new StringBuffer("http://");
-		urlreal.append(sysConfigUtil.getCfgInfo("service_ip"));
-		urlreal.append("/");
-		urlreal.append(sysConfigUtil.getCfgInfo("service_name"));
+		StringBuffer urlreal = new StringBuffer("");
+		urlreal.append(service_name);
 		urlreal.append("/upload/imagereal/");
 		urlreal.append(imageName);
 
-		StringBuffer url = new StringBuffer("http://");
-		url.append(sysConfigUtil.getCfgInfo("service_ip"));
-		url.append("/");
-		url.append(sysConfigUtil.getCfgInfo("service_name"));
+		StringBuffer url = new StringBuffer("");
+		url.append(service_name);
 		url.append("/upload/image/");
 		url.append(imageName);
 
@@ -200,17 +197,13 @@ public class ParallelVehicleCfgService implements IBusinessService {
 		String carbrandid = strarray[2];
 		String carbrandname = strarray[3];
 
-		StringBuffer urlreal = new StringBuffer("http://");
-		urlreal.append(sysConfigUtil.getCfgInfo("service_ip"));
-		urlreal.append("/");
-		urlreal.append(sysConfigUtil.getCfgInfo("service_name"));
+		StringBuffer urlreal = new StringBuffer("");
+		urlreal.append(service_name);
 		urlreal.append("/upload/imagereal/");
 		urlreal.append(imageName);
 
-		StringBuffer url = new StringBuffer("http://");
-		url.append(sysConfigUtil.getCfgInfo("service_ip"));
-		url.append("/");
-		url.append(sysConfigUtil.getCfgInfo("service_name"));
+		StringBuffer url = new StringBuffer("");
+		url.append(service_name);
 		url.append("/upload/image/");
 		url.append(imageName);
 
