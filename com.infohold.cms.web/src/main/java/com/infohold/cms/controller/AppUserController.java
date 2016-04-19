@@ -48,10 +48,13 @@ public class AppUserController extends CentreController{
 		transData.setTradeCode("T40001");
 		transData=super.doService(httpServletRequest, transData);
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+//		Map<String,Object> map1=(Map<String,Object>)transData.getObj();
 		if(!"".equals(transData.getExpCode())){
 			map.put("expCode", transData.getExpCode());
 			map.put("expMsg", transData.getExpMsg());
+//			map.put("phone_no", map1.get("phone_no"));
+//			map.put("password", map1.get("password"));
+			
 			return map;
 		}
 		System.out.println(map);

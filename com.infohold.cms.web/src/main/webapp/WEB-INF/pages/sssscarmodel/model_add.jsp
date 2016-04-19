@@ -146,9 +146,6 @@
 		if (!checkData('originalprice', '官方指导价格', 'input')) {
 			return;
 		}
-		if (!checkData('originalprice', '官方指导价格', 'illegal')) {
-			return;
-		}
 		if (!limitCheck('originalprice', '官方指导价格', 32)) {
 			return;
 		}
@@ -156,17 +153,11 @@
 		if (!checkData('discountprice', '五车折扣价格', 'input')) {
 			return;
 		}
-		if (!checkData('discountprice', '五车折扣价格', 'illegal')) {
-			return;
-		}
 		if (!limitCheck('discountprice', '五车折扣价格', 32)) {
 			return;
 		}
 		
 		if (!checkData('Carabstract', '配置摘要', 'input')) {
-			return;
-		}
-		if (!checkData('Carabstract', '配置摘要', 'illegal')) {
 			return;
 		}
 		if (!limitCheck('Carabstract', '配置摘要', 255)) {

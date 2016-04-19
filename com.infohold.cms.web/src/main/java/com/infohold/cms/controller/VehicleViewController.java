@@ -48,6 +48,28 @@ public class VehicleViewController extends CentreController {
 
 	@RequestMapping("/vehicleWebview.do")
 	public ModelAndView ssssvehicleWebview(HttpServletRequest httpServletRequest) {
+		ModelAndView mav = new ModelAndView();
+		TransData transData = new TransData();
+		Page page = new Page();
+		transData.setServiceName("vehicleService");
+		transData.setTradeCode("T23008");
+		transData=super.doService(httpServletRequest, transData);
+		Map<String,Object> map=(Map<String,Object>)transData.getObj();
+		page = transData.getPageInfo();
+		mav.addObject("page", page);
+		mav.addObject("server",(String) map.get("server"));
+		mav.addObject("url",(String) map.get("url"));
+		mav.addObject("vehicle", (CarVehicleEntity)map.get("vehicle"));
+		mav.addObject("dealer", (CarDealerEntity)map.get("dealer"));
+		mav.addObject("saleslist", (List<Map<String, Object>>)map.get("saleslist"));
+		mav.addObject("dealerlist", (List<Map<String, Object>>)map.get("dealerlist"));
+		mav.addObject("modellist", (List<Map<String, Object>>)map.get("modellist"));
+		mav.setViewName("/webview/vehiclenew");
+		return mav;
+	}
+
+	@RequestMapping("/vehicleWebview1.do")
+	public ModelAndView vehicleWebview(HttpServletRequest httpServletRequest) {
 		TransData transData = new TransData();
 		String vehicleid = httpServletRequest.getParameter("vehicleid");
 		String delrid = httpServletRequest.getParameter("dealerid");
@@ -82,7 +104,6 @@ public class VehicleViewController extends CentreController {
 		mav.setViewName("/webview/vehicle");
 		return mav;
 	}
-
 	@RequestMapping("/pavehicleWebview.do")
 	public ModelAndView parallelvehicleWebview(HttpServletRequest httpServletRequest) {
 		TransData transData = new TransData();

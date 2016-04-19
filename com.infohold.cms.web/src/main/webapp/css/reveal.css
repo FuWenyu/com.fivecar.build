@@ -1,0 +1,8 @@
+.reveal-modal-bg { position: fixed; height: 100%;width: 100%;background: #000;background: rgba(0,0,0,.5);z-index: 100;display: none;top: 0;left: 0; }
+.reveal-modal {visibility: hidden;top: 44px; width:100%;background-color:#fff;position: absolute;z-index: 101;padding:10px 10px 40px 10px;}
+.reveal-modal.small{ width: 200px; margin-left: -140px;}
+.reveal-modal.medium{ width: 400px; margin-left: -240px;}
+.reveal-modal.large{ width: 600px; margin-left: -340px;}
+.reveal-modal.xlarge{ width: 800px; margin-left: -440px;}
+.reveal-modal .close-reveal-modal {font-size: 14px;position: absolute;bottom: 12px;text-align:center;color: #666;width:100px;left:50%;margin-left:-50px;} 
+.mymode2{}

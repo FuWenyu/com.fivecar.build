@@ -48,6 +48,12 @@ public class CarVehicleService implements IBusinessService {
 	private static String service_name = CustomPropertyUtil
 			.getProperties("service_name");
 	
+	private static String service_addr = CustomPropertyUtil
+			.getProperties("service_addr");
+	
+	private static String system_webview = CustomPropertyUtil
+			.getProperties("system_webview");
+	
 	private DateUtil dateutil = new DateUtil();
 
 	private Logger logger = Logger.getLogger(CarVehicleService.class);
@@ -69,6 +75,8 @@ public class CarVehicleService implements IBusinessService {
 			return this.updatePictureEntity(transData);
 		} else if (tradCode.equals("T23007")) {
 			return this.vehicleQuery(transData);
+		}else if (tradCode.equals("T23008")) {
+			return this.vechicleWebview(transData);
 		}
 		return transData;
 	}
@@ -279,7 +287,51 @@ public class CarVehicleService implements IBusinessService {
 		}
 		return transData;
 	}
-
+	/**
+	 * 车辆webview
+	 * 
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData vechicleWebview(TransData transData) throws BusinessException {
+		Map<String, Object> map1 = transData.getViewMap();
+		String vehicleid = (String) map1.get("vehicleid");
+		String delrid = (String) map1.get("dealerid");
+		Page page = new Page();
+		page.setPageSize(999);
+		Map<String,Object> map = new HashMap<String, Object>();
+		//获取车辆信息
+		CarVehicleEntity vehicle = vehicledao.getvehicleEntity(vehicleid);
+		map.put("vehicle", vehicle);
+		//获取4s店和销售员信息
+		if (delrid == null || delrid.equals(" ")||delrid.equals("") ) {
+			CarDealerEntity dealer = dealerdao.getdealerEntity(vehicle.getBelong());
+			map.put("dealer", dealer);
+			List<Map<String, Object>> saleslist = salesdao.querysalesList1(dealer.getId(), transData.getPageInfo());
+			map.put("saleslist", saleslist);
+		} else {
+			CarDealerEntity dealer = dealerdao.getdealerEntity(delrid);
+			map.put("dealer", dealer);
+			List<Map<String, Object>> saleslist = salesdao.querysalesList1(dealer.getId(), transData.getPageInfo());
+			map.put("saleslist", saleslist);
+		}
+		//获取4s店列表
+		List<Map<String, Object>> dealerlist = dealerdao.querydealerListPage(vehicle.getCarbrandid(), page);
+		map.put("dealerlist", dealerlist);
+		//获取车辆对应的车型信息
+		List<Map<String, Object>> modellist = modeldao.querymodelList1(vehicleid, page);
+		map.put("modellist", modellist);
+		//获取
+		StringBuffer url = new StringBuffer(system_webview);
+		url.append("dealerid=");
+		map.put("url", url.toString());
+		map.put("server", service_addr);
+		transData.setObj(map);
+		return transData;
+	}
+	
+	
 	/**
 	 * 页面查询
 	 * 

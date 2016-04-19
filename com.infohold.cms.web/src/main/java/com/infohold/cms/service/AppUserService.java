@@ -37,14 +37,9 @@ public class AppUserService implements IBusinessService {
 	@Autowired
 	private AppUserDao appuserdao;
 
-	@Autowired
-	private SysConfigUtil sysConfigUtil;
-
 	private DateUtil dateutil = new DateUtil();
 
 	private Logger logger = Logger.getLogger(AppUserService.class);
-
-	private static String appkey = CustomPropertyUtil.getProperties("appkey");
 
 	@Override
 	public TransData execute(TransData transData) throws BusinessException {
@@ -80,44 +75,44 @@ public class AppUserService implements IBusinessService {
 		logger.info("AppRegister-request:" + map);
 		String phone_no = (String) map.get("phone_no");
 		String password = (String) map.get("password");
-		String code = (String) map.get("vccode");
+		// String code = (String) map.get("vccode");
 		Timestamp create_date = dateutil.getTimestamp();
-		String response = null;
-		try {
-			response = new SmsVerifyKit(appkey, phone_no, "86", code).go();
-			System.out.println(response);
-		} catch (Exception e) {
-			e.printStackTrace();
+		/*
+		 * String response = null; try { response = new SmsVerifyKit(appkey,
+		 * phone_no, "86", code).go(); System.out.println(response);
+		 * logger.info("AppRegister-SMSverifyresponse:" + response); } catch
+		 * (Exception e) { e.printStackTrace(); }
+		 */
+		/*
+		 * JSONObject responsejson = new JSONObject(response); int response1 =
+		 * responsejson.getInt("status"); if (response1 == 200) {
+		 */
+		AppUserEntity userentity = new AppUserEntity();
+		userentity.setPhone(phone_no);
+		userentity.setPassword(MD5Util.encryption(password));
+		userentity.setCreate_date(create_date);
+		if (!isPhoneNumber(phone_no)) {
+			transData.setExpCode("-1");
+			transData.setExpMsg("请输入正确的电话号！");
+			return transData;
 		}
-		JSONObject responsejson = new JSONObject(response);
-		int response1 = responsejson.getInt("status");
-		if (response1 == 200) {
-			AppUserEntity userentity = new AppUserEntity();
-			userentity.setPhone(phone_no);
-			userentity.setPassword(MD5Util.encryption(password));
-			userentity.setCreate_date(create_date);
-			if (!isPhoneNumber(phone_no)) {
-				transData.setExpCode("-1");
-				transData.setExpMsg("请输入正确的电话号！");
-				return transData;
-			}
-			if (appuserdao.getbyphone(phone_no)) {
-				transData.setExpCode("-1");
-				transData.setExpMsg("此电话号码已经被注册过了！");
-				return transData;
-			}
-			if (appuserdao.saveAppUserEntity(userentity)) {
-				transData.setExpCode("1");
-				transData.setExpMsg("success");
-			} else {
-				transData.setExpCode("-1");
-				transData.setExpMsg("此电话号码已经被注册过了！");
-				return transData;
-			}
+		if (appuserdao.getbyphone(phone_no)) {
+			transData.setExpCode("-1");
+			transData.setExpMsg("此电话号码已经被注册过了！");
+			return transData;
+		}
+		if (appuserdao.saveAppUserEntity(userentity)) {
+			transData.setExpCode("1");
+			transData.setExpMsg("success");
+			transData.setObj(map);
 		} else {
 			transData.setExpCode("-1");
-			transData.setExpMsg("验证码错误！");
+			transData.setExpMsg("此电话号码已经被注册过了！");
+			return transData;
 		}
+		/*
+		 * } else { transData.setExpCode("-1"); transData.setExpMsg("验证码错误！"); }
+		 */
 		return transData;
 
 	}
@@ -199,42 +194,41 @@ public class AppUserService implements IBusinessService {
 		Map<String, Object> map = transData.getViewMap();
 		logger.info("updatePWDforSMS-request:" + map);
 		String phone_no = (String) map.get("phone_no");
-		String code = (String) map.get("vccode");
+		// String code = (String) map.get("vccode");
 		String newpassword = (String) map.get("newpassword");
+		/*
 		String response = null;
-		try {
-			response = new SmsVerifyKit(appkey, phone_no, "86", code).go();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		JSONObject responsejson = new JSONObject(response);
-		int response1 = responsejson.getInt("status");
-		if (response1 == 200) {
-			String newmd5pwd = MD5Util.encryption(newpassword);
-			String id = appuserdao.getuserbyphone(phone_no);
-			if (id == null) {
-				transData.setExpCode("-1");
-				transData.setExpMsg("用户不存在！");
-			} else {
-				AppUserEntity user = appuserdao.getuserEntity(id);
-				if (user != null) {
-					user.setPassword(newmd5pwd);
-					if (appuserdao.user_update(user)) {
-						transData.setExpCode("1");
-						transData.setExpMsg("success");
-					} else {
-						transData.setExpCode("-1");
-						transData.setExpMsg("更新失败请重试！");
-					}
+		 * try { response = new SmsVerifyKit(appkey, phone_no, "86", code).go();
+		 * } catch (Exception e) { e.printStackTrace(); }
+		 */
+		/*
+		 * JSONObject responsejson = new JSONObject(response); int response1 =
+		 * responsejson.getInt("status"); if (response1 == 200) {
+		 */
+		String newmd5pwd = MD5Util.encryption(newpassword);
+		String id = appuserdao.getuserbyphone(phone_no);
+		if (id == null) {
+			transData.setExpCode("-1");
+			transData.setExpMsg("用户不存在！");
+		} else {
+			AppUserEntity user = appuserdao.getuserEntity(id);
+			if (user != null) {
+				user.setPassword(newmd5pwd);
+				if (appuserdao.user_update(user)) {
+					transData.setExpCode("1");
+					transData.setExpMsg("success");
 				} else {
 					transData.setExpCode("-1");
-					transData.setExpMsg("帐号或者密码错误！");
+					transData.setExpMsg("更新失败请重试！");
 				}
+			} else {
+				transData.setExpCode("-1");
+				transData.setExpMsg("用户不存在！");
 			}
-		} else {
-			transData.setExpCode("-1");
-			transData.setExpMsg("验证码错误！");
 		}
+		/*
+		 * } else { transData.setExpCode("-1"); transData.setExpMsg("验证码错误！"); }
+		 */
 		return transData;
 	}
 
@@ -359,7 +353,7 @@ public class AppUserService implements IBusinessService {
 		logger.info("queryCollection-request:" + map);
 		String user_id = (String) map.get("user_id");
 		List<Map<String, Object>> collectionList = appuserdao.queryCollectionEntity(user_id, transData.getPageInfo());
-		if (!(collectionList==null)) {
+		if (!(collectionList == null)) {
 			transData.setExpCode("1");
 			transData.setExpMsg("success");
 			transData.setObj(collectionList);
