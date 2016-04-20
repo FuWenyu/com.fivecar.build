@@ -308,6 +308,30 @@ public class ParallelVehicleDao extends BaseDao<BaseEntity> {
 		return super.excutePageQuery(sql.toString(), page);
 	}
 	/**
+	 * 4s店车辆信息列表查询
+	 * 
+	 * @param map
+	 * @param page
+	 * @return
+	 */
+	public List<Map<String, Object>> queryvehicleList6( String like,
+			Page page) {
+		StringBuffer sql = new StringBuffer();
+		sql.append("select vcl.id,");
+		sql.append("vcl.dealerName,");
+		sql.append("vcl.vehicleName,");
+		sql.append("vcl.description,");
+		sql.append("vcl.price,");
+		sql.append("vcl.url,");
+		sql.append("vcl.urlreal ");
+		sql.append("from fc_parallel_vehicle vcl ");
+		sql.append(" where vcl.vehicleName like ");
+		sql.append("'%");
+		sql.append(like);
+		sql.append("%'");
+		return super.excutePageQuery(sql.toString(), page);
+	}
+	/**
 	 * 保存4s店车辆信息
 	 * 
 	 * @param VersionEntity

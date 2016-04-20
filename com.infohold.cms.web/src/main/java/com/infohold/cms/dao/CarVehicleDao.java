@@ -71,6 +71,7 @@ public class CarVehicleDao extends BaseDao<BaseEntity> {
 		sql.append("select vcl.id,");
 		sql.append("vcl.carbrand,");
 		sql.append("vcl.vehicleName,");
+		sql.append("vcl.price,");
 		sql.append("vcl.url,");
 		sql.append("vcl.urlreal ");
 		sql.append("from fc_ssss_vehicle vcl ");
@@ -91,9 +92,32 @@ public class CarVehicleDao extends BaseDao<BaseEntity> {
 		sql.append("select vcl.id,");
 		sql.append("vcl.carbrand,");
 		sql.append("vcl.vehicleName,");
+		sql.append("vcl.price,");
 		sql.append("vcl.url,");
 		sql.append("vcl.urlreal ");
 		sql.append("from fc_ssss_vehicle vcl ");
+		sql.append(" order by vcl.carbrand");
+		return super.excutePageQuery(sql.toString(),page);
+	}
+	/**
+	 * 4s店车辆信息列表模糊查询
+	 * @param map
+	 * @param page
+	 * @return
+	 */
+	public List<Map<String, Object>> queryvehicleList3(String like,Page page){
+		StringBuffer sql = new StringBuffer();
+		sql.append("select vcl.id,");
+		sql.append("vcl.carbrand,");
+		sql.append("vcl.vehicleName,");
+		sql.append("vcl.price,");
+		sql.append("vcl.url,");
+		sql.append("vcl.urlreal ");
+		sql.append("from fc_ssss_vehicle vcl ");
+		sql.append(" where vcl.vehicleName like ");
+		sql.append("'%");
+		sql.append(like);
+		sql.append("%'");
 		sql.append(" order by vcl.carbrand");
 		return super.excutePageQuery(sql.toString(),page);
 	}

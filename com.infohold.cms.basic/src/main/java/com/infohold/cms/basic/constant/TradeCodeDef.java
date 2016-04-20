@@ -34,7 +34,7 @@ public enum TradeCodeDef implements Serializable {
 	//平行进口车品牌管理模块
 	T31001(), T31002(), T31003, T31004(), T31005(), T31006(),T31007(),T31008(),T31009(),T31010(),
 	//平行进口车车辆管理模块
-	T32001(), T32002(), T32003, T32004(), T32005(), T32006(),T32007(),T32008(),T32009(),T32010(),T32011(),T32012(),T32013(),T32014(),T32015(),
+	T32001(), T32002(), T32003, T32004(), T32005(), T32006(),T32007(),T32008(),T32009(),T32010(),T32011(),T32012(),T32013(),T32014(),T32015(),T32016(),
 	//平行进口车信息管理
 	T33001(), T33002(), T33003, T33004(), T33005(), T33006(),T33007(),T33008(),T33009(),T33010(),
 	//平行进口车销售员管理
@@ -158,7 +158,7 @@ public enum TradeCodeDef implements Serializable {
 		case T23008:
 			return "车辆webview";
 		case T23009:
-			return "暂不用";
+			return "车辆app模糊查询";
 		case T23010:
 			return "暂不用";
 			
@@ -340,6 +340,8 @@ public enum TradeCodeDef implements Serializable {
 			return "app进口车默认查询";
 		case T32015:
 			return "app进口车根据经销商查询";
+		case T32016:
+			return "app进口车模糊查询";
 			
 		case T33001:
 			return "进口车经销商列表查询";

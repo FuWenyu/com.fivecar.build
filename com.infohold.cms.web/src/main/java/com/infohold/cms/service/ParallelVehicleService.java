@@ -44,9 +44,8 @@ public class ParallelVehicleService implements IBusinessService {
 	@Autowired
 	private ParallelModelDao modeldao;
 
-	private static String service_name = CustomPropertyUtil
-			.getProperties("service_name");
-	
+	private static String service_name = CustomPropertyUtil.getProperties("service_name");
+
 	private DateUtil dateutil = new DateUtil();
 
 	private Logger logger = Logger.getLogger(ParallelVehicleService.class);
@@ -80,9 +79,11 @@ public class ParallelVehicleService implements IBusinessService {
 			return this.vehicleQueryVersion(transData);
 		} else if (tradCode.equals("T32014")) {
 			return this.vehicleQuery(transData);
-		}else if (tradCode.equals("T32015")) {
-		return this.vehicleQueryDealer(transData);
-	}
+		} else if (tradCode.equals("T32015")) {
+			return this.vehicleQueryDealer(transData);
+		} else if (tradCode.equals("T32016")) {
+			return this.vehicleQueryLikes(transData);
+		}
 		return transData;
 	}
 
@@ -96,7 +97,7 @@ public class ParallelVehicleService implements IBusinessService {
 	public TransData findvehicleList(TransData transData) throws BusinessException {
 		UserSession session = transData.getUserSession();
 		String orgid = session.getBranchNo();
-		List<Map<String, Object>> orgList = vehicledao.queryvehicleList(transData.getPageInfo(),orgid);
+		List<Map<String, Object>> orgList = vehicledao.queryvehicleList(transData.getPageInfo(), orgid);
 		transData.setObj(orgList);
 		return transData;
 	}
@@ -114,14 +115,14 @@ public class ParallelVehicleService implements IBusinessService {
 		List<Map<String, Object>> brandList = vehicledao.queryBrandList(page);
 		UserSession session = transData.getUserSession();
 		String orgid = session.getBranchNo();
-		List<Map<String, Object>> dealerList = vehicledao.queryDealerList(transData
-				.getPageInfo(),orgid);
-		Map<String,Object> map = new HashMap<String, Object>();
+		List<Map<String, Object>> dealerList = vehicledao.queryDealerList(transData.getPageInfo(), orgid);
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("brandList", brandList);
 		map.put("dealerList", dealerList);
 		transData.setObj(map);
 		return transData;
 	}
+
 	/**
 	 * 品牌列表
 	 * 
@@ -168,7 +169,7 @@ public class ParallelVehicleService implements IBusinessService {
 	}
 
 	/**
-	 *经销商列表
+	 * 经销商列表
 	 * 
 	 * @param transData
 	 * @return
@@ -179,7 +180,7 @@ public class ParallelVehicleService implements IBusinessService {
 		page.setPageSize(999);
 		UserSession session = transData.getUserSession();
 		String orgid = session.getBranchNo();
-		List<Map<String, Object>> orgList = vehicledao.queryDealerList(page,orgid);
+		List<Map<String, Object>> orgList = vehicledao.queryDealerList(page, orgid);
 		transData.setObj(orgList);
 		return transData;
 	}
@@ -455,6 +456,7 @@ public class ParallelVehicleService implements IBusinessService {
 		}
 		return transData;
 	}
+
 	/**
 	 * http请求根据车辆版本查询车辆列表
 	 * 
@@ -465,41 +467,42 @@ public class ParallelVehicleService implements IBusinessService {
 	public TransData vehicleQuery(TransData transData) throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
 		logger.info("vehicleQuery-request:" + map);
-		
+
 		String carbrand = (String) map.get("carbrand");
 		String pricekey = (String) map.get("pricekey");
 		String versionkey = (String) map.get("versionkey");
 		List<Map<String, Object>> vehiclelist = null;
 		int index = 0;
-		if (carbrand.equals("all")&&pricekey.equals("all")&&versionkey.equals("all")) {
+		if (carbrand.equals("all") && pricekey.equals("all") && versionkey.equals("all")) {
 			index = 1;
-		}else if (!carbrand.equals("all")&&pricekey.equals("all")&&versionkey.equals("all")) {
+		} else if (!carbrand.equals("all") && pricekey.equals("all") && versionkey.equals("all")) {
 			index = 2;
-		}else if (carbrand.equals("all")&&!pricekey.equals("all")&&versionkey.equals("all")) {
+		} else if (carbrand.equals("all") && !pricekey.equals("all") && versionkey.equals("all")) {
 			index = 3;
-		}else if (carbrand.equals("all")&&pricekey.equals("all")&&!versionkey.equals("all")) {
+		} else if (carbrand.equals("all") && pricekey.equals("all") && !versionkey.equals("all")) {
 			index = 4;
-		}else if (!carbrand.equals("all")&&!pricekey.equals("all")&&versionkey.equals("all")) {
+		} else if (!carbrand.equals("all") && !pricekey.equals("all") && versionkey.equals("all")) {
 			index = 5;
-		}else if (!carbrand.equals("all")&&pricekey.equals("all")&&!versionkey.equals("all")) {
+		} else if (!carbrand.equals("all") && pricekey.equals("all") && !versionkey.equals("all")) {
 			index = 6;
-		}else if (carbrand.equals("all")&&!pricekey.equals("all")&&!versionkey.equals("all")) {
+		} else if (carbrand.equals("all") && !pricekey.equals("all") && !versionkey.equals("all")) {
 			index = 7;
-		}else if (!carbrand.equals("all")&&!pricekey.equals("all")&&!versionkey.equals("all")) {
+		} else if (!carbrand.equals("all") && !pricekey.equals("all") && !versionkey.equals("all")) {
 			index = 8;
 		}
-		vehiclelist = vehicledao.queryvehicleList4(index,carbrand,pricekey,versionkey,transData.getPageInfo());
-		
-			if (vehiclelist == null) {
-				transData.setExpCode("1");
-				transData.setExpMsg("暂时没有这样的车型哦！");
-			} else {
-				transData.setObj(vehiclelist);
-				transData.setExpCode("1");
-				transData.setExpMsg("success");
-			}
+		vehiclelist = vehicledao.queryvehicleList4(index, carbrand, pricekey, versionkey, transData.getPageInfo());
+
+		if (vehiclelist == null) {
+			transData.setExpCode("1");
+			transData.setExpMsg("暂时没有这样的车型哦！");
+		} else {
+			transData.setObj(vehiclelist);
+			transData.setExpCode("1");
+			transData.setExpMsg("success");
+		}
 		return transData;
 	}
+
 	/**
 	 * http请求根据车辆版本查询车辆列表
 	 * 
@@ -512,10 +515,34 @@ public class ParallelVehicleService implements IBusinessService {
 		logger.info("vehicleQueryDealer-request:" + map);
 		String dealerid = (String) map.get("dealerid");
 		List<Map<String, Object>> vehiclelist = null;
-		vehiclelist = vehicledao.queryvehicleList5(dealerid,transData.getPageInfo());
+		vehiclelist = vehicledao.queryvehicleList5(dealerid, transData.getPageInfo());
 		if (vehiclelist == null) {
 			transData.setExpCode("-1");
 			transData.setExpMsg("fail");
+		} else {
+			transData.setObj(vehiclelist);
+			transData.setExpCode("1");
+			transData.setExpMsg("success");
+		}
+		return transData;
+	}
+
+	/**
+	 * http请求模糊查询车辆列表
+	 * 
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData vehicleQueryLikes(TransData transData) throws BusinessException {
+		Map<String, Object> map = transData.getViewMap();
+		logger.info("vehicleQueryDealer-request:" + map);
+		String like = (String) map.get("like");
+		List<Map<String, Object>> vehiclelist = null;
+		vehiclelist = vehicledao.queryvehicleList6(like, transData.getPageInfo());
+		if (vehiclelist == null) {
+			transData.setExpCode("1");
+			transData.setExpMsg("null");
 		} else {
 			transData.setObj(vehiclelist);
 			transData.setExpCode("1");

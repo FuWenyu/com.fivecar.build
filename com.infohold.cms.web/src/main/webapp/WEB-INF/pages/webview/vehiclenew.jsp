@@ -35,7 +35,7 @@
 				<strong>${vehicle.vehicleName}<span>${vehicle.price}万</span></strong>
 			</div>
 			<div class="slide-right fl">
-				<span class="">${dealer.dealerName}[4s]${dealer.addr}</span>
+				<span class=""><p>${dealer.dealerName}[4s]</p><p>${dealer.addr}</p></span>
 				<ul class="lianxi clearfix">
 					<li><a href="#" data-reveal-id="myModal2"
 						data-animation="fade"><img
@@ -103,7 +103,7 @@
 		</ul>
 		<a class="close-reveal-modal">返回</a>
 	</div>
-	<div id="myModal2" class="reveal-modal mymode2">
+	<div id="myModal2" class="reveal-modal">
 		${dealer.position} <a class="close-reveal-modal">返回</a>
 	</div>
 </body>

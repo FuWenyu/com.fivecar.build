@@ -45,15 +45,12 @@ public class CarVehicleService implements IBusinessService {
 	@Autowired
 	private CarModelDao modeldao;
 
-	private static String service_name = CustomPropertyUtil
-			.getProperties("service_name");
-	
-	private static String service_addr = CustomPropertyUtil
-			.getProperties("service_addr");
-	
-	private static String system_webview = CustomPropertyUtil
-			.getProperties("system_webview");
-	
+	private static String service_name = CustomPropertyUtil.getProperties("service_name");
+
+	private static String service_addr = CustomPropertyUtil.getProperties("service_addr");
+
+	private static String system_webview = CustomPropertyUtil.getProperties("system_webview");
+
 	private DateUtil dateutil = new DateUtil();
 
 	private Logger logger = Logger.getLogger(CarVehicleService.class);
@@ -75,8 +72,10 @@ public class CarVehicleService implements IBusinessService {
 			return this.updatePictureEntity(transData);
 		} else if (tradCode.equals("T23007")) {
 			return this.vehicleQuery(transData);
-		}else if (tradCode.equals("T23008")) {
+		} else if (tradCode.equals("T23008")) {
 			return this.vechicleWebview(transData);
+		} else if (tradCode.equals("T23009")) {
+			return this.vehicleQuerylike(transData);
 		}
 		return transData;
 	}
@@ -91,7 +90,7 @@ public class CarVehicleService implements IBusinessService {
 	public TransData findvehicleList(TransData transData) throws BusinessException {
 		UserSession session = transData.getUserSession();
 		String orgid = session.getBranchNo();
-		List<Map<String, Object>> orgList = vehicledao.queryvehicleList(transData.getPageInfo(),orgid);
+		List<Map<String, Object>> orgList = vehicledao.queryvehicleList(transData.getPageInfo(), orgid);
 		transData.setObj(orgList);
 		return transData;
 	}
@@ -109,9 +108,8 @@ public class CarVehicleService implements IBusinessService {
 		List<Map<String, Object>> brandList = vehicledao.queryBrandList(page);
 		UserSession session = transData.getUserSession();
 		String orgid = session.getBranchNo();
-		List<Map<String, Object>> dealerList = salesdao.queryDealerList(transData
-				.getPageInfo(),orgid);
-		Map<String,Object> map = new HashMap<String, Object>();
+		List<Map<String, Object>> dealerList = salesdao.queryDealerList(transData.getPageInfo(), orgid);
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("brandList", brandList);
 		map.put("dealerList", dealerList);
 		transData.setObj(map);
@@ -135,7 +133,7 @@ public class CarVehicleService implements IBusinessService {
 		String[] strarray = carbrandall.split("-");
 		String carbrandid = strarray[0];
 		String carbrandname = strarray[1];
-		
+
 		String[] strarray1 = dealer.split("-");
 		String belong = strarray1[0];
 		String belongName = strarray1[1];
@@ -227,7 +225,7 @@ public class CarVehicleService implements IBusinessService {
 		String[] strarray1 = dealer.split("-");
 		String belong = strarray1[0];
 		String belongName = strarray1[1];
-		
+
 		StringBuffer urlreal = new StringBuffer("");
 		urlreal.append(service_name);
 		urlreal.append("/upload/imagereal/");
@@ -287,6 +285,31 @@ public class CarVehicleService implements IBusinessService {
 		}
 		return transData;
 	}
+
+	/**
+	 * http请求根据品牌查询车辆列表
+	 * 
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData vehicleQuerylike(TransData transData) throws BusinessException {
+		Map<String, Object> map = transData.getViewMap();
+		logger.info("vehicleQuery-request:" + map);
+		String like = (String) map.get("like");
+		List<Map<String, Object>> vehiclelist = new ArrayList<>();
+		vehiclelist = vehicledao.queryvehicleList3(like, transData.getPageInfo());
+		if (vehiclelist == null) {
+			transData.setExpCode("1");
+			transData.setExpMsg("null");
+		} else {
+			transData.setObj(vehiclelist);
+			transData.setExpCode("1");
+			transData.setExpMsg("success");
+		}
+		return transData;
+	}
+
 	/**
 	 * 车辆webview
 	 * 
@@ -300,12 +323,12 @@ public class CarVehicleService implements IBusinessService {
 		String delrid = (String) map1.get("dealerid");
 		Page page = new Page();
 		page.setPageSize(999);
-		Map<String,Object> map = new HashMap<String, Object>();
-		//获取车辆信息
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 获取车辆信息
 		CarVehicleEntity vehicle = vehicledao.getvehicleEntity(vehicleid);
 		map.put("vehicle", vehicle);
-		//获取4s店和销售员信息
-		if (delrid == null || delrid.equals(" ")||delrid.equals("") ) {
+		// 获取4s店和销售员信息
+		if (delrid == null || delrid.equals(" ") || delrid.equals("")) {
 			CarDealerEntity dealer = dealerdao.getdealerEntity(vehicle.getBelong());
 			map.put("dealer", dealer);
 			List<Map<String, Object>> saleslist = salesdao.querysalesList1(dealer.getId(), transData.getPageInfo());
@@ -316,13 +339,13 @@ public class CarVehicleService implements IBusinessService {
 			List<Map<String, Object>> saleslist = salesdao.querysalesList1(dealer.getId(), transData.getPageInfo());
 			map.put("saleslist", saleslist);
 		}
-		//获取4s店列表
+		// 获取4s店列表
 		List<Map<String, Object>> dealerlist = dealerdao.querydealerListPage(vehicle.getCarbrandid(), page);
 		map.put("dealerlist", dealerlist);
-		//获取车辆对应的车型信息
+		// 获取车辆对应的车型信息
 		List<Map<String, Object>> modellist = modeldao.querymodelList1(vehicleid, page);
 		map.put("modellist", modellist);
-		//获取
+		// 获取
 		StringBuffer url = new StringBuffer(system_webview);
 		url.append("dealerid=");
 		map.put("url", url.toString());
@@ -330,8 +353,7 @@ public class CarVehicleService implements IBusinessService {
 		transData.setObj(map);
 		return transData;
 	}
-	
-	
+
 	/**
 	 * 页面查询
 	 * 

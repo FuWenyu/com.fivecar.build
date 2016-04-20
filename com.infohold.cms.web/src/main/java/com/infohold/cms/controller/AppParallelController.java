@@ -261,7 +261,7 @@ public class AppParallelController extends CentreController{
 		return map;
 	}
 	/**
-	 * APP-经销商信息列表查询
+	 * APP-平行进口车列表查询
 	 * 
 	 * @param httpServletRequest
 	 * @return map
@@ -288,5 +288,32 @@ public class AppParallelController extends CentreController{
 		System.out.println(map);
 		return map;
 	}
+	/**
+	 * APP-平行进口车列表模糊查询
+	 * 
+	 * @param httpServletRequest
+	 * @return map
+	 */
 	
+	@RequestMapping("/app/pavehiclelike.do")
+	@ResponseBody
+	public Map<String, Object> ParaDealerVehiclelike(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletresponse) throws Exception {
+		TransData transData = new TransData();
+		transData.setServiceName("pavehicleService");
+		transData.setTradeCode("T32016");
+		transData=super.doService(httpServletRequest, transData);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(!"".equals(transData.getExpCode())){
+			map.put("expCode", transData.getExpCode());
+			map.put("expMsg", transData.getExpMsg());
+			List<Map<String, Object>> carvehicleList = (List<Map<String, Object>>)transData.getObj();
+			map.put("carvehicleList", carvehicleList);
+			map.put("page",transData.getPageInfo());
+			return map;
+		}
+		System.out.println(map);
+		return map;
+	}
 }

@@ -143,7 +143,7 @@
 							4s店地图</label>
 						<div class="col-sm-9">
 						<button class="btn btn-sm btn-primary" onclick="upImage();" type="button">添加地图信息</button>
-								 <textarea name="position" id="position">${dealer.position}</textarea>
+								 <textarea name="position" id="position"></textarea>
 						</div>
 					</div>
 					
