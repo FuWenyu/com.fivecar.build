@@ -128,7 +128,7 @@ public class AppUserDao extends BaseDao<BaseEntity> {
 	 * 通过id查询用户信息
 	 * @return
 	 */
-	public List<Map<String, Object>> queryCollectionEntity(String user_id,Page page) {
+	public List<Map<String, Object>> queryCollectionEntity(String user_id,String query_type,Page page) {
 		StringBuffer sql = new StringBuffer();
 		sql.append("select co.user_id,");
 		sql.append("co.resource_id,");
@@ -138,6 +138,11 @@ public class AppUserDao extends BaseDao<BaseEntity> {
 		sql.append("where co.user_id = ");
 		sql.append("'");
 		sql.append(user_id);
+		sql.append("'");
+		sql.append(" and ");
+		sql.append("co.query_type = ");
+		sql.append("'");
+		sql.append(query_type);
 		sql.append("'");
 		return super.excutePageQuery(sql.toString(),page);
 	}

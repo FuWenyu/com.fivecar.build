@@ -106,5 +106,22 @@
 	<div id="myModal2" class="reveal-modal">
 		${dealer.position} <a class="close-reveal-modal">返回</a>
 	</div>
+		<script>
+		$("#myModal").dialog({
+			autoOpen : false
+		});
+		$("#myModal").click(function() {
+			$("#myModal").dialog("open");
+		});
+		$("#myModal2").dialog({
+			autoOpen : false,
+/* 			height : 420,
+			width : 590,
+			position : 0 */
+		});
+		$("#myModal2").click(function() {
+			$("#myModal2").dialog("open");
+		});
+	</script>
 </body>
 </html>

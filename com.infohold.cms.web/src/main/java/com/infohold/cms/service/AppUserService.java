@@ -197,9 +197,9 @@ public class AppUserService implements IBusinessService {
 		// String code = (String) map.get("vccode");
 		String newpassword = (String) map.get("newpassword");
 		/*
-		String response = null;
-		 * try { response = new SmsVerifyKit(appkey, phone_no, "86", code).go();
-		 * } catch (Exception e) { e.printStackTrace(); }
+		 * String response = null; try { response = new SmsVerifyKit(appkey,
+		 * phone_no, "86", code).go(); } catch (Exception e) {
+		 * e.printStackTrace(); }
 		 */
 		/*
 		 * JSONObject responsejson = new JSONObject(response); int response1 =
@@ -325,18 +325,31 @@ public class AppUserService implements IBusinessService {
 		String resource_id = (String) map.get("resource_id");
 		String resource_type = (String) map.get("resource_type");
 		String title = (String) map.get("title");
-		CollectionEntity collection = new CollectionEntity();
-		collection.setUser_id(user_id);
-		collection.setResource_id(resource_id);
-		collection.setResource_type(resource_type);
-		collection.setTitle(title);
-		boolean iswork = appuserdao.saveCollectionEntity(collection);
-		if (iswork) {
-			transData.setExpCode("1");
-			transData.setExpMsg("success");
+		String query_type = null;
+		if (resource_type.equals("normal") || resource_type.equals("thirdparty") || resource_type.equals("vehicle")
+				|| resource_type.equals("pavehicle")) {
+			if (resource_type.equals("normal") || resource_type.equals("thirdparty")) {
+				query_type = "article";
+			}else {
+				query_type = "vehicle";
+			}
+			CollectionEntity collection = new CollectionEntity();
+			collection.setUser_id(user_id);
+			collection.setResource_id(resource_id);
+			collection.setQuery_type(query_type);
+			collection.setResource_type(resource_type);
+			collection.setTitle(title);
+			boolean iswork = appuserdao.saveCollectionEntity(collection);
+			if (iswork) {
+				transData.setExpCode("1");
+				transData.setExpMsg("success");
+			} else {
+				transData.setExpCode("-1");
+				transData.setExpMsg("收藏失败请重试！");
+			}
 		} else {
 			transData.setExpCode("-1");
-			transData.setExpMsg("收藏失败请重试！");
+			transData.setExpMsg("收藏失败无效的类型！");
 		}
 		return transData;
 	}
@@ -352,7 +365,9 @@ public class AppUserService implements IBusinessService {
 		Map<String, Object> map = transData.getViewMap();
 		logger.info("queryCollection-request:" + map);
 		String user_id = (String) map.get("user_id");
-		List<Map<String, Object>> collectionList = appuserdao.queryCollectionEntity(user_id, transData.getPageInfo());
+		String query_type = (String) map.get("query_type");
+		List<Map<String, Object>> collectionList = appuserdao.queryCollectionEntity(user_id, query_type,
+				transData.getPageInfo());
 		if (!(collectionList == null)) {
 			transData.setExpCode("1");
 			transData.setExpMsg("success");
@@ -361,6 +376,7 @@ public class AppUserService implements IBusinessService {
 			transData.setExpCode("1");
 			transData.setExpMsg("亲！您的收藏夹是空的哦！");
 		}
+
 		return transData;
 	}
 }

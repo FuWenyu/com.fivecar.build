@@ -22,8 +22,10 @@ import com.infohold.cms.basic.util.FileUtil;
 import com.infohold.cms.basic.util.ImageCompressUtil;
 import com.infohold.cms.basic.util.SysConfigUtil;
 import com.infohold.cms.dao.PictureDao;
+import com.infohold.cms.dao.ThirdPartyResourcesDao;
 import com.infohold.cms.entity.AdEntity;
 import com.infohold.cms.entity.ResourcesEntity;
+import com.infohold.cms.entity.ThirdPartyResourcesEntity;
 import com.infohold.cms.util.CustomPropertyUtil;
 import com.infohold.cms.util.DateUtil;
 
@@ -40,16 +42,16 @@ public class PictureService implements IBusinessService {
 	@Autowired
 	private PictureDao pictureDao;
 	@Autowired
+	private ThirdPartyResourcesDao resourcesdao;
+	@Autowired
 	private SysConfigUtil sysConfigUtil;
-	
-	private static String service_name = CustomPropertyUtil
-			.getProperties("service_name");
-	
-	private static String resource_request = CustomPropertyUtil
-			.getProperties("resource_request");
+
+	private static String service_name = CustomPropertyUtil.getProperties("service_name");
+
+	private static String resource_request = CustomPropertyUtil.getProperties("resource_request");
 
 	private DateUtil dateutil = new DateUtil();
-	
+
 	private Logger logger = Logger.getLogger(PictureService.class);
 
 	@Override
@@ -71,11 +73,11 @@ public class PictureService implements IBusinessService {
 			return this.resourcesQuery(transData);
 		} else if (tradCode.equals("T20008")) {
 			return this.entry_query(transData);
-		}else if (tradCode.equals("T20009")) {
+		} else if (tradCode.equals("T20009")) {
 			return this.findEntry(transData);
-		}else if (tradCode.equals("T20010")) {
+		} else if (tradCode.equals("T20010")) {
 			return this.getResources(transData);
-		}else if (tradCode.equals("T20011")) {
+		} else if (tradCode.equals("T20011")) {
 			return this.picture_query(transData);
 		}
 		return transData;
@@ -89,12 +91,13 @@ public class PictureService implements IBusinessService {
 	 * @throws BusinessException
 	 */
 	public TransData findPicture(TransData transData) throws BusinessException {
-		List<Map<String, Object>> orgList = pictureDao.queryOmsPictureList(
-				transData.getViewMap(), transData.getPageInfo());
+		List<Map<String, Object>> orgList = pictureDao.queryOmsPictureList(transData.getViewMap(),
+				transData.getPageInfo());
 		transData.setObj(orgList);
 		return transData;
 
 	}
+
 	/**
 	 * 条目列表
 	 * 
@@ -104,21 +107,20 @@ public class PictureService implements IBusinessService {
 	 */
 	public TransData findEntry(TransData transData) throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
-		String usefo = (String) map.get("usefo"); 
-		List<Map<String, Object>> orgList = pictureDao.queryEntryList(
-		usefo, transData.getPageInfo());
+		String usefo = (String) map.get("usefo");
+		List<Map<String, Object>> orgList = pictureDao.queryEntryList(usefo, transData.getPageInfo());
 		transData.setObj(orgList);
 		return transData;
 
 	}
+
 	/**
 	 * 图片上传
 	 * 
 	 * @param transData
 	 * @return
 	 */
-	public TransData uploadPicture(TransData transData)
-			throws BusinessException {
+	public TransData uploadPicture(TransData transData) throws BusinessException {
 		// Map<String,Object> checked_map = (Map<String, Object>)
 		// transData.getObj();
 
@@ -130,8 +132,7 @@ public class PictureService implements IBusinessService {
 
 		MultipartFile file = (MultipartFile) transData.getObj();
 		String fileName = file.getOriginalFilename();
-		String ext = fileName.substring(fileName.lastIndexOf("."),
-				fileName.length());
+		String ext = fileName.substring(fileName.lastIndexOf("."), fileName.length());
 		int id = sysConfigUtil.getPrimaryId();
 		// 文件检查
 		FileUtil.fileCheck(file);
@@ -141,20 +142,18 @@ public class PictureService implements IBusinessService {
 		// sysConfigUtil.getCfgInfo("picture_ip") + "/" + id;
 		// String filePath = path.substring(0, path.indexOf("/WEB-INF/")) +
 		// "/upload/goodsimg" + "/" + id;
-		String filePath = path.substring(0, path.indexOf("/WEB-INF/"))
-				+ "/upload/image";
-		String filePathreal = path.substring(0, path.indexOf("/WEB-INF/"))
-				+ "/upload/imagereal";
+		String filePath = path.substring(0, path.indexOf("/WEB-INF/")) + "/upload/image";
+		String filePathreal = path.substring(0, path.indexOf("/WEB-INF/")) + "/upload/imagereal";
 		// String filePath1 = path.substring(1, path.indexOf("/WEB-INF/")) +
 		// "/upload/image";
 		// String filePathreal1 = path.substring(1, path.indexOf("/WEB-INF/")) +
 		// "/upload/imagereal";
-//		File file1 = new File(filePathreal, String.valueOf(id) + ext);
+		// File file1 = new File(filePathreal, String.valueOf(id) + ext);
 		File file2 = new File(filePath, String.valueOf(id) + ext);
 		InputStream in = null;
 		try {
 			in = file.getInputStream();
-//			FileUtils.copyInputStreamToFile(in, file1);
+			// FileUtils.copyInputStreamToFile(in, file1);
 			FileUtils.copyInputStreamToFile(in, file2);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -223,10 +222,13 @@ public class PictureService implements IBusinessService {
 		// String urlreal = "http://"+sysConfigUtil.getCfgInfo("service_ip")+
 		// "/+"+sysConfigUtil.getCfgInfo("service_name")+"/upload/imagereal/"+imageName;
 
-/*		String realpath = "/var/tomcat/tomcat-7/webapps/com.fivecar.cms.web/upload/imagereal"
-				+ "/" + imageName;
-		String zippath = "/var/tomcat/tomcat-7/webapps/com.fivecar.cms.web/upload/image"
-				+ "/" + imageName;*/
+		/*
+		 * String realpath =
+		 * "/var/tomcat/tomcat-7/webapps/com.fivecar.cms.web/upload/imagereal" +
+		 * "/" + imageName; String zippath =
+		 * "/var/tomcat/tomcat-7/webapps/com.fivecar.cms.web/upload/image" + "/"
+		 * + imageName;
+		 */
 		StringBuffer urlreal = new StringBuffer("");
 		urlreal.append(service_name);
 		urlreal.append("/upload/imagereal/");
@@ -236,15 +238,15 @@ public class PictureService implements IBusinessService {
 		url.append(service_name);
 		url.append("/upload/image/");
 		url.append(imageName);
-		
+
 		String[] strarray2 = usefoall.split("-");
 		String usefo = strarray2[0];
 		String usefoName = strarray2[1];
-		
+
 		StringBuffer anchor1 = new StringBuffer("");
 		anchor1.append(resource_request);
 		anchor1.append(anchor);
-		
+
 		AdEntity adentity = new AdEntity();
 		adentity.setImageName(imageName);
 		adentity.setTitle(title);
@@ -264,12 +266,10 @@ public class PictureService implements IBusinessService {
 		if (pictureDao.savePictureEntity(adentity)) {
 			transData.setExpMsg("success");
 		}
-/*		try {
-			imgcompress.saveMinPhoto(realpath, zippath, 556, 0.9d);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println(zippath);*/
+		/*
+		 * try { imgcompress.saveMinPhoto(realpath, zippath, 556, 0.9d); } catch
+		 * (Exception e) { e.printStackTrace(); } System.out.println(zippath);
+		 */
 		return transData;
 
 	}
@@ -281,8 +281,7 @@ public class PictureService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData deletePicture(TransData transData)
-			throws BusinessException {
+	public TransData deletePicture(TransData transData) throws BusinessException {
 		String pictureid = (String) transData.getViewMap().get("pictureid");
 		pictureDao.deletePictureEntity(pictureid);
 		transData.setObj(true);
@@ -311,8 +310,7 @@ public class PictureService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData updatePictureEntity(TransData transData)
-			throws BusinessException {
+	public TransData updatePictureEntity(TransData transData) throws BusinessException {
 		// 页面数据
 		UserSession session = transData.getUserSession();
 		Map<String, Object> map = transData.getViewMap();
@@ -330,7 +328,7 @@ public class PictureService implements IBusinessService {
 		String[] strarray2 = usefoall.split("-");
 		String usefo = strarray2[0];
 		String usefoName = strarray2[1];
-		
+
 		AdEntity adentity = new AdEntity();
 		StringBuffer urlreal = new StringBuffer("");
 		urlreal.append(service_name);
@@ -341,11 +339,11 @@ public class PictureService implements IBusinessService {
 		url.append(service_name);
 		url.append("/upload/image/");
 		url.append(imageName);
-		
+
 		StringBuffer anchor1 = new StringBuffer("");
 		anchor1.append(sysConfigUtil.getCfgInfo("resource_request"));
 		anchor1.append(anchor);
-		
+
 		adentity.setId(id);
 		adentity.setImageName(imageName);
 		adentity.setTitle(title);
@@ -373,22 +371,35 @@ public class PictureService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData resourcesQuery(TransData transData)
-			throws BusinessException {
+	public TransData resourcesQuery(TransData transData) throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
-		logger.info("resourcesQuery-request:"+map);
+		logger.info("resourcesQuery-request:" + map);
 		String anchor = (String) map.get("anchor");
-		ResourcesEntity resources = pictureDao.getResource(anchor);
-		if (resources==null) {
-			transData.setExpCode("-1");
-			transData.setExpMsg("fail");
-		}else {
-			transData.setObj(resources);
-			transData.setExpCode("1");
-			transData.setExpMsg("success");
+		String resource_type = (String) map.get("resource_type");
+		if (resource_type.equals("thirdparty")) {
+			ThirdPartyResourcesEntity resources = resourcesdao.getResourceEntity(anchor);
+			if (resources == null) {
+				transData.setExpCode("-1");
+				transData.setExpMsg("fail");
+			} else {
+				transData.setObj(resources);
+				transData.setExpCode("1");
+				transData.setExpMsg("success");
+			}
+		} else {
+			ResourcesEntity resources = pictureDao.getResource(anchor);
+			if (resources == null) {
+				transData.setExpCode("-1");
+				transData.setExpMsg("fail");
+			} else {
+				transData.setObj(resources);
+				transData.setExpCode("1");
+				transData.setExpMsg("success");
+			}
 		}
 		return transData;
 	}
+
 	/**
 	 * 广告图片查询
 	 * 
@@ -396,22 +407,22 @@ public class PictureService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData picture_query(TransData transData)
-			throws BusinessException {
+	public TransData picture_query(TransData transData) throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
-		logger.info("picture_query-request:"+map);
+		logger.info("picture_query-request:" + map);
 		String usefo = (String) map.get("usefo");
-		List<Map<String, Object>> orgList = pictureDao.getEntry(usefo,transData.getPageInfo());
+		List<Map<String, Object>> orgList = pictureDao.getEntry(usefo, transData.getPageInfo());
 		if (orgList.isEmpty()) {
 			transData.setExpCode("-1");
 			transData.setExpMsg("fail");
-		}else {
+		} else {
 			transData.setObj(orgList);
 			transData.setExpCode("1");
 			transData.setExpMsg("success");
 		}
 		return transData;
 	}
+
 	/**
 	 * 首页条目查询
 	 * 
@@ -419,22 +430,22 @@ public class PictureService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData entry_query(TransData transData)
-			throws BusinessException {
+	public TransData entry_query(TransData transData) throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
-		logger.info("entry_query-request:"+map);
+		logger.info("entry_query-request:" + map);
 		String usefo = (String) map.get("usefo");
-		List<Map<String, Object>> orgList = pictureDao.getEntry(usefo,transData.getPageInfo());
+		List<Map<String, Object>> orgList = pictureDao.getEntry(usefo, transData.getPageInfo());
 		if (orgList.isEmpty()) {
 			transData.setExpCode("-1");
 			transData.setExpMsg("fail");
-		}else {
+		} else {
 			transData.setObj(orgList);
 			transData.setExpCode("1");
 			transData.setExpMsg("success");
 		}
 		return transData;
 	}
+
 	/**
 	 * 首页图片新增图文资源查询
 	 * 
@@ -442,8 +453,7 @@ public class PictureService implements IBusinessService {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public TransData getResources(TransData transData)
-			throws BusinessException {
+	public TransData getResources(TransData transData) throws BusinessException {
 		List<Map<String, Object>> orgList = pictureDao.getResources();
 		transData.setObj(orgList);
 		transData.setExpMsg("success");

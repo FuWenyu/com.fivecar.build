@@ -34,6 +34,8 @@ public class CollectionEntity extends BaseEntity {
 	private java.lang.String user_id;
 	/**资源id*/
 	private java.lang.String resource_id;
+	/**查询类型，图文or车辆*/
+	private java.lang.String query_type;
 	/**资源类型*/
 	private java.lang.String resource_type;
 	/**资源名称*/
@@ -92,6 +94,20 @@ public class CollectionEntity extends BaseEntity {
 	 */
 	public void setResource_type(java.lang.String resource_type) {
 		this.resource_type = resource_type;
+	}
+	
+	/**
+	 * @return the query_type
+	 */
+	@Column(name ="query_type",nullable=false,columnDefinition="varchar(8)default ''")
+	public java.lang.String getQuery_type() {
+		return query_type;
+	}
+	/**
+	 * @param query_type the query_type to set
+	 */
+	public void setQuery_type(java.lang.String query_type) {
+		this.query_type = query_type;
 	}
 	/**
 	 * @return the title
