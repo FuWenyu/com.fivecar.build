@@ -376,15 +376,27 @@ public class PictureService implements IBusinessService {
 		logger.info("resourcesQuery-request:" + map);
 		String anchor = (String) map.get("anchor");
 		String resource_type = (String) map.get("resource_type");
-		if (resource_type.equals("thirdparty")) {
-			ThirdPartyResourcesEntity resources = resourcesdao.getResourceEntity(anchor);
-			if (resources == null) {
-				transData.setExpCode("-1");
-				transData.setExpMsg("fail");
-			} else {
-				transData.setObj(resources);
-				transData.setExpCode("1");
-				transData.setExpMsg("success");
+		if (resource_type != null) {
+			if (resource_type.equals("thirdparty")) {
+				ThirdPartyResourcesEntity resources = resourcesdao.getResourceEntity(anchor);
+				if (resources == null) {
+					transData.setExpCode("-1");
+					transData.setExpMsg("fail");
+				} else {
+					transData.setObj(resources);
+					transData.setExpCode("1");
+					transData.setExpMsg("success");
+				}
+			}else {
+				ResourcesEntity resources = pictureDao.getResource(anchor);
+				if (resources == null) {
+					transData.setExpCode("-1");
+					transData.setExpMsg("fail");
+				} else {
+					transData.setObj(resources);
+					transData.setExpCode("1");
+					transData.setExpMsg("success");
+				}
 			}
 		} else {
 			ResourcesEntity resources = pictureDao.getResource(anchor);
