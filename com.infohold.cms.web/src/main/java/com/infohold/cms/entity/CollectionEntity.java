@@ -34,6 +34,8 @@ public class CollectionEntity extends BaseEntity {
 	private java.lang.String user_id;
 	/**资源id*/
 	private java.lang.String resource_id;
+	/**资源id*/
+	private java.lang.String url;
 	/**查询类型，图文or车辆*/
 	private java.lang.String query_type;
 	/**资源类型*/
@@ -81,6 +83,20 @@ public class CollectionEntity extends BaseEntity {
 	 */
 	public void setResource_id(java.lang.String resource_id) {
 		this.resource_id = resource_id;
+	}
+	
+	/**
+	 * @return the url
+	 */
+	@Column(name ="url",nullable=false,columnDefinition="varchar(255)default ''")
+	public java.lang.String getUrl() {
+		return url;
+	}
+	/**
+	 * @param url the url to set
+	 */
+	public void setUrl(java.lang.String url) {
+		this.url = url;
 	}
 	/**
 	 * @return the resource_type

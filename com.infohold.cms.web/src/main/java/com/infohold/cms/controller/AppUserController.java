@@ -225,6 +225,33 @@ public class AppUserController extends CentreController{
 			map.put("expCode", transData.getExpCode());
 			map.put("expMsg", transData.getExpMsg());
 			map.put("collectionList", collectionList);
+			map.put("page",transData.getPageInfo());
+			return map;
+		}
+		System.out.println(map);
+		return map;
+	}
+	/**
+	 * APP-查询图文
+	 * 
+	 * @param httpServletRequest
+	 * @return map
+	 */
+	@RequestMapping("/app/queryResourcelikes.do")
+	@ResponseBody
+	public Map<String, Object> queryResourcelikes(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletresponse) throws Exception {
+		TransData transData = new TransData();
+		transData.setServiceName("appUserService");
+		transData.setTradeCode("T40009");
+		transData=super.doService(httpServletRequest, transData);
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Map<String, Object>> resourceList  = (List<Map<String, Object>>)transData.getObj();
+		if(!"".equals(transData.getExpCode())){
+			map.put("expCode", transData.getExpCode());
+			map.put("expMsg", transData.getExpMsg());
+			map.put("resourceList", resourceList);
+			map.put("page",transData.getPageInfo());
 			return map;
 		}
 		System.out.println(map);

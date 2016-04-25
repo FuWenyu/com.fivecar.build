@@ -96,4 +96,20 @@ public class ThirdPartyResourcesDao extends BaseDao<BaseEntity> {
 		sql.append(" order by dle.createDate desc");
 		return super.queryForList(sql.toString());
 	}
+	/**
+	 * 图文信息查询
+	 * @return
+	 */
+	public List<Map<String, Object>> getResources(String title,Page page) {
+		StringBuffer sql = new StringBuffer();
+		sql.append("select pm.id,");
+		sql.append("pm.title,");
+		sql.append("pm.resourceName ");
+		sql.append("from fc_app_resources pm ");
+		sql.append(" where pm.title like ");
+		sql.append("'%");
+		sql.append(title);
+		sql.append("%'");
+		return super.excutePageQuery(sql.toString(),page);
+	}
 }

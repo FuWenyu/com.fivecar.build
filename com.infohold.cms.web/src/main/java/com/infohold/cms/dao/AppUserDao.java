@@ -132,6 +132,7 @@ public class AppUserDao extends BaseDao<BaseEntity> {
 		StringBuffer sql = new StringBuffer();
 		sql.append("select co.user_id,");
 		sql.append("co.resource_id,");
+		sql.append("co.url,");
 		sql.append("co.resource_type,");
 		sql.append("co.title ");
 		sql.append("from fc_user_collection co ");

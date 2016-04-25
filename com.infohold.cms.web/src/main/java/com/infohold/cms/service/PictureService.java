@@ -341,7 +341,7 @@ public class PictureService implements IBusinessService {
 		url.append(imageName);
 
 		StringBuffer anchor1 = new StringBuffer("");
-		anchor1.append(sysConfigUtil.getCfgInfo("resource_request"));
+		anchor1.append(resource_request);
 		anchor1.append(anchor);
 
 		adentity.setId(id);
@@ -375,40 +375,26 @@ public class PictureService implements IBusinessService {
 		Map<String, Object> map = transData.getViewMap();
 		logger.info("resourcesQuery-request:" + map);
 		String anchor = (String) map.get("anchor");
-		String resource_type = (String) map.get("resource_type");
-		if (resource_type != null) {
-			if (resource_type.equals("thirdparty")) {
-				ThirdPartyResourcesEntity resources = resourcesdao.getResourceEntity(anchor);
-				if (resources == null) {
-					transData.setExpCode("-1");
-					transData.setExpMsg("fail");
-				} else {
-					transData.setObj(resources);
-					transData.setExpCode("1");
-					transData.setExpMsg("success");
-				}
-			}else {
+		Map<String,Object> mapr = new HashMap<String, Object>();
 				ResourcesEntity resources = pictureDao.getResource(anchor);
 				if (resources == null) {
-					transData.setExpCode("-1");
-					transData.setExpMsg("fail");
+					ThirdPartyResourcesEntity resources1 = resourcesdao.getResourceEntity(anchor);
+					if (resources1 == null) {
+						transData.setExpCode("-1");
+						transData.setExpMsg("fail");
+					} else {
+						mapr.put("resources", resources1);
+//						transData.setObj(resources1);
+						transData.setExpCode("1");
+						transData.setExpMsg("success");
+					}
 				} else {
-					transData.setObj(resources);
+					mapr.put("resources", resources);
+//					transData.setObj(resources);
 					transData.setExpCode("1");
 					transData.setExpMsg("success");
 				}
-			}
-		} else {
-			ResourcesEntity resources = pictureDao.getResource(anchor);
-			if (resources == null) {
-				transData.setExpCode("-1");
-				transData.setExpMsg("fail");
-			} else {
-				transData.setObj(resources);
-				transData.setExpCode("1");
-				transData.setExpMsg("success");
-			}
-		}
+				transData.setObj(mapr);
 		return transData;
 	}
 

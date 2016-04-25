@@ -18,8 +18,11 @@ import com.infohold.cms.basic.service.IBusinessService;
 import com.infohold.cms.basic.util.MD5Util;
 import com.infohold.cms.basic.util.SysConfigUtil;
 import com.infohold.cms.dao.AppUserDao;
+import com.infohold.cms.dao.ThirdPartyResourcesDao;
 import com.infohold.cms.entity.AppUserEntity;
 import com.infohold.cms.entity.CollectionEntity;
+import com.infohold.cms.entity.ResourcesEntity;
+import com.infohold.cms.entity.ThirdPartyResourcesEntity;
 import com.infohold.cms.util.CustomPropertyUtil;
 import com.infohold.cms.util.DateUtil;
 import com.infohold.cms.util.SmsVerifyKit;
@@ -36,8 +39,14 @@ public class AppUserService implements IBusinessService {
 
 	@Autowired
 	private AppUserDao appuserdao;
+	@Autowired
+	private ThirdPartyResourcesDao resourcesdao;
 
 	private DateUtil dateutil = new DateUtil();
+
+	private static String resource_request = CustomPropertyUtil.getProperties("resource_request");
+	private static String vehicle_request = CustomPropertyUtil.getProperties("vehicle_request");
+	private static String pavehicle_request = CustomPropertyUtil.getProperties("pavehicle_request");
 
 	private Logger logger = Logger.getLogger(AppUserService.class);
 
@@ -60,6 +69,8 @@ public class AppUserService implements IBusinessService {
 			return this.saveCollection(transData);
 		} else if (tradCode.equals("T40008")) {
 			return this.queryCollection(transData);
+		} else if (tradCode.equals("T40009")) {
+			return this.queryArticle(transData);
 		}
 		return transData;
 	}
@@ -326,16 +337,48 @@ public class AppUserService implements IBusinessService {
 		String resource_type = (String) map.get("resource_type");
 		String title = (String) map.get("title");
 		String query_type = null;
-		if (resource_type.equals("normal") || resource_type.equals("thirdparty") || resource_type.equals("vehicle")
-				|| resource_type.equals("pavehicle")) {
-			if (resource_type.equals("normal") || resource_type.equals("thirdparty")) {
-				query_type = "article";
-			}else {
-				query_type = "vehicle";
-			}
+		// if (resource_type.equals("normal") ||
+		// resource_type.equals("thirdparty") || resource_type.equals("vehicle")
+		// || resource_type.equals("pavehicle")) {
+		/*
+		 * if (resource_type.equals("normal") ||
+		 * resource_type.equals("thirdparty")) { query_type = "article"; }else {
+		 * query_type = "vehicle"; }
+		 */
+		String reCode = "1";
+		StringBuffer anchor = new StringBuffer("");
+		switch (resource_type) {
+		case "normal":
+			query_type = "article";
+			// anchor.append(resource_request);
+			anchor.append(resource_id);
+			break;
+		case "thirdparty":
+			query_type = "article";
+			anchor.append(resource_request);
+			anchor.append(resource_id);
+			break;
+		case "vehicle":
+			query_type = "vehicle";
+			anchor.append(vehicle_request);
+			anchor.append(resource_id);
+			break;
+		case "pavehicle":
+			query_type = "vehicle";
+			anchor.append(pavehicle_request);
+			anchor.append(resource_id);
+			break;
+		default:
+			reCode = "-1";
+			transData.setExpCode("-1");
+			transData.setExpMsg("收藏失败无效的类型！");
+			break;
+		}
+		if (reCode.equals("1")) {
 			CollectionEntity collection = new CollectionEntity();
 			collection.setUser_id(user_id);
 			collection.setResource_id(resource_id);
+			collection.setUrl(anchor.toString());
 			collection.setQuery_type(query_type);
 			collection.setResource_type(resource_type);
 			collection.setTitle(title);
@@ -376,7 +419,24 @@ public class AppUserService implements IBusinessService {
 			transData.setExpCode("1");
 			transData.setExpMsg("亲！您的收藏夹是空的哦！");
 		}
+		return transData;
+	}
 
+	/**
+	 * 图文信息查询
+	 * 
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData queryArticle(TransData transData) throws BusinessException {
+		Map<String, Object> map = transData.getViewMap();
+		logger.info("queryCollection-request:" + map);
+		String title = (String) map.get("title");
+		List<Map<String, Object>> orgList = resourcesdao.getResources(title,transData.getPageInfo());
+		transData.setObj(orgList);
+		transData.setExpCode("1");
+		transData.setExpMsg("success");
 		return transData;
 	}
 }

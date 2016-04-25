@@ -79,8 +79,8 @@ public class PictureAppController extends CentreController{
 		transData.setTradeCode("T20007");
 		transData=super.doService(httpServletRequest, transData);
 		if(!"".equals(transData.getExpCode())){
-			ResourcesEntity resources = (ResourcesEntity)transData.getObj();
-			mav.addObject("resources", resources);
+			Map<String,Object> map=(Map<String,Object>)transData.getObj();
+			mav.addObject("resources", map.get("resources"));
 			mav.setViewName("/view");
 			return mav;
 		}
