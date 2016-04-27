@@ -8,24 +8,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.infohold.cms.basic.common.TransData;
 import com.infohold.cms.basic.exception.BusinessException;
 import com.infohold.cms.basic.service.IBusinessService;
 import com.infohold.cms.basic.util.MD5Util;
-import com.infohold.cms.basic.util.SysConfigUtil;
 import com.infohold.cms.dao.AppUserDao;
 import com.infohold.cms.dao.ThirdPartyResourcesDao;
 import com.infohold.cms.entity.AppUserEntity;
 import com.infohold.cms.entity.CollectionEntity;
-import com.infohold.cms.entity.ResourcesEntity;
-import com.infohold.cms.entity.ThirdPartyResourcesEntity;
 import com.infohold.cms.util.CustomPropertyUtil;
 import com.infohold.cms.util.DateUtil;
-import com.infohold.cms.util.SmsVerifyKit;
 
 /**
  * APP用户管理Service

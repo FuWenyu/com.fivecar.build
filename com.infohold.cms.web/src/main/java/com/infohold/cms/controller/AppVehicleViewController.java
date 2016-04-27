@@ -30,7 +30,7 @@ import com.infohold.cms.service.ParallelVehicleService;
  *
  */
 @Controller
-public class VehicleViewController extends CentreController {
+public class AppVehicleViewController extends CentreController {
 
 	/**
 	 * 版本管理-版本号查询
@@ -118,7 +118,7 @@ public class VehicleViewController extends CentreController {
 		mav.addObject("vehicle", pavehicle);
 		mav.addObject("dealer", dealer);
 		mav.addObject("saleslist",saleslist);
-		mav.setViewName("/webview/pavehicle");
+		mav.setViewName("/webview/pavehiclenew");
 		return mav;
 	}
 

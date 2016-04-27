@@ -69,7 +69,7 @@ public class PictureAppController extends CentreController{
 	 * @return map
 	 */
 	
-	@RequestMapping(value="/app/Resources.do",method=RequestMethod.GET)
+	@RequestMapping(value="/Resources.do")
 	@ResponseBody
 	public ModelAndView Resources(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletresponse) throws Exception {
@@ -81,7 +81,7 @@ public class PictureAppController extends CentreController{
 		if(!"".equals(transData.getExpCode())){
 			Map<String,Object> map=(Map<String,Object>)transData.getObj();
 			mav.addObject("resources", map.get("resources"));
-			mav.setViewName("/view");
+			mav.setViewName("/webview/acter");
 			return mav;
 		}
 		return mav;

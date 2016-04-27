@@ -74,7 +74,7 @@ public class CollectionEntity extends BaseEntity {
 	/**
 	 * @return the resource_id
 	 */
-	@Column(name ="resource_id",nullable=false,columnDefinition="varchar(36)default ''")
+	@Column(name ="resource_id",nullable=true, unique=true, columnDefinition="varchar(255)default ''")
 	public java.lang.String getResource_id() {
 		return resource_id;
 	}

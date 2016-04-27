@@ -19,6 +19,10 @@
 <link rel="stylesheet" type="text/css" href="css/style.css" />
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="js/jquery.reveal.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
 </head>
 <body>
 	<header id="header">
@@ -35,10 +39,10 @@
 				<strong>${vehicle.vehicleName}<span>${vehicle.price}万</span></strong>
 			</div>
 			<div class="slide-right fl">
-				<span class=""><p>${dealer.dealerName}[4s]</p><p>${dealer.addr}</p></span>
+				<span class=""><p>${dealer.dealerName}[4s]</p>
+					<p>${dealer.addr}</p></span>
 				<ul class="lianxi clearfix">
-					<li><a href="#" data-reveal-id="myModal2"
-						data-animation="fade"><img
+					<li><a href=""><img id=map
 							src="images/zc_button_ckdt_pressed.png"></a></li>
 					<li><a href="tel://${dealer.telephone}"><img
 							src="images/zc_button_lxsj_pressed.png"></a></li>
@@ -67,7 +71,8 @@
 						<li><img src="${server}${saleslist.url}"> <span>
 								<p>销售顾问：${saleslist.salesName}</p>
 								<p>销售车型：${vehicle.vehicleName}</p> <em><i></i>${dealer.privilegestile}</em>
-						</span><a href="tel://${saleslist.phone}"> <img class="tel" src="images/zc_button_bddha_default.png"></a></li>
+						</span><a href="tel://${saleslist.phone}"> <img class="tel"
+								src="images/zc_button_bddha_default.png"></a></li>
 					</c:forEach>
 				</ul>
 			</div>
@@ -76,20 +81,24 @@
 			<h2>全系车型</h2>
 			<div class="qxcx_col">
 				<c:forEach var="modellist" items="${modellist}">
-				<dl class="clearfix">
-					<dt class="clearfix">
-						<strong>${modellist.modelName}</strong>
-					</dt>
-					<dd class="clearfix ">
-						<span class="fl text1">指导价：${modellist.originalprice}</span><span class="fr text2">优惠参考价：<i>${modellist.discountprice}</i>万
-						</span>
-					</dd>
-					<dd>${modellist.Carabstract}</dd>
-					<dd>
-						<a href="wc://FullBuy?id=${modellist.modelid}"><span class="fl text4">全款明细</span></a><a href="wc://LoanBuy?id=${modellist.modelid}"> <span class="fr text5">贷款购车</span></a>
-					</dd>
-				</dl>
-					</c:forEach>
+					<dl class="clearfix">
+						<dt class="clearfix">
+							<strong>${modellist.modelName}</strong>
+						</dt>
+						<dd class="clearfix ">
+							<span class="fl text1">指导价：${modellist.originalprice}</span><span
+								class="fr text2">优惠参考价：<i>${modellist.discountprice}</i>万
+							</span>
+						</dd>
+						<dd>${modellist.Carabstract}</dd>
+						<dd>
+							<a href="wc://FullBuy?id=${modellist.modelid}"><span
+								class="fl text4">全款明细</span></a><a
+								href="wc://LoanBuy?id=${modellist.modelid}"> <span
+								class="fr text5">贷款购车</span></a>
+						</dd>
+					</dl>
+				</c:forEach>
 			</div>
 		</div>
 
@@ -103,24 +112,19 @@
 		</ul>
 		<a class="close-reveal-modal">返回</a>
 	</div>
-	<div id="myModal2" class="reveal-modal">
-		${dealer.position} <a class="close-reveal-modal">返回</a>
+	<div id="myModal2">
+		${dealer.position} 
 	</div>
-		<script>
-		$("#myModal").dialog({
-			autoOpen : false
-		});
-		$("#myModal").click(function() {
-			$("#myModal").dialog("open");
-		});
-		$("#myModal2").dialog({
-			autoOpen : false,
-/* 			height : 420,
-			width : 590,
-			position : 0 */
-		});
-		$("#myModal2").click(function() {
-			$("#myModal2").dialog("open");
+	<script>
+		$(function() {
+			$("#myModal2").dialog({
+				autoOpen : false,
+				width : 400,
+			});
+
+			$("#map").click(function() {
+				$("#myModal2").dialog("open");
+			});
 		});
 	</script>
 </body>
