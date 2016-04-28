@@ -62,6 +62,7 @@
 								<option value="maintain">保养</option>
 								<option value="repair">维修</option>
 								<option value="parts">配件</option>
+								<option value="finance">金融</option>
 							</select>
 						</div>
 					</div>
