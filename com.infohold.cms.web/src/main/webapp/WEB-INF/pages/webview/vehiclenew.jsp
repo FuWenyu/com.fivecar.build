@@ -39,7 +39,7 @@
 				<strong>${vehicle.vehicleName}<span>${vehicle.price}万</span></strong>
 			</div>
 			<div class="slide-right fl">
-				<span class=""><p>${dealer.dealerName}[4s]</p>
+				<span class=""><p>${dealer.dealerName}</p>
 					<p>${dealer.addr}</p></span>
 				<ul class="lianxi clearfix">
 					<li><img id=map

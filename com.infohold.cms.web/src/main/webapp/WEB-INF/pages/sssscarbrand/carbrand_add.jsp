@@ -75,6 +75,17 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">
+							品牌归属</label>
+						<div class="col-sm-9">
+							<select class="input-medium"  id="belong" name="belong">
+                                <option value="">-请选择-</option> 
+								<option value="ssss">4s店</option>
+								<option value="parallel">平行进口车</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
 							<label class="col-sm-3 control-label no-padding-right" for="fileInput">品牌logo上传</label>
 							<div class="col-sm-3" id="upload">
 								<div class="ace-file-input col-sm-12" id="fileInputDiv">
@@ -143,6 +154,9 @@
 			return;
 		}
 		if (!limitCheck('initial', '品牌首字母', 1)) {
+			return;
+		}
+		if (!checkData('belong', '品牌归属', 'input')) {
 			return;
 		}
 		if (!checkData('brandNameen', '品牌英文名称', 'input')) {

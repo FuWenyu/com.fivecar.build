@@ -30,6 +30,8 @@
 									    value="2"><span class="lbl">维修</span></label>
 									 <label><input name="thirdparty_type" id="thirdparty_type" type="checkbox" class="ace" 
 									 	value="3"><span class="lbl">配件</span></label>
+									 <label><input name="thirdparty_type" id="thirdparty_type" type="checkbox" class="ace" 
+									 	value="4"><span class="lbl">金融</span></label>
 								</div>
 							</div>
 						</div>

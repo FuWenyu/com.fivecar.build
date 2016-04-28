@@ -77,6 +77,7 @@ public class CarBrandService implements IBusinessService {
 		Map<String, Object> map = transData.getViewMap();
 		UserSession session = transData.getUserSession();
 		String initial = (String) map.get("initial");
+		String belong = (String) map.get("belong");
 		String brandNamecn = (String) map.get("brandNamecn");
 		String brandNameen = (String) map.get("brandNameen");
 		String description = (String) map.get("description");
@@ -96,6 +97,7 @@ public class CarBrandService implements IBusinessService {
 		
 		CarBrandEntity carbrandentity = new CarBrandEntity();
 		carbrandentity.setInitial(initial);
+		carbrandentity.setBelong(belong);
 		carbrandentity.setBrandNamecn(brandNamecn);
 		carbrandentity.setBrandNameen(brandNameen);
 		carbrandentity.setImageName(imageName);
@@ -154,6 +156,7 @@ public class CarBrandService implements IBusinessService {
 		UserSession session = transData.getUserSession();
 		String id = (String) map.get("cardbrand_id");
 		String initial = (String) map.get("initial");
+		String belong = (String) map.get("belong");
 		String brandNamecn = (String) map.get("brandNamecn");
 		String brandNameen = (String) map.get("brandNameen");
 		String description = (String) map.get("description");
@@ -174,6 +177,7 @@ public class CarBrandService implements IBusinessService {
 		CarBrandEntity carbrandentity = new CarBrandEntity();
 		carbrandentity.setId(id);
 		carbrandentity.setInitial(initial);
+		carbrandentity.setBelong(belong);
 		carbrandentity.setBrandNamecn(brandNamecn);
 		carbrandentity.setBrandNameen(brandNameen);
 		carbrandentity.setImageName(imageName);

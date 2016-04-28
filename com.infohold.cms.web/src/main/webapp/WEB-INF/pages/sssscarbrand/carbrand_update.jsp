@@ -38,10 +38,9 @@
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id"> </label>
 					</div>
-					<%-- <input id="VERSION_FOR" type="hidden" class="" name="VERSION_FOR"   value="${picture.version_flag}" />	
-					<input id="version_ol" type="hidden" class="" name="version_ol"   value="${picture.version_online}" />	 --%>
 					<input id="cardbrand_id" type="hidden" class="" name="cardbrand_id" value="${cardbrand.id}" />
-					<input id="initial1" type="hidden" class="" name="initial1"   value="${cardbrand.initial}" />
+					<input id="initial1" type="hidden" class="" name="initial1" value="${cardbrand.initial}" />
+					<input id="belong1" type="hidden" class="" name="belong1" value="${cardbrand.belong}" />
 				<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
 							品牌英文名称 </label>
@@ -94,6 +93,17 @@
 								<option value="X">-X-</option>
 								<option value="Y">-Y-</option>
 								<option value="Z">-Z-</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="id">
+							品牌归属</label>
+						<div class="col-sm-9">
+							<select class="input-medium"  id="belong" name="belong">
+                                <option value="">-请选择-</option> 
+								<option value="ssss">4s店</option>
+								<option value="parallel">平行进口车</option>
 							</select>
 						</div>
 					</div>
@@ -183,6 +193,8 @@
 		
 		var initial1 = document.getElementById('initial1').value;
 		checkOption('initial',initial1);
+		var belong1 = document.getElementById('belong1').value;
+		checkOption('belong',belong1);
 		//上传文件控件
 		$('#fileInput').ace_file_input({
 			no_file:'空...',
@@ -208,6 +220,9 @@
 			return;
 		}
 		if (!limitCheck('initial', '品牌首字母', 1)) {
+			return;
+		}
+		if (!checkData('belong', '品牌归属', 'input')) {
 			return;
 		}
 		if (!checkData('brandNameen', '品牌英文名称', 'input')) {

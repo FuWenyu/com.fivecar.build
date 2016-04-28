@@ -57,6 +57,10 @@ public class ParallelBrandDao extends BaseDao<BaseEntity> {
 		sql.append("brd.url,");
 		sql.append("brd.urlreal ");
 		sql.append("from fc_parallel_brand brd ");
+		sql.append(" where brd.belong=");
+		sql.append("'");
+		sql.append("parallel");
+		sql.append("'");
 		sql.append(" order by brd.initial");
 		return super.excutePageQuery(sql.toString(),page);
 	}

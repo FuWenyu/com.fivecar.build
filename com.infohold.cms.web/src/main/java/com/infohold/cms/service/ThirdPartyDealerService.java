@@ -107,6 +107,7 @@ public class ThirdPartyDealerService implements IBusinessService {
 		boolean maintain = false;
 		boolean repair = false;
 		boolean parts = false;
+		boolean finance = false;
 
 		StringBuffer thirdparty_type1 = new StringBuffer();
 		String[] params = thirdparty_type.split("&");
@@ -126,6 +127,9 @@ public class ThirdPartyDealerService implements IBusinessService {
 			}
 			if ("3".equals(p[1])) {
 				parts = true;
+			}
+			if ("4".equals(p[1])) {
+				finance = true;
 			}
 		}
 		String[] strarray1 = anchor.split("-");

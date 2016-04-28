@@ -36,6 +36,8 @@ public class CarBrandEntity extends BaseEntity {
 	private java.lang.String brandNamecn;
 	/**品牌名称英文*/
 	private java.lang.String brandNameen;
+	/**品牌归属*/
+	private java.lang.String belong;
 	/**品牌logo*/
 	private java.lang.String imageName;
 	/**logo url*/
@@ -113,6 +115,14 @@ public class CarBrandEntity extends BaseEntity {
 	 */
 	public void setBrandNameen(java.lang.String brandNameen) {
 		this.brandNameen = brandNameen;
+	}
+	@Column(name ="belong",nullable=false,columnDefinition="varchar(32)default ''")
+	public java.lang.String getBelong() {
+		return belong;
+	}
+
+	public void setBelong(java.lang.String belong) {
+		this.belong = belong;
 	}
 
 	/**

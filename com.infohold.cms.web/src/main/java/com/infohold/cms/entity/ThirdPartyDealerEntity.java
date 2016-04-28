@@ -37,6 +37,8 @@ public class ThirdPartyDealerEntity extends BaseEntity {
 	private boolean repair;
 	/**经营配件项目*/
 	private boolean parts;
+	/**金融*/
+	private boolean finance;
 	/**地址*/
 	private java.lang.String addr;
 	/**经纬度*/
@@ -149,6 +151,20 @@ public class ThirdPartyDealerEntity extends BaseEntity {
 	 */
 	public void setParts(boolean parts) {
 		this.parts = parts;
+	}
+
+	/**
+	 * @return the finance
+	 */
+	@Column(name ="finance", nullable=false,columnDefinition="tinyint(1)default '0'")
+	public boolean isFinance() {
+		return finance;
+	}
+	/**
+	 * @param finance the finance to set
+	 */
+	public void setFinance(boolean finance) {
+		this.finance = finance;
 	}
 	/**
 	 * @return the addr
