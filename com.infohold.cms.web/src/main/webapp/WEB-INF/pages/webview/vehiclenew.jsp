@@ -42,8 +42,8 @@
 				<span class=""><p>${dealer.dealerName}[4s]</p>
 					<p>${dealer.addr}</p></span>
 				<ul class="lianxi clearfix">
-					<li><a href=""><img id=map
-							src="images/zc_button_ckdt_pressed.png"></a></li>
+					<li><img id=map
+							src="images/zc_button_ckdt_pressed.png"></li>
 					<li><a href="tel://${dealer.telephone}"><img
 							src="images/zc_button_lxsj_pressed.png"></a></li>
 				</ul>
