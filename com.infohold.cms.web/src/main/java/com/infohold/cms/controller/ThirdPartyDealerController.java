@@ -55,7 +55,7 @@ public class ThirdPartyDealerController extends CentreController{
 	 * @param httpServletRequest
 	 * @return
 	 */
-	@RequestMapping("/mvc/tpdealer_add.do")
+	@RequestMapping("/tpdealer_add.do")
 	public ModelAndView picture_add(HttpServletRequest httpServletRequest) {
 		ModelAndView mav = new ModelAndView();
 		TransData transData = new TransData();
@@ -108,7 +108,7 @@ public class ThirdPartyDealerController extends CentreController{
 	 * @param httpServletRequest
 	 * @return
 	 */
-	@RequestMapping("/mvc/tpdealer_edit.do")
+	@RequestMapping("/tpdealer_edit.do")
 	public ModelAndView version_edit(HttpServletRequest httpServletRequest) {
 		TransData transData = new TransData();
 		transData.setServiceName("tpdealerService");

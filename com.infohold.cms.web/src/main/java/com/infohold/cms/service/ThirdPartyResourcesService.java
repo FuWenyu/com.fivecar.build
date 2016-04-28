@@ -189,7 +189,4 @@ public class ThirdPartyResourcesService implements IBusinessService {
 		}
 		return transData;
 	}
-
-	
-
 }

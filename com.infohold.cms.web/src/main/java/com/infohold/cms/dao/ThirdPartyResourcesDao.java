@@ -41,6 +41,7 @@ public class ThirdPartyResourcesDao extends BaseDao<BaseEntity> {
 		sql.append(" order by rs.id desc");
 		return super.excutePageQuery(sql.toString(),page);
 	}
+	
 	/**
 	 * 保存图片信息
 	 * @param VersionEntity
@@ -94,6 +95,26 @@ public class ThirdPartyResourcesDao extends BaseDao<BaseEntity> {
 		sql.append("dle.thirdparty_type ");
 		sql.append("from fc_thirdparty_dealer dle ");
 		sql.append(" order by dle.createDate desc");
+		return super.queryForList(sql.toString());
+	}
+	/**
+	 * 第三方机构查询
+	 * @param id，用户主键
+	 * @return
+	 */
+	public List<Map<String, Object>> queryresourceList(String dealerid){
+		StringBuffer sql = new StringBuffer();
+		sql.append("select rs.id,");
+		sql.append("rs.title,");
+		sql.append("rs.thirdparty_type,");
+		sql.append("rs.resourceName,");
+		sql.append("rs.createDate,");
+		sql.append("rs.createName ");
+		sql.append("from fc_thirdparty_resources rs ");
+		sql.append("where rs.purpose = ");
+		sql.append("'");
+		sql.append(dealerid);
+		sql.append("'");
 		return super.queryForList(sql.toString());
 	}
 	/**

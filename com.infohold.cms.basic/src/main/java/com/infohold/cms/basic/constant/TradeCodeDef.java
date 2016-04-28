@@ -423,7 +423,7 @@ public enum TradeCodeDef implements Serializable {
 		case T36008:
 			return "优惠信息查询";
 		case T36009:
-			return "暂不用";
+			return "第三方经销商webview";
 		case T36010:
 			return "暂不用";
 			

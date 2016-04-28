@@ -1,6 +1,7 @@
 package com.infohold.cms.service;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,8 @@ import com.infohold.cms.basic.service.IBusinessService;
 import com.infohold.cms.basic.util.StrUtil;
 import com.infohold.cms.basic.util.SysConfigUtil;
 import com.infohold.cms.dao.ThirdPartyDealerDao;
+import com.infohold.cms.dao.ThirdPartyResourcesDao;
+import com.infohold.cms.dao.ThirdPartySalesDao;
 import com.infohold.cms.entity.ThirdPartyDealerEntity;
 import com.infohold.cms.util.CustomPropertyUtil;
 import com.infohold.cms.util.DateUtil;
@@ -31,9 +34,13 @@ public class ThirdPartyDealerService implements IBusinessService {
 
 	@Autowired
 	private ThirdPartyDealerDao tpdealerdao;
+	@Autowired
+	private ThirdPartySalesDao tpsalesdao;
+	@Autowired
+	private ThirdPartyResourcesDao resourcesdao;
 
-	private static String resource_request = CustomPropertyUtil
-			.getProperties("resource_request");
+	private static String resource_request = CustomPropertyUtil.getProperties("resource_request");
+	private static String service_addr = CustomPropertyUtil.getProperties("service_addr");
 
 	private DateUtil dateutil = new DateUtil();
 
@@ -58,6 +65,8 @@ public class ThirdPartyDealerService implements IBusinessService {
 			return this.dealerQuery(transData);
 		} else if (tradCode.equals("T36008")) {
 			return this.getResources(transData);
+		} else if (tradCode.equals("T36009")) {
+			return this.webView(transData);
 		}
 		return transData;
 	}
@@ -103,6 +112,11 @@ public class ThirdPartyDealerService implements IBusinessService {
 		Timestamp createDate = dateutil.getTimestamp();
 		if (null == position || "".equals(position) || "null".equals(position)) {
 			position = "<iframe class=\"ueditor_baidumap\" src=\"./ueditor/dialogs/map/show.html#center=121.807603,39.058436&zoom=13&width=530&height=340&markers=121.805375,39.05796&markerStyles=l,A\" frameborder=\"0\" width=\"534\" height=\"344\"></iframe>";
+		}else {
+			position=position.replace("<p>", "");
+			position=position.replace("</p>", "");
+			position=position.replace("530", "420");
+			position=position.replace("534", "100%");
 		}
 		boolean maintain = false;
 		boolean repair = false;
@@ -143,6 +157,7 @@ public class ThirdPartyDealerService implements IBusinessService {
 		ThirdPartyDealerEntity ThirdPartyDealerEntity = new ThirdPartyDealerEntity();
 		ThirdPartyDealerEntity.setResourceid(resourceId);
 		ThirdPartyDealerEntity.setPrivileges(resourceName);
+		ThirdPartyDealerEntity.setFinance(finance);
 		ThirdPartyDealerEntity.setPrivilegestile(resourceTitle);
 		ThirdPartyDealerEntity.setPrivilegesurl(anchor1.toString());
 		ThirdPartyDealerEntity.setDealerName(tpdealerName);
@@ -214,10 +229,16 @@ public class ThirdPartyDealerService implements IBusinessService {
 		Timestamp createDate = dateutil.getTimestamp();
 		if (null == position || "".equals(position) || "null".equals(position)) {
 			position = "<iframe class=\"ueditor_baidumap\" src=\"./ueditor/dialogs/map/show.html#center=121.807603,39.058436&zoom=13&width=530&height=340&markers=121.805375,39.05796&markerStyles=l,A\" frameborder=\"0\" width=\"534\" height=\"344\"></iframe>";
+		}else {
+			position=position.replace("<p>", "");
+			position=position.replace("</p>", "");
+			position=position.replace("530", "420");
+			position=position.replace("534", "100%");
 		}
 		boolean maintain = false;
 		boolean repair = false;
 		boolean parts = false;
+		boolean finance = false;
 
 		StringBuffer thirdparty_type1 = new StringBuffer();
 		String[] params = thirdparty_type.split("&");
@@ -237,6 +258,9 @@ public class ThirdPartyDealerService implements IBusinessService {
 			}
 			if ("3".equals(p[1])) {
 				parts = true;
+			}
+			if ("4".equals(p[1])) {
+				finance = true;
 			}
 		}
 		String[] strarray1 = anchor.split("-");
@@ -258,6 +282,7 @@ public class ThirdPartyDealerService implements IBusinessService {
 		ThirdPartyDealerEntity.setMaintain(maintain);
 		ThirdPartyDealerEntity.setRepair(repair);
 		ThirdPartyDealerEntity.setParts(parts);
+		ThirdPartyDealerEntity.setFinance(finance);
 		ThirdPartyDealerEntity.setTelephone(telephone);
 		ThirdPartyDealerEntity.setAddr(addr);
 		ThirdPartyDealerEntity.setPosition(position);
@@ -294,6 +319,31 @@ public class ThirdPartyDealerService implements IBusinessService {
 	}
 
 	/**
+	 * http请求查询4s店信息列表
+	 * 
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData webView(TransData transData) throws BusinessException {
+		Map<String, Object> map = transData.getViewMap();
+		logger.info("dealerQuery-request:" + map);
+		String dealerid = (String) map.get("dealerid");
+		ThirdPartyDealerEntity dealer = tpdealerdao.getdealerEntity(dealerid);
+		List<Map<String, Object>> tpsaleslist = tpsalesdao.querytpsalesList2(dealerid, transData.getPageInfo());
+		List<Map<String, Object>> resourcelist = resourcesdao.queryresourceList(dealerid);
+		String url = service_addr+resource_request;
+		Map<String, Object> map1 = new HashMap<String, Object>();
+		map1.put("url", url);
+		map1.put("server", service_addr);
+		map1.put("dealer", dealer);
+		map1.put("tpsaleslist", tpsaleslist);
+		map1.put("resourcelist", resourcelist);
+		transData.setObj(map1);
+		return transData;
+	}
+
+	/**
 	 * 首页图片新增图文资源查询
 	 * 
 	 * @param transData
@@ -306,5 +356,5 @@ public class ThirdPartyDealerService implements IBusinessService {
 		transData.setExpMsg("success");
 		return transData;
 	}
-	
+
 }

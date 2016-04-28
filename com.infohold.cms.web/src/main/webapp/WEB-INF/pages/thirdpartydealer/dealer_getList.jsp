@@ -201,7 +201,7 @@
 		});
 		/*********自定于方法**********/
 		//根据查询条件查看
-		function toQry()
+/* 		function toQry()
 		{
 			var param = $("#queryForm").serialize();
 			param += "&qry_type=qry";
@@ -210,18 +210,18 @@
 				$("#qryContent").fadeIn('fast');
 				setHash('${pageContext.request.contextPath}');
 			});
-		}
+		} */
 		//展示图片
 		function viewFile(from_url,file_name){
 			window.open("<%=path%>/upload/image/"+file_name);
 		}
 		//跳转至图片新增页面
 		function addEntity(){
-			window.location="<%=path%>/mvc/tpdealer_add.do";
+			window.location="<%=path%>/tpdealer_add.do";
 		};
 		//跳转至图片编辑页面
 		function editEntity(id){
-			window.location="<%=path%>/mvc/tpdealer_edit.do?id="+id+"";
+			window.location="<%=path%>/tpdealer_edit.do?id="+id+"";
 		};
 		function addSalesEntity(){
 			window.location="<%=path%>/mvc/sales_add.do";

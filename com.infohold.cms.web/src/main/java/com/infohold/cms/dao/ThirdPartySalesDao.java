@@ -81,6 +81,30 @@ public class ThirdPartySalesDao extends BaseDao<BaseEntity> {
 		return super.excutePageQuery(sql.toString(),page);
 	}
 	/**
+	 * 4s店车辆信息列表查询
+	 * @param map
+	 * @param page
+	 * @return
+	 */
+	public List<Map<String, Object>> querytpsalesList2(String belong,Page page){
+		page.setPageSize(999);
+		StringBuffer sql = new StringBuffer();
+		sql.append("select sl.id,");
+		sql.append("sl.belong,");
+		sql.append("sl.belongName,");
+		sql.append("sl.salesName,");
+		sql.append("sl.phone,");
+		sql.append("sl.wxQQ,");
+		sql.append("sl.url,");
+		sql.append("sl.urlreal ");
+		sql.append("from fc_thirdparty_sales sl ");
+		sql.append(" where sl.belong=");
+		sql.append("'");
+		sql.append(belong);
+		sql.append("'");
+		return super.excutePageQuery(sql.toString(),page);
+	}
+	/**
 	 * 保存4s店车辆信息
 	 * @param VersionEntity
 	 * @return boolean

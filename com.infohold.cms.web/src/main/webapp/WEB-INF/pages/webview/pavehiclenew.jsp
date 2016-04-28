@@ -65,7 +65,7 @@
 					<c:forEach var="saleslist" items="${saleslist}">
 						<li><img src="images/img1.jpg"> <span>
 								<p>销售顾问：${saleslist.salesName}</p>
-								<p>小手车型：${vehicle.vehicleName}</p> <!-- <em><i></i>奥迪车全系85折！</em> -->
+								<p>销售车型：${vehicle.vehicleName}</p> <!-- <em><i></i>奥迪车全系85折！</em> -->
 						</span><a href="tel://${saleslist.phone}"> <img class="tel"
 								src="images/zc_button_bddha_default.png"></a></li>
 					</c:forEach>
@@ -100,7 +100,7 @@
 				</dl>
 				<dl class="clearfix">
 					<dt>车辆颜色：</dt>
-					<dd ${vehicle.color}</dd>
+					<dd>${vehicle.color}</dd>
 				</dl>
 				<dl class="clearfix">
 					<dt>环保标准：</dt>
