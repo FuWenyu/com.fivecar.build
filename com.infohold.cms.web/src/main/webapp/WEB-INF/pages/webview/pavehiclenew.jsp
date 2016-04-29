@@ -30,7 +30,7 @@
 			<span class="pleft">1</span> <span class="pright">2</span>
 			<h1>${dealer.dealerName}</h1>
 		</nav> --%>
-		<div id="banner2">
+		<div id="banner">
 			<img src="${vehicle.url}">
 		</div>
 		<div class="ziliao clearfix" style="height: 30px;">
@@ -55,7 +55,7 @@
 			<div class="yhly-cont clearfix">
 				<span class="fl spleft"> <strong><i></i>${dealer.privilegestile}</strong>
 					<p>${dealer.privileges}</p>
-				</span> <span class="fr spright"><a href="${dealer.privilegesurl}">参加</a></span>
+				</span> <span class="fr spright"><a href="${server}${dealer.privilegesurl}">参加</a></span>
 			</div>
 		</div>
 		<div class="xsgw">
