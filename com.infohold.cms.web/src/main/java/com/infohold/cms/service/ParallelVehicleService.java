@@ -83,6 +83,8 @@ public class ParallelVehicleService implements IBusinessService {
 			return this.vehicleQueryDealer(transData);
 		} else if (tradCode.equals("T32016")) {
 			return this.vehicleQueryLikes(transData);
+		} else if (tradCode.equals("T32017")) {
+			return this.vehicleWebview(transData);
 		}
 		return transData;
 	}
@@ -535,6 +537,30 @@ public class ParallelVehicleService implements IBusinessService {
 	 * @throws BusinessException
 	 */
 	public TransData vehicleQueryLikes(TransData transData) throws BusinessException {
+		Map<String, Object> map = transData.getViewMap();
+		logger.info("vehicleQueryDealer-request:" + map);
+		String like = (String) map.get("like");
+		List<Map<String, Object>> vehiclelist = null;
+		vehiclelist = vehicledao.queryvehicleList6(like, transData.getPageInfo());
+		if (vehiclelist == null) {
+			transData.setExpCode("1");
+			transData.setExpMsg("null");
+		} else {
+			transData.setObj(vehiclelist);
+			transData.setExpCode("1");
+			transData.setExpMsg("success");
+		}
+		return transData;
+	}
+
+	/**
+	 * http请求模糊查询车辆列表
+	 * 
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData vehicleWebview(TransData transData) throws BusinessException {
 		Map<String, Object> map = transData.getViewMap();
 		logger.info("vehicleQueryDealer-request:" + map);
 		String like = (String) map.get("like");

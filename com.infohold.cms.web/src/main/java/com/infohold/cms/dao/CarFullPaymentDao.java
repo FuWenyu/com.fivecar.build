@@ -123,5 +123,20 @@ public class CarFullPaymentDao extends BaseDao<BaseEntity> {
 		super.update(entity);
 		return true;
 	}
-	
+	/**
+	 * 4s店车辆信息列表查询
+	 * @param map
+	 * @param page
+	 * @return
+	 */
+	public List<Map<String, Object>> queryModelName(String modelid,Page page){
+		StringBuffer sql = new StringBuffer();
+		sql.append("select md.modelName ");
+		sql.append("from fc_ssss_model md ");
+		sql.append(" where md.id=");
+		sql.append("'");
+		sql.append(modelid);
+		sql.append("'");
+		return super.excutePageQuery(sql.toString(),page);
+	}
 }

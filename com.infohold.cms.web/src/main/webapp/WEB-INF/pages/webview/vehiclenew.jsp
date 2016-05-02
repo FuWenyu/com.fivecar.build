@@ -92,9 +92,9 @@
 						</dd>
 						<dd>${modellist.Carabstract}</dd>
 						<dd>
-							<a href="wc://FullBuy?id=${modellist.modelid}"><span
+							<a href="wc://FullBuy?id=${modellist.id}"><span
 								class="fl text4">全款明细</span></a><a
-								href="wc://LoanBuy?id=${modellist.modelid}"> <span
+								href="wc://LoanBuy?id=${modellist.id}"> <span
 								class="fr text5">贷款购车</span></a>
 						</dd>
 					</dl>

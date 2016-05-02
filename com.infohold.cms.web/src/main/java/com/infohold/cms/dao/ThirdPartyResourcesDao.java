@@ -12,6 +12,7 @@ import com.infohold.cms.basic.common.Label;
 import com.infohold.cms.basic.common.Page;
 import com.infohold.cms.basic.dao.BaseDao;
 import com.infohold.cms.basic.entity.BaseEntity;
+import com.infohold.cms.entity.ComplaintsEntity;
 import com.infohold.cms.entity.ThirdPartyResourcesEntity;
 
 /**
@@ -132,5 +133,13 @@ public class ThirdPartyResourcesDao extends BaseDao<BaseEntity> {
 		sql.append(title);
 		sql.append("%'");
 		return super.excutePageQuery(sql.toString(),page);
+	}
+	/**
+	 * 图文信息查询
+	 * @return
+	 */
+	public Boolean complaintsSave(ComplaintsEntity entity) {
+		super.save(entity);
+		return true;
 	}
 }

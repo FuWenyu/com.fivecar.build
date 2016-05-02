@@ -42,10 +42,8 @@ public class VersionHttpController extends CentreController{
 	public Map<String, Object> VersionQuery(HttpServletRequest httpServletRequest,
 			HttpServletResponse response) throws Exception {
 
-		JSONObject params = JSONObject.fromObject(httpServletRequest
-				.getParameter("params"));
-		String version_no = (String) params.get("version_no");
-		String version_flag = (String) params.get("version_flag");
+		String version_no = (String) httpServletRequest.getParameter("version_no");
+		String version_flag = (String) httpServletRequest.getParameter("version_flag");
 		Map<String, String> mapr = new HashMap<String, String>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		List list = new ArrayList();

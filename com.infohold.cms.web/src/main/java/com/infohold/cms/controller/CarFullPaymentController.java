@@ -33,18 +33,15 @@ public class CarFullPaymentController extends CentreController{
 	public ModelAndView version_edit(HttpServletRequest httpServletRequest) {
 		TransData transData = new TransData();
 		ModelAndView mav = new ModelAndView();
-		String model =httpServletRequest.getParameter("model");
-		String[] strarray = model.split("-");
-		String modelid = strarray[0];
-		String modelName = strarray[1];
-		mav.addObject("modelid", modelid);
-		mav.addObject("modelName", modelName);
-		
 		transData.setServiceName("fullpayService");
 		transData.setTradeCode("T27001");
 		transData=super.doService(httpServletRequest, transData);
-		CarFullPaymentEntity fullpay = (CarFullPaymentEntity) transData.getObj();
+		Map<String,Object> map=(Map<String,Object>)transData.getObj();
+		String modelName = (String)map.get("modelName");
+		CarFullPaymentEntity fullpay = (CarFullPaymentEntity) map.get("fullpay");;
+		
 		mav.addObject("FullPay",fullpay);
+		mav.addObject("modelName",modelName);
 		mav.setViewName("/sssscarfullpay/fullpay_update");
 		return mav;
 	}

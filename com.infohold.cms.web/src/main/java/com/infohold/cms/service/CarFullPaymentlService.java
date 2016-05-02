@@ -2,6 +2,7 @@ package com.infohold.cms.service;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -63,8 +64,12 @@ public class CarFullPaymentlService implements IBusinessService {
 		String model = map.get("model") + "";
 		String[] strarray = model.split("-");
 		String modelid = strarray[0];
+		List<Map<String, Object>> modellist = FullPaymentdao.queryModelName(modelid, transData.getPageInfo());
+		Map<String,Object> map1 = new HashMap<String, Object>();
+		map1.put("modelName", modellist.get(0).get("modelName"));
 		CarFullPaymentEntity entity = FullPaymentdao.getFullPaymentEntity(modelid);
-		transData.setObj(entity);
+		map1.put("fullpay", entity);
+		transData.setObj(map1);
 		return transData;
 	}
 

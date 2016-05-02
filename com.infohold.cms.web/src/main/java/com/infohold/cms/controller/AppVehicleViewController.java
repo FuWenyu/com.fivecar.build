@@ -121,5 +121,21 @@ public class AppVehicleViewController extends CentreController {
 		mav.setViewName("/webview/pavehiclenew");
 		return mav;
 	}
-
+	@RequestMapping("/pavehicleWebview.do1")
+	public ModelAndView parallelvehicleWebview1(HttpServletRequest httpServletRequest) {
+		TransData transData = new TransData();
+		String vehicleid = httpServletRequest.getParameter("vehicleid");
+//		List<Map<String, Object>> saleslist = new ArrayList<>();
+		ModelAndView mav = new ModelAndView();
+		ParallelVehicleEntity pavehicle = new ParallelVehicleEntity();
+		Page page = new Page();
+		pavehicle = pavehicleService.VehicleQueryPage(vehicleid);
+		List<Map<String, Object>> saleslist = pavehicleService.salesQueryPage(pavehicle.getDealerid(), page, transData);
+		ParallelDealerEntity dealer = pavehicleService.querydealerPage(pavehicle.getDealerid());
+		mav.addObject("vehicle", pavehicle);
+		mav.addObject("dealer", dealer);
+		mav.addObject("saleslist",saleslist);
+		mav.setViewName("/webview/pavehiclenew");
+		return mav;
+	}
 }

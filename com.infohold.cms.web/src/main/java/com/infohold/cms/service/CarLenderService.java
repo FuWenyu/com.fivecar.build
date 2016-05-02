@@ -88,7 +88,7 @@ public class CarLenderService implements IBusinessService {
 		String description = (String) map.get("description");
 		String imageName = (String) map.get("imageName");
 		String createName = session.getUserName();
-		String orgid = (String) map.get("orgid");
+		String orgid = session.getBranchNo();
 		Timestamp createDate = dateutil.getTimestamp();
 
 		String[] strarray1 = anchor.split("-");
@@ -177,7 +177,7 @@ public class CarLenderService implements IBusinessService {
 		String description = (String) map.get("description");
 		String imageName = (String) map.get("imageName");
 		String createName = session.getUserName();
-		String orgid = (String) map.get("orgid");
+		String orgid = session.getBranchNo();
 		Timestamp createDate = dateutil.getTimestamp();
 
 		String[] strarray1 = anchor.split("-");

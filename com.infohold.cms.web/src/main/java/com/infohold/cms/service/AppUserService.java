@@ -18,6 +18,7 @@ import com.infohold.cms.dao.AppUserDao;
 import com.infohold.cms.dao.ThirdPartyResourcesDao;
 import com.infohold.cms.entity.AppUserEntity;
 import com.infohold.cms.entity.CollectionEntity;
+import com.infohold.cms.entity.ComplaintsEntity;
 import com.infohold.cms.util.CustomPropertyUtil;
 import com.infohold.cms.util.DateUtil;
 
@@ -65,6 +66,8 @@ public class AppUserService implements IBusinessService {
 			return this.queryCollection(transData);
 		} else if (tradCode.equals("T40009")) {
 			return this.queryArticle(transData);
+		}else if (tradCode.equals("T40010")) {
+			return this.complaints(transData);
 		}
 		return transData;
 	}
@@ -431,6 +434,28 @@ public class AppUserService implements IBusinessService {
 		transData.setObj(orgList);
 		transData.setExpCode("1");
 		transData.setExpMsg("success");
+		return transData;
+	}
+	/**
+	 * 图文信息查询
+	 * 
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData complaints(TransData transData) throws BusinessException {
+		Map<String, Object> map = transData.getViewMap();
+		logger.info("queryCollection-request:" + map);
+		String title = (String) map.get("title");
+		String description = (String) map.get("description");
+		ComplaintsEntity complaints = new ComplaintsEntity();
+		complaints.setTitle(title);
+		complaints.setDescription(description);
+		Boolean res = resourcesdao.complaintsSave(complaints);
+		if (res) {
+			transData.setExpCode("1");
+			transData.setExpMsg("success");
+		}
 		return transData;
 	}
 }

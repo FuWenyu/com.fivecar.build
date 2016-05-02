@@ -2,6 +2,7 @@ package com.infohold.cms.service;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +15,9 @@ import com.infohold.cms.basic.common.UserSession;
 import com.infohold.cms.basic.exception.BusinessException;
 import com.infohold.cms.basic.service.IBusinessService;
 import com.infohold.cms.basic.util.SysConfigUtil;
+import com.infohold.cms.dao.CarFullPaymentDao;
 import com.infohold.cms.dao.CarLoanDao;
+import com.infohold.cms.entity.CarFullPaymentEntity;
 import com.infohold.cms.entity.CarLoanEntity;
 import com.infohold.cms.util.DateUtil;
 import com.infohold.cms.util.MathUtils;
@@ -31,6 +34,8 @@ public class CarLoanService implements IBusinessService {
 
 	@Autowired
 	private CarLoanDao loandao;
+	@Autowired
+	private CarFullPaymentDao FullPaymentdao;
 
 	private DateUtil dateutil = new DateUtil();
 
@@ -72,7 +77,12 @@ public class CarLoanService implements IBusinessService {
 		String[] strarray = model.split("-");
 		String modelid = strarray[0];
 		List<Map<String, Object>> orgList = loandao.queryloanList(modelid,transData.getPageInfo());
-		transData.setObj(orgList);
+		Map<String,Object> map1 = new HashMap<String, Object>();
+		List<Map<String, Object>> modellist = FullPaymentdao.queryModelName(modelid, transData.getPageInfo());
+		map1.put("modelid", modelid);
+		map1.put("modelName", modellist.get(0).get("modelName"));
+		map1.put("loanList", orgList);
+		transData.setObj(map1);
 		return transData;
 	}
 
@@ -86,9 +96,17 @@ public class CarLoanService implements IBusinessService {
 	public TransData querylender(TransData transData) throws BusinessException {
 		UserSession session = transData.getUserSession();
 		String orgid = session.getBranchNo();
+		String model = (String) transData.getViewMap().get("model");
+		String[] strarray = model.split("-");
+		String modelid = strarray[0];
+		Map<String,Object> map1 = new HashMap<String, Object>();
+		List<Map<String, Object>> modellist = FullPaymentdao.queryModelName(modelid, transData.getPageInfo());
+		map1.put("modelid", modelid);
+		map1.put("modelName", modellist.get(0).get("modelName"));
 		List<Map<String, Object>> orgList = loandao.querylenderList(transData
 				.getPageInfo(),orgid);
-		transData.setObj(orgList);
+		map1.put("lenderList", orgList);
+		transData.setObj(map1);
 		return transData;
 	}
 

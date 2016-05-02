@@ -257,4 +257,28 @@ public class AppUserController extends CentreController{
 		System.out.println(map);
 		return map;
 	}
+	/**
+	 * APP-查询图文
+	 * 
+	 * @param httpServletRequest
+	 * @return map
+	 */
+	@RequestMapping("/app/Complaints.do")
+	@ResponseBody
+	public Map<String, Object> Complaints(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletresponse) throws Exception {
+		TransData transData = new TransData();
+		transData.setServiceName("appUserService");
+		transData.setTradeCode("T40010");
+		transData=super.doService(httpServletRequest, transData);
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Map<String, Object>> resourceList  = (List<Map<String, Object>>)transData.getObj();
+		if(!"".equals(transData.getExpCode())){
+			map.put("expCode", transData.getExpCode());
+			map.put("expMsg", transData.getExpMsg());
+			return map;
+		}
+		System.out.println(map);
+		return map;
+	}
 }
