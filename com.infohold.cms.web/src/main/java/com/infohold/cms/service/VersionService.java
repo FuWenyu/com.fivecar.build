@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,8 @@ public class VersionService implements IBusinessService {
 	@Autowired
 	private SysConfigUtil sysConfigUtil;
 	
-//	private DateUtil dateutil = new DateUtil();
+	private Logger logger = Logger.getLogger(ParallelDealerService.class);
+	
 	private DateUtil dateutil = new DateUtil();
 	@Override
 	public TransData execute(TransData transData) throws BusinessException {
@@ -53,6 +55,9 @@ public class VersionService implements IBusinessService {
 		}
 		else if(tradCode.equals("T30005")){
 			return this.Version_edit(transData);
+		}
+		else if(tradCode.equals("T30007")){
+			return this.VersionAPP(transData);
 		}
 		return transData;	
 	}
@@ -175,5 +180,39 @@ public class VersionService implements IBusinessService {
 	 */
 	public VersionEntity Version_query(String version_online,String version_flag) throws BusinessException{
 		return versionDao.getVersionByonline(version_online,version_flag);
+	}
+	/**
+	 * http请求查询4s店信息列表
+	 * 
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData VersionAPP(TransData transData) throws BusinessException {
+		Map<String, Object> map = transData.getViewMap();
+		Map<String, String> mapr = new HashMap<String, String>();
+		logger.info("VersionAPP-request:"+map);
+		String version_no = (String) map.get("version_no");
+		String version_flag = (String) map.get("version_flag");
+		
+		VersionEntity version = versionDao.getVersionByonline("Y",version_flag);
+		if (version.getVersion_no().equals(version_no)) {
+			transData.setExpCode("2");
+			transData.setExpMsg("无新版本");
+			mapr.put("version_no", "");
+			mapr.put("version_flag", "");
+			mapr.put("version_desc", "");
+			mapr.put("version_url", "");
+		}else {
+			transData.setExpCode("1");
+			transData.setExpMsg("发现新版本");
+			mapr.put("version_no", version.getVersion_no());
+			mapr.put("version_flag", version.getVersion_flag());
+			mapr.put("version_desc", version.getVersion_desc());
+			mapr.put("version_url", version.getVersion_url());
+		}
+		transData.setObj(mapr);
+		logger.info("VersionAPP-response:"+mapr);
+		return transData;
 	}
 }

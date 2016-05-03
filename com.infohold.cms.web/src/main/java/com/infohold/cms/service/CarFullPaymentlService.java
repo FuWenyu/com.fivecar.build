@@ -66,6 +66,7 @@ public class CarFullPaymentlService implements IBusinessService {
 		String modelid = strarray[0];
 		List<Map<String, Object>> modellist = FullPaymentdao.queryModelName(modelid, transData.getPageInfo());
 		Map<String,Object> map1 = new HashMap<String, Object>();
+		map1.put("modelid", modelid);
 		map1.put("modelName", modellist.get(0).get("modelName"));
 		CarFullPaymentEntity entity = FullPaymentdao.getFullPaymentEntity(modelid);
 		map1.put("fullpay", entity);

@@ -20,6 +20,7 @@ import com.infohold.cms.dao.ParallelDealerDao;
 import com.infohold.cms.dao.ParallelModelDao;
 import com.infohold.cms.dao.ParallelSalesDao;
 import com.infohold.cms.dao.ParallelVehicleDao;
+import com.infohold.cms.entity.CarDealerEntity;
 import com.infohold.cms.entity.ParallelDealerEntity;
 import com.infohold.cms.entity.ParallelVehicleEntity;
 import com.infohold.cms.util.CustomPropertyUtil;
@@ -45,6 +46,8 @@ public class ParallelVehicleService implements IBusinessService {
 	private ParallelModelDao modeldao;
 
 	private static String service_name = CustomPropertyUtil.getProperties("service_name");
+	private static String pavehicle_request = CustomPropertyUtil.getProperties("pavehicle_request");
+	private static String service_addr = CustomPropertyUtil.getProperties("service_addr");
 
 	private DateUtil dateutil = new DateUtil();
 
@@ -67,6 +70,8 @@ public class ParallelVehicleService implements IBusinessService {
 			return this.updatePictureEntity(transData);
 		} else if (tradCode.equals("T32007")) {
 			return this.vehicleQueryBrand(transData);
+		} else if (tradCode.equals("T32008")) {
+			return this.vehicleWebview(transData);
 		} else if (tradCode.equals("T32009")) {
 			return this.queryprice(transData);
 		} else if (tradCode.equals("T32010")) {
@@ -561,19 +566,35 @@ public class ParallelVehicleService implements IBusinessService {
 	 * @throws BusinessException
 	 */
 	public TransData vehicleWebview(TransData transData) throws BusinessException {
-		Map<String, Object> map = transData.getViewMap();
+		Map<String, Object> map1 = transData.getViewMap();
+		Map<String, Object> map = new HashMap<String, Object>();
+		logger.info("vehicleQueryDealer-request:" + map1);
+		String vehicleid = (String) map1.get("vehicleid");
+		ParallelVehicleEntity pavehicle = vehicledao.getvehicleEntity(vehicleid);
+		map.put("vehicle", pavehicle);
+		Page page = new Page();
+		page.setPageSize(999);
+		transData.setPageInfo(page);
+		/*
+		 * if (delrid == null || delrid.equals(" ") || delrid.equals("")) {
+		 * ParallelDealerEntity dealer =
+		 * dealerdao.getdealerEntity(pavehicle.getDealerid()); map.put("dealer",
+		 * dealer); List<Map<String, Object>> saleslist =
+		 * salesdao.querysalesList1(dealer.getId(), transData.getPageInfo());
+		 * map.put("saleslist", saleslist); } else {
+		 */
+		ParallelDealerEntity dealer = dealerdao.getdealerEntity(pavehicle.getDealerid());
+		map.put("dealer", dealer);
+		List<Map<String, Object>> saleslist = salesdao.querysalesList1(dealer.getId(), transData.getPageInfo());
+		map.put("saleslist", saleslist);
+		// }
+		StringBuffer url = new StringBuffer(pavehicle_request);
+		url.append("dealerid=");
+		map.put("url", url.toString());
+		map.put("server", service_addr);
 		logger.info("vehicleQueryDealer-request:" + map);
-		String like = (String) map.get("like");
-		List<Map<String, Object>> vehiclelist = null;
-		vehiclelist = vehicledao.queryvehicleList6(like, transData.getPageInfo());
-		if (vehiclelist == null) {
-			transData.setExpCode("1");
-			transData.setExpMsg("null");
-		} else {
-			transData.setObj(vehiclelist);
-			transData.setExpCode("1");
-			transData.setExpMsg("success");
-		}
+		transData.setObj(map);
+
 		return transData;
 	}
 

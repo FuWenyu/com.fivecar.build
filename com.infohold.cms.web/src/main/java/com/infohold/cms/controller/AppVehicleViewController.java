@@ -67,7 +67,7 @@ public class AppVehicleViewController extends CentreController {
 		mav.setViewName("/webview/vehiclenew");
 		return mav;
 	}
-
+/*
 	@RequestMapping("/vehicleWebview1.do")
 	public ModelAndView vehicleWebview(HttpServletRequest httpServletRequest) {
 		TransData transData = new TransData();
@@ -103,25 +103,27 @@ public class AppVehicleViewController extends CentreController {
 		mav.addObject("modellist", modellist);
 		mav.setViewName("/webview/vehicle");
 		return mav;
-	}
+	}*/
 	@RequestMapping("/pavehicleWebview.do")
 	public ModelAndView parallelvehicleWebview(HttpServletRequest httpServletRequest) {
-		TransData transData = new TransData();
-		String vehicleid = httpServletRequest.getParameter("vehicleid");
-//		List<Map<String, Object>> saleslist = new ArrayList<>();
 		ModelAndView mav = new ModelAndView();
-		ParallelVehicleEntity pavehicle = new ParallelVehicleEntity();
+		TransData transData = new TransData();
 		Page page = new Page();
-		pavehicle = pavehicleService.VehicleQueryPage(vehicleid);
-		List<Map<String, Object>> saleslist = pavehicleService.salesQueryPage(pavehicle.getDealerid(), page, transData);
-		ParallelDealerEntity dealer = pavehicleService.querydealerPage(pavehicle.getDealerid());
-		mav.addObject("vehicle", pavehicle);
-		mav.addObject("dealer", dealer);
-		mav.addObject("saleslist",saleslist);
+		transData.setServiceName("pavehicleService");
+		transData.setTradeCode("T32008");
+		transData=super.doService(httpServletRequest, transData);
+		Map<String,Object> map=(Map<String,Object>)transData.getObj();
+		page = transData.getPageInfo();
+		mav.addObject("page", page);
+		mav.addObject("server",(String) map.get("server"));
+		mav.addObject("url",(String) map.get("url"));
+		mav.addObject("vehicle", (ParallelVehicleEntity)map.get("vehicle"));
+		mav.addObject("dealer", (ParallelDealerEntity)map.get("dealer"));
+		mav.addObject("saleslist", (List<Map<String, Object>>)map.get("saleslist"));
 		mav.setViewName("/webview/pavehiclenew");
 		return mav;
 	}
-	@RequestMapping("/pavehicleWebview.do1")
+	/*@RequestMapping("/pavehicleWebview.do1")
 	public ModelAndView parallelvehicleWebview1(HttpServletRequest httpServletRequest) {
 		TransData transData = new TransData();
 		String vehicleid = httpServletRequest.getParameter("vehicleid");
@@ -137,5 +139,5 @@ public class AppVehicleViewController extends CentreController {
 		mav.addObject("saleslist",saleslist);
 		mav.setViewName("/webview/pavehiclenew");
 		return mav;
-	}
+	}*/
 }

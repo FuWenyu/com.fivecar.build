@@ -34,7 +34,7 @@ public enum TradeCodeDef implements Serializable {
 	//平行进口车品牌管理模块
 	T31001(), T31002(), T31003, T31004(), T31005(), T31006(),T31007(),T31008(),T31009(),T31010(),
 	//平行进口车车辆管理模块
-	T32001(), T32002(), T32003, T32004(), T32005(), T32006(),T32007(),T32008(),T32009(),T32010(),T32011(),T32012(),T32013(),T32014(),T32015(),T32016(),
+	T32001(), T32002(), T32003, T32004(), T32005(), T32006(),T32007(),T32008(),T32009(),T32010(),T32011(),T32012(),T32013(),T32014(),T32015(),T32016(),T32017(),
 	//平行进口车信息管理
 	T33001(), T33002(), T33003, T33004(), T33005(), T33006(),T33007(),T33008(),T33009(),T33010(),
 	//平行进口车销售员管理
@@ -49,9 +49,9 @@ public enum TradeCodeDef implements Serializable {
 	T38001(), T38002(), T38003, T38004(), T38005(), T38006(),T38007(),T38008(),T38009(),T38010(),
 	
 // 版本管理模块
-	T30001(), T30002(), T30003(), T30004(), T30005(), T30006(),
+	T30001(), T30002(), T30003(), T30004(), T30005(), T30006(),T30007(),
 	//APP客户端用户模块
-	T40001(),T40002(),T40003(),T40004(),T40005(),T40006(),T40007(),T40008(),T40009,
+	T40001(),T40002(),T40003(),T40004(),T40005(),T40006(),T40007(),T40008(),T40009(),T40010(),
 	// 角色管理模块
 	T50001(), T50002(), T50003(), T50004(), T50005(), T50006(), T50007(), T50008(), T50009(), T50010(),
 	// 用户管理模块
@@ -227,7 +227,7 @@ public enum TradeCodeDef implements Serializable {
 			
 			
 		case T27001:
-			return "4s店贷款购车列表查询";
+			return "4s店全款购车查询";
 		case T27002:
 			return "4s店全款购车编辑保存";
 		case T27003:
@@ -341,6 +341,8 @@ public enum TradeCodeDef implements Serializable {
 		case T32015:
 			return "app进口车根据经销商查询";
 		case T32016:
+			return "app进口车模糊查询";
+		case T32017:
 			return "app进口车模糊查询";
 			
 		case T33001:
@@ -479,6 +481,8 @@ public enum TradeCodeDef implements Serializable {
 			return "版本编辑";
 		case T30005:
 			return "版本编辑跳转";
+		case T30007:
+			return "APP请求版本信息";
 			
 		case T40001:
 			return "APP用户注册";
@@ -498,6 +502,8 @@ public enum TradeCodeDef implements Serializable {
 			return "APP收藏查询";
 		case T40009:
 			return "APP文章模糊查询";
+		case T40010:
+			return "APP意见反馈";
 			
 		case T50001:
 			return "角色查询";
