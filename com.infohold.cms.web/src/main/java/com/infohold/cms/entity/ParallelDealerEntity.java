@@ -115,7 +115,7 @@ public class ParallelDealerEntity extends BaseEntity {
 	/**
 	 * @return the carbrandid
 	 */
-	@Column(name ="carbrandid",nullable=false,columnDefinition="varchar(64)default ''")
+	@Column(name ="carbrandid",columnDefinition="varchar(64)default ''")
 	public java.lang.String getCarbrandid() {
 		return carbrandid;
 	}
@@ -128,7 +128,7 @@ public class ParallelDealerEntity extends BaseEntity {
 	/**
 	 * @return the carbrand
 	 */
-	@Column(name ="carbrand",nullable=false,columnDefinition="varchar(64)default ''")
+	@Column(name ="carbrand",columnDefinition="varchar(64)default ''")
 	public java.lang.String getCarbrand() {
 		return carbrand;
 	}

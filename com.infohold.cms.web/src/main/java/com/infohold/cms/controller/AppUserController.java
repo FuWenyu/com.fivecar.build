@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.infohold.cms.basic.common.TransData;
@@ -280,5 +281,33 @@ public class AppUserController extends CentreController{
 		}
 		System.out.println(map);
 		return map;
+	}
+	/**
+	 * 图片上传
+	 * 
+	 * @param request
+	 * @param myfile
+	 * @return
+	 */
+	@RequestMapping("/app/userProfile.do")
+	@ResponseBody
+	public Map<String,Object> fileUpLoad(HttpServletRequest request, MultipartFile myfile) {
+		TransData transData = new TransData();
+		transData.setServiceName("appUserService");
+		transData.setTradeCode("T40011");
+		transData.setObj(myfile);
+		transData=super.doService(request, transData);
+		Map<String,Object> map = new HashMap<String,Object>();
+		String expCode=transData.getExpCode();
+		if(null != expCode && !"".equals(expCode)){
+			map.put("expCode", "-1");
+			map.put("expMsg",expCode+":"+ transData.getExpMsg());
+		}else{
+			Map<String,Object> fileMap = transData.getViewMap();
+			map.put("url", fileMap.get("url"));
+			map.put("expCode", "1");
+		}
+		return map;
+
 	}
 }

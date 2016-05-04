@@ -77,7 +77,7 @@
 					<input id="orgid" type="hidden" class="" name="orgid" value="${dealer.orgid}" />
 					<input id="carbrand1" type="hidden" class="" name="carbrand1" value="${dealer.carbrandid}-${dealer.carbrand}" />
 					<input id="resource" type="hidden" class="" name="resource" value="${dealer.resourceid}-${dealer.privilegestile}-${dealer.privileges}" />
-					<div class="form-group">
+<%-- 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
 							经营品牌</label>
 						<div class="col-sm-9">
@@ -87,7 +87,7 @@
 	               		    </c:forEach>
                		    </select>
 						</div>
-					</div>
+					</div> --%>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
 							经销商全名 </label>
@@ -220,9 +220,9 @@
 		/*********自定于方法**********/
 		//表单提交
 		function subForm() {
-			if (!checkData('carbrand', '经营品牌', 'input')) {
+/* 			if (!checkData('carbrand', '经营品牌', 'input')) {
 				return;
-			}
+			} */
 			
 			if (!checkData('anchor', '五车专享特权', 'input')) {
 				return;

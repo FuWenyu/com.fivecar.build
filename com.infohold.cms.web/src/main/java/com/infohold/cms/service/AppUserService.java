@@ -1,5 +1,8 @@
 package com.infohold.cms.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
@@ -7,13 +10,18 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.infohold.cms.basic.common.TransData;
 import com.infohold.cms.basic.exception.BusinessException;
 import com.infohold.cms.basic.service.IBusinessService;
+import com.infohold.cms.basic.util.FileUtil;
 import com.infohold.cms.basic.util.MD5Util;
+import com.infohold.cms.basic.util.SysConfigUtil;
 import com.infohold.cms.dao.AppUserDao;
 import com.infohold.cms.dao.ThirdPartyResourcesDao;
 import com.infohold.cms.entity.AppUserEntity;
@@ -36,12 +44,15 @@ public class AppUserService implements IBusinessService {
 	private AppUserDao appuserdao;
 	@Autowired
 	private ThirdPartyResourcesDao resourcesdao;
+	@Autowired
+	private SysConfigUtil sysConfigUtil;
 
 	private DateUtil dateutil = new DateUtil();
 
 	private static String resource_request = CustomPropertyUtil.getProperties("resource_request");
 	private static String vehicle_request = CustomPropertyUtil.getProperties("vehicle_request");
 	private static String pavehicle_request = CustomPropertyUtil.getProperties("pavehicle_request");
+	private static String service_name = CustomPropertyUtil.getProperties("service_name");
 
 	private Logger logger = Logger.getLogger(AppUserService.class);
 
@@ -68,6 +79,8 @@ public class AppUserService implements IBusinessService {
 			return this.queryArticle(transData);
 		}else if (tradCode.equals("T40010")) {
 			return this.complaints(transData);
+		}else if (tradCode.equals("T40011")) {
+			return this.uploadPicture(transData);
 		}
 		return transData;
 	}
@@ -457,5 +470,43 @@ public class AppUserService implements IBusinessService {
 			transData.setExpMsg("success");
 		}
 		return transData;
+	}
+	/**
+	 * 图片上传
+	 * 
+	 * @param transData
+	 * @return
+	 */
+	public TransData uploadPicture(TransData transData) throws BusinessException {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		MultipartFile file = (MultipartFile) transData.getObj();
+		String fileName = file.getOriginalFilename();
+		String ext = fileName.substring(fileName.lastIndexOf("."), fileName.length());
+		int id = sysConfigUtil.getPrimaryId();
+		// 文件检查
+		FileUtil.fileCheck(file);
+		// 保存到本地
+		String path = getClass().getResource("/").getPath();
+		String filePath = path.substring(0, path.indexOf("/WEB-INF/")) + "/upload/userprofile";
+		File file2 = new File(filePath, String.valueOf(id) + ext);
+		InputStream in = null;
+		try {
+			in = file.getInputStream();
+			FileUtils.copyInputStreamToFile(in, file2);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		String url = service_name+ "/upload/userprofile/"+String.valueOf(id) + ext;
+		map.put("url", url);
+		transData.setViewMap(map);
+		return transData;
+
 	}
 }

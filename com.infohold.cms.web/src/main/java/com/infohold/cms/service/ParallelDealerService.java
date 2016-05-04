@@ -107,7 +107,7 @@ public class ParallelDealerService implements IBusinessService {
 		Map<String, Object> map = transData.getViewMap();
 		UserSession session = transData.getUserSession();
 		String dealerName = (String) map.get("dealerName");
-		String carbrandall = (String) map.get("carbrand");
+//		String carbrandall = (String) map.get("carbrand");
 		String anchor = (String) map.get("anchor");
 		String telephone = (String) map.get("telephone");
 		String addr = (String) map.get("addr");
@@ -125,9 +125,9 @@ public class ParallelDealerService implements IBusinessService {
 			position=position.replace("534", "100%");
 		}
 //		var reg = /<p[^>]*>(?:(?!<\/p>)[\s\S])*<\/p>/gi;
-		String[] strarray = carbrandall.split("-");
-		String carbrandid = strarray[0];
-		String carbrandname = strarray[1];
+//		String[] strarray = carbrandall.split("-");
+//		String carbrandid = strarray[0];
+//		String carbrandname = strarray[1];
 		
 		String[] strarray1 = anchor.split("-");
 		String resourceId = strarray1[0];
@@ -144,8 +144,8 @@ public class ParallelDealerService implements IBusinessService {
 		ParallelDealerEntity.setPrivilegestile(resourceTitle);
 		ParallelDealerEntity.setPrivilegesurl(anchor1.toString());
 		ParallelDealerEntity.setDealerName(dealerName);
-		ParallelDealerEntity.setCarbrandid(carbrandid);
-		ParallelDealerEntity.setCarbrand(carbrandname);
+//		ParallelDealerEntity.setCarbrandid(carbrandid);
+//		ParallelDealerEntity.setCarbrand(carbrandname);
 		ParallelDealerEntity.setTelephone(telephone);
 		ParallelDealerEntity.setAddr(addr);
 		ParallelDealerEntity.setPosition(position);
@@ -203,7 +203,7 @@ public class ParallelDealerService implements IBusinessService {
 		String id = (String)  map.get("dealer_id");
 		String anchor = (String) map.get("anchor");
 		String dealerName = (String) map.get("dealerName");
-		String carbrandall = (String) map.get("carbrand");
+//		String carbrandall = (String) map.get("carbrand");
 		String telephone = (String) map.get("telephone");
 		String addr = (String) map.get("addr");
 		String position = (String) map.get("position");
@@ -218,9 +218,9 @@ public class ParallelDealerService implements IBusinessService {
 			position=position.replace("530", "420");
 			position=position.replace("534", "100%");
 		}
-		String[] strarray = carbrandall.split("-");
-		String carbrandid = strarray[0];
-		String carbrandname = strarray[1];
+//		String[] strarray = carbrandall.split("-");
+//		String carbrandid = strarray[0];
+//		String carbrandname = strarray[1];
 		
 		String[] strarray1 = anchor.split("-");
 		String resourceId = strarray1[0];
@@ -238,8 +238,8 @@ public class ParallelDealerService implements IBusinessService {
 		ParallelDealerEntity.setPrivilegesurl(anchor1.toString());
 		ParallelDealerEntity.setId(id);
 		ParallelDealerEntity.setDealerName(dealerName);
-		ParallelDealerEntity.setCarbrandid(carbrandid);
-		ParallelDealerEntity.setCarbrand(carbrandname);
+//		ParallelDealerEntity.setCarbrandid(carbrandid);
+//		ParallelDealerEntity.setCarbrand(carbrandname);
 		ParallelDealerEntity.setTelephone(telephone);
 		ParallelDealerEntity.setAddr(addr);
 		ParallelDealerEntity.setPosition(position);

@@ -53,7 +53,7 @@
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id"> </label>
 					</div>
-					<div class="form-group">
+<%-- 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
 							经营品牌</label>
 						<div class="col-sm-9">
@@ -63,7 +63,7 @@
 	               		    </c:forEach>
                		    </select>
 						</div>
-					</div>
+					</div> --%>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="id">
 							所属机构</label>
@@ -174,9 +174,9 @@
 	}
 	
 	function subForm(){
-		if (!checkData('carbrand', '经营品牌', 'input')) {
+/* 		if (!checkData('carbrand', '经营品牌', 'input')) {
 			return;
-		}
+		} */
 		
 		if (!checkData('anchor', '五车专享特权', 'input')) {
 			return;
