@@ -302,9 +302,6 @@
 		if (!checkData('vehicleinfo', '车辆信息', 'input')) {
 			return;
 		}
-		if (!checkData('vehicleinfo', '车辆信息', 'illegal')) {
-			return;
-		}
 		if (!limitCheck('vehicleinfo', '车辆信息', 64)) {
 			return;
 		}
@@ -321,9 +318,6 @@
 			return;
 		}
 		if (!checkData('salesarea', '销售范围', 'input')) {
-			return;
-		}
-		if (!checkData('salesarea', '销售范围', 'illegal')) {
 			return;
 		}
 		if (!limitCheck('salesarea', '销售范围', 64)) {
@@ -359,10 +353,7 @@
 		if (!checkData('description', '车辆详细信息', 'input')) {
 			return;
 		}
-		if (!checkData('description', '车辆详细信息', 'illegal')) {
-			return;
-		}
-		if (!limitCheck('description', '车辆详细信息', 600)) {
+		if (!limitCheck('description', '车辆详细信息', 2000)) {
 			return;
 		}
 		if (!checkData('vehicleName', '车辆名称', 'input')) {

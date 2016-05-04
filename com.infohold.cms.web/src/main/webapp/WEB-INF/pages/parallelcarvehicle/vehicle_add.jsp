@@ -278,7 +278,7 @@
 		if (!checkData('description', '车辆详细信息', 'input')) {
 			return;
 		}
-		if (!limitCheck('description', '车辆详细信息', 600)) {
+		if (!limitCheck('description', '车辆详细信息', 2000)) {
 			return;
 		}
 		if (!checkData('vehicleName', '车辆名称', 'input')) {
