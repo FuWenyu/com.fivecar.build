@@ -147,4 +147,14 @@ public class AppUserDao extends BaseDao<BaseEntity> {
 		sql.append("'");
 		return super.excutePageQuery(sql.toString(),page);
 	}
+	/**
+	 * 4s店车辆信息删除
+	 * @param id
+	 * @return
+	 */
+	public boolean delCollectionEntity(String user_id,String resource_id) {
+		String deleteUser_HQL = "delete from CollectionEntity c where c.user_id = ? and c.resource_id= ? ";
+		excuteUpdate(deleteUser_HQL,user_id,resource_id);
+		return true;
+	}
 }

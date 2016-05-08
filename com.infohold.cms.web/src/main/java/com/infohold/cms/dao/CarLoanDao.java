@@ -9,6 +9,7 @@ import com.infohold.cms.basic.common.Page;
 import com.infohold.cms.basic.dao.BaseDao;
 import com.infohold.cms.basic.entity.BaseEntity;
 import com.infohold.cms.entity.CarLoanEntity;
+import com.infohold.cms.entity.CarLoanInfoEntity;
 
 /**
  * 4s店品牌Dao
@@ -194,4 +195,14 @@ public class CarLoanDao extends BaseDao<BaseEntity> {
 		sql.append(" order by pm.id desc ");
 		return super.queryForList(sql.toString());
 	}
+	/**
+	 * 保存贷款信息
+	 * @param VersionEntity
+	 * @return boolean
+	 */
+	public boolean saveloanInfoEntity(CarLoanInfoEntity entity) {
+		super.save(entity);
+		return true;
+	}
+	
 }

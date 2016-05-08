@@ -81,6 +81,8 @@ public class AppUserService implements IBusinessService {
 			return this.complaints(transData);
 		}else if (tradCode.equals("T40011")) {
 			return this.uploadPicture(transData);
+		}else if (tradCode.equals("T40012")) {
+			return this.delCollection(transData);
 		}
 		return transData;
 	}
@@ -428,6 +430,28 @@ public class AppUserService implements IBusinessService {
 		} else {
 			transData.setExpCode("1");
 			transData.setExpMsg("亲！您的收藏夹是空的哦！");
+		}
+		return transData;
+	}
+	/**
+	 * 删除收藏图文信息
+	 * 
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData delCollection(TransData transData) throws BusinessException {
+		Map<String, Object> map = transData.getViewMap();
+		logger.info("queryCollection-request:" + map);
+		String user_id = (String) map.get("user_id");
+		String resource_id = (String) map.get("resource_id");
+		boolean del = appuserdao.delCollectionEntity(user_id, resource_id);
+		if (del) {
+			transData.setExpCode("1");
+			transData.setExpMsg("success");
+		} else {
+			transData.setExpCode("1");
+			transData.setExpMsg("亲！删除失败了呢！");
 		}
 		return transData;
 	}

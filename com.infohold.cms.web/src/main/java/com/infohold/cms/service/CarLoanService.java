@@ -19,6 +19,7 @@ import com.infohold.cms.dao.CarFullPaymentDao;
 import com.infohold.cms.dao.CarLoanDao;
 import com.infohold.cms.entity.CarFullPaymentEntity;
 import com.infohold.cms.entity.CarLoanEntity;
+import com.infohold.cms.entity.CarLoanInfoEntity;
 import com.infohold.cms.util.DateUtil;
 import com.infohold.cms.util.MathUtils;
 
@@ -60,7 +61,9 @@ public class CarLoanService implements IBusinessService {
 			return this.loanQuery(transData);
 		} else if (tradCode.equals("T28008")) {
 			return this.getResources(transData);
-	}
+		}else if (tradCode.equals("T28009")) {
+			return this.loanInfo(transData);
+		}
 		return transData;
 	}
 
@@ -298,6 +301,33 @@ public class CarLoanService implements IBusinessService {
 		List<Map<String, Object>> orgList = loandao.getResources();
 		transData.setObj(orgList);
 		transData.setExpMsg("success");
+		return transData;
+	}
+	
+	public TransData loanInfo(TransData transData) throws BusinessException {
+		// 保存数据库
+		Map<String, Object> map = transData.getViewMap();
+		String user_name = (String) map.get("user_name");
+		String telephone = (String) map.get("telephone");
+		String model_id = (String) map.get("model_id");
+		String model_name = (String) map.get("model_name");
+		String downpayment = (String) map.get("downpayment");
+		String periods = (String) map.get("periods");
+		
+		CarLoanInfoEntity carLoanInfoEntity = new CarLoanInfoEntity();
+		carLoanInfoEntity.setDownpayment(downpayment);
+		carLoanInfoEntity.setModel_id(model_id);
+		carLoanInfoEntity.setModel_name(model_name);
+		carLoanInfoEntity.setPeriods(periods);
+		carLoanInfoEntity.setTelephone(telephone);
+		carLoanInfoEntity.setUser_name(user_name);
+		if (loandao.saveloanInfoEntity(carLoanInfoEntity)) {
+			transData.setExpCode("1");
+			transData.setExpMsg("保存成功");
+		}else {
+			transData.setExpCode("-1");
+			transData.setExpMsg("出错啦！~");
+		}
 		return transData;
 	}
 }

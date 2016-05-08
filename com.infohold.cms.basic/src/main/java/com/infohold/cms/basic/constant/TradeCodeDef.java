@@ -51,7 +51,7 @@ public enum TradeCodeDef implements Serializable {
 // 版本管理模块
 	T30001(), T30002(), T30003(), T30004(), T30005(), T30006(),T30007(),
 	//APP客户端用户模块
-	T40001(),T40002(),T40003(),T40004(),T40005(),T40006(),T40007(),T40008(),T40009(),T40010(),T40011(),
+	T40001(),T40002(),T40003(),T40004(),T40005(),T40006(),T40007(),T40008(),T40009(),T40010(),T40011(),T40012(),
 	// 角色管理模块
 	T50001(), T50002(), T50003(), T50004(), T50005(), T50006(), T50007(), T50008(), T50009(), T50010(),
 	// 用户管理模块
@@ -264,7 +264,7 @@ public enum TradeCodeDef implements Serializable {
 		case T28008:
 			return "贷款信息资源查询";
 		case T28009:
-			return "暂不用";
+			return "客户贷款意向保存";
 		case T28010:
 			return "暂不用";
 			
@@ -506,6 +506,8 @@ public enum TradeCodeDef implements Serializable {
 			return "APP意见反馈";
 		case T40011:
 			return "APP上传图片";
+		case T40012:
+			return "APP收藏删除";
 			
 		case T50001:
 			return "角色查询";

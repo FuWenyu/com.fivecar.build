@@ -204,4 +204,28 @@ public class AppCarBrandController extends CentreController{
 		System.out.println(map);
 		return map;
 	}
+	/**
+	 * APP-贷款购车查询
+	 * 
+	 * @param httpServletRequest
+	 * @return map
+	 */
+	
+	@RequestMapping("/app/carLoanInfo.do")
+	@ResponseBody
+	public Map<String, Object> carloaninfo(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletresponse) throws Exception {
+		TransData transData = new TransData();
+		transData.setServiceName("loanService");
+		transData.setTradeCode("T28009");
+		transData=super.doService(httpServletRequest, transData);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(!"".equals(transData.getExpCode())){
+			map.put("expCode", transData.getExpCode());
+			map.put("expMsg", transData.getExpMsg());
+			return map;
+		}
+		System.out.println(map);
+		return map;
+	}
 }

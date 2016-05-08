@@ -184,6 +184,7 @@ public class PictureDao extends BaseDao<BaseEntity> {
 		sql.append("pm.createDate ");
 		sql.append("from fc_cms_ad pm where pm.usefo= ");
 		sql.append(usefo);
+		sql.append(" order by pm.createDate desc");
 		return super.excutePageQuery(sql.toString(),page);
 	}
 	/**

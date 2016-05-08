@@ -63,7 +63,7 @@
 			<div class="xsgw-cont clearfix">
 				<ul class="clearfix">
 					<c:forEach var="saleslist" items="${saleslist}">
-						<li><img src="images/img1.jpg"> <span>
+						<li><img src="${saleslist.url}"> <span>
 								<p>销售顾问：${saleslist.salesName}</p>
 								<p>销售车型：${vehicle.vehicleName}</p> <!-- <em><i></i>奥迪车全系85折！</em> -->
 						</span><a href="tel://${saleslist.phone}"> <img class="tel"

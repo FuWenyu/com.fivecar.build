@@ -205,6 +205,29 @@ public class AppUserController extends CentreController{
 		}
 		System.out.println(map);
 		return map;
+	}	/**
+	 * APP-删除图文
+	 * 
+	 * @param httpServletRequest
+	 * @return map
+	 */
+	@RequestMapping("/app/delCollection.do")
+	@ResponseBody
+	public Map<String, Object> delCollection(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletresponse) throws Exception {
+		TransData transData = new TransData();
+		transData.setServiceName("appUserService");
+		transData.setTradeCode("T40012");
+		transData=super.doService(httpServletRequest, transData);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(!"".equals(transData.getExpCode())){
+			map.put("expCode", transData.getExpCode());
+			map.put("expMsg", transData.getExpMsg());
+			return map;
+		}
+		System.out.println(map);
+		return map;
 	}
 	/**
 	 * APP-查询图文
