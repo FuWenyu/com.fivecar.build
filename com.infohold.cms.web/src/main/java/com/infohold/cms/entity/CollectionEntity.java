@@ -101,7 +101,7 @@ public class CollectionEntity extends BaseEntity {
 	/**
 	 * @return the resource_type
 	 */
-	@Column(name ="resource_type",nullable=false,columnDefinition="varchar(8)default ''")
+	@Column(name ="resource_type",nullable=false,columnDefinition="varchar(20)default ''")
 	public java.lang.String getResource_type() {
 		return resource_type;
 	}

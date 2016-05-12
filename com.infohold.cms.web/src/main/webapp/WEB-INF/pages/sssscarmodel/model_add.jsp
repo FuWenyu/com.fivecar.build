@@ -136,9 +136,6 @@
 		if (!checkData('modelName', '车型名称', 'input')) {
 			return;
 		}
-		if (!checkData('modelName', '车型名称', 'illegal')) {
-			return;
-		}
 		if (!limitCheck('modelName', '车型名称', 64)) {
 			return;
 		}

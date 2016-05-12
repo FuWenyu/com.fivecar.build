@@ -232,6 +232,7 @@
 		param["type"]=$("#type").val();
 		param["imageName"]=imageName;
 		param["initial"]=$("#initial").val();
+		param["belong"]=$("#belong").val();
 		param["brandNamecn"]=$("#brandNamecn").val();
 		param["brandNameen"]=$("#brandNameen").val();
 		param["imageHref"]=filePath;
