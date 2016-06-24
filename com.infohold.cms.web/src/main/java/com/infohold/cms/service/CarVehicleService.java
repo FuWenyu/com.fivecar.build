@@ -269,11 +269,19 @@ public class CarVehicleService implements IBusinessService {
 		Map<String, Object> map = transData.getViewMap();
 		logger.info("vehicleQuery-request:" + map);
 		String carbrand = (String) map.get("carbrand");
+		String userId = (String) map.get("userId");
+		try {
+			if (userId.equals("null")||userId.equals(" ")||userId==null) {
+				userId = "";
+			}
+		} catch (NullPointerException e) {
+			userId = "";
+		}
 		List<Map<String, Object>> vehiclelist = new ArrayList<>();
 		if (carbrand.equals("all")) {
-			vehiclelist = vehicledao.queryvehicleList2(carbrand, transData.getPageInfo());
+			vehiclelist = vehicledao.queryvehicleList2(carbrand, userId,transData.getPageInfo());
 		} else {
-			vehiclelist = vehicledao.queryvehicleList1(carbrand, transData.getPageInfo());
+			vehiclelist = vehicledao.queryvehicleList1(carbrand, userId,transData.getPageInfo());
 		}
 		if (vehiclelist == null) {
 			transData.setExpCode("-1");

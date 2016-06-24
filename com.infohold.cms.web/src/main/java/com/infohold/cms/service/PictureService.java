@@ -409,7 +409,15 @@ public class PictureService implements IBusinessService {
 		Map<String, Object> map = transData.getViewMap();
 		logger.info("picture_query-request:" + map);
 		String usefo = (String) map.get("usefo");
-		List<Map<String, Object>> orgList = pictureDao.getEntry(usefo, transData.getPageInfo());
+		String userId = (String) map.get("userId");
+		try {
+			if (userId.equals("null")||userId.equals(" ")||userId==null) {
+				userId = "";
+			}
+		} catch (NullPointerException e) {
+			userId = "";
+		}
+		List<Map<String, Object>> orgList = pictureDao.getEntry(usefo, userId,transData.getPageInfo());
 		if (orgList.isEmpty()) {
 			transData.setExpCode("-1");
 			transData.setExpMsg("fail");
@@ -432,7 +440,15 @@ public class PictureService implements IBusinessService {
 		Map<String, Object> map = transData.getViewMap();
 		logger.info("entry_query-request:" + map);
 		String usefo = (String) map.get("usefo");
-		List<Map<String, Object>> orgList = pictureDao.getEntry(usefo, transData.getPageInfo());
+		String userId = (String) map.get("userId");
+		try {
+			if (userId.equals("null")||userId.equals(" ")||userId==null) {
+				userId = "";
+			}
+		} catch (NullPointerException e) {
+			userId = "";
+		}
+		List<Map<String, Object>> orgList = pictureDao.getEntry(usefo, userId,transData.getPageInfo());
 		if (orgList.isEmpty()) {
 			transData.setExpCode("-1");
 			transData.setExpMsg("fail");

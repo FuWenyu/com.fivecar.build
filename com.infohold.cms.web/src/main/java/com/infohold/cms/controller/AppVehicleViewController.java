@@ -48,6 +48,7 @@ public class AppVehicleViewController extends CentreController {
 
 	@RequestMapping("/vehicleWebview.do")
 	public ModelAndView ssssvehicleWebview(HttpServletRequest httpServletRequest) {
+		String share = (String)httpServletRequest.getParameter("share");
 		ModelAndView mav = new ModelAndView();
 		TransData transData = new TransData();
 		Page page = new Page();
@@ -64,7 +65,15 @@ public class AppVehicleViewController extends CentreController {
 		mav.addObject("saleslist", (List<Map<String, Object>>)map.get("saleslist"));
 		mav.addObject("dealerlist", (List<Map<String, Object>>)map.get("dealerlist"));
 		mav.addObject("modellist", (List<Map<String, Object>>)map.get("modellist"));
-		mav.setViewName("/webview/vehiclenew");
+		try {
+			if (share.equals("1")) {
+				mav.setViewName("/webview/vehiclenewad");
+			}else {
+				mav.setViewName("/webview/vehiclenew");
+			}
+		} catch (Exception e) {
+			mav.setViewName("/webview/vehiclenew");
+		}
 		return mav;
 	}
 /*
@@ -108,6 +117,7 @@ public class AppVehicleViewController extends CentreController {
 	public ModelAndView parallelvehicleWebview(HttpServletRequest httpServletRequest) {
 		ModelAndView mav = new ModelAndView();
 		TransData transData = new TransData();
+		String share = (String)httpServletRequest.getParameter("share");
 		Page page = new Page();
 		transData.setServiceName("pavehicleService");
 		transData.setTradeCode("T32008");
@@ -120,7 +130,15 @@ public class AppVehicleViewController extends CentreController {
 		mav.addObject("vehicle", (ParallelVehicleEntity)map.get("vehicle"));
 		mav.addObject("dealer", (ParallelDealerEntity)map.get("dealer"));
 		mav.addObject("saleslist", (List<Map<String, Object>>)map.get("saleslist"));
-		mav.setViewName("/webview/pavehiclenew");
+		try {
+			if (share.equals("1")) {
+				mav.setViewName("/webview/pavehiclenewad");
+			}else {
+				mav.setViewName("/webview/pavehiclenew");
+			}
+		} catch (Exception e) {
+			mav.setViewName("/webview/pavehiclenew");
+		}
 		return mav;
 	}
 	/*@RequestMapping("/pavehicleWebview.do1")

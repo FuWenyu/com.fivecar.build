@@ -73,6 +73,7 @@ public class PictureAppController extends CentreController{
 	@ResponseBody
 	public ModelAndView Resources(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletresponse) throws Exception {
+		String share = (String)httpServletRequest.getParameter("share");
 		ModelAndView mav = new ModelAndView();
 		TransData transData = new TransData();
 		transData.setServiceName("pictureService");
@@ -81,7 +82,15 @@ public class PictureAppController extends CentreController{
 		if(!"".equals(transData.getExpCode())){
 			Map<String,Object> map=(Map<String,Object>)transData.getObj();
 			mav.addObject("resources", map.get("resources"));
-			mav.setViewName("/webview/acter");
+			try {
+				if (share.equals("1")) {
+					mav.setViewName("/webview/acterad");
+				}else {
+					mav.setViewName("/webview/acter");
+				}
+			} catch (Exception e) {
+				mav.setViewName("/webview/acter");
+			}
 			return mav;
 		}
 		return mav;

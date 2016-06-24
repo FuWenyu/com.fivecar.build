@@ -174,17 +174,23 @@ public class PictureDao extends BaseDao<BaseEntity> {
 	 * 广告图片按用途查询
 	 * @return
 	 */
-	public List<Map<String, Object>> getEntry(String usefo,Page page) {
+	public List<Map<String, Object>> getEntry(String usefo,String userId,Page page) {
 		StringBuffer sql = new StringBuffer();
 		sql.append("select pm.title,");
 		sql.append("pm.url,");
 		sql.append("pm.urlreal,");
 		sql.append("pm.anchor,");
 		sql.append("pm.createName,");
-		sql.append("pm.createDate ");
-		sql.append("from fc_cms_ad pm where pm.usefo= ");
+		sql.append("pm.createDate,");
+		sql.append("c.resource_id,");
+		sql.append("c.user_id ");
+		sql.append("from fc_cms_ad pm LEFT JOIN ");
+		sql.append("(select * from fc_user_collection where user_id= '"+userId+"' ) c");
+		sql.append(" ON (pm.anchor=c.resource_id)");
+		sql.append(" where pm.usefo=");
 		sql.append(usefo);
 		sql.append(" order by pm.createDate desc");
+		System.out.println(sql.toString());
 		return super.excutePageQuery(sql.toString(),page);
 	}
 	/**

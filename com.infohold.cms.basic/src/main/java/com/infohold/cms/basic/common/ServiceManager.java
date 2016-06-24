@@ -4,8 +4,10 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.apache.log4j.Logger;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ApplicationObjectSupport;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
@@ -64,6 +66,12 @@ public class ServiceManager extends ApplicationObjectSupport{
 			}else{
 				transData =service.execute(transData);
 			}
+		} catch (DataIntegrityViolationException e) {
+			transData.setExpCode("999");
+			transData.setExpMsg("重复收藏！");
+			logger.info("交易失败,"+tradeCode+":"+tradeName);
+			logger.info("系统内部异常,expCode:"+transData.getExpCode()+",expMsg:"+transData.getExpMsg(),e);
+			this.saveSysExcep(transData,getExpTrace(e));
 		} catch (Exception e) {
 			logger.info("交易失败,"+tradeCode+":"+tradeName);
 			if (e instanceof BusinessException){

@@ -74,7 +74,7 @@ public class CollectionEntity extends BaseEntity {
 	/**
 	 * @return the resource_id
 	 */
-	@Column(name ="resource_id",nullable=true, unique=true, columnDefinition="varchar(255)default ''")
+	@Column(name ="resource_id",nullable=true, columnDefinition="varchar(255)default ''")
 	public java.lang.String getResource_id() {
 		return resource_id;
 	}
@@ -101,7 +101,7 @@ public class CollectionEntity extends BaseEntity {
 	/**
 	 * @return the resource_type
 	 */
-	@Column(name ="resource_type",nullable=false,columnDefinition="varchar(20)default ''")
+	@Column(name ="resource_type",nullable=false,columnDefinition="varchar(10)default ''")
 	public java.lang.String getResource_type() {
 		return resource_type;
 	}
@@ -115,7 +115,7 @@ public class CollectionEntity extends BaseEntity {
 	/**
 	 * @return the query_type
 	 */
-	@Column(name ="query_type",nullable=false,columnDefinition="varchar(8)default ''")
+	@Column(name ="query_type",nullable=false,columnDefinition="varchar(10)default ''")
 	public java.lang.String getQuery_type() {
 		return query_type;
 	}

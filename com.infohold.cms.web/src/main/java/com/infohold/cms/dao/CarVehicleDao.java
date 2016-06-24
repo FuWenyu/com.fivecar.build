@@ -66,15 +66,19 @@ public class CarVehicleDao extends BaseDao<BaseEntity> {
 	 * @param page
 	 * @return
 	 */
-	public List<Map<String, Object>> queryvehicleList1(String cardbrand,Page page){
+	public List<Map<String, Object>> queryvehicleList1(String cardbrand,String userId, Page page){
 		StringBuffer sql = new StringBuffer();
 		sql.append("select vcl.id,");
 		sql.append("vcl.carbrand,");
 		sql.append("vcl.vehicleName,");
 		sql.append("vcl.price,");
 		sql.append("vcl.url,");
-		sql.append("vcl.urlreal ");
-		sql.append("from fc_ssss_vehicle vcl ");
+		sql.append("vcl.urlreal,");
+		sql.append("c.resource_id,");
+		sql.append("c.user_id ");
+		sql.append("from fc_ssss_vehicle vcl LEFT JOIN ");
+		sql.append("(select * from fc_user_collection where user_id= '"+userId+"' ) c");
+		sql.append(" ON (vcl.id=c.resource_id)");
 		sql.append(" where vcl.carbrandid=");
 		sql.append("'");
 		sql.append(cardbrand);
@@ -87,15 +91,19 @@ public class CarVehicleDao extends BaseDao<BaseEntity> {
 	 * @param page
 	 * @return
 	 */
-	public List<Map<String, Object>> queryvehicleList2(String cardbrand,Page page){
+	public List<Map<String, Object>> queryvehicleList2(String cardbrand,String userId,Page page){
 		StringBuffer sql = new StringBuffer();
 		sql.append("select vcl.id,");
 		sql.append("vcl.carbrand,");
 		sql.append("vcl.vehicleName,");
 		sql.append("vcl.price,");
 		sql.append("vcl.url,");
-		sql.append("vcl.urlreal ");
-		sql.append("from fc_ssss_vehicle vcl ");
+		sql.append("vcl.urlreal,");
+		sql.append("c.resource_id,");
+		sql.append("c.user_id ");
+		sql.append("from fc_ssss_vehicle vcl LEFT JOIN ");
+		sql.append("(select * from fc_user_collection where user_id= '"+userId+"' ) c");
+		sql.append(" ON (vcl.id=c.resource_id)");
 		sql.append(" order by vcl.carbrand");
 		return super.excutePageQuery(sql.toString(),page);
 	}

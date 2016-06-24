@@ -198,7 +198,7 @@ public class ParallelVehicleDao extends BaseDao<BaseEntity> {
 	 * @return
 	 */
 	public List<Map<String, Object>> queryvehicleList4(int index, String carbrand, String pricekey, String versionkey,
-			Page page) {
+			String userId,Page page) {
 		StringBuffer sql = new StringBuffer();
 		sql.append("select vcl.id,");
 		sql.append("vcl.dealerName,");
@@ -206,8 +206,12 @@ public class ParallelVehicleDao extends BaseDao<BaseEntity> {
 		sql.append("vcl.description,");
 		sql.append("vcl.price,");
 		sql.append("vcl.url,");
-		sql.append("vcl.urlreal ");
-		sql.append("from fc_parallel_vehicle vcl ");
+		sql.append("vcl.urlreal,");
+		sql.append("c.resource_id,");
+		sql.append("c.user_id ");
+		sql.append("from fc_parallel_vehicle vcl LEFT JOIN ");
+		sql.append("(select * from fc_user_collection where user_id= '"+userId+"' ) c");
+		sql.append(" ON (vcl.id=c.resource_id)");
 		switch (index) {
 		case 1:
 			break;
@@ -290,7 +294,7 @@ public class ParallelVehicleDao extends BaseDao<BaseEntity> {
 	 * @param page
 	 * @return
 	 */
-	public List<Map<String, Object>> queryvehicleList5( String dealerid,
+	public List<Map<String, Object>> queryvehicleList5( String dealerid,String userId,
 			Page page) {
 		StringBuffer sql = new StringBuffer();
 		sql.append("select vcl.id,");
@@ -299,8 +303,12 @@ public class ParallelVehicleDao extends BaseDao<BaseEntity> {
 		sql.append("vcl.description,");
 		sql.append("vcl.price,");
 		sql.append("vcl.url,");
-		sql.append("vcl.urlreal ");
-		sql.append("from fc_parallel_vehicle vcl ");
+		sql.append("vcl.urlreal,");
+		sql.append("c.resource_id,");
+		sql.append("c.user_id ");
+		sql.append("from fc_parallel_vehicle vcl LEFT JOIN ");
+		sql.append("(select * from fc_user_collection where user_id= '"+userId+"' ) c");
+		sql.append(" ON (vcl.id=c.resource_id)");
 		sql.append(" where vcl.dealerid= ");
 		sql.append("'");
 		sql.append(dealerid);

@@ -478,6 +478,14 @@ public class ParallelVehicleService implements IBusinessService {
 		String carbrand = (String) map.get("carbrand");
 		String pricekey = (String) map.get("pricekey");
 		String versionkey = (String) map.get("versionkey");
+		String userId = (String) map.get("userId");
+		try {
+			if (userId.equals("null")||userId.equals(" ")||userId==null) {
+				userId = "";
+			}
+		} catch (NullPointerException e) {
+			userId = "";
+		}
 		List<Map<String, Object>> vehiclelist = null;
 		int index = 0;
 		if (carbrand.equals("all") && pricekey.equals("all") && versionkey.equals("all")) {
@@ -497,7 +505,7 @@ public class ParallelVehicleService implements IBusinessService {
 		} else if (!carbrand.equals("all") && !pricekey.equals("all") && !versionkey.equals("all")) {
 			index = 8;
 		}
-		vehiclelist = vehicledao.queryvehicleList4(index, carbrand, pricekey, versionkey, transData.getPageInfo());
+		vehiclelist = vehicledao.queryvehicleList4(index, carbrand, pricekey, versionkey,userId, transData.getPageInfo());
 
 		if (vehiclelist == null) {
 			transData.setExpCode("1");
@@ -511,7 +519,7 @@ public class ParallelVehicleService implements IBusinessService {
 	}
 
 	/**
-	 * http请求根据车辆版本查询车辆列表
+	 * http请求根据车辆经销商查询车辆列表
 	 * 
 	 * @param transData
 	 * @return
@@ -521,8 +529,16 @@ public class ParallelVehicleService implements IBusinessService {
 		Map<String, Object> map = transData.getViewMap();
 		logger.info("vehicleQueryDealer-request:" + map);
 		String dealerid = (String) map.get("dealerid");
+		String userId = (String) map.get("userId");
+		try {
+			if (userId.equals("null")||userId.equals(" ")||userId==null) {
+				userId = "";
+			}
+		} catch (NullPointerException e) {
+			userId = "";
+		}
 		List<Map<String, Object>> vehiclelist = null;
-		vehiclelist = vehicledao.queryvehicleList5(dealerid, transData.getPageInfo());
+		vehiclelist = vehicledao.queryvehicleList5(dealerid, userId,transData.getPageInfo());
 		if (vehiclelist == null) {
 			transData.setExpCode("-1");
 			transData.setExpMsg("fail");

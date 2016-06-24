@@ -4,6 +4,7 @@ encoding//src/main/resources=UTF-8
 encoding//src/main/resources/dictionary_zh_CN.properties=UTF-8
 encoding//src/main/webapp/WEB-INF/pages/webview/pavehicle.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/pages/webview/pavehiclenew.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/pages/webview/shop.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/pages/webview/vehiclenew.jsp=UTF-8
 encoding//src/test/java=UTF-8
 encoding/<project>=UTF-8
