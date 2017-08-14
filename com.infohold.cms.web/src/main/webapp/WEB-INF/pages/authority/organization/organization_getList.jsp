@@ -250,17 +250,17 @@
 		function deleteEntity(id){
 			 var param={};
 			param["id"]=id;
-			$.post("role_delete.do",param,function(result){
+			$.post("organization_delete.do",param,function(result){
 				if(result.msg=="success"){
-					f_alert("<%=path%>","success","role_getList.do?pageNo="+$("#pageNo").val());
+					f_alert("<%=path%>","success","organization_getList.do?pageNo="+$("#pageNo").val());
 				}else{
 					f_alert("<%=path%>","删除失败!","");			
 				}
 			}); 
 		};
 		//跳转至用户编辑页面
-		function roleMenu(id){
-			window.location="<%=path%>/mvc/role_editMenu.do?id="+id+"&pageNo="+$("#pageNo").val();
+		function organizationMenu(id){
+			window.location="<%=path%>/mvc/organization_editMenu.do?id="+id+"&pageNo="+$("#pageNo").val();
 		};
 	</script>
 	</body>

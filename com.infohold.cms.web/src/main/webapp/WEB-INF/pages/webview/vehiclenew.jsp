@@ -32,7 +32,7 @@
 			<h1>标题标题标题</h1> 
 		</nav> -->
 		<div id="banner">
-			<img src="${server}${vehicle.url}">
+			<a href="${server}${vehicle.url}"><img src="${server}${vehicle.url}"></a>
 		</div>
 		<div class="slide clearfix">
 			<div class="slide-left fl">
@@ -68,7 +68,7 @@
 			<div class="xsgw-cont clearfix">
 				<ul class="clearfix">
 					<c:forEach var="saleslist" items="${saleslist}">
-						<li><img src="${server}${saleslist.url}"> <span>
+						<li><a href="${server}${saleslist.url}"><img src="${server}${saleslist.url}"></a> <span>
 								<p>销售顾问：${saleslist.salesName}</p>
 								<p>销售车型：${vehicle.vehicleName}</p> <em><i></i>${dealer.privilegestile}</em>
 						</span><a href="tel://${saleslist.phone}"> <img class="tel"

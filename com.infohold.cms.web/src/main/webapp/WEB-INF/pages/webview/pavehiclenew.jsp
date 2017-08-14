@@ -13,9 +13,6 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="format-detection" content="telphone=no, email=no">
-<!-- 	<title>大连汽车美容商城</title>
-	<meta name="keywords" content="" />
-	<meta name="description" content="" /> -->
 <link rel="stylesheet" type="text/css" href="css/style.css" />
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="js/jquery.reveal.js"></script>
@@ -31,7 +28,7 @@
 			<h1>${dealer.dealerName}</h1>
 		</nav> --%>
 		<div id="banner">
-			<img src="${vehicle.url}">
+			<a href="${vehicle.url}"><img src="${vehicle.url}"></a>
 		</div>
 		<div class="ziliao clearfix" style="height: 30px;">
 			<span class="fl">发布时间：:${vehicle.createDate}</span>
@@ -63,7 +60,7 @@
 			<div class="xsgw-cont clearfix">
 				<ul class="clearfix">
 					<c:forEach var="saleslist" items="${saleslist}">
-						<li><img src="${saleslist.url}"> <span>
+						<li><a href="${saleslist.url}"><img src="${saleslist.url}"></a> <span>
 								<p>销售顾问：${saleslist.salesName}</p>
 								<p>销售车型：${vehicle.vehicleName}</p> <!-- <em><i></i>奥迪车全系85折！</em> -->
 						</span><a href="tel://${saleslist.phone}"> <img class="tel"

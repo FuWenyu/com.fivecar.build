@@ -263,4 +263,14 @@ public class OrganizationDao extends BaseDao<BaseEntity>{
 		sql.append(" order by org.orgid desc");
 		return super.excutePageQuery(sql.toString(),page);
 	}
+	/**
+	 * 按照机构级别查询机构信息
+	 * @param id，用户主键
+	 * @return
+	 */
+	public boolean deleteOrgn(String id){
+		String deleteUser_HQL = "delete from OrganizationEntity v where v.id = ?";
+		excuteUpdate(deleteUser_HQL,id);
+		return true;
+	}
 }

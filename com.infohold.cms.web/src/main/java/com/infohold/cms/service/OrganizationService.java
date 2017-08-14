@@ -49,15 +49,15 @@ public class OrganizationService implements IBusinessService{
 //		else if(tradCode.equals("T50025")){
 //			return this.role_addSave(transData);
 //		}
-//		else if(tradCode.equals("T50026")){
-//			return this.role_edit(transData);
-//		}
-//		else if(tradCode.equals("T50027")){
-//			return this.role_editSave(transData);
-//		}
-//		else if(tradCode.equals("T50028")){
-//			return this.role_delete(transData);
-//		}
+		else if(tradCode.equals("T50026")){
+			return this.organization_edit(transData);
+		}
+		else if(tradCode.equals("T50027")){
+			return this.role_editSave(transData);
+		}
+		else if(tradCode.equals("T50028")){
+			return this.organization_delete(transData);
+		}
 		return transData;	
 	}
 	
@@ -220,12 +220,62 @@ public class OrganizationService implements IBusinessService{
 		Map<String,Object> map = transData.getViewMap();
 		String id=map.get("id")+"";
 		List<Label> orgtypeList=organizationDao.getTypeByKey("orgtype");
+		List<Map<String,Object>> pOrgtypeList=(List<Map<String,Object>>)organizationDao.getOrgType_p();
+		Map<String,Object> orgmap=new HashMap<String, Object>();
+		if(null!=id && !"0".equals(id) && !"".equals(id) ){
+			orgmap.put("organizationEntity", organizationDao.getOrgByid(id));
+		}
+		orgmap.put("pOrgtypeList", pOrgtypeList);
+		orgmap.put("orgtypeList", orgtypeList);
+		transData.setObj(orgmap);
+		return transData;
+	}
+	/**
+	 * 机构编辑
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData organization_edit(TransData transData) throws BusinessException{
+		Map<String,Object> map = transData.getViewMap();
+		String id=map.get("id")+"";
+		List<Label> orgtypeList=organizationDao.getTypeByKey("orgtype");
 		Map<String,Object> orgmap=new HashMap<String, Object>();
 		if(null!=id && !"0".equals(id) && !"".equals(id) ){
 			orgmap.put("organizationEntity", organizationDao.getOrgByid(id));
 		}
 		orgmap.put("orgtypeList", orgtypeList);
 		transData.setObj(orgmap);
+		return transData;
+	}
+	/**
+	 * 机构编辑保存
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData role_editSave(TransData transData) throws BusinessException{
+		Map<String,Object> map = transData.getViewMap();
+		String id=map.get("id")+"";
+		String name=map.get("name")+"";
+		OrganizationEntity organizationEntity = organizationDao.getOrgnByid(id);
+		organizationEntity.setName(name);
+		organizationDao.update(organizationEntity);
+		return transData;
+	}
+	/**
+	 * 机构删除
+	 * @param transData
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TransData organization_delete(TransData transData) throws BusinessException{
+		Map<String,Object> map = transData.getViewMap();
+		String id=map.get("id")+"";
+		boolean response = organizationDao.deleteOrgn(id);
+		if (response) {
+			transData.setExpMsg("success");
+		}
 		return transData;
 	}
 	

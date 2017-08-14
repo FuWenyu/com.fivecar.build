@@ -77,28 +77,17 @@
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
 				<form class="form-horizontal" id="sub_form" action="" method="post">
+				<input id="id" type="hidden" class="" name="id" value="${organizationEntity.id}" />
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="orgid"> 机构编号 </label>
 						<div class="col-sm-9">
-							<input type="text" id="orgid" placeholder="请输入机构编号" class="col-xs-10 col-sm-5" name="orgid" value="${orgid}"  readonly="readonly"/>
+							<input type="text" id="orgid" placeholder="请输入机构编号" class="col-xs-10 col-sm-5" name="orgid" value="${organizationEntity.orgid}"  readonly="readonly"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="name"> 机构名称 </label>
 						<div class="col-sm-9">
-							<input type="text" id="name" placeholder="请输入机构名称" class="col-xs-10 col-sm-5" name="name" />
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="orgtype"> 机构等级 </label>
-						<div class="col-sm-9">
-							<select name="orgtype" id="orgtype" onchange="changeOrgId()" class="col-xs-10 col-sm-5" data-emptyoption="false" data-select-list="${orgtypeList }" data-select-value="1"></select>
-						</div>
-					</div>
-					<div class="form-group" id="changeOrgId">
-						<label class="col-sm-3 control-label no-padding-right" for="pid">上级机构</label>
-						<div class="col-sm-9">
-						<select class="col-xs-10 col-sm-5" id="pid" name="pid" data-emptyoption="true"  ></select>
+							<input type="text" id="name" placeholder="请输入机构名称" class="col-xs-10 col-sm-5" name="name" value="${organizationEntity.name}"/>
 						</div>
 					</div>
 					<div class="clearfix form-actions">
@@ -175,15 +164,9 @@
 			if (!checkData('name', '机构名称 ', 'input')) {
 				return;
 			}
-			var orgtype=$("#orgtype").val();
-			if(orgtype!=1){
-				if (!checkData('pid', '上级机构 ', 'input')) {
-					return;
-				}
-			}
 			$.ajax({
 				type : "POST",
-				url : "<%=path%>/mvc/organization_addSave.do",
+				url : "<%=path%>/mvc/organization_editSave.do",
 				data : $("#sub_form").serialize(),
 				async : false,
 				dataType:'json',
@@ -201,13 +184,7 @@
 			});
 		}
 		function goback(){
-			var param = {};
-			param ["qry_type"]="qry";
-			$.post("organization_getList.do", param, function(result) {			
-				$("#loadPageContent").html(result).hide();
-				$("#loadPageContent").fadeIn('fast');
-				setHash('${pageContext.request.contextPath}');
-			});
+			window.location="<%=path%>/mvc/organization_getList.do";
 		}
 	</script>
 	</body>

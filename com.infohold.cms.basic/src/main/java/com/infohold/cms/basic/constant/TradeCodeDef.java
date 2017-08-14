@@ -538,6 +538,8 @@ public enum TradeCodeDef implements Serializable {
 			return "机构编辑保存";
 		case T50026:
 			return "机构删除";
+		case T50027:
+			return "机构编辑保存";
 		case T50030:
 			return "角色用户信息同步";
 		case T50031:

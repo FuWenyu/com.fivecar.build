@@ -113,6 +113,7 @@ public class OrganizationController extends CentreController{
 		ModelAndView mav = new ModelAndView();
 		Map<String,Object> map = (Map<String,Object>) transData.getObj();
 		mav.addObject("orgtypeList",(List<Label>)map.get("orgtypeList"));
+		mav.addObject("pOrgtypeList",(List<Map<String,Object>>)map.get("pOrgtypeList"));
 		mav.addObject("organizationEntity",(Map<String,Object>)map.get("organizationEntity"));
 		//mav.addObject("page",transData.getPageInfo());
 		String view=transData.getViewMap().get("view")+"";
@@ -131,11 +132,14 @@ public class OrganizationController extends CentreController{
 	 * @return JSON
 	 */
 	@RequestMapping("/mvc/organization_editSave.do")
-	public ModelAndView organization_editSave(OrganizationEntity organizationEntity,Page page) {
-		ModelAndView mav = new ModelAndView();
-//		organizationService.update(organizationEntity);
-//		mav = organization_getList(page);
-		return mav;
+	public Map<String,Object> organization_editSave(HttpServletRequest httpServletRequest) {
+		TransData transData = new TransData();
+		transData.setServiceName("organizationService");
+		transData.setTradeCode("T50027");
+		transData=super.doService(httpServletRequest, transData);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("msg", "success");
+		return map;
 	}
 	
 	/**
@@ -149,10 +153,10 @@ public class OrganizationController extends CentreController{
     public Map<String,Object> organization_delete(HttpServletRequest httpServletRequest){
 		TransData transData = new TransData();
 		transData.setServiceName("organizationService");
-		transData.setTradeCode("T50024");
+		transData.setTradeCode("T50028");
 		transData=super.doService(httpServletRequest, transData);
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("msg", "success");
+		map.put("msg", transData.getExpMsg());
 		return map;
 	}
 	
